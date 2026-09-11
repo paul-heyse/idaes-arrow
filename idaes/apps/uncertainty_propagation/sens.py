@@ -759,7 +759,7 @@ class SensitivityInterface(object):
 
         if len(self.block._paramList) != len(perturbList):
             raise ValueError(
-                "Length of paramList argument does not equal " "length of perturbList"
+                "Length of paramList argument does not equal length of perturbList"
             )
 
         for i, (var, param, list_idx, comp_idx) in enumerate(sens_data_list):

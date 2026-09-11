@@ -461,7 +461,6 @@ class _GasPhaseStateBlock(StateBlock):
         # ---------------------------------------------------------------------
         # Initialize values
         for k in blk.values():
-
             if hasattr(k, "mw_eqn"):
                 calculate_variable_from_constraint(k.mw, k.mw_eqn)
 
@@ -491,7 +490,6 @@ class _GasPhaseStateBlock(StateBlock):
                 calculate_variable_from_constraint(k.enth_mol, k.mixture_enthalpy_eqn)
 
             for j in k.params.component_list:
-
                 if hasattr(k, "comp_conc_eqn"):
                     calculate_variable_from_constraint(
                         k.dens_mol_comp[j], k.comp_conc_eqn[j]
@@ -766,7 +764,7 @@ class GasPhaseStateBlockData(StateBlockData):
             self.params.component_list,
             domain=Reals,
             initialize=1e-5,
-            doc="Component diffusion in a gas mixture" "[cm2/s]",
+            doc="Component diffusion in a gas mixture[cm2/s]",
             units=pyunits.cm**2 / pyunits.s,
         )
 

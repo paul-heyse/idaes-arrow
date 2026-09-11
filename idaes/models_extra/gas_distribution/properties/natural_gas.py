@@ -267,8 +267,7 @@ class NaturalGasStateBlockData(StateBlockData):
             component_list,
             rule=cp_mol_comp_rule,
             doc=(
-                "Pure component constant-pressure molar heat capacity "
-                "of each component"
+                "Pure component constant-pressure molar heat capacity of each component"
             ),
         )
 
@@ -304,8 +303,7 @@ class NaturalGasStateBlockData(StateBlockData):
             component_list,
             rule=cv_mol_comp_rule,
             doc=(
-                "Pure component constant-volume molar heat capacity "
-                "of each component"
+                "Pure component constant-volume molar heat capacity of each component"
             ),
         )
 

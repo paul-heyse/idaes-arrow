@@ -1000,7 +1000,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--store_initialization",
-        help="If specified, store" " the initialized model values, to reload later.",
+        help="If specified, store the initialized model values, to reload later.",
         default=None,
     )
     args = parser.parse_args()

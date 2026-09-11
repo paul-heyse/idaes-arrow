@@ -222,7 +222,6 @@ def test_compute_DA_bids(bidder_object):
 
     expected_bids = {}
     for t in range(horizon):
-
         expected_bids[t] = {}
         expected_bids[t][gen] = {
             "p_min": pmin,

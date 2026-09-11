@@ -75,18 +75,18 @@ class LinearTiling(Tiling, ABC):
     # === CONSTRUCTOR - From Parallelepiped
     @classmethod
     def fromParallelepiped(cls, argShape):
-        assert (
-            type(argShape) == Parallelepiped
-        ), "The input shape is not an instance of Parallelepiped."
+        assert type(argShape) == Parallelepiped, (
+            "The input shape is not an instance of Parallelepiped."
+        )
         TilingDirections_ = [argShape.Vz, -argShape.Vz]
         return cls(TilingDirections_, argShape)
 
     # === CONSTRUCTOR - From Cylinder or CylindricalSector
     @classmethod
     def fromCylindricalShape(cls, argShape):
-        assert (
-            type(argShape) == Cylinder or CylindricalSector
-        ), "The input shape is not an instance of Cylinder or CylindricalSector."
+        assert type(argShape) == Cylinder or CylindricalSector, (
+            "The input shape is not an instance of Cylinder or CylindricalSector."
+        )
         TilingDirections_ = [argShape.Vh, -argShape.Vh]
         return cls(TilingDirections_, argShape)
 

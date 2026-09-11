@@ -298,8 +298,9 @@ between flow and pressure driven simulations.}""",
         # Set inlet pressure to minimum pressure
         @self.Constraint(self.flowsheet().time, doc="Link pressure to control volume")
         def minimum_pressure_constraint(b, t):
-            return self.mixed_state[t].pressure == (
-                self.minimum_pressure[t, self.inlet_list[-1]]
+            return (
+                self.mixed_state[t].pressure
+                == (self.minimum_pressure[t, self.inlet_list[-1]])
             )
 
     def add_pressure_equality_equations(self):

@@ -622,7 +622,7 @@ def test_model_replication(model):
     for i in range(len(out)):
         cached_results.append(
             pd.read_csv(
-                os.sep.join([data_cache, f"case_{i+1}_interconnect.csv"]), index_col=0
+                os.sep.join([data_cache, f"case_{i + 1}_interconnect.csv"]), index_col=0
             )
         )
 
@@ -800,7 +800,7 @@ def test_model_replication_voltage_drop_custom(model_vdc):
     for i in range(len(out)):
         cached_results.append(
             pd.read_csv(
-                os.sep.join([data_cache, f"case_{i+1}_interconnect.csv"]), index_col=0
+                os.sep.join([data_cache, f"case_{i + 1}_interconnect.csv"]), index_col=0
             )
         )
 
@@ -828,4 +828,4 @@ if __name__ == "__main__":
     out = kazempoor_braun_replication(m)
     # Uncomment to recreate cached data
     for i, df in enumerate(out):
-        df.to_csv(os.sep.join([data_cache, f"case_{i+1}_interconnect.csv"]))
+        df.to_csv(os.sep.join([data_cache, f"case_{i + 1}_interconnect.csv"]))

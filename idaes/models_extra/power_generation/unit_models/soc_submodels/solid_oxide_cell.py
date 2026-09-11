@@ -1048,11 +1048,10 @@ class SolidOxideCellData(UnitModelBlockData):
                     )
                 )
                 for j in self.fuel_triple_phase_boundary.component_list:
-                    self.fuel_triple_phase_boundary.mole_frac_comp[t, iz, j].value = (
-                        pyo.value(
-                            self.fuel_triple_phase_boundary.conc_mol_comp[t, iz, j]
-                            / denom
-                        )
+                    self.fuel_triple_phase_boundary.mole_frac_comp[
+                        t, iz, j
+                    ].value = pyo.value(
+                        self.fuel_triple_phase_boundary.conc_mol_comp[t, iz, j] / denom
                     )
                     if j in self.fuel_triple_phase_boundary.reacting_gas_list:
                         self.fuel_triple_phase_boundary.log_mole_frac_comp[
@@ -1083,11 +1082,11 @@ class SolidOxideCellData(UnitModelBlockData):
                     )
                 )
                 for j in self.oxygen_triple_phase_boundary.component_list:
-                    self.oxygen_triple_phase_boundary.mole_frac_comp[t, iz, j].value = (
-                        pyo.value(
-                            self.oxygen_triple_phase_boundary.conc_mol_comp[t, iz, j]
-                            / denom
-                        )
+                    self.oxygen_triple_phase_boundary.mole_frac_comp[
+                        t, iz, j
+                    ].value = pyo.value(
+                        self.oxygen_triple_phase_boundary.conc_mol_comp[t, iz, j]
+                        / denom
                     )
                     if j in self.oxygen_triple_phase_boundary.reacting_gas_list:
                         self.oxygen_triple_phase_boundary.log_mole_frac_comp[

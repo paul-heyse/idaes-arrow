@@ -97,7 +97,7 @@ def process_testfile(filename):
                 if re.match(r' *($|"""|class)', lines[backtrack_index]):  # case 4
                     insert_indices.append((line_ind, def_ind))
                     _log.debug(
-                        f"\tAdding `@pytest.mark.unit` to {lines[line_ind][def_ind+4:-2]}"
+                        f"\tAdding `@pytest.mark.unit` to {lines[line_ind][def_ind + 4 : -2]}"
                     )
                     break
                 elif re.match(
@@ -115,14 +115,14 @@ def process_testfile(filename):
                         backtrack_index -= 2
                         continue
                     _log.warning(
-                        f"Error at line {line_ind} (function {lines[line_ind][def_ind+4:-2]})"
+                        f"Error at line {line_ind} (function {lines[line_ind][def_ind + 4 : -2]})"
                         f" in file {filename}! Skipping file."
                     )
                     return -1
             else:  # case 0, head of file: unusual situation!
                 insert_indices.append((0, def_ind))
                 _log.debug(
-                    f"\tAdding `@pytest.mark.unit` to {lines[line_ind][def_ind+4:-2]}"
+                    f"\tAdding `@pytest.mark.unit` to {lines[line_ind][def_ind + 4 : -2]}"
                 )
                 _log.debug("\tNOTE: this is the first line of the file!")
 

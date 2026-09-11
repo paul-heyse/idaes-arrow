@@ -143,8 +143,14 @@ def cmd_check(tool: str) -> int:
         )
         return 1
 
-    worse = {k: (baseline.get(k, 0), v) for k, v in current.items() if v > baseline.get(k, 0)}
-    better = {k: (baseline[k], current.get(k, 0)) for k in baseline if current.get(k, 0) < baseline[k]}
+    worse = {
+        k: (baseline.get(k, 0), v) for k, v in current.items() if v > baseline.get(k, 0)
+    }
+    better = {
+        k: (baseline[k], current.get(k, 0))
+        for k in baseline
+        if current.get(k, 0) < baseline[k]
+    }
 
     if worse:
         print(f"{tool}: {len(worse)} new or increased finding(s):", file=sys.stderr)

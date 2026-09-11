@@ -849,7 +849,7 @@ def generate_baseline_statistics(
         print()
         print("Failed Samples:")
         for s in fails:
-            print(f"{' '*4}{s}")
+            print(f"{' ' * 4}{s}")
         print("Samples with Restoration:")
         for s in restoration:
             print(f"{' ' * 4}{s}")
@@ -993,12 +993,11 @@ class Stats(object):
         s = self
         res = self.results
         n = len(res)
-        fp.write(f"\n{'='*24}{'Scenario Statistics':^24s}{'='*24}\n\n")
+        fp.write(f"\n{'=' * 24}{'Scenario Statistics':^24s}{'=' * 24}\n\n")
         fp.write(
-            f"{'Parameter':>20s}{'Min':>10s}{'Mean':>10s}"
-            f"{'Stdev':>10s}{'Max':>10s}\n"
+            f"{'Parameter':>20s}{'Min':>10s}{'Mean':>10s}{'Stdev':>10s}{'Max':>10s}\n"
         )
-        fp.write(f"{'-'*60}\n")
+        fp.write(f"{'-' * 60}\n")
         for k, v in self.inputs.items():
             values = [res[i]["sample_point"][k] for i in range(n)]
             fp.write(
@@ -1007,15 +1006,15 @@ class Stats(object):
                 f"{float(np.std(values)):10.3g}"
                 f"{float(np.max(values)):10.3}\n"
             )
-        fp.write(f"{'-'*60}\n\n")
-        fp.write(f"\n{'='*24}{'Summary':^24s}{'='*24}\n\n")
+        fp.write(f"{'-' * 60}\n\n")
+        fp.write(f"\n{'=' * 24}{'Summary':^24s}{'=' * 24}\n\n")
         nsuc = n - len(s.failed_cases)
         fp.write(f"Number of Successful Cases (solved=True): {nsuc}/{n}\n\n")
         fp.write(
             f"{'':20s}{'min':>10s}{'-1std':>10s}{'mean':>10s}"
             f"{'+1std':>10s}{'max':>10s}\n"
         )
-        fp.write(f"{'-'*70}\n")
+        fp.write(f"{'-' * 70}\n")
         fp.write(
             f"{'Iterations':>20s}{s.iters_min:10.3g}"
             f"{(s.iters_mean - s.iters_std):10.3g}"
@@ -1028,20 +1027,20 @@ class Stats(object):
             f"{s.time_mean:10.3g}{(s.time_mean + s.time_std):10.3g}"
             f"{s.time_max:10.3g}\n"
         )
-        fp.write(f"{'-'*70}\n\n")
+        fp.write(f"{'-' * 70}\n\n")
         # print the detailed table
-        fp.write(f"\n{'='*24}{'Table of Results':^24s}{'='*24}\n\n")
+        fp.write(f"\n{'=' * 24}{'Table of Results':^24s}{'=' * 24}\n\n")
         fp.write(
-            f"{'Flag':>5s}{'Name':>20s}{'Solved':>10s}" f"{'Iters':>10s}{'Time':>10s}\n"
+            f"{'Flag':>5s}{'Name':>20s}{'Solved':>10s}{'Iters':>10s}{'Time':>10s}\n"
         )
-        fp.write(f"{'-'*55}\n")
+        fp.write(f"{'-' * 55}\n")
         for r in res:
             fp.write(
                 f"{r['flag']:>5s}{r['name']:>20s}{str(r['solved']):>10s}"
                 f"{r['iters']:>10d}{r['time']:>10.2f}\n"
             )
-        fp.write(f"{'-'*55}\n\n")
-        fp.write(f"\n{'='*24}{'Notable Cases':^24s}{'='*24}\n\n")
+        fp.write(f"{'-' * 55}\n\n")
+        fp.write(f"\n{'=' * 24}{'Notable Cases':^24s}{'=' * 24}\n\n")
         if len(s.notable_cases) == 0:
             fp.write("... None\n")
         for c in s.notable_cases:

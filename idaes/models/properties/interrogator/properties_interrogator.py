@@ -244,9 +244,7 @@ class PropertyInterrogatorData(PhysicalParameterBlock):
         tab = " " * 4
 
         ostream.write("\n")
-        ostream.write(
-            f"The following models in the Flowsheet " f"require {prop}:" + "\n"
-        )
+        ostream.write(f"The following models in the Flowsheet require {prop}:" + "\n")
 
         for m in self.required_properties[prop]:
             ostream.write(tab + m + "\n")
@@ -273,9 +271,7 @@ class PropertyInterrogatorData(PhysicalParameterBlock):
         tab = " " * 4
 
         ostream.write("\n")
-        ostream.write(
-            f"The following properties are required by model " f"{model}:" + "\n"
-        )
+        ostream.write(f"The following properties are required by model {model}:" + "\n")
 
         for m in self.list_properties_required_by_model(model):
             ostream.write(tab + m + "\n")

@@ -934,14 +934,20 @@ class PriceTakerModel(ConcreteModel):
 
                 Example: ::
 
-                    ['elec_revenue', 'H2_revenue', ]
+                    [
+                        "elec_revenue",
+                        "H2_revenue",
+                    ]
 
             costs: List of strings representing the names of the
                    costs associated with operating at a time period.
                    default: None
                    Example: ::
 
-                        ['hourly_fixed_cost', 'electricity_cost',]
+                        [
+                            "hourly_fixed_cost",
+                            "electricity_cost",
+                        ]
         """
         # Ensure that multiperiod model exists
         self._assert_mp_model_exists()
@@ -966,7 +972,6 @@ class PriceTakerModel(ConcreteModel):
             total_revenue_expr = 0
 
             for blk in self.period[p].component_data_objects(Block):
-
                 # Add costs for each block. If more than one block, may have
                 # costs that exist on one block and not on another. (i.e., coproduction)
                 for cost in operational_costs:

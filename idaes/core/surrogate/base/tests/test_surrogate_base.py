@@ -117,7 +117,7 @@ class TestSurrogateTrainer:
     def test_surrogate_trainer_labels_overlap(self):
         with pytest.raises(
             ValueError,
-            match="Duplicate label found in input_labels " "and/or output_labels.",
+            match="Duplicate label found in input_labels and/or output_labels.",
         ):
             SurrogateTrainer(
                 input_labels=["x1", "x2"],
@@ -221,7 +221,7 @@ class TestSurrogateTrainer:
     def test_train_surrogate(self, trainer):
         with pytest.raises(
             NotImplementedError,
-            match="train_surrogate called, but not implemented " "on the derived class",
+            match="train_surrogate called, but not implemented on the derived class",
         ):
             trainer.train_surrogate()
 
@@ -265,7 +265,7 @@ class TestSurrogateBase:
     def test_populate_block(self, surrogate):
         with pytest.raises(
             NotImplementedError,
-            match="SurrogateModel class has not implemented " "populate_block method.",
+            match="SurrogateModel class has not implemented populate_block method.",
         ):
             surrogate.populate_block("foo")
 

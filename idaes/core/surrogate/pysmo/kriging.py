@@ -343,8 +343,8 @@ class KrigingModel:
         cov_mat = self.covariance_matrix_generator(x, theta, reg_param, p)
         try:  # Check Cholesky factorization
             L = np.linalg.cholesky(cov_mat)
-            lndetcov = 2 * np.sum(
-                np.log(np.abs(np.diag(L)))
+            lndetcov = (
+                2 * np.sum(np.log(np.abs(np.diag(L))))
             )  # Approximation to 2nd term from Forrester book, making use of the Ch. factorization
             cov_inv = self.covariance_inverse_generator(cov_mat)
             km = self.kriging_mean(cov_inv, y)
@@ -819,7 +819,7 @@ class KrigingModel:
             f"--------------------------\n"
             f"\nModel training errors:"
             f"\n-----------------------\n"
-            f"Mean Squared Error (MSE)         : {self.training_rmse ** 2}\n"
+            f"Mean Squared Error (MSE)         : {self.training_rmse**2}\n"
             f"Root Mean Squared Error (RMSE)   : {self.training_rmse}\n"
             f"Goodness of fit (R2)             : {self.training_R2}\n"
             f"\n{double_line}"

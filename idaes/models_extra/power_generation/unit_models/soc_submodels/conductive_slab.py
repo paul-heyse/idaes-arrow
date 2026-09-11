@@ -116,7 +116,7 @@ class SocConductiveSlabData(UnitModelBlockData):
                 units=pyo.units.J / pyo.units.m**3,
             )
         self.resistivity_log_preexponential_factor = pyo.Var(
-            doc="Logarithm of resistivity preexponential factor " "in units of ohm*m",
+            doc="Logarithm of resistivity preexponential factor in units of ohm*m",
             units=pyo.units.dimensionless,
         )
         self.resistivity_thermal_exponent_dividend = pyo.Var(

@@ -499,12 +499,7 @@ def test_common(m):
         assert pytest.approx(value(m.props[1].PR_a[i]), rel=1e-5) == value(
             0.45724
             * ((const.gas_constant * Tc) ** 2 / Pc)
-            * (
-                (
-                    (1 + m.props[1].PR_fw[i] * (1 - sqrt(m.props[1].temperature / Tc)))
-                    ** 2
-                )
-            )
+            * ((1 + m.props[1].PR_fw[i] * (1 - sqrt(m.props[1].temperature / Tc))) ** 2)
         )
 
     assert isinstance(m.props[1].PR_b, Expression)
@@ -683,13 +678,11 @@ def test_common(m):
             * ((const.gas_constant * Tc) ** 2 / Pc)
             * (
                 (
-                    (
-                        1
-                        + m.props[1].PR_fw[i[2]]
-                        * (1 - sqrt(m.props[1]._teq[i[0], i[1]] / Tc))
-                    )
-                    ** 2
+                    1
+                    + m.props[1].PR_fw[i[2]]
+                    * (1 - sqrt(m.props[1]._teq[i[0], i[1]] / Tc))
                 )
+                ** 2
             )
         )
 

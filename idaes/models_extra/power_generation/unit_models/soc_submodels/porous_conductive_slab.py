@@ -342,7 +342,7 @@ class PorousConductiveSlabData(UnitModelBlockData):
                 self.conc_mol_comp_deviation_x,
                 wrt=tset,
                 initialize=0,
-                doc="Component concentration time derivative in deviation " "variable",
+                doc="Component concentration time derivative in deviation variable",
             )
         else:
             self.dconc_mol_comp_deviation_xdt = pyo.Param(
@@ -517,8 +517,9 @@ class PorousConductiveSlabData(UnitModelBlockData):
                 ifaces=ixfaces,
                 nodes=b.xnodes,
                 faces=b.xfaces,
-                phi_func=lambda ixf: b.conc_mol_comp_deviation_x[t, ixf, iz, i]
-                / b.length_x,
+                phi_func=lambda ixf: (
+                    b.conc_mol_comp_deviation_x[t, ixf, iz, i] / b.length_x
+                ),
                 phi_bound_0=(
                     b.conc_mol_comp_deviation_x[t, ixnodes.first(), iz, i]
                     - b.conc_mol_comp_deviation_x0[t, iz, i]
@@ -733,9 +734,7 @@ class PorousConductiveSlabData(UnitModelBlockData):
                 t, ix, iz, i
             ] == b.xface_area[iz] * (
                 b.material_flux_x[t, ix, iz, i] - b.material_flux_x[t, ix + 1, iz, i]
-            ) + b.zface_area[
-                ix
-            ] * (
+            ) + b.zface_area[ix] * (
                 b.material_flux_z[t, ix, iz, i] - b.material_flux_z[t, ix, iz + 1, i]
             )
 

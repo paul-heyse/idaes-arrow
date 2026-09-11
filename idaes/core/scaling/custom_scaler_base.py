@@ -536,8 +536,7 @@ class CustomScalerBase(ScalerBase):
         """
         if variable.is_indexed():
             raise TypeError(
-                f"Variable {variable} is indexed. Call with VarData "
-                "children instead."
+                f"Variable {variable} is indexed. Call with VarData children instead."
             )
 
         if not isinstance(variable, VarData):

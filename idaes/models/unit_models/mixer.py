@@ -890,8 +890,9 @@ objects linked to all inlet states and the mixed state,
 
         elif mb_type == MaterialBalanceType.elementTotal:
             raise ConfigurationError(
-                "{} Mixers do not support elemental "
-                "material balances.".format(self.name)
+                "{} Mixers do not support elemental material balances.".format(
+                    self.name
+                )
             )
         elif mb_type == MaterialBalanceType.none:
             pass
@@ -972,8 +973,9 @@ objects linked to all inlet states and the mixed state,
         # Set inlet pressure to minimum pressure
         @self.Constraint(self.flowsheet().time, doc="Link pressure to control volume")
         def mixture_pressure(b, t):
-            return mixed_block[t].pressure == (
-                self.minimum_pressure[t, self.inlet_idx.last()]
+            return (
+                mixed_block[t].pressure
+                == (self.minimum_pressure[t, self.inlet_idx.last()])
             )
 
     def add_pressure_equality_equations(self, inlet_blocks, mixed_block):

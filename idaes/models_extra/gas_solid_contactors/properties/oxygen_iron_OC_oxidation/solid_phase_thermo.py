@@ -414,7 +414,6 @@ class _SolidPhaseStateBlock(StateBlock):
                 calculate_variable_from_constraint(k.enth_mass, k.mixture_enthalpy_eqn)
 
             for j in k.params.component_list:
-
                 if hasattr(k, "cp_shomate_eqn"):
                     calculate_variable_from_constraint(
                         k.cp_mol_comp[j], k.cp_shomate_eqn[j]

@@ -352,7 +352,7 @@ class SaponificationStateBlockData(StateBlockData):
             self.params.component_list,
             bounds=(0, None),
             initialize=100.0,
-            doc="Component molar concentrations " "[mol/m^3]",
+            doc="Component molar concentrations [mol/m^3]",
             units=units.mol / units.m**3,
         )
 

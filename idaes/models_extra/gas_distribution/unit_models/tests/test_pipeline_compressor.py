@@ -239,8 +239,7 @@ class TestSolveDynamicPipelineCompressor(unittest.TestCase):
         pred_values = (
             list(time),
             {
-                "fs.pipeline.control_volume.flow_mass[*,%s]"
-                % x0: [
+                "fs.pipeline.control_volume.flow_mass[*,%s]" % x0: [
                     3.000e5,
                     2.999e5,
                     2.999e5,
@@ -263,8 +262,7 @@ class TestSolveDynamicPipelineCompressor(unittest.TestCase):
                     3.595e5,
                     3.597e5,
                 ],
-                "fs.pipeline.control_volume.pressure[*,%s]"
-                % xf: [
+                "fs.pipeline.control_volume.pressure[*,%s]" % xf: [
                     50.90,
                     50.90,
                     50.90,

@@ -269,7 +269,7 @@ class IpoptConvergenceAnalysis:
                 runs_w_num_iss += 1
 
         stream.write(
-            f"Successes: {successes}, Failures {failures} ({100*successes/(successes+failures)}%)\n"
+            f"Successes: {successes}, Failures {failures} ({100 * successes / (successes + failures)}%)\n"
         )
         stream.write(f"Runs with Restoration: {runs_w_restoration}\n")
         stream.write(f"Runs with Regularization: {runs_w_regulariztion}\n")

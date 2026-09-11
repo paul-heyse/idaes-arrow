@@ -763,9 +763,9 @@ class HelmTurbineMultistageData(UnitModelBlockData):
                 break
             if it_count < flow_iterate - 1:
                 for t in self.inlet_split.inlet.flow_mol:
-                    self.inlet_split.inlet.flow_mol[t].value = (
-                        self.outlet_stage.inlet.flow_mol[t].value
-                    )
+                    self.inlet_split.inlet.flow_mol[
+                        t
+                    ].value = self.outlet_stage.inlet.flow_mol[t].value
 
                     for s in self.hp_split.values():
                         for i, o in enumerate(s.outlet_list):

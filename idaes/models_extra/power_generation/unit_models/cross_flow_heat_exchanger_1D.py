@@ -868,12 +868,15 @@ class CrossFlowHeatExchanger1DData(HeatExchanger1DData):
             doc="heat per length on shell side",
         )
         def heat_shell_eqn(b, t, x):
-            return b.heat_shell[t, x] * b.length_flow_shell == pyunits.convert(
-                b.length_flow_tube, to_units=shell_units["length"]
-            ) * b.total_heat_transfer_coeff_shell[
-                t, x
-            ] * const.pi * b.do_tube * b.number_rows_per_pass * b.number_columns_per_pass * (
-                b.temp_wall_shell[t, x] - shell.properties[t, x].temperature
+            return (
+                b.heat_shell[t, x] * b.length_flow_shell
+                == pyunits.convert(b.length_flow_tube, to_units=shell_units["length"])
+                * b.total_heat_transfer_coeff_shell[t, x]
+                * const.pi
+                * b.do_tube
+                * b.number_rows_per_pass
+                * b.number_columns_per_pass
+                * (b.temp_wall_shell[t, x] - shell.properties[t, x].temperature)
             )
 
         # Tube side wall temperature
@@ -891,9 +894,7 @@ class CrossFlowHeatExchanger1DData(HeatExchanger1DData):
                     to_units=1 / tube_units["heat_transfer_coefficient"],
                 )
                 + b.rfouling_tube
-            ) == b.temp_wall_tube[
-                t, x
-            ] - pyunits.convert(
+            ) == b.temp_wall_tube[t, x] - pyunits.convert(
                 b.temp_wall_center[t, x], to_units=tube_units["temperature"]
             )
 

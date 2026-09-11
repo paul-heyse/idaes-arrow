@@ -872,7 +872,7 @@ class TestCustomScalerBase:
         with pytest.raises(
             TypeError,
             match=re.escape(
-                f"Variable foo is indexed. Call with VarData " "children instead."
+                f"Variable foo is indexed. Call with VarData children instead."
             ),
         ):
             sb.scale_variable_by_definition_constraint(
@@ -893,8 +893,7 @@ class TestCustomScalerBase:
         with pytest.raises(
             TypeError,
             match=re.escape(
-                f"Constraint bar is indexed. Call with ConstraintData "
-                "children instead."
+                f"Constraint bar is indexed. Call with ConstraintData children instead."
             ),
         ):
             sb.scale_variable_by_definition_constraint(
@@ -1441,7 +1440,8 @@ class TestCustomScalerBase:
             model.ideal_gas, norm=1, overwrite=True
         )
         assert model.scaling_factor[model.ideal_gas] == pytest.approx(
-            4.99792e-7, rel=1e-5  # (1/(8.314+1e6+1e6)
+            4.99792e-7,
+            rel=1e-5,  # (1/(8.314+1e6+1e6)
         )
 
         # Check for clean up

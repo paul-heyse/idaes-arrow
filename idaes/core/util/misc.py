@@ -165,8 +165,9 @@ def set_param_from_config(b, param, config=None, index=None):
             p_val = p_data[0] * p_data[1]
     else:
         _log.debug(
-            "{} no units provided for parameter {} - assuming default "
-            "units".format(b.name, param)
+            "{} no units provided for parameter {} - assuming default units".format(
+                b.name, param
+            )
         )
         p_val = p_data
 

@@ -228,7 +228,6 @@ see property package for documentation.}""",
         self._vapor_set = Set(initialize=_vapor_list)
 
         if self.config.has_boilup_ratio is True:
-
             self.boilup_ratio = Var(initialize=0.5, doc="Boilup ratio for reboiler")
 
             def rule_boilup_ratio(self, t):
@@ -273,7 +272,7 @@ see property package for documentation.}""",
 
         self.vapor_reboil = Port(
             noruleinit=True,
-            doc="Vapor outlet stream that is returned to " "to the bottom tray.",
+            doc="Vapor outlet stream that is returned to to the bottom tray.",
         )
 
         make_phase_split(
@@ -311,7 +310,7 @@ see property package for documentation.}""",
 
         self.vapor_reboil = Port(
             noruleinit=True,
-            doc="Vapor outlet stream that is returned to " "to the bottom tray.",
+            doc="Vapor outlet stream that is returned to to the bottom tray.",
         )
 
     def initialize(

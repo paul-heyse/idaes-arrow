@@ -68,8 +68,7 @@ def smooth_minmax(a, b, eps=1e-4, sense="max"):
     # Check type of eps
     if not isinstance(eps, (float, int, Param)):
         raise TypeError(
-            "Smooth {} eps argument must be a float, int or "
-            "Pyomo Param".format(sense)
+            "Smooth {} eps argument must be a float, int or Pyomo Param".format(sense)
         )
 
     # Set sense of expression

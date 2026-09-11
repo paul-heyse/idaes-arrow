@@ -310,9 +310,10 @@ class MEAColumnData(PackedColumnData):
             if x == blk.liquid_phase.length_domain.last():
                 return Constraint.Skip
             else:
-                return exp(blk.log_diffus_liq_comp[t, x, j]) * lunits(
-                    "diffusivity"
-                ) == (blk.liquid_phase.properties[t, x].diffus_phase_comp["Liq", j])
+                return (
+                    exp(blk.log_diffus_liq_comp[t, x, j]) * lunits("diffusivity")
+                    == (blk.liquid_phase.properties[t, x].diffus_phase_comp["Liq", j])
+                )
 
         self.log_property_var_eqn_map[self.log_diffus_liq_comp] = (
             self.log_diffus_liq_comp_eqn

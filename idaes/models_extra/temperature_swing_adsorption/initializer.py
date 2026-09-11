@@ -311,19 +311,18 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
         # 5.4) check degrees of freedom and solve
         if degrees_of_freedom(blk) == 0:
-
             with idaeslog.solver_log(solve_log, idaeslog.DEBUG) as slc:
                 res = solver.solve(blk, tee=slc.tee)
 
             if check_optimal_termination(res):
                 init_log.info(
-                    "Initialization of fixed bed TSA model "
-                    "completed {}.".format(idaeslog.condition(res))
+                    "Initialization of fixed bed TSA model completed {}.".format(
+                        idaeslog.condition(res)
+                    )
                 )
             else:
                 _log.warning(
-                    "Initialization of fixed bed TSA model "
-                    "Failed {}.".format(blk.name)
+                    "Initialization of fixed bed TSA model Failed {}.".format(blk.name)
                 )
         else:
             raise InitializationError(
@@ -335,7 +334,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
         # 6 - solve compressor unit
         if blk.config.compressor:
-
             # initialization of compressor
             init_log.info("Starting initialization of compressor.")
 
@@ -377,7 +375,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
             # 6.2) check degrees of freedom and solve
             if degrees_of_freedom(blk.compressor) == 0:
-
                 # TODO: switch to new initialization method when implemented
                 # for FlueGasStateBlock
                 blk.compressor.unit.initialize()
@@ -408,9 +405,7 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
         # 7 - solve steam calculation
         if blk.config.steam_calculation != SteamCalculationType.none:
-
             if blk.config.steam_calculation == SteamCalculationType.rigorous:
-
                 # initialization of steam heater
                 init_log.info(
                     "Starting initialization of heater model for steam calculation."
@@ -432,7 +427,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
                 # 7.3) check degrees of freedom and solve
                 if degrees_of_freedom(blk.steam_heater) == 0:
-
                     # initialize steam heater
                     heater_initializer = self.get_submodel_initializer(
                         blk.steam_heater.unit
@@ -454,7 +448,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
                 # 7.5) solve model for total saturation at outlet
                 if degrees_of_freedom(blk.steam_heater) == 0:
-
                     init_log.info_high(
                         "Starting initialization of heater model "
                         "for total saturation at outlet."
@@ -494,7 +487,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
                 # 7.7) solve model for steam flow rate
                 if degrees_of_freedom(blk.steam_heater) == 0:
-
                     init_log.info_high(
                         "Starting initialization of heater model "
                         "for total steam flow rate."
@@ -538,7 +530,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
         #     compressor unit simultaneously
 
         if blk.config.compressor:
-
             # 8.1) unfix state that were fixed in 6.1
             blk.compressor.unit.inlet.flow_mol_comp[:, :].unfix()
             blk.compressor.unit.inlet.temperature[:].unfix()
@@ -552,7 +543,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
             blk.compressor.pressure_drop_tsa_compressor_eqn.activate()
 
         if blk.config.steam_calculation != SteamCalculationType.none:
-
             # 8.2 unfix variables and activate constraints that were fixed
             #     and deactivated in 7
             if blk.config.steam_calculation == SteamCalculationType.rigorous:
@@ -568,7 +558,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
             or blk.config.steam_calculation != SteamCalculationType.none
         ):
             if degrees_of_freedom(blk) == 0:
-
                 with idaeslog.solver_log(solve_log, idaeslog.DEBUG) as slc:
                     res = solver.solve(blk, tee=slc.tee)
                 if (
@@ -836,7 +825,6 @@ class FixedBedTSA0DInitializer(ModularInitializerBase):
 
         # check condition to stop
         while condition:
-
             # compute new approximated root as x2
             # pylint: disable-next=used-before-assignment,possibly-used-before-assignment
             x2 = x0 - (x1 - x0) * f_x0 / (f_x1 - f_x0)

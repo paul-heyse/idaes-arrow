@@ -1863,7 +1863,7 @@ class TestSetScalingFactor:
         with pytest.raises(
             ValueError,
             match=re.escape(
-                "Scaling factor for v is infinity. " "Scaling factors must be finite."
+                "Scaling factor for v is infinity. Scaling factors must be finite."
             ),
         ):
             set_scaling_factor(m.v, float("inf"))

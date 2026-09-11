@@ -219,9 +219,9 @@ class TestWrapper:
 
         # Pressure_sat uses has two parts to form. Set type to supported form
         # and using_tau_r to False (unsupported)
-        CoolPropWrapper._cached_components["TestComp"]["ANCILLARIES"]["pS"][
-            "type"
-        ] = "pL"
+        CoolPropWrapper._cached_components["TestComp"]["ANCILLARIES"]["pS"]["type"] = (
+            "pL"
+        )
         CoolPropWrapper._cached_components["TestComp"]["ANCILLARIES"]["pS"][
             "using_tau_r"
         ] = False

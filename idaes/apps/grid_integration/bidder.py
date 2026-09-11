@@ -735,7 +735,6 @@ class StochasticProgramBidder(AbstractBidder):
         """
 
         for i in model.SCENARIOS:
-
             time_index = model.fs[i].real_time_energy_price.index_set()
 
             if day_ahead_price is not None:
@@ -911,7 +910,6 @@ class SelfScheduler(StochasticProgramBidder):
         time_index = power_output_var.index_set()
 
         for t_idx in time_index:
-
             t = t_idx + hour
 
             bids[t] = {}
@@ -939,7 +937,6 @@ class SelfScheduler(StochasticProgramBidder):
                     ]
 
             if is_thermal:
-
                 bids[t][self.generator]["p_cost"] = [
                     (bids[t][self.generator]["p_min"], 0),
                     (bids[t][self.generator]["p_max"], 0),
@@ -975,7 +972,6 @@ class SelfScheduler(StochasticProgramBidder):
         df_list = []
         for t in bids:
             for g in bids[t]:
-
                 result_dict = {}
                 result_dict["Generator"] = g
                 result_dict["Date"] = date
@@ -1132,13 +1128,11 @@ class Bidder(StochasticProgramBidder):
         gen = self.generator
 
         for i in model.SCENARIOS:
-
             power_output_var = getattr(model.fs[i], power_var_name)
             energy_price_param = getattr(model.fs[i], energy_price_param_name)
             time_index = power_output_var.index_set()
 
             for t in time_index:
-
                 if t not in bids:
                     bids[t] = {}
                 if gen not in bids[t]:
@@ -1158,7 +1152,6 @@ class Bidder(StochasticProgramBidder):
                     bids[t][gen][power] = marginal_cost
 
         for t in time_index:
-
             # always include pmin in the cost curve, but include the other points if required
             if self.bidding_model_object.model_data.include_default_p_cost:
                 p_cost_add = self.bidding_model_object.model_data.p_cost
@@ -1177,7 +1170,6 @@ class Bidder(StochasticProgramBidder):
             # make sure the curve is nondecreasing
             pre_power = pmin
             for power, marginal_cost in bids[t][gen].items():
-
                 # ignore pmin, because min load cost is special
                 if pre_power == pmin:
                     pre_power = power
@@ -1217,7 +1209,6 @@ class Bidder(StochasticProgramBidder):
         full_bids = {}
 
         for t_idx in bids:
-
             t = t_idx + hour
 
             full_bids[t] = {}
@@ -1263,7 +1254,6 @@ class Bidder(StochasticProgramBidder):
         df_list = []
         for t in bids:
             for gen in bids[t]:
-
                 result_dict = {}
                 result_dict["Generator"] = gen
                 result_dict["Date"] = date
@@ -1456,7 +1446,6 @@ class ParametrizedBidder(AbstractBidder):
         df_list = []
         for t in bids:
             for gen in bids[t]:
-
                 result_dict = {}
                 result_dict["Generator"] = gen
                 result_dict["Date"] = date

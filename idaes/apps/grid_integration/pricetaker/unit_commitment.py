@@ -73,8 +73,7 @@ class UnitCommitmentData:
             "capacity",
             ConfigValue(
                 doc=(
-                    "Parameter/variable denoting the maximum "
-                    "capacity of the commodity"
+                    "Parameter/variable denoting the maximum capacity of the commodity"
                 ),
             ),
         )

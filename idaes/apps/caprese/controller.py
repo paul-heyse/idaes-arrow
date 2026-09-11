@@ -251,7 +251,7 @@ class _ControllerBlockData(_DynamicBlockData):
             or control_penalty_type == ControlPenaltyType.NONE
         ):
             raise ValueError(
-                "control_penalty_type argument must be 'ACTION', 'ERROR', " "or 'NONE'."
+                "control_penalty_type argument must be 'ACTION', 'ERROR', or 'NONE'."
             )
 
         states = list(self.component_objects(state_ctypes))

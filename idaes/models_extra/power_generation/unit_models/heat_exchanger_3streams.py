@@ -381,42 +381,42 @@ exchanger (default = 'counter-current' - counter-current flow arrangement""",
         self.temperature_driving_force_side_2 = Var(
             self.flowsheet().time,
             initialize=1.0,
-            doc="Mean driving force " "for heat exchange",
+            doc="Mean driving force for heat exchange",
         )
 
         # Temperature driving force
         self.temperature_driving_force_side_3 = Var(
             self.flowsheet().time,
             initialize=1.0,
-            doc="Mean driving force " "for heat exchange",
+            doc="Mean driving force for heat exchange",
         )
 
         # Temperature difference at side 2 inlet
         self.side_2_inlet_dT = Var(
             self.flowsheet().time,
             initialize=1.0,
-            doc="Temperature difference " "at side 2 inlet",
+            doc="Temperature difference at side 2 inlet",
         )
 
         # Temperature difference at side 2 outlet
         self.side_2_outlet_dT = Var(
             self.flowsheet().time,
             initialize=1.0,
-            doc="Temperature difference " "at side 2 outlet",
+            doc="Temperature difference at side 2 outlet",
         )
 
         # Temperature difference at side 3 inlet
         self.side_3_inlet_dT = Var(
             self.flowsheet().time,
             initialize=1.0,
-            doc="Temperature difference" " at side 3 inlet",
+            doc="Temperature difference at side 3 inlet",
         )
 
         # Temperature difference at side 3 outlet
         self.side_3_outlet_dT = Var(
             self.flowsheet().time,
             initialize=1.0,
-            doc="Temperature difference " "at side 3 outlet",
+            doc="Temperature difference at side 3 outlet",
         )
 
         # Driving force side 2 (Underwood approximation)

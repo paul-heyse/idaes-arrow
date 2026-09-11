@@ -1784,12 +1784,10 @@ def report_statistics(block, ostream=None):
     ostream.write(header + "\n")
     ostream.write(f"Model Statistics  {name_str} \n")
     ostream.write("\n")
-    ostream.write(f"Degrees of Freedom: " f"{degrees_of_freedom(block)} \n")
+    ostream.write(f"Degrees of Freedom: {degrees_of_freedom(block)} \n")
     ostream.write("\n")
-    ostream.write(f"Total No. Variables: " f"{number_variables(block)} \n")
-    ostream.write(
-        f"{tab}No. Fixed Variables: " f"{number_fixed_variables(block)}" f"\n"
-    )
+    ostream.write(f"Total No. Variables: {number_variables(block)} \n")
+    ostream.write(f"{tab}No. Fixed Variables: {number_fixed_variables(block)}\n")
     ostream.write(
         f"{tab}No. Unused Variables: "
         f"{number_unused_variables(block)} (Fixed):"
@@ -1804,7 +1802,7 @@ def report_statistics(block, ostream=None):
         f" (Fixed: {nfv_alias(block)}) \n"
     )
     ostream.write("\n")
-    ostream.write(f"Total No. Constraints: " f"{number_total_constraints(block)} \n")
+    ostream.write(f"Total No. Constraints: {number_total_constraints(block)} \n")
     ostream.write(
         f"{tab}No. Equality Constraints: "
         f"{number_total_equalities(block)}"
@@ -1833,14 +1831,14 @@ def report_statistics(block, ostream=None):
         f" (Deactivated: "
         f"{number_deactivated_blocks(block)}) \n"
     )
-    ostream.write(f"No. Expressions: " f"{number_expressions(block)} \n")
+    ostream.write(f"No. Expressions: {number_expressions(block)} \n")
     if number_activated_greybox_blocks(block) != 0:
         ostream.write(
             f"No. Activated GreyBox Blocks: {number_activated_greybox_blocks(block)} \n"
         )
         ostream.write(f"No. GreyBox Variables: {number_of_greybox_variables(block)} \n")
         ostream.write(
-            f"No. Fixed GreyBox Variables: {number_of_greybox_variables(block)-number_of_unfixed_greybox_variables(block)} \n"
+            f"No. Fixed GreyBox Variables: {number_of_greybox_variables(block) - number_of_unfixed_greybox_variables(block)} \n"
         )
         ostream.write(
             f"No. GreyBox Equalities: {number_activated_greybox_equalities(block)} \n"

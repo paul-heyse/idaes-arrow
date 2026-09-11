@@ -1618,7 +1618,6 @@ class MSContactorData(UnitModelBlockData):
         # Pressure Balances
         for stream, pconfig in self.config.streams.items():
             if pconfig.has_pressure_balance:
-
                 if pconfig.has_pressure_change:
                     deltaP = Var(
                         self.flowsheet().time,

@@ -646,7 +646,6 @@ def load_generic_ccs_costing_dictionary(path=None):
     if not os.path.exists(
         os.path.join(directory, "generic_ccs_costing_data.json")
     ):  # make the dictionary
-
         generic_ccs_costing_data = generic_ccs_costing_params
 
         for (
@@ -658,13 +657,13 @@ def load_generic_ccs_costing_dictionary(path=None):
                     accounts_dict = gccsd[ccs]  # shorter alias
                     for account in accounts_dict.keys():  # do one account at a time
                         if account == "5.1.a.epri":
-                            accounts_dict[account][
-                                "BEC_units"
-                            ] = "K$2018"  # add BEC units as thousands of 2018 USD
+                            accounts_dict[account]["BEC_units"] = (
+                                "K$2018"  # add BEC units as thousands of 2018 USD
+                            )
                         else:
-                            accounts_dict[account][
-                                "BEC_units"
-                            ] = "K$2013"  # add BEC units as thousands of 2013 USD
+                            accounts_dict[account]["BEC_units"] = (
+                                "K$2013"  # add BEC units as thousands of 2013 USD
+                            )
                         for accountkey in generic_ccs_costing_exponents[tech][
                             account
                         ].keys():  # get one " exponents"account property at a time

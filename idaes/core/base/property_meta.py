@@ -31,16 +31,17 @@ Example::
 
     from idaes.core.property_base import PhysicalParameterBlock
 
-    class MyPropParams(PhysicalParameterBlock):
 
+    class MyPropParams(PhysicalParameterBlock):
         @classmethod
         def define_metadata(cls, meta):
-            meta.add_default_units({foo.U.TIME: 'fortnights',
-                                   foo.U.MASS: 'stones'})
-            meta.add_properties({'under_sea': {'units': 'leagues'},
-                                'tentacle_size': {'units': 'yards'}})
-            meta.add_required_properties({'under_sea': 'leagues',
-                                'tentacle_size': 'yards'})
+            meta.add_default_units({foo.U.TIME: "fortnights", foo.U.MASS: "stones"})
+            meta.add_properties(
+                {"under_sea": {"units": "leagues"}, "tentacle_size": {"units": "yards"}}
+            )
+            meta.add_required_properties(
+                {"under_sea": "leagues", "tentacle_size": "yards"}
+            )
 
         # Also, of course, implement the non-metadata methods that
         # do the work of the class.
@@ -431,10 +432,23 @@ class PropertyClassMetadata(object):
     Example usage::
 
         foo = PropertyClassMetadata()
-        foo.add_default_units(time = pyo.units.fortnights,
-                              mass = pyo.units.stones)
-        foo.add_properties({'under_sea': {'method': 'submarine', 'units': 'leagues', 'required': False, 'supported': True},
-                            'tentacle_size': {'method': 'kraken', 'units': 'yards', 'required': True, 'supported': True}})
+        foo.add_default_units(time=pyo.units.fortnights, mass=pyo.units.stones)
+        foo.add_properties(
+            {
+                "under_sea": {
+                    "method": "submarine",
+                    "units": "leagues",
+                    "required": False,
+                    "supported": True,
+                },
+                "tentacle_size": {
+                    "method": "kraken",
+                    "units": "yards",
+                    "required": True,
+                    "supported": True,
+                },
+            }
+        )
 
     """
 

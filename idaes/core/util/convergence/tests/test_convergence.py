@@ -32,16 +32,13 @@ import idaes
 # See if ipopt is available and set up solver
 ipopt_available = pe.SolverFactory("ipopt").available()
 ceval_fixedvar_mutableparam_str = (
-    "idaes.core.util.convergence.tests."
-    "conv_eval_classes.ConvEvalFixedVarMutableParam"
+    "idaes.core.util.convergence.tests.conv_eval_classes.ConvEvalFixedVarMutableParam"
 )
 ceval_fixedvar_immutableparam_str = (
-    "idaes.core.util.convergence.tests."
-    "conv_eval_classes.ConvEvalFixedVarImmutableParam"
+    "idaes.core.util.convergence.tests.conv_eval_classes.ConvEvalFixedVarImmutableParam"
 )
 ceval_unfixedvar_mutableparam_str = (
-    "idaes.core.util.convergence.tests."
-    "conv_eval_classes.ConvEvalUnfixedVarMutableParam"
+    "idaes.core.util.convergence.tests.conv_eval_classes.ConvEvalUnfixedVarMutableParam"
 )
 
 currdir = this_file_dir()

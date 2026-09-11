@@ -200,9 +200,7 @@ class ReactionInterrogatorData(ReactionParameterBlock):
         tab = " " * 4
 
         ostream.write("\n")
-        ostream.write(
-            f"The following models in the Flowsheet " f"require {prop}:" + "\n"
-        )
+        ostream.write(f"The following models in the Flowsheet require {prop}:" + "\n")
 
         for m in self.required_properties[prop]:
             ostream.write(tab + m + "\n")
@@ -230,8 +228,7 @@ class ReactionInterrogatorData(ReactionParameterBlock):
 
         ostream.write("\n")
         ostream.write(
-            f"The following reaction properties are required by "
-            f"model {model}:" + "\n"
+            f"The following reaction properties are required by model {model}:" + "\n"
         )
 
         for m in self.list_properties_required_by_model(model):

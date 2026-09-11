@@ -647,9 +647,9 @@ def print_HX_results(blk, exchanger_list):
     # Print Inlet Temperature, Outlet Temperature and Heat
     for i, v in exchangerdict.items():
         print("Heat exchanger: ", v)
-        print(f'Inlet T: {" "*3} {Tin_[i] : 0.3f} {T_units}')
-        print(f'Outlet T: {" "*2} {Tout_[i] : 0.3f} {T_units}')
-        print(f'Q : {" "*9} {Q_[i]: 0.3f} {DG_units}')
+        print(f"Inlet T: {' ' * 3} {Tin_[i]: 0.3f} {T_units}")
+        print(f"Outlet T: {' ' * 2} {Tout_[i]: 0.3f} {T_units}")
+        print(f"Q : {' ' * 9} {Q_[i]: 0.3f} {DG_units}")
 
 
 def unique(list1):

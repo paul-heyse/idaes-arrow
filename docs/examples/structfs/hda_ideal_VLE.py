@@ -99,7 +99,7 @@ class HDAInitializer(InitializerBase):
                 )
 
         init_log.info_high(
-            "Initialization Step 1 - Dew and bubble points " "calculation completed."
+            "Initialization Step 1 - Dew and bubble points calculation completed."
         )
 
         # ---------------------------------------------------------------------
@@ -112,7 +112,7 @@ class HDAInitializer(InitializerBase):
                 blk[k]._teq.value = min(blk[k]._t1.value, blk[k].temperature_dew.value)
 
         init_log.info_high(
-            "Initialization Step 2 - Equilibrium temperature " " calculation completed."
+            "Initialization Step 2 - Equilibrium temperature  calculation completed."
         )
 
         # ---------------------------------------------------------------------

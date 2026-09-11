@@ -38,7 +38,7 @@ def test_categorize_deriv():
     m.v = pyo.Var(m.time, initialize=0)
     m.dv = dae.DerivativeVar(m.v, wrt=m.time)
     m.diff_eqn = pyo.Constraint(
-        m.time, rule={t: m.dv[t] == -m.v[t] ** 2 for t in m.time}
+        m.time, rule={t: m.dv[t] == -(m.v[t] ** 2) for t in m.time}
     )
     with pytest.raises(TypeError):
         # If we find a derivative var, we will try to access the disc eq.
@@ -91,7 +91,7 @@ def test_categorize_deriv_fixed():
     m.v = pyo.Var(m.time, initialize=0)
     m.dv = dae.DerivativeVar(m.v, wrt=m.time)
     m.diff_eqn = pyo.Constraint(
-        m.time, rule={t: m.dv[t] == -m.v[t] ** 2 for t in m.time}
+        m.time, rule={t: m.dv[t] == -(m.v[t] ** 2) for t in m.time}
     )
     disc = pyo.TransformationFactory("dae.finite_difference")
     disc.apply_to(m, wrt=m.time, nfe=1, scheme="BACKWARD")

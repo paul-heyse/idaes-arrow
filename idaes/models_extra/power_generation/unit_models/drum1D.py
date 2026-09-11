@@ -507,7 +507,7 @@ discretizing length domain (default=3)""",
         self.const_Nu = Param(
             initialize=0.322,
             mutable=True,
-            doc="constant related to Nu number for free" "convection",
+            doc="constant related to Nu number for freeconvection",
         )
 
         # Ambient pressure
@@ -532,14 +532,14 @@ discretizing length domain (default=3)""",
         self.heat_transfer_free_conv = Var(
             self.flowsheet().time,
             initialize=1,
-            doc="Insulation Free Convection" "Heat Transfer Coefficient",
+            doc="Insulation Free ConvectionHeat Transfer Coefficient",
         )
 
         # Ra number of free convection
         self.N_Ra_root6 = Var(
             self.flowsheet().time,
             initialize=80,
-            doc="1/6 Power of Ra" "Number of Free Convection of Air",
+            doc="1/6 Power of RaNumber of Free Convection of Air",
         )
 
         # Nu number  of free convection
@@ -750,11 +750,7 @@ discretizing length domain (default=3)""",
                 b.drum_wall_temperature[t, r2] - b.drum_wall_temperature[t, r1]
             ) + 8 * b.diff_therm_metal / b.therm_cond_metal * b.heat_transfer_in[
                 t
-            ] * R1 / (
-                R2 - R1
-            ) / (
-                3 * R1 + R2
-            ) * (
+            ] * R1 / (R2 - R1) / (3 * R1 + R2) * (
                 b.control_volume.properties_out[t].temperature
                 - b.drum_wall_temperature[t, r1]
             )
@@ -776,11 +772,7 @@ discretizing length domain (default=3)""",
                 b.drum_wall_temperature[t, rfm1] - b.drum_wall_temperature[t, rf]
             ) + 8 * b.diff_therm_metal / b.therm_cond_metal * b.heat_transfer_out[
                 t
-            ] * Rf / (
-                Rf - Rfm1
-            ) / (
-                3 * Rf + Rfm1
-            ) * (
+            ] * Rf / (Rf - Rfm1) / (3 * Rf + Rfm1) * (
                 b.temperature_ambient[t] - b.drum_wall_temperature[t, rf]
             )
 
@@ -985,7 +977,7 @@ discretizing length domain (default=3)""",
         @self.Expression(
             self.flowsheet().time,
             self.dimensionless_radial_domain,
-            doc="Thermal Stress at Circumferential Direction" "for Drum",
+            doc="Thermal Stress at Circumferential Directionfor Drum",
         )
         def therm_sigma_theta(b, t, r):
             R = b.radial_coordinate[r]
@@ -1044,7 +1036,7 @@ discretizing length domain (default=3)""",
         @self.Expression(
             self.flowsheet().time,
             self.dimensionless_radial_domain,
-            doc="Mechanical Stress at Circumferential Direction" "for Drum",
+            doc="Mechanical Stress at Circumferential Directionfor Drum",
         )
         def mech_sigma_theta(b, t, r):
             R = b.radial_coordinate[r]
@@ -1065,7 +1057,7 @@ discretizing length domain (default=3)""",
             )
 
         @self.Expression(
-            self.flowsheet().time, doc="Mechanical Stress at Axial Direction" "for Drum"
+            self.flowsheet().time, doc="Mechanical Stress at Axial Directionfor Drum"
         )
         def mech_sigma_z(b, t):
             return 0.1 * (
@@ -1080,7 +1072,7 @@ discretizing length domain (default=3)""",
         @self.Expression(
             self.flowsheet().time,
             self.dimensionless_radial_domain,
-            doc="Principal Structural Stress" "at Radial Direction for Drum",
+            doc="Principal Structural Stressat Radial Direction for Drum",
         )
         def sigma_r(b, t, r):
             if r == b.dimensionless_radial_domain.first():
@@ -1093,7 +1085,7 @@ discretizing length domain (default=3)""",
         @self.Expression(
             self.flowsheet().time,
             self.dimensionless_radial_domain,
-            doc="Principal Structural Stress" "at Circumferential Direction for Drum",
+            doc="Principal Structural Stressat Circumferential Direction for Drum",
         )
         def sigma_theta(b, t, r):
             return b.mech_sigma_theta[t, r] + b.therm_sigma_theta[t, r]
@@ -1101,7 +1093,7 @@ discretizing length domain (default=3)""",
         @self.Expression(
             self.flowsheet().time,
             self.dimensionless_radial_domain,
-            doc="Principal Structural Stress" "at Axial Direction for Drum",
+            doc="Principal Structural Stressat Axial Direction for Drum",
         )
         def sigma_z(b, t, r):
             return b.mech_sigma_z[t] + b.therm_sigma_z[t, r]
@@ -1144,7 +1136,7 @@ discretizing length domain (default=3)""",
         @self.Expression(
             self.flowsheet().time,
             self.dimensionless_radial_domain,
-            doc="Variation Principal Stress" "between Axial-Radial Directions for Drum",
+            doc="Variation Principal Stressbetween Axial-Radial Directions for Drum",
         )
         def delta_sigma_z_r(b, t, r):
             return abs(b.sigma_z[t, r] - b.sigma_r[t, r])
@@ -1201,9 +1193,7 @@ discretizing length domain (default=3)""",
         # mechanical stress at circumferential direction
         @self.Expression(
             self.flowsheet().time,
-            doc="Mechanical Stress "
-            "at Circumferential Direction"
-            "for Drum (EN 12952-3)",
+            doc="Mechanical Stress at Circumferential Directionfor Drum (EN 12952-3)",
         )
         def sigma_p(b, t):
             return (
@@ -1217,7 +1207,7 @@ discretizing length domain (default=3)""",
         # thermal stress at circumferential direction
         @self.Expression(
             self.flowsheet().time,
-            doc="Thermal Stress at Circumferential" "Direction for Drum (EN 12952-3)",
+            doc="Thermal Stress at CircumferentialDirection for Drum (EN 12952-3)",
         )
         def sigma_t(b, t):
             delta_T = (
@@ -1236,7 +1226,7 @@ discretizing length domain (default=3)""",
 
         # mechanical stress by pressure at crotch corner
         @self.Expression(
-            self.flowsheet().time, doc="Mechanical Stress at Crotch Corner" "for Drum"
+            self.flowsheet().time, doc="Mechanical Stress at Crotch Cornerfor Drum"
         )
         def sigma_p_P1(b, t):
             return b.sigma_p[t] * k_m
@@ -1244,7 +1234,7 @@ discretizing length domain (default=3)""",
         # mechanical stress at location P2
         @self.Expression(
             self.flowsheet().time,
-            doc="Mechanical Stress at" "Critical Point P2 for Drum",
+            doc="Mechanical Stress atCritical Point P2 for Drum",
         )
         def sigma_p_P2(b, t):
             return b.sigma_p[t] * k_m / 5
@@ -1258,7 +1248,7 @@ discretizing length domain (default=3)""",
 
         # thermal stress at location P2
         @self.Expression(
-            self.flowsheet().time, doc="Thermal Stress" "at Critical Point P2 for Drum"
+            self.flowsheet().time, doc="Thermal Stressat Critical Point P2 for Drum"
         )
         def sigma_t_P2(b, t):
             return b.sigma_t[t] * k_t
@@ -1267,7 +1257,7 @@ discretizing length domain (default=3)""",
         # crotch corner P1
         @self.Expression(
             self.flowsheet().time,
-            doc="Circumferential Stress" "at Crotch Corner for Drum",
+            doc="Circumferential Stressat Crotch Corner for Drum",
         )
         def sigma_theta_P1(b, t):
             return b.sigma_p_P1[t] + b.sigma_t_P1[t]
@@ -1275,7 +1265,7 @@ discretizing length domain (default=3)""",
         # location P2
         @self.Expression(
             self.flowsheet().time,
-            doc="Circumferential Stress" "at Critical Point P2 for Drum",
+            doc="Circumferential Stressat Critical Point P2 for Drum",
         )
         def sigma_theta_P2(b, t):
             return b.sigma_p_P2[t] + b.sigma_t_P2[t]
@@ -1303,7 +1293,7 @@ discretizing length domain (default=3)""",
         # VM stress at crotch corner
         @self.Expression(
             self.flowsheet().time,
-            doc="Equivalent von Mises Stress" "at Crotch Corner for Drum",
+            doc="Equivalent von Mises Stressat Crotch Corner for Drum",
         )
         def sigma_eff_P1(b, t):
             sigma_comer_P1 = b.sigma_theta_P1[t]
@@ -1322,7 +1312,7 @@ discretizing length domain (default=3)""",
         # VM stress at location P2
         @self.Expression(
             self.flowsheet().time,
-            doc="Equivalent von Mises Stress" "at Critical Point P2 for Drum",
+            doc="Equivalent von Mises Stressat Critical Point P2 for Drum",
         )
         def sigma_eff_P2(b, t):
             sigma_comer_P2 = b.sigma_theta_P2[t]

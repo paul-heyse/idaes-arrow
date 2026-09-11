@@ -347,7 +347,6 @@ class Tracker:
         """
 
         for t in self.time_set:
-
             try:
                 dispatch = market_dispatch[t]
             except IndexError:
@@ -386,7 +385,6 @@ class Tracker:
 
         df_list = []
         for t in self.time_set:
-
             result_dict = {}
 
             result_dict["Date"] = kwargs["date"]

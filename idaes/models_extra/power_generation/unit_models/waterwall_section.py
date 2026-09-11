@@ -377,7 +377,7 @@ constructed,
 
         @self.Expression(
             self.flowsheet().time,
-            doc="Angle at joint of tube and " "fin at outside slag layer",
+            doc="Angle at joint of tube and fin at outside slag layer",
         )
         def alpha_slag(b, t):
             return asin(
@@ -1001,7 +1001,7 @@ constructed,
         # Forced convection heat transfer coefficient for liquid only
         @self.Constraint(
             self.flowsheet().time,
-            doc="forced convection heat transfer " "coefficient for liquid only",
+            doc="forced convection heat transfer coefficient for liquid only",
         )
         def hconv_lo_eqn(b, t):
             return (
@@ -1055,13 +1055,13 @@ constructed,
             self.martinelli_reciprocal_p86 = Var(
                 self.flowsheet().time,
                 initialize=0.2,
-                doc="Reciprocal of Martinelli parameter " "to the power of 0.86",
+                doc="Reciprocal of Martinelli parameter to the power of 0.86",
             )
 
             # Reciprocal of Martinelli parameter to the power of 0.86
             @self.Constraint(
                 self.flowsheet().time,
-                doc="Reciprocal of Martineli parameter " "to the power of 0.86",
+                doc="Reciprocal of Martineli parameter to the power of 0.86",
             )
             def martinelli_reciprocal_p86_eqn(b, t):
                 return b.martinelli_reciprocal_p86[t] * b.liquid_fraction[

@@ -100,9 +100,7 @@ class log_fugacity:
             phase1
         ).config.equation_of_state.log_fug_phase_comp_eq(
             b, phase1, comp, pp
-        ) == b.params.get_phase(
-            phase2
-        ).config.equation_of_state.log_fug_phase_comp_eq(
+        ) == b.params.get_phase(phase2).config.equation_of_state.log_fug_phase_comp_eq(
             b, phase2, comp, pp
         )
 

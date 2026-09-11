@@ -78,8 +78,7 @@ class ReplaceVariables(NonIsomorphicTransformation):
             if r[0].is_indexed() and r[1].is_indexed():
                 if not r[0].index_set().issubset(r[1].index_set()):
                     raise ValueError(
-                        "The index set of {} must be a subset of"
-                        " {}.".format(r[0], r[1])
+                        "The index set of {} must be a subset of {}.".format(r[0], r[1])
                     )
                 for i in r[0]:
                     d[id(r[0][i])] = r[1][i]

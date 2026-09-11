@@ -148,12 +148,12 @@ class IndexedElem(object):
 
         Example::
 
-            VarIndexes = IndexedElem(sites=[1,2])
-            CoefIndexes = IndexedElem(site_types=['A','B'])
-            Comb = IndexedElem.fromComb(VarIndexes,CoefIndexes)
+            VarIndexes = IndexedElem(sites=[1, 2])
+            CoefIndexes = IndexedElem(site_types=["A", "B"])
+            Comb = IndexedElem.fromComb(VarIndexes, CoefIndexes)
             for k in Comb.keys():
-                site = VarIndexes.mask(k,Comb)
-                site_type = CoefIndexes.mask(k,Comb)
+                site = VarIndexes.mask(k, Comb)
+                site_type = CoefIndexes.mask(k, Comb)
 
         Args:
             index (tuple<int/BBlock>): index from which to identify relevant parts
@@ -290,7 +290,7 @@ class IndexedElem(object):
         elif len(index_sets) == 1:
             return (k for k in index_sets[0])
         else:
-            raise NotImplementedError("There should always be at least " "a [None] key")
+            raise NotImplementedError("There should always be at least a [None] key")
 
 
 class Coef(IndexedElem):
@@ -514,7 +514,7 @@ class SiteCombination(Expr):
             i, j, k, l = index[0], index[1], (), ()
         else:
             raise NotImplementedError(
-                "Decide how to split the extra " "indices in this case..."
+                "Decide how to split the extra indices in this case..."
             )
         if (
             type(self.coefi) is float
@@ -2906,7 +2906,7 @@ class MatOptModel(object):
                         index=iSoln, expr=(Disallow(D)._pyomo_expr(self.Yi) >= 1)
                     )
                 else:
-                    raise NotImplementedError("Decide what to do " "in this case...")
+                    raise NotImplementedError("Decide what to do in this case...")
             else:
                 dispPrint("No solution found. Terminating populate.")
                 break
@@ -3056,7 +3056,7 @@ class MatOptModel(object):
                 #  NOTE: This assertion should be re-enabled when Pyomo bug
                 #        described above is fixed.
                 # assert(soln_status==SolutionStatus.optimal)
-                dispPrint("A feasible and provably optimal solution " "is available.")
+                dispPrint("A feasible and provably optimal solution is available.")
             else:
                 dispPrint(
                     "The solver exited due to termination criteria: {}".format(
@@ -3065,8 +3065,7 @@ class MatOptModel(object):
                 )
                 if has_solution:
                     dispPrint(
-                        "A feasible (but not provably optimal) "
-                        "solution is available."
+                        "A feasible (but not provably optimal) solution is available."
                     )
                 else:
                     dispPrint("No solution available.")

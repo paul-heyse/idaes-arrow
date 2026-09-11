@@ -765,9 +765,9 @@ class QGESSCostingData(FlowsheetCostingBlockData):
                                             )
                                         )
                                 else:  # conflict is the account passed, and overwrite it
-                                    frozen_dict[techkey][ccskey][
-                                        accountkey
-                                    ] = accountval
+                                    frozen_dict[techkey][ccskey][accountkey] = (
+                                        accountval
+                                    )
                         else:  # it's a new type, append the entry
                             frozen_dict[techkey][ccskey] = ccsval
                 else:
@@ -1324,14 +1324,14 @@ class QGESSCostingData(FlowsheetCostingBlockData):
         self.bare_erected_cost = Var(
             initialize=self.ref_cost,
             bounds=(0, 1e4),
-            doc="bare erected cost of sCO2 unit" "in $MM",
+            doc="bare erected cost of sCO2 unitin $MM",
             units=CE_index_units,
         )
 
         self.total_plant_cost = Var(
             initialize=self.ref_cost,
             bounds=(0, 1e4),
-            doc="total plant cost of sCO2 unit" "in $MM",
+            doc="total plant cost of sCO2 unitin $MM",
             units=CE_index_units,
         )
 
@@ -1351,8 +1351,7 @@ class QGESSCostingData(FlowsheetCostingBlockData):
         ]:
             if temp_C is None:
                 raise ValueError(
-                    "Temperature argument is "
-                    "required to cost %s equipment" % equipment
+                    "Temperature argument is required to cost %s equipment" % equipment
                 )
 
             else:
@@ -2166,5 +2165,8 @@ class QGESSCostingData(FlowsheetCostingBlockData):
                             % (value(o.name), value(o.scaled_param), upper_bound)
                         )
                     else:
-                        print("""%s: The scaled parameter is within the
-                            bounds.""" % value(o.name))
+                        print(
+                            """%s: The scaled parameter is within the
+                            bounds."""
+                            % value(o.name)
+                        )

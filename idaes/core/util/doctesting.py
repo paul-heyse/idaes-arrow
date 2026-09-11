@@ -39,7 +39,7 @@ class Docstring:
         # TODO: also handle RST
         else:
             raise ValueError(
-                f"Unknown docstring style: {style}. " f"Must be one of: markdown"
+                f"Unknown docstring style: {style}. Must be one of: markdown"
             )
 
     def code(self, section: str, func_prefix: str = None) -> str:

@@ -331,7 +331,7 @@ mixed phase not supported""",
         # Friction factor expression depending on laminar or turbulent flow
         @self.Constraint(
             self.flowsheet().time,
-            doc="Darcy friction factor as" " a function of Reynolds number",
+            doc="Darcy friction factor as a function of Reynolds number",
         )
         def friction_factor_darcy_eqn(b, t):
             return (

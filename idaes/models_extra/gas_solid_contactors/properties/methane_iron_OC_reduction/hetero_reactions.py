@@ -132,7 +132,7 @@ class ReactionParameterData(ReactionParameterBlock):
         self._scale_factor_rxn = Param(
             mutable=True,
             default=1,
-            doc="Scale Factor for reaction eqn." "Used to help initialization routine",
+            doc="Scale Factor for reaction eqn.Used to help initialization routine",
         )
 
         # Reaction Stoichiometry
@@ -165,7 +165,7 @@ class ReactionParameterData(ReactionParameterBlock):
         self.grain_radius = Var(
             domain=Reals,
             initialize=2.6e-7,
-            doc="Representative particle grain" "radius within OC particle [m]",
+            doc="Representative particle grainradius within OC particle [m]",
             units=pyunits.m,
         )
         self.grain_radius.fix()
@@ -212,7 +212,7 @@ class ReactionParameterData(ReactionParameterBlock):
             self.rate_reaction_idx,
             domain=Reals,
             initialize=8e-4,
-            doc="Pre-exponential factor" "[mol^(1-rxn_order) * m^(3*rxn_order -2)/s]",
+            doc="Pre-exponential factor[mol^(1-rxn_order) * m^(3*rxn_order -2)/s]",
             units=pyunits.mol ** (1 - 1.3) * pyunits.m ** (3 * 1.3 - 2) / pyunits.s,
         )
         self.k0_rxn.fix()
@@ -445,7 +445,7 @@ class ReactionBlockData(ReactionBlockDataBase):
             self.params.rate_reaction_idx,
             domain=Reals,
             initialize=1,
-            doc="Rate constant " "[mol^(1-rxn_order) * m^(3*rxn_order -2)/s]",
+            doc="Rate constant [mol^(1-rxn_order) * m^(3*rxn_order -2)/s]",
             units=pyunits.mol ** (1 - 1.3) * pyunits.m ** (3 * 1.3 - 2) / pyunits.s,
         )
 
@@ -518,7 +518,7 @@ class ReactionBlockData(ReactionBlockDataBase):
         self.OC_conv_temp = Var(
             domain=Reals,
             initialize=1.0,
-            doc="Reformulation term for" "X to help eqn scaling",
+            doc="Reformulation term forX to help eqn scaling",
             units=pyunits.dimensionless,
         )
 
@@ -544,9 +544,7 @@ class ReactionBlockData(ReactionBlockDataBase):
         )
 
         def rate_rule(b, r):
-            return b.reaction_rate[
-                r
-            ] == b.params._scale_factor_rxn * (  # pylint: disable=protected-access
+            return b.reaction_rate[r] == b.params._scale_factor_rxn * (  # pylint: disable=protected-access
                 b.solid_state_ref.mass_frac_comp["Fe2O3"]
                 * (1 - b.solid_state_ref.particle_porosity)
                 * b.solid_state_ref.dens_mass_skeletal

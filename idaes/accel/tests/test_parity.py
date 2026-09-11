@@ -38,9 +38,9 @@ from idaes.accel.tests._harness import to_params
 def run_case(case):
     """Assert the Python and Rust implementations agree for one case."""
     accelerated = registry().get(case.key)
-    assert (
-        accelerated is not None
-    ), f"parity case {case.id!r} targets unknown accel key {case.key!r}"
+    assert accelerated is not None, (
+        f"parity case {case.id!r} targets unknown accel key {case.key!r}"
+    )
     rust = accelerated.rust_impl
     if rust is None:
         pytest.skip(f"no Rust implementation for {case.key!r}")

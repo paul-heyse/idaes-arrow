@@ -193,7 +193,6 @@ class ExampleModel:
         df_list = []
 
         for t in b.HOUR:
-
             result_dict = {}
             result_dict["Generator"] = self.generator
             result_dict["Date"] = date

@@ -128,8 +128,7 @@ def test_IndexedVarLikeExpression():
         with pytest.raises(
             TypeError,
             match=re.escape(
-                f"e[{i}] is an Expression and does not "
-                f"have a value which can be set."
+                f"e[{i}] is an Expression and does not have a value which can be set."
             ),
         ):
             m.e[i].set_value(10)
@@ -137,8 +136,7 @@ def test_IndexedVarLikeExpression():
         with pytest.raises(
             TypeError,
             match=re.escape(
-                f"e[{i}] is an Expression and does not have "
-                "a value which can be set."
+                f"e[{i}] is an Expression and does not have a value which can be set."
             ),
         ):
             m.e[i].value = 10

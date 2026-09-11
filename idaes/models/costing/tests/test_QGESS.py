@@ -99,9 +99,9 @@ class TestQGESSConfigParameters(object):
             ), f"Value mismatch for key {k}"
 
         for k in m.fs.costing.param_dir["Units"]:
-            assert (
-                str(m.fs.costing.param_dir["Units"][k]) == expected["Units"][k]
-            ), f"Units mismatch for key {k}"
+            assert str(m.fs.costing.param_dir["Units"][k]) == expected["Units"][k], (
+                f"Units mismatch for key {k}"
+            )
 
     @pytest.mark.unit
     def test_invalid_CEPCI_year(self):
@@ -559,9 +559,9 @@ class TestQGESSConfigParameters(object):
             )
         )
 
-        assert (
-            pyo.value(m.fs.costing.phaseout_factor) == expected[CEPCI_year]
-        ), f"Expected {expected[CEPCI_year]}, got {pyo.value(m.fs.costing.phaseout_factor)}"
+        assert pyo.value(m.fs.costing.phaseout_factor) == expected[CEPCI_year], (
+            f"Expected {expected[CEPCI_year]}, got {pyo.value(m.fs.costing.phaseout_factor)}"
+        )
 
     @pytest.mark.unit
     def test_capital_expenditure_percentages_not_set(self):
@@ -898,7 +898,9 @@ class TestQGESSConfigParameters(object):
 
         assert set(m.fs.costing.param_dir["Value"].keys()) == set(
             expected["Value"].keys()
-        ), f"Expected {expected['Value'].keys()}, got {m.fs.costing.param_dir['Value'].keys()}"
+        ), (
+            f"Expected {expected['Value'].keys()}, got {m.fs.costing.param_dir['Value'].keys()}"
+        )
 
         for k in m.fs.costing.param_dir["Value"]:
             if expected["Value"][k] == 0:
@@ -911,13 +913,12 @@ class TestQGESSConfigParameters(object):
                 ), f"Value mismatch for key {k}"
 
         for k in m.fs.costing.param_dir["Units"]:
-            assert (
-                str(m.fs.costing.param_dir["Units"][k]) == expected["Units"][k]
-            ), f"Units mismatch for key {k}"
+            assert str(m.fs.costing.param_dir["Units"][k]) == expected["Units"][k], (
+                f"Units mismatch for key {k}"
+            )
 
 
 class TestQGESSBuildProcessCosts(object):
-
     @pytest.mark.parametrize(
         "tech",
         [

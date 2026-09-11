@@ -105,8 +105,7 @@ def cluster_lmp_data(
             A dictionary of representative day LMP data, indices are indexed
                 by integers starting at 1. Example: ::
 
-                    {1: {1: 4, 2: 3, 3: 5},
-                    2: {1: 1, 2: 7, 3: 3}}
+                    {1: {1: 4, 2: 3, 3: 5}, 2: {1: 1, 2: 7, 3: 3}}
 
 
         weights: dict

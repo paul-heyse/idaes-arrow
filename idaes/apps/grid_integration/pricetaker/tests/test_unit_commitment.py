@@ -72,9 +72,7 @@ def test_unit_commitment_data():
     # Test assertion error associated with incomplete data
     with pytest.raises(
         uc.ConfigurationError,
-        match=(
-            "Necessary arguments needed for the ramping constraints " "are missing."
-        ),
+        match=("Necessary arguments needed for the ramping constraints are missing."),
     ):
         # rampdown_rate value is missing, so it should throw an error.
         m.assert_ramping_args_present()

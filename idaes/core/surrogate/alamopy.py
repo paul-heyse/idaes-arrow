@@ -656,7 +656,7 @@ class AlamoTrainer(SurrogateTrainer):
         ConfigValue(
             default=False,
             domain=Bool,
-            description="Flag indicating whether existing files can be " "overwritten.",
+            description="Flag indicating whether existing files can be overwritten.",
         ),
     )
 
@@ -839,7 +839,7 @@ class AlamoTrainer(SurrogateTrainer):
         for k, b in self._input_bounds.items():
             if b is None or b[0] is None or b[1] is None:
                 raise ConfigurationError(
-                    f"ALAMO configuration error: invalid bounds on input {k} " f"({b})."
+                    f"ALAMO configuration error: invalid bounds on input {k} ({b})."
                 )
             elif b[0] == b[1]:
                 raise ConfigurationError(
@@ -1113,7 +1113,7 @@ class AlamoTrainer(SurrogateTrainer):
                     if trace_val != str(j + 1):
                         raise RuntimeError(
                             f"Mismatch when reading ALAMO trace file. "
-                            f"Expected OUTPUT = {j+1}, found {trace_val}."
+                            f"Expected OUTPUT = {j + 1}, found {trace_val}."
                         )
                 elif header == "SET":
                     # SET should always be 0 - higher numbers are for

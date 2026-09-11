@@ -51,7 +51,6 @@ def make_phase_split(
     member_list = model.properties_out[t0].define_port_members()
 
     for k in member_list:
-
         local_name = member_list[k].local_name
 
         # Create references and populate the intensive variables
@@ -69,7 +68,6 @@ def make_phase_split(
             port.add(Reference(var), k)
 
         elif "frac" in local_name:
-
             # Mole/mass frac is typically indexed
             index_set = member_list[k].index_set()
 
@@ -78,7 +76,6 @@ def make_phase_split(
                 local_name_flow = ""
                 local_name_frac = ""
                 if "mole" in local_name:  # check mole basis/mass basis
-
                     # The following conditionals are required when a
                     # mole frac or mass frac is a state var i.e. will be
                     # a port member. This gets a bit tricky when handling
@@ -145,7 +142,6 @@ def make_phase_split(
                 model.add_component("e_mole_frac_" + port.local_name, expr)
                 port.add(expr, k)
             else:
-
                 # Assumes mole_frac_phase or mass_frac_phase exist as
                 # state vars in the port and therefore access directly
                 # from the state block.
@@ -157,7 +153,6 @@ def make_phase_split(
                 port.add(ref, k)
         elif "flow" in local_name:
             if "phase" not in local_name:
-
                 # Assumes that here the var is total flow or component
                 # flow. However, need to extract the flow by phase from
                 # the state block. Expects to find the var
@@ -167,7 +162,6 @@ def make_phase_split(
                 # is total flow
                 if "total" in str(equipmentType):
                     if not member_list[k].is_indexed():
-
                         # add the reference and variable name to the port
                         expr = Expression(
                             model.flowsheet().time,

@@ -193,7 +193,7 @@ class ScalingProfiler:
         max_line = max_str + 26 * 2
 
         # Write header rows
-        stream.write(f"\n{'='*max_line}\n")
+        stream.write(f"\n{'=' * max_line}\n")
         stream.write("Scaling Profile Report\n")
         stream.write(f"{'-' * max_line}\n")
         # Pad User Scaling columns to full column width (22)

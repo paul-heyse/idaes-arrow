@@ -1715,14 +1715,14 @@ def report_scaling_issues(
     ostream.write(f"{prefix}{tab}Unscaled Variables")
     ostream.write("\n" * 2)
     for v in unscaled_variables_generator(blk, descend_into, include_fixed):
-        ostream.write(f"{prefix}{tab*2}{v.name}")
+        ostream.write(f"{prefix}{tab * 2}{v.name}")
     ostream.write("\n" * 2)
     ostream.write(f"{prefix}{tab}Badly Scaled Variables")
     ostream.write("\n" * 2)
     for v in badly_scaled_var_generator(
         blk, large, small, zero, descend_into, include_fixed
     ):
-        ostream.write(f"{prefix}{tab*2}{v[0].name}: {v[1]}")
+        ostream.write(f"{prefix}{tab * 2}{v[0].name}: {v[1]}")
     ostream.write("\n" * 2)
     ostream.write(f"{prefix}{tab}Unscaled Constraints")
     ostream.write("\n" * 2)

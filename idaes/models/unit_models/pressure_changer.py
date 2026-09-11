@@ -637,9 +637,7 @@ see property package for documentation.}""",
             and self.config.thermodynamic_assumption == ThermodynamicAssumption.pump
             and eb is None
         ):
-            units = (
-                self.control_volume.config.property_package.get_metadata().get_derived_units
-            )
+            units = self.control_volume.config.property_package.get_metadata().get_derived_units
             self.control_volume.work = Var(
                 self.flowsheet().time,
                 domain=Reals,
@@ -733,7 +731,7 @@ see property package for documentation.}""",
         # Isothermal constraint
         @self.Constraint(
             self.flowsheet().time,
-            doc="For isothermal condition: Equate inlet and " "outlet temperature",
+            doc="For isothermal condition: Equate inlet and outlet temperature",
         )
         def isothermal(self, t):
             return (
@@ -911,8 +909,9 @@ see property package for documentation.}""",
                 for t in blk.flowsheet().time
             ):
                 _log.warning(
-                    "{} Expander/turbine set with ratioP greater "
-                    "than 1.".format(blk.name)
+                    "{} Expander/turbine set with ratioP greater than 1.".format(
+                        blk.name
+                    )
                 )
             if any(
                 blk.control_volume.properties_out[t].pressure.fixed
@@ -923,8 +922,9 @@ see property package for documentation.}""",
                 for t in blk.flowsheet().time
             ):
                 _log.warning(
-                    "{} Expander/turbine maybe set with pressure "
-                    "increase.".format(blk.name),
+                    "{} Expander/turbine maybe set with pressure increase.".format(
+                        blk.name
+                    ),
                 )
             # Check that work is not positive
             if any(

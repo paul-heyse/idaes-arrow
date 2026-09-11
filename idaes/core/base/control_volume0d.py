@@ -1440,22 +1440,25 @@ class ControlVolume0DBlockData(ControlVolumeBlockData):
     def add_phase_enthalpy_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_enthalpy_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_enthalpy_balances.".format(
+                self.name
+            )
         )
 
     def add_phase_energy_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_energy_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_energy_balances.".format(
+                self.name
+            )
         )
 
     def add_total_energy_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_total_energy_balances.".format(self.name)
+            "{} OD control volumes do not support add_total_energy_balances.".format(
+                self.name
+            )
         )
 
     def add_isothermal_constraint(self, *args, **kwargs):
@@ -1513,22 +1516,25 @@ class ControlVolume0DBlockData(ControlVolumeBlockData):
     def add_phase_pressure_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_pressure_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_pressure_balances.".format(
+                self.name
+            )
         )
 
     def add_phase_momentum_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_momentum_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_momentum_balances.".format(
+                self.name
+            )
         )
 
     def add_total_momentum_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_total_momentum_balances.".format(self.name)
+            "{} OD control volumes do not support add_total_momentum_balances.".format(
+                self.name
+            )
         )
 
     def model_check(blk):

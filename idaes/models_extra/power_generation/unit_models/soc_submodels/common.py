@@ -688,16 +688,14 @@ def _thermal_boundary_conditions_config(CONFIG, thin):
     # otherwise there is one at both ends
     CONFIG.declare(
         "temperature_z",
-        ConfigValue(
-            default=None, description="Temperature as indexed by time " "and z"
-        ),
+        ConfigValue(default=None, description="Temperature as indexed by time and z"),
     )
     if thin:
         CONFIG.declare(
             "temperature_deviation_x",
             ConfigValue(
                 default=None,
-                description="Deviation of temperature " "from temperature_z",
+                description="Deviation of temperature from temperature_z",
             ),
         )
     else:
@@ -705,26 +703,24 @@ def _thermal_boundary_conditions_config(CONFIG, thin):
             "temperature_deviation_x0",
             ConfigValue(
                 default=None,
-                description="Deviation of temperature at x=0 " "from temperature_z",
+                description="Deviation of temperature at x=0 from temperature_z",
             ),
         )
         CONFIG.declare(
             "temperature_deviation_x1",
             ConfigValue(
                 default=None,
-                description="Deviation of temperature at x=1 " "from temperature_z",
+                description="Deviation of temperature at x=1 from temperature_z",
             ),
         )
     CONFIG.declare(
         "heat_flux_x0",
-        ConfigValue(
-            default=None, description="Heat flux through x=0 " "(positive is in)"
-        ),
+        ConfigValue(default=None, description="Heat flux through x=0 (positive is in)"),
     )
     CONFIG.declare(
         "heat_flux_x1",
         ConfigValue(
-            default=None, description="Heat flux through x=1 " "(positive is out)"
+            default=None, description="Heat flux through x=1 (positive is out)"
         ),
     )
 

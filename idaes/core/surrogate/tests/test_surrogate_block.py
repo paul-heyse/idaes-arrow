@@ -48,7 +48,7 @@ def test_extract_var_data_indexed_not_ordered():
     m.s = Set(initialize=[1, 2, 3, 4], ordered=False)
     m.v = Var(m.s)
     with pytest.raises(
-        ValueError, match="Expected IndexedVar: v to be indexed over " "an ordered set."
+        ValueError, match="Expected IndexedVar: v to be indexed over an ordered set."
     ):
         _extract_var_data(m.v)
 

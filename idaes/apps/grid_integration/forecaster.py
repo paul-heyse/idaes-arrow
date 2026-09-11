@@ -639,7 +639,6 @@ class Backcaster(AbstractPrescientPriceForecaster):
 
         # update the historical
         for b in self._current_day_rt_prices:
-
             # if a full day's data is ready, get them ready for future forecasts
             if len(self._current_day_rt_prices[b]) >= 24:
                 self._historical_rt_prices[b] += self._current_day_rt_prices[b]
@@ -669,7 +668,6 @@ class Backcaster(AbstractPrescientPriceForecaster):
         """
 
         for b in self._historical_da_prices:
-
             # save the newest da prices
             self._historical_da_prices[b] += [
                 day_ahead_result.ruc_market.day_ahead_prices.get((b, t))

@@ -589,9 +589,9 @@ def main_dynamic():
     m_dyn.fs_main.turbine_master_ctrl.mv_ref.value = (
         m_ss.fs_main.fs_stc.turb.throttle_valve[1].valve_opening[t0].value
     )
-    m_dyn.fs_main.turbine_master_ctrl.setpoint[:].value = (
-        m_ss.fs_main.fs_stc.power_output[t0].value
-    )
+    m_dyn.fs_main.turbine_master_ctrl.setpoint[
+        :
+    ].value = m_ss.fs_main.fs_stc.power_output[t0].value
     m_dyn.fs_main.boiler_master_ctrl.mv_ref.value = (
         m_ss.fs_main.fs_blr.aBoiler.flowrate_coal_raw[t0].value
     )
@@ -2177,7 +2177,7 @@ def _build_pfd_tag_group(sd):
 
     for i, s in sd.items():
         tags[i + "_Fmass"] = s.flow_mass
-        tag_formats[i + "_Fmass"] = lambda x: ("{:.1f}" if x >= 10 else "{:.2f}")
+        tag_formats[i + "_Fmass"] = lambda x: "{:.1f}" if x >= 10 else "{:.2f}"
 
         tags[i + "_F"] = s.flow_mol
         tag_formats[i + "_F"] = "{:,.0f}"
@@ -2186,7 +2186,7 @@ def _build_pfd_tag_group(sd):
         tag_formats[i + "_T"] = "{:,.0f}"
 
         tags[i + "_P_kPa"] = s.pressure
-        tag_formats[i + "_P_kPa"] = lambda x: ("{:,.0f}" if x >= 100 else "{:.2f}")
+        tag_formats[i + "_P_kPa"] = lambda x: "{:,.0f}" if x >= 100 else "{:.2f}"
 
         try:
             tags[i + "_hmass"] = s.enth_mass

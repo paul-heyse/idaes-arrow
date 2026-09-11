@@ -273,16 +273,12 @@ class BoilerHeatExchangerData(HeatExchangerData):
             )
 
         # Ratio of pitch_x/do_tube
-        @self.Expression(
-            doc="Ratio of pitch in x " "direction to tube outside diameter"
-        )
+        @self.Expression(doc="Ratio of pitch in x direction to tube outside diameter")
         def pitch_x_to_do(b):
             return b.pitch_x / b.do_tube
 
         # Ratio of pitch_y/do_tube
-        @self.Expression(
-            doc="Ratio of pitch in y " "direction to tube outside diameter"
-        )
+        @self.Expression(doc="Ratio of pitch in y direction to tube outside diameter")
         def pitch_y_to_do(b):
             return b.pitch_y / b.do_tube
 
@@ -422,7 +418,7 @@ class BoilerHeatExchangerData(HeatExchangerData):
             self.frad_gas_shell = Var(
                 self.flowsheet().time,
                 initialize=0.5,
-                doc="Gas-surface radiation exchange " "factor for shell side wall",
+                doc="Gas-surface radiation exchange factor for shell side wall",
             )
 
             # Shell side equivalent convective heat transfer coefficient
@@ -660,8 +656,7 @@ class BoilerHeatExchangerData(HeatExchangerData):
             # equivalent convective heat transfer coefficient due to radiation
             @self.Constraint(
                 self.flowsheet().time,
-                doc="Equivalent convective heat transfer "
-                "coefficient due to radiation",
+                doc="Equivalent convective heat transfer coefficient due to radiation",
             )
             def hconv_shell_rad_eqn(b, t):
                 return b.hconv_shell_rad[t] == c.stefan_constant * b.frad_gas_shell[
@@ -857,7 +852,7 @@ class BoilerHeatExchangerData(HeatExchangerData):
         # Heat transfer coefficient
         @self.Constraint(
             self.flowsheet().time,
-            doc="Convective heat transfer " "coefficient equation on tube side",
+            doc="Convective heat transfer coefficient equation on tube side",
         )
         def hconv_tube_eqn(b, t):
             return (
@@ -933,9 +928,7 @@ class BoilerHeatExchangerData(HeatExchangerData):
                 t
             ].visc_d == b.do_tube * b.v_shell[t] * b.hot_side.properties_in[
                 t
-            ].dens_mol_phase[
-                "Vap"
-            ] * sum(
+            ].dens_mol_phase["Vap"] * sum(
                 b.hot_side.properties_in[t].mw_comp[c]
                 * b.hot_side.properties_in[t].mole_frac_comp[c]
                 for c in b.hot_side.properties_in[t].params.component_list
@@ -1039,7 +1032,7 @@ class BoilerHeatExchangerData(HeatExchangerData):
         # Total convective heat transfer coefficient on shell side
         @self.Constraint(
             self.flowsheet().time,
-            doc="Total convective heat transfer " "coefficient equation on shell side",
+            doc="Total convective heat transfer coefficient equation on shell side",
         )
         def hconv_shell_total_eqn(b, t):
             if self.config.has_radiation is True:

@@ -44,15 +44,15 @@ def phi_residual_expressions_type03(model, parameters):
             n[i]
             * model.delta ** d[i]
             * model.tau ** t[i]
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             for i in rng[1]
         )
         + sum(
             n[i]
             * model.delta ** d[i]
             * model.tau ** t[i]
-            * pyo.exp(-model.delta ** c[i])
-            * pyo.exp(-model.tau ** b[i])
+            * pyo.exp(-(model.delta ** c[i]))
+            * pyo.exp(-(model.tau ** b[i]))
             for i in rng[2]
         ),
         "phir_d": sum(
@@ -60,7 +60,7 @@ def phi_residual_expressions_type03(model, parameters):
         )
         + sum(
             n[i]
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             * model.delta ** (d[i] - 1)
             * model.tau ** t[i]
             * (d[i] - c[i] * model.delta ** c[i])
@@ -68,11 +68,11 @@ def phi_residual_expressions_type03(model, parameters):
         )
         + sum(
             n[i]
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             * model.delta ** (d[i] - 1)
             * model.tau ** t[i]
             * (d[i] - c[i] * model.delta ** c[i])
-            * pyo.exp(-model.tau ** b[i])
+            * pyo.exp(-(model.tau ** b[i]))
             for i in rng[2]
         ),
         "phir_dd": sum(
@@ -81,7 +81,7 @@ def phi_residual_expressions_type03(model, parameters):
         )
         + sum(
             n[i]
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             * model.delta ** (d[i] - 2)
             * model.tau ** t[i]
             * (
@@ -93,7 +93,7 @@ def phi_residual_expressions_type03(model, parameters):
         )
         + sum(
             n[i]
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             * model.delta ** (d[i] - 2)
             * model.tau ** t[i]
             * (
@@ -101,7 +101,7 @@ def phi_residual_expressions_type03(model, parameters):
                 * (d[i] - 1 - c[i] * model.delta ** c[i])
                 - c[i] ** 2 * model.delta ** c[i]
             )
-            * pyo.exp(-model.tau ** b[i])
+            * pyo.exp(-(model.tau ** b[i]))
             for i in rng[2]
         ),
         "phir_t": sum(
@@ -112,15 +112,15 @@ def phi_residual_expressions_type03(model, parameters):
             * t[i]
             * model.delta ** d[i]
             * model.tau ** (t[i] - 1)
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             for i in rng[1]
         )
         + sum(
             n[i]
             * model.delta ** d[i]
             * model.tau ** (t[i] - 1)
-            * pyo.exp(-model.delta ** c[i])
-            * pyo.exp(-model.tau ** b[i])
+            * pyo.exp(-(model.delta ** c[i]))
+            * pyo.exp(-(model.tau ** b[i]))
             * (t[i] - b[i] * model.tau ** b[i])
             for i in rng[2]
         ),
@@ -134,15 +134,15 @@ def phi_residual_expressions_type03(model, parameters):
             * (t[i] - 1)
             * model.delta ** d[i]
             * model.tau ** (t[i] - 2)
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             for i in rng[1]
         )
         + sum(
             n[i]
             * model.delta ** d[i]
             * model.tau ** (t[i] - 2)
-            * pyo.exp(-model.delta ** c[i])
-            * pyo.exp(-model.tau ** b[i])
+            * pyo.exp(-(model.delta ** c[i]))
+            * pyo.exp(-(model.tau ** b[i]))
             * (
                 (t[i] - b[i] * model.tau ** b[i])
                 * (t[i] - 1 - b[i] * model.tau ** b[i])
@@ -160,7 +160,7 @@ def phi_residual_expressions_type03(model, parameters):
             * model.delta ** (d[i] - 1)
             * model.tau ** (t[i] - 1)
             * (d[i] - c[i] * model.delta ** c[i])
-            * pyo.exp(-model.delta ** c[i])
+            * pyo.exp(-(model.delta ** c[i]))
             for i in rng[1]
         )
         + sum(
@@ -169,8 +169,8 @@ def phi_residual_expressions_type03(model, parameters):
             * model.tau ** (t[i] - 1)
             * (d[i] - c[i] * model.delta ** c[i])
             * (t[i] - b[i] * model.tau ** b[i])
-            * pyo.exp(-model.delta ** c[i])
-            * pyo.exp(-model.tau ** b[i])
+            * pyo.exp(-(model.delta ** c[i]))
+            * pyo.exp(-(model.tau ** b[i]))
             for i in rng[2]
         ),
     }

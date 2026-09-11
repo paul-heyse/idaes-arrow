@@ -32,9 +32,9 @@ Example::
 
     from idaes.accel import accelerate
 
+
     @accelerate("pysmo.sampling.prime_number_generator")
-    def _prime_number_generator(n):
-        ...
+    def _prime_number_generator(n): ...
 """
 
 from idaes.accel._loader import (

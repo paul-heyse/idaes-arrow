@@ -593,7 +593,6 @@ see property package for documentation.}""",
         state_args_mixed = {}
 
         if self.config.is_feed_tray:
-
             # if feed tray, initialize the mixed state block at
             # the same condition.
             state_args_mixed = state_args_feed

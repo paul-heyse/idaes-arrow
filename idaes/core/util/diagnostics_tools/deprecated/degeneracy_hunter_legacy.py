@@ -268,7 +268,7 @@ class DegeneracyHunter:
                 if self.s[i] < tol:
                     counter += 1
         else:
-            print(f"Only singular value: {norm(self.jac_eq,'fro')}")
+            print(f"Only singular value: {norm(self.jac_eq, 'fro')}")
 
         return counter
 

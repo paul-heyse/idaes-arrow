@@ -316,8 +316,7 @@ The property package must be iapws95.
         # consistency check for properties
         if self.config.compressor and self.config.compressor_properties == useDefault:
             raise ConfigurationError(
-                "Compressor flag was set to true "
-                "but no property package was provided"
+                "Compressor flag was set to true but no property package was provided"
             )
 
         if (
@@ -769,7 +768,7 @@ The property package must be iapws95.
             self.isotherm_components,
             initialize={"CO2": -62900, "N2": 0.0},
             units=units.J / units.mol,
-            doc="Heat of adsorption - estimated with" "Clausius-Clapeyron relation",
+            doc="Heat of adsorption - estimated withClausius-Clapeyron relation",
         )
         self.temperature_ref = Param(
             initialize=313.15,
@@ -1754,7 +1753,7 @@ The property package must be iapws95.
 
         @self.pressurization.Constraint(
             self.isotherm_components,
-            doc="Constraint to calculate equilibrium loading at end of " "cooling step",
+            doc="Constraint to calculate equilibrium loading at end of cooling step",
         )
         def loading_cooling_end_eq(b, i):
             return b.loading_cooling_end[i] == self.cooling.loading[tf, i]
@@ -1840,7 +1839,7 @@ The property package must be iapws95.
                 * self.bed_bulk_dens_mass
                 / self.total_voidage
                 / self.pressure_adsorption
-                * ((b.loading["CO2"] - b.loading_pressurization_end["CO2"]))
+                * (b.loading["CO2"] - b.loading_pressurization_end["CO2"])
                 / (self.mole_frac_in["CO2"] * 1.0 - b.mole_frac_pressurization_end)
             )
 
@@ -1852,7 +1851,7 @@ The property package must be iapws95.
         # auxiliary constraints to connect initial state of adsorption step
         # with final state of pressurization step
         @self.adsorption.Constraint(
-            doc="Constraint to calculate mole fraction at end of " "pressurization step"
+            doc="Constraint to calculate mole fraction at end of pressurization step"
         )
         def mole_frac_pressurization_end_eq(b):
             return (
@@ -1960,7 +1959,6 @@ The property package must be iapws95.
         p = {}
 
         for j in self.isotherm_components:
-
             p[j] = units.convert(pressure[j], to_units=units.bar)
 
             saturation_capacity[j] = self.saturation_capacity_ref[j] * exp(
@@ -1984,7 +1982,6 @@ The property package must be iapws95.
         loading = {}
 
         for j in self.isotherm_components:
-
             loading[j] = (
                 saturation_capacity[j]
                 * (affinity_parameter[j] * p[j]) ** heterogeneity_parameter[j]
@@ -2026,7 +2023,6 @@ The property package must be iapws95.
             p[j] = units.convert(pressure[j], to_units=units.bar)
 
         if i == "CO2":
-
             lower_affinity_parameter = self.lower_affinity_preexponential_factor[
                 i
             ] * exp(
@@ -2135,7 +2131,6 @@ The property package must be iapws95.
             p[j] = units.convert(pressure[j], to_units=units.bar)
 
         if i == "CO2":
-
             saturation_capacity = self.saturation_capacity_ref[i] * exp(
                 self.saturation_capacity_exponential_factor[i]
                 * (1 - T / self.temperature_ref)
@@ -2357,8 +2352,7 @@ The property package must be iapws95.
             return b.heat_duty_bed_heating_step * b.number_beds
 
         @self.Expression(
-            doc="Total heat duty of fixed bed TSA system required during "
-            "the cycle [MW]"
+            doc="Total heat duty of fixed bed TSA system required during the cycle [MW]"
         )
         def heat_duty_total(b):
             return b.heat_duty_bed * b.number_beds
@@ -2445,7 +2439,7 @@ The property package must be iapws95.
 
         @self.Expression(
             self.isotherm_components,
-            doc="Mole fraction of N2 rich stream: stream vented to " "atmosphere [-]",
+            doc="Mole fraction of N2 rich stream: stream vented to atmosphere [-]",
         )
         def mole_frac_n2_rich_stream(b, i):
             return b.flow_mol_n2_rich_stream[0, i] / sum(
@@ -2599,7 +2593,6 @@ The property package must be iapws95.
         )
 
         if self.config.steam_calculation == SteamCalculationType.rigorous:
-
             # add empty block for heater
             self.steam_heater = Block()
 

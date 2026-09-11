@@ -155,9 +155,7 @@ class TestSolvePipelineSquare(unittest.TestCase):
         state[:, x0].temperature.fix(293.15 * pyo.units.K)
         state[:, x0].pressure.fix(57.0 * pyo.units.bar)
         pipeline.control_volume.flow_mass[:, x0].fix(
-            3.0e5
-            * pyo.units.kg
-            / pyo.units.hr
+            3.0e5 * pyo.units.kg / pyo.units.hr
             # close to 10 * (1e6 SCM) / day, the nominal value in the model
         )
 
@@ -450,8 +448,7 @@ class TestSolveDynamicPipeline(unittest.TestCase):
         pred_values = (
             list(time),
             {
-                "fs.pipeline.control_volume.flow_mass[*,%s]"
-                % x0: [
+                "fs.pipeline.control_volume.flow_mass[*,%s]" % x0: [
                     3.000e5,
                     2.999e5,
                     2.999e5,
@@ -474,8 +471,7 @@ class TestSolveDynamicPipeline(unittest.TestCase):
                     3.595e5,
                     3.597e5,
                 ],
-                "fs.pipeline.control_volume.pressure[*,%s]"
-                % xf: [
+                "fs.pipeline.control_volume.pressure[*,%s]" % xf: [
                     50.90,
                     50.90,
                     50.90,
@@ -890,9 +886,7 @@ class TestConstructPipeline(unittest.TestCase):
         state[:, x0].temperature.fix(300.0 * pyo.units.K)
         state[:, x0].pressure.fix(57.0 * pyo.units.bar)
         cv.flow_mass[:, x0].fix(
-            3.0e5
-            * pyo.units.kg
-            / pyo.units.hr
+            3.0e5 * pyo.units.kg / pyo.units.hr
             # close to 10 * (1e6 SCM) / day, the nominal value in the model
         )
 

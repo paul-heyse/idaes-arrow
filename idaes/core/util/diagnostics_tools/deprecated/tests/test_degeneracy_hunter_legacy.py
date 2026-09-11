@@ -137,13 +137,13 @@ def test_underdetermined_variables_and_constraints(dummy_problem, capsys):
     dh.underdetermined_variables_and_constraints()
     captured = capsys.readouterr()
     assert captured.out == (
-        "Column:    Variable\n3: x[3]\n\nRow:    " "Constraint\n3: dummy_eqn[3]\n"
+        "Column:    Variable\n3: x[3]\n\nRow:    Constraint\n3: dummy_eqn[3]\n"
     )
 
     dh.underdetermined_variables_and_constraints(n_calc=3)
     captured = capsys.readouterr()
     assert captured.out == (
-        "Column:    Variable\n4: x[4]\n\nRow:    " "Constraint\n4: dummy_eqn[4]\n"
+        "Column:    Variable\n4: x[4]\n\nRow:    Constraint\n4: dummy_eqn[4]\n"
     )
     with pytest.raises(
         ValueError,
@@ -207,7 +207,7 @@ def test_single_eq_error(capsys):
     dh = DegeneracyHunter(m)
     with pytest.raises(
         ValueError,
-        match="Model needs at least 2 equality constraints to " "perform svd_analysis.",
+        match="Model needs at least 2 equality constraints to perform svd_analysis.",
     ):
         dh.svd_analysis()
 

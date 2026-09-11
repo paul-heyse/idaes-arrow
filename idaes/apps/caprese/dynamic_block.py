@@ -364,8 +364,7 @@ class _DynamicBlockData(BlockData):
                 fe_per = 0
             if time_since > sp:
                 raise ValueError(
-                    "Could not find a time point for the %ith "
-                    "sample point" % sample_no
+                    "Could not find a time point for the %ith sample point" % sample_no
                 )
         assert len(sample_points) == n_samples + 1
         self.fe_per_sample = fe_per_sample_dict
@@ -544,7 +543,7 @@ class _DynamicBlockData(BlockData):
                 yield val
         else:
             raise RuntimeError(
-                "Trying to generate inputs but no input " "category has been specified."
+                "Trying to generate inputs but no input category has been specified."
             )
 
     def generate_measurements_at_time(self, t):
@@ -570,8 +569,7 @@ class _DynamicBlockData(BlockData):
                 var[:].fix(val)
         else:
             raise RuntimeError(
-                "Trying to set input values but no input "
-                "category has been specified."
+                "Trying to set input values but no input category has been specified."
             )
 
     def load_measurements(self, measured):

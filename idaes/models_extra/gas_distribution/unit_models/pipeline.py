@@ -63,7 +63,6 @@ UNSUPPORTED_DISCRETIZATION_SCHEMES = {
 
 @declare_process_block_class("GasPipeline")
 class GasPipelineData(UnitModelBlockData):
-
     CONFIG = UnitModelBlockData.CONFIG()
 
     CONFIG.declare(

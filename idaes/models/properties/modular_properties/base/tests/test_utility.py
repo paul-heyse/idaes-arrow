@@ -356,9 +356,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_rate_molarity(self, frame):
         frame.params.config.rate_reactions["r1"] = rxn_config
-        frame.params.config.rate_reactions["r1"].concentration_form = (
-            ConcentrationForm.molarity
-        )
+        frame.params.config.rate_reactions[
+            "r1"
+        ].concentration_form = ConcentrationForm.molarity
 
         assert get_concentration_term(frame, "r1") is frame.conc_mol_phase_comp
         assert (
@@ -369,9 +369,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_rate_activity(self, frame):
         frame.params.config.rate_reactions["r1"] = rxn_config
-        frame.params.config.rate_reactions["r1"].concentration_form = (
-            ConcentrationForm.activity
-        )
+        frame.params.config.rate_reactions[
+            "r1"
+        ].concentration_form = ConcentrationForm.activity
 
         assert get_concentration_term(frame, "r1") is frame.act_phase_comp
         assert get_concentration_term(frame, "r1", log=True) is frame.log_act_phase_comp
@@ -379,9 +379,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_rate_molality(self, frame):
         frame.params.config.rate_reactions["r1"] = rxn_config
-        frame.params.config.rate_reactions["r1"].concentration_form = (
-            ConcentrationForm.molality
-        )
+        frame.params.config.rate_reactions[
+            "r1"
+        ].concentration_form = ConcentrationForm.molality
 
         assert get_concentration_term(frame, "r1") is frame.molality_phase_comp
         assert (
@@ -392,9 +392,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_rate_mole_frac(self, frame):
         frame.params.config.rate_reactions["r1"] = rxn_config
-        frame.params.config.rate_reactions["r1"].concentration_form = (
-            ConcentrationForm.moleFraction
-        )
+        frame.params.config.rate_reactions[
+            "r1"
+        ].concentration_form = ConcentrationForm.moleFraction
 
         assert get_concentration_term(frame, "r1") is frame.mole_frac_phase_comp
         assert (
@@ -405,9 +405,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_rate_mass_frac(self, frame):
         frame.params.config.rate_reactions["r1"] = rxn_config
-        frame.params.config.rate_reactions["r1"].concentration_form = (
-            ConcentrationForm.massFraction
-        )
+        frame.params.config.rate_reactions[
+            "r1"
+        ].concentration_form = ConcentrationForm.massFraction
 
         assert get_concentration_term(frame, "r1") is frame.mass_frac_phase_comp
         assert (
@@ -418,9 +418,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_rate_partial_pressure(self, frame):
         frame.params.config.rate_reactions["r1"] = rxn_config
-        frame.params.config.rate_reactions["r1"].concentration_form = (
-            ConcentrationForm.partialPressure
-        )
+        frame.params.config.rate_reactions[
+            "r1"
+        ].concentration_form = ConcentrationForm.partialPressure
 
         assert get_concentration_term(frame, "r1") is frame.pressure_phase_comp
         assert (
@@ -431,9 +431,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_equilibrium_molarity(self, frame):
         frame.params.config.equilibrium_reactions["e1"] = rxn_config
-        frame.params.config.equilibrium_reactions["e1"].concentration_form = (
-            ConcentrationForm.molarity
-        )
+        frame.params.config.equilibrium_reactions[
+            "e1"
+        ].concentration_form = ConcentrationForm.molarity
 
         assert get_concentration_term(frame, "e1") is frame.conc_mol_phase_comp
         assert (
@@ -444,9 +444,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_equilibrium_activity(self, frame):
         frame.params.config.equilibrium_reactions["e1"] = rxn_config
-        frame.params.config.equilibrium_reactions["e1"].concentration_form = (
-            ConcentrationForm.activity
-        )
+        frame.params.config.equilibrium_reactions[
+            "e1"
+        ].concentration_form = ConcentrationForm.activity
 
         assert get_concentration_term(frame, "e1") is frame.act_phase_comp
         assert get_concentration_term(frame, "e1", log=True) is frame.log_act_phase_comp
@@ -454,9 +454,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_equilibrium_molality(self, frame):
         frame.params.config.equilibrium_reactions["e1"] = rxn_config
-        frame.params.config.equilibrium_reactions["e1"].concentration_form = (
-            ConcentrationForm.molality
-        )
+        frame.params.config.equilibrium_reactions[
+            "e1"
+        ].concentration_form = ConcentrationForm.molality
 
         assert get_concentration_term(frame, "e1") is frame.molality_phase_comp
         assert (
@@ -467,9 +467,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_equilibrium_mole_frac(self, frame):
         frame.params.config.equilibrium_reactions["e1"] = rxn_config
-        frame.params.config.equilibrium_reactions["e1"].concentration_form = (
-            ConcentrationForm.moleFraction
-        )
+        frame.params.config.equilibrium_reactions[
+            "e1"
+        ].concentration_form = ConcentrationForm.moleFraction
 
         assert get_concentration_term(frame, "e1") is frame.mole_frac_phase_comp
         assert (
@@ -480,9 +480,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_equilibrium_mass_frac(self, frame):
         frame.params.config.equilibrium_reactions["e1"] = rxn_config
-        frame.params.config.equilibrium_reactions["e1"].concentration_form = (
-            ConcentrationForm.massFraction
-        )
+        frame.params.config.equilibrium_reactions[
+            "e1"
+        ].concentration_form = ConcentrationForm.massFraction
 
         assert get_concentration_term(frame, "e1") is frame.mass_frac_phase_comp
         assert (
@@ -493,9 +493,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_equilibrium_partial_pressure(self, frame):
         frame.params.config.equilibrium_reactions["e1"] = rxn_config
-        frame.params.config.equilibrium_reactions["e1"].concentration_form = (
-            ConcentrationForm.partialPressure
-        )
+        frame.params.config.equilibrium_reactions[
+            "e1"
+        ].concentration_form = ConcentrationForm.partialPressure
 
         assert get_concentration_term(frame, "e1") is frame.pressure_phase_comp
         assert (
@@ -536,9 +536,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_inherent_molarity(self, frame2):
         frame2.params.config.inherent_reactions["i1"] = rxn_config
-        frame2.params.config.inherent_reactions["i1"].concentration_form = (
-            ConcentrationForm.molarity
-        )
+        frame2.params.config.inherent_reactions[
+            "i1"
+        ].concentration_form = ConcentrationForm.molarity
 
         assert get_concentration_term(frame2, "i1") is frame2.conc_mol_phase_comp
         assert (
@@ -549,9 +549,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_inherent_activity(self, frame2):
         frame2.params.config.inherent_reactions["i1"] = rxn_config
-        frame2.params.config.inherent_reactions["i1"].concentration_form = (
-            ConcentrationForm.activity
-        )
+        frame2.params.config.inherent_reactions[
+            "i1"
+        ].concentration_form = ConcentrationForm.activity
 
         assert get_concentration_term(frame2, "i1") is frame2.act_phase_comp
         assert (
@@ -561,9 +561,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_inherent_molality(self, frame2):
         frame2.params.config.inherent_reactions["i1"] = rxn_config
-        frame2.params.config.inherent_reactions["i1"].concentration_form = (
-            ConcentrationForm.molality
-        )
+        frame2.params.config.inherent_reactions[
+            "i1"
+        ].concentration_form = ConcentrationForm.molality
 
         assert get_concentration_term(frame2, "i1") is frame2.molality_phase_comp
         assert (
@@ -574,9 +574,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_inherent_mole_frac(self, frame2):
         frame2.params.config.inherent_reactions["i1"] = rxn_config
-        frame2.params.config.inherent_reactions["i1"].concentration_form = (
-            ConcentrationForm.moleFraction
-        )
+        frame2.params.config.inherent_reactions[
+            "i1"
+        ].concentration_form = ConcentrationForm.moleFraction
 
         assert get_concentration_term(frame2, "i1") is frame2.mole_frac_phase_comp
         assert (
@@ -587,9 +587,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_inherent_mass_frac(self, frame2):
         frame2.params.config.inherent_reactions["i1"] = rxn_config
-        frame2.params.config.inherent_reactions["i1"].concentration_form = (
-            ConcentrationForm.massFraction
-        )
+        frame2.params.config.inherent_reactions[
+            "i1"
+        ].concentration_form = ConcentrationForm.massFraction
 
         assert get_concentration_term(frame2, "i1") is frame2.mass_frac_phase_comp
         assert (
@@ -600,9 +600,9 @@ class TestGetConcentrationTerm:
     @pytest.mark.unit
     def test_inherent_partial_pressure(self, frame2):
         frame2.params.config.inherent_reactions["i1"] = rxn_config
-        frame2.params.config.inherent_reactions["i1"].concentration_form = (
-            ConcentrationForm.partialPressure
-        )
+        frame2.params.config.inherent_reactions[
+            "i1"
+        ].concentration_form = ConcentrationForm.partialPressure
 
         assert get_concentration_term(frame2, "i1") is frame2.pressure_phase_comp
         assert (

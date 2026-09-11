@@ -736,13 +736,13 @@ class DiagnosticsToolbox:
 
         for i, uc_vblock in enumerate(uc_vblocks):
             stream.write(f"{TAB}Independent Block {i}:\n\n")
-            stream.write(f"{2*TAB}Variables:\n\n")
+            stream.write(f"{2 * TAB}Variables:\n\n")
             for v in uc_vblock:
-                stream.write(f"{3*TAB}{v.name}\n")
+                stream.write(f"{3 * TAB}{v.name}\n")
 
-            stream.write(f"\n{2*TAB}Constraints:\n\n")
+            stream.write(f"\n{2 * TAB}Constraints:\n\n")
             for c in uc_cblocks[i]:
-                stream.write(f"{3*TAB}{c.name}\n")
+                stream.write(f"{3 * TAB}{c.name}\n")
             stream.write("\n")
 
         stream.write("=" * MAX_STR_LENGTH + "\n")
@@ -772,13 +772,13 @@ class DiagnosticsToolbox:
 
         for i, oc_vblock in enumerate(oc_vblocks):
             stream.write(f"{TAB}Independent Block {i}:\n\n")
-            stream.write(f"{2*TAB}Variables:\n\n")
+            stream.write(f"{2 * TAB}Variables:\n\n")
             for v in oc_vblock:
-                stream.write(f"{3*TAB}{v.name}\n")
+                stream.write(f"{3 * TAB}{v.name}\n")
 
-            stream.write(f"\n{2*TAB}Constraints:\n\n")
+            stream.write(f"\n{2 * TAB}Constraints:\n\n")
             for c in oc_cblocks[i]:
-                stream.write(f"{3*TAB}{c.name}\n")
+                stream.write(f"{3 * TAB}{c.name}\n")
             stream.write("\n")
 
         stream.write("=" * MAX_STR_LENGTH + "\n")
@@ -1169,7 +1169,7 @@ class DiagnosticsToolbox:
                     if len(terms) > 0:
                         terms += ", "
                     # +1 to switch from 0-index to 1-index
-                    terms += f"{j[0]+1} ({j[1]})"
+                    terms += f"{j[0] + 1} ({j[1]})"
                 issues.append(
                     f"Cancellation in{tag}{compact_expression_to_string(k)}. Terms {terms}"
                 )
@@ -1262,9 +1262,9 @@ class DiagnosticsToolbox:
         if any(len(x) > 0 for x in [uc_var, uc_con, oc_var, oc_con]):
             warnings.append(
                 f"WARNING: Structural singularity found\n"
-                f"{TAB*2}Under-Constrained Set: {len(sum(uc_var, []))} "
+                f"{TAB * 2}Under-Constrained Set: {len(sum(uc_var, []))} "
                 f"variables, {len(sum(uc_con, []))} constraints\n"
-                f"{TAB*2}Over-Constrained Set: {len(sum(oc_var, []))} "
+                f"{TAB * 2}Over-Constrained Set: {len(sum(oc_var, []))} "
                 f"variables, {len(sum(oc_con, []))} constraints"
             )
 
@@ -1730,7 +1730,7 @@ class DiagnosticsToolbox:
             lines_list=next_steps,
             title="Suggested next steps:",
             line_if_empty=f"If you still have issues converging your model consider:\n"
-            f"\n{TAB*2}prepare_degeneracy_hunter()\n{TAB*2}prepare_svd_toolbox()",
+            f"\n{TAB * 2}prepare_degeneracy_hunter()\n{TAB * 2}prepare_svd_toolbox()",
             footer="=",
         )
 

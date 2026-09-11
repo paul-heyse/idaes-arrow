@@ -274,7 +274,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         @self.Constraint(
             self.flowsheet().time,
             self.zones,
-            doc="Surrogate model for heat loss" " to water wall zones",
+            doc="Surrogate model for heat loss to water wall zones",
         )
         def eq_surr_waterwall_heat(b, t, z):
             # Evaluating surrogate expression
@@ -287,7 +287,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
 
             @self.Constraint(
                 self.flowsheet().time,
-                doc="Surrogate model for heat loss" " to platen superheater",
+                doc="Surrogate model for heat loss to platen superheater",
             )
             def eq_surr_platen_heat(b, t):
                 # Evaluating surrogate expression
@@ -300,7 +300,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
 
             @self.Constraint(
                 self.flowsheet().time,
-                doc="Surrogate model for heat loss in " " the roof and backpass heater",
+                doc="Surrogate model for heat loss in  the roof and backpass heater",
             )
             def eq_surr_roof_heat(b, t):
                 # Evaluating surrogate expression
@@ -312,7 +312,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         # Constraints for unburned carbon
         @self.Constraint(
             self.flowsheet().time,
-            doc="Surrogate model for" " mass fraction of unburned carbon",
+            doc="Surrogate model for mass fraction of unburned carbon",
         )
         def eq_surr_ln_ubc(b, t):
             # Evaluating surrogate expression
@@ -323,7 +323,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         # converted to mass fraction
         @self.Constraint(
             self.flowsheet().time,
-            doc="NOx in mol fraction" "surrogate model must be in PPM",
+            doc="NOx in mol fractionsurrogate model must be in PPM",
         )
         def eq_surr_nox(b, t):
             # Evaluating surrogate expression
@@ -368,7 +368,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.deltaP = Var(
             self.flowsheet().time,
             initialize=1000,
-            doc="Pressure drop of secondary air " "through windbox and burner [Pa]",
+            doc="Pressure drop of secondary air through windbox and burner [Pa]",
         )
 
         self.zones = RangeSet(self.config.number_of_zones)
@@ -376,14 +376,14 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.fcorrection_heat_ww = Var(
             self.flowsheet().time,
             initialize=1,
-            doc="Correction factor " "for waterwall heat duty",
+            doc="Correction factor for waterwall heat duty",
         )
 
         if self.config.has_platen_superheater is True:
             self.fcorrection_heat_platen = Var(
                 self.flowsheet().time,
                 initialize=1,
-                doc="Correction factor for " "platen SH heat duty",
+                doc="Correction factor for platen SH heat duty",
             )
 
         # wall temperatures of water wall zones
@@ -391,7 +391,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
             self.flowsheet().time,
             self.zones,
             initialize=700.0,
-            doc="Wall temperature [K] in " "Waterwall zones",
+            doc="Wall temperature [K] in Waterwall zones",
         )
 
         # heat duties for water wall zones
@@ -399,7 +399,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
             self.flowsheet().time,
             self.zones,
             initialize=2.0e7,
-            doc="Heat duty [W] or heat loss " "to waterwall zones",
+            doc="Heat duty [W] or heat loss to waterwall zones",
         )
 
         if self.config.has_platen_superheater is True:
@@ -413,7 +413,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
             self.wall_temperature_platen = Var(
                 self.flowsheet().time,
                 initialize=800.0,
-                doc="Platen superheater" " wall temperature [K]",
+                doc="Platen superheater wall temperature [K]",
             )
 
         if self.config.has_roof_superheater is True:
@@ -427,7 +427,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
             self.wall_temperature_roof = Var(
                 self.flowsheet().time,
                 initialize=800.0,
-                doc="Roof superheater " "wall temperature [K]",
+                doc="Roof superheater wall temperature [K]",
             )
 
         # PA/coal temperature, usually fixed around 150 F
@@ -449,7 +449,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.SR_lf = Var(
             self.flowsheet().time,
             initialize=1.15,
-            doc="Lower furnace Stoichiometric ratio" " - SR excluding overfire air",
+            doc="Lower furnace Stoichiometric ratio - SR excluding overfire air",
         )
 
         # PA to coal mass flow ratio,
@@ -479,7 +479,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.mf_H2O_coal_raw = Var(
             self.flowsheet().time,
             initialize=0.15,
-            doc="Raw coal mass fraction of" " moisture on as received basis",
+            doc="Raw coal mass fraction of moisture on as received basis",
         )
 
         # moisture mass fraction of coal to burners after mill,
@@ -487,7 +487,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.mf_H2O_coal_burner = Var(
             self.flowsheet().time,
             initialize=0.15,
-            doc="Mass fraction of moisture" " on as received basis",
+            doc="Mass fraction of moisture on as received basis",
         )
 
         # Fraction of moisture vaporized in mill,
@@ -495,7 +495,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.frac_moisture_vaporized = Var(
             self.flowsheet().time,
             initialize=0.6,
-            doc="Fraction of coal" " moisture vaporized in mill",
+            doc="Fraction of coal moisture vaporized in mill",
         )
 
         # Vaporized moisture mass flow rate
@@ -527,7 +527,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
 
         # High heating value of dry coal, usually as a fixed user input
         self.hhv_coal_dry = Var(
-            initialize=1e7, doc="High heating value (HHV)" "of coal on dry basis J/kg"
+            initialize=1e7, doc="High heating value (HHV)of coal on dry basis J/kg"
         )
 
         # Fraction of unburned carbon (actually all organic elements) in
@@ -537,7 +537,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.ubc_in_flyash = Var(
             self.flowsheet().time,
             initialize=0.01,
-            doc="Unburned carbon and" " other organic elements in fly ash",
+            doc="Unburned carbon and other organic elements in fly ash",
         )
 
         # mole fraction of NO in flue gas, predicted by surrogate model
@@ -597,7 +597,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
 
         @self.Expression(
             self.flowsheet().time,
-            doc="Dry ash free - daf_coal flow rate " "in fuel fed to the boiler kg/s",
+            doc="Dry ash free - daf_coal flow rate in fuel fed to the boiler kg/s",
         )
         def flowrate_daf_fuel(b, t):
             return b.flowrate_coal_raw[t] * (1 - b.mf_H2O_coal_raw[t]) * b.mf_daf_dry
@@ -641,7 +641,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
             return b.hhv_coal_dry / b.mf_daf_dry
 
         @self.Expression(
-            doc="Heat of combustion at constant " "pressure on daf basis in J/kg"
+            doc="Heat of combustion at constant pressure on daf basis in J/kg"
         )
         # Note that measure HHV is the heat of combustion at constant volume
         def dhcoal(b):
@@ -669,7 +669,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
 
         @self.Expression(
             self.flowsheet().time,
-            doc="Heat of formation of " "moisture-containing coal to burners",
+            doc="Heat of formation of moisture-containing coal to burners",
         )
         def hf_coal(b, t):
             return b.hf_daf * (
@@ -700,12 +700,12 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.gt1_flyash = Var(
             self.flowsheet().time,
             initialize=1,
-            doc="Gt1 or Einstein quantum theory function" " for daf part of flyash",
+            doc="Gt1 or Einstein quantum theory function for daf part of flyash",
         )
 
         @self.Constraint(
             self.flowsheet().time,
-            doc="Gt1 or Einstein quantum theory " "for daf part of flyash",
+            doc="Gt1 or Einstein quantum theory for daf part of flyash",
         )
         def gt1_flyash_eqn(b, t):
             return b.gt1_flyash[t] * (exp(380 / b.flue_gas[t].temperature) - 1) == 1
@@ -724,12 +724,12 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
         self.gt2_flyash = Var(
             self.flowsheet().time,
             initialize=1,
-            doc="Gt2 or Einstein quantum theory function " "for daf part of flyash",
+            doc="Gt2 or Einstein quantum theory function for daf part of flyash",
         )
 
         @self.Constraint(
             self.flowsheet().time,
-            doc="Gt2 or Einstein quantum theory function " "for daf part of flyash",
+            doc="Gt2 or Einstein quantum theory function for daf part of flyash",
         )
         def gt2_flyash_eqn(b, t):
             return b.gt2_flyash[t] * (exp(1800 / b.flue_gas[t].temperature) - 1) == 1
@@ -770,7 +770,7 @@ ratio, PA to coal ratio, and lower stoichiometric ratio,
 
         @self.Expression(
             self.flowsheet().time,
-            doc="Total enthalpy of " "moisture-containing coal to burners",
+            doc="Total enthalpy of moisture-containing coal to burners",
         )
         def h_coal(b, t):
             return b.hs_coal[t] + b.hf_coal[t]

@@ -175,8 +175,7 @@ class SocChannelData(UnitModelBlockData):
                 tset,
                 iznodes,
                 comps,
-                doc="Material flux from electrode surface to channel "
-                "(positive is in)",
+                doc="Material flux from electrode surface to channel (positive is in)",
                 initialize=0,
                 units=pyo.units.mol / pyo.units.m**2 / pyo.units.s,
             )
@@ -213,8 +212,7 @@ class SocChannelData(UnitModelBlockData):
                 tset,
                 iznodes,
                 comps,
-                doc="Material flux from channel to electrode surface "
-                "(positive is out)",
+                doc="Material flux from channel to electrode surface (positive is out)",
                 initialize=0,
                 units=pyo.units.mol / pyo.units.m**2 / pyo.units.s,
             )
@@ -267,7 +265,7 @@ class SocChannelData(UnitModelBlockData):
         self.temperature_deviation_x = pyo.Var(
             tset,
             iznodes,
-            doc="Deviation of temperature at node centers " "from temperature_z",
+            doc="Deviation of temperature at node centers from temperature_z",
             units=pyo.units.K,
             bounds=(-1000, 1000),
         )
@@ -533,8 +531,9 @@ class SocChannelData(UnitModelBlockData):
                 ifaces=izfaces,
                 nodes=b.znodes,
                 faces=b.zfaces,
-                phi_func=lambda iface: b.velocity[t, iface]
-                * b.conc_mol_comp[t, iface, i],
+                phi_func=lambda iface: (
+                    b.velocity[t, iface] * b.conc_mol_comp[t, iface, i]
+                ),
                 phi_inlet=b.material_flux_z_inlet[t, i],
                 opposite_flow=self.config.opposite_flow,
             )
@@ -546,9 +545,9 @@ class SocChannelData(UnitModelBlockData):
                 ifaces=izfaces,
                 nodes=b.znodes,
                 faces=b.zfaces,
-                phi_func=lambda iface: b.velocity[t, iface]
-                / b.vol_mol[t, iface]
-                * b.enth_mol[t, iface],
+                phi_func=lambda iface: (
+                    b.velocity[t, iface] / b.vol_mol[t, iface] * b.enth_mol[t, iface]
+                ),
                 phi_inlet=b.enth_flux_z_inlet[t],
                 opposite_flow=self.config.opposite_flow,
             )

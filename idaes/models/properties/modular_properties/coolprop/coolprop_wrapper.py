@@ -397,7 +397,7 @@ class CoolPropWrapper:
             prop_str = CoolProp.get_fluid_param_string(comp_name, "JSON")
         except RuntimeError:
             raise RuntimeError(
-                f"Failed to find component {comp_name} in CoolProp JSON " f"database."
+                f"Failed to find component {comp_name} in CoolProp JSON database."
             )
         comp_prop = json.loads(prop_str)[0]
 

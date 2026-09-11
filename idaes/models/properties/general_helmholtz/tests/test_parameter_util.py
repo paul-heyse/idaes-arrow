@@ -71,7 +71,6 @@ def _common_sat(sat_thermo_data, we):
     # due to lack of sig. figs. in reported data
 
     for pnt in sat_thermo_data.values():
-
         # The pressure is very sensitive to the liquid density (rhol) around the triple point.
         # If you're finding we.calculate_pressure(rho=pnt["rhol"], T=pnt["T"]) is failing,
         # uncomment the line below to infer a more precise value for rhol that you can use in

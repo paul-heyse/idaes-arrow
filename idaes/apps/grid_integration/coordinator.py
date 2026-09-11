@@ -341,7 +341,6 @@ class DoubleLoopCoordinator:
         self._clone_tracking_model()
 
         for hour in range(ruc_hour, 24):
-
             # assemble market_signals
             market_signals = self.assemble_project_tracking_signal(
                 options=options, simulator=simulator, hour=hour
@@ -489,7 +488,6 @@ class DoubleLoopCoordinator:
         is_first_day = simulator.time_manager.current_time is None
 
         if not is_first_day:
-
             # solve rolling horizon to get the trajectory
             full_projected_trajectory = self.project_tracking_trajectory(
                 options, simulator, options.ruc_execution_hour

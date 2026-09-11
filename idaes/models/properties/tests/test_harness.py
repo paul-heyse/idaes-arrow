@@ -182,12 +182,11 @@ class PropertyTestHarness(object):
                 assert isinstance(term, _scalable)
         except KeyError:
             raise KeyError(
-                "get_material_flow_terms method is not indexed by phase and "
-                "component."
+                "get_material_flow_terms method is not indexed by phase and component."
             )
         except AttributeError:
             raise AttributeError(
-                "State block has not implemented get_material_flow_terms " "method."
+                "State block has not implemented get_material_flow_terms method."
             )
 
     @pytest.mark.unit
@@ -201,7 +200,7 @@ class PropertyTestHarness(object):
             raise KeyError("get_enthalpy_flow_terms method is not indexed by phase.")
         except AttributeError:
             raise AttributeError(
-                "State block has not implemented get_enthalpy_flow_terms " "method."
+                "State block has not implemented get_enthalpy_flow_terms method."
             )
 
     @pytest.mark.unit
@@ -220,8 +219,7 @@ class PropertyTestHarness(object):
                 )
             except AttributeError:
                 raise AttributeError(
-                    "State block has not implemented "
-                    "get_material_density_terms method."
+                    "State block has not implemented get_material_density_terms method."
                 )
 
     @pytest.mark.unit
@@ -233,12 +231,11 @@ class PropertyTestHarness(object):
                     assert isinstance(term, _scalable)
             except KeyError:
                 raise KeyError(
-                    "get_enthalpy_density_terms method is not indexed by " "phase."
+                    "get_enthalpy_density_terms method is not indexed by phase."
                 )
             except AttributeError:
                 raise AttributeError(
-                    "State block has not implemented "
-                    "get_enthalpy_density_terms method."
+                    "State block has not implemented get_enthalpy_density_terms method."
                 )
 
     @pytest.mark.unit
@@ -296,8 +293,7 @@ class PropertyTestHarness(object):
             # PYLINT-TODO
             # pylint: disable-next=broad-exception-raised
             raise Exception(
-                "initialize did not result in a State Block with 0 "
-                "degrees of freedom."
+                "initialize did not result in a State Block with 0 degrees of freedom."
             )
 
     @pytest.mark.component

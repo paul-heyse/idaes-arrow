@@ -545,7 +545,9 @@ class FcPhScaler(FTPxScaler):
         if len(model.phase_list) > 1:
             for condata in model.sum_mole_frac.values():
                 self.set_component_scaling_factor(
-                    condata, 1, overwrite=overwrite  # Constraint well-scaled by default
+                    condata,
+                    1,
+                    overwrite=overwrite,  # Constraint well-scaled by default
                 )
         if len(model.phase_list) == 1:
             self.set_component_scaling_factor(

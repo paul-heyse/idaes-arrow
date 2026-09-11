@@ -391,7 +391,6 @@ class TestInitializers:
 
 
 class DummyScaler:
-
     def __init__(self, **kwargs):
         pass
 

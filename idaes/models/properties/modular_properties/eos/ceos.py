@@ -218,7 +218,7 @@ class Cubic(EoSBase):
             Expression(
                 b.component_list,
                 rule=rule_d2a_dT2,
-                doc="Second temperature derivative" "of component a",
+                doc="Second temperature derivativeof component a",
             ),
         )
 

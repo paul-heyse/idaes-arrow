@@ -574,9 +574,7 @@ class TestEquilibriumReactorScalerLegacy:
         ] == pytest.approx(9.86923267e-6, rel=1e-8)
         for c in model.fs.unit.control_volume.material_balances.values():
             assert sfx_cv[c] == pytest.approx(1e-2, rel=1e-8)
-        for (
-            c
-        ) in (
+        for c in (
             model.fs.unit.control_volume.rate_reaction_stoichiometry_constraint.values()
         ):
             assert sfx_cv[c] == pytest.approx(1, rel=1e-8)
@@ -698,10 +696,13 @@ class TestEquilibriumReactorScalerLegacy:
             else:
                 assert sfx_cv[c] == pytest.approx(1, rel=1e-8)
         for (
-            _,
-            _,
-            j,
-        ), c in (
+            (
+                _,
+                _,
+                j,
+            ),
+            c,
+        ) in (
             model.fs.unit.control_volume.rate_reaction_stoichiometry_constraint.items()
         ):
             assert sfx_cv[c] == pytest.approx(1, rel=1e-8)

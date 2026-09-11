@@ -74,9 +74,9 @@ def build_model(eos, visc_d_phase_comp=None):
             "CO2": 467.6,
         }
         for comp in comp_set:
-            config_dict["components"][comp]["visc_d_phase_comp"][
-                "Vap"
-            ] = visc_d_phase_comp
+            config_dict["components"][comp]["visc_d_phase_comp"]["Vap"] = (
+                visc_d_phase_comp
+            )
             config_dict["components"][comp]["parameter_data"]["dipole_moment"] = (
                 0.0,
                 pyunits.debye,

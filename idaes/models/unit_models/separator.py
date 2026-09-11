@@ -1131,8 +1131,9 @@ objects linked the mixed state and all outlet states,
             ]
         else:
             raise BurntToast(
-                "{} split_basis has unexpected value. This "
-                "should not happen.".format(self.name)
+                "{} split_basis has unexpected value. This should not happen.".format(
+                    self.name
+                )
             )
 
         # Create split fraction variable
@@ -1352,8 +1353,9 @@ objects linked the mixed state and all outlet states,
 
         elif mb_type == MaterialBalanceType.elementTotal:
             raise ConfigurationError(
-                "{} Separators do not support elemental "
-                "material balances.".format(self.name)
+                "{} Separators do not support elemental material balances.".format(
+                    self.name
+                )
             )
         elif mb_type == MaterialBalanceType.none:
             pass
@@ -1770,7 +1772,6 @@ objects linked the mixed state and all outlet states,
             # Create dict to store fixed status of state variables
             o_flags = {}
             for t in blk.flowsheet().time:
-
                 # Calculate values for state variables
                 s_vars = o_block[t].define_state_vars()
                 for v in s_vars:

@@ -404,7 +404,7 @@ class TestHXLCGeneric(object):
 
         with pytest.raises(
             ConfigurationError,
-            match="dynamic can only be True if dynamic_heat_balance " "is also True.",
+            match="dynamic can only be True if dynamic_heat_balance is also True.",
         ):
             m.fs.unit = HeatExchangerLumpedCapacitance(
                 hot_side_name="shell",

@@ -619,7 +619,9 @@ def test_model_replication(model):
     cached_results = []
     for i in range(len(out)):
         cached_results.append(
-            pd.read_csv(os.sep.join([data_cache, f"case_{i+1}_thin.csv"]), index_col=0)
+            pd.read_csv(
+                os.sep.join([data_cache, f"case_{i + 1}_thin.csv"]), index_col=0
+            )
         )
 
     for df, cached_df in zip(out, cached_results):

@@ -253,7 +253,6 @@ see property package for documentation.}""",
             return self.reflux_ratio * (1 + self.reflux_ratio) ** -1
 
         if self.config.condenser_type == CondenserType.totalCondenser:
-
             make_phase_split(
                 self.control_volume,
                 port=self.reflux,
@@ -302,7 +301,6 @@ see property package for documentation.}""",
                 )
 
         else:
-
             make_phase_split(
                 self.control_volume,
                 port=self.reflux,
@@ -344,15 +342,15 @@ see property package for documentation.}""",
 
         # Outlet ports that always exist irrespective of condenser type
         self.reflux = Port(
-            noruleinit=True, doc="Reflux stream that is" " returned to the top tray."
+            noruleinit=True, doc="Reflux stream that is returned to the top tray."
         )
         self.distillate = Port(
-            noruleinit=True, doc="Distillate stream that is" " the top product."
+            noruleinit=True, doc="Distillate stream that is the top product."
         )
 
         if self.config.condenser_type == CondenserType.partialCondenser:
             self.vapor_outlet = Port(
-                noruleinit=True, doc="Vapor outlet port from a " "partial condenser"
+                noruleinit=True, doc="Vapor outlet port from a partial condenser"
             )
         # Add codnenser specific variables
         self.reflux_ratio = Var(initialize=0.5, doc="Reflux ratio for the condenser")

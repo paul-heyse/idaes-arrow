@@ -459,8 +459,9 @@ class IonData(SoluteData):
         Ions should not be used outside of electrolyte property methods
         """
         raise PropertyPackageError(
-            "{} Ion Component types should only be used with Aqueous "
-            "Phases".format(self.name)
+            "{} Ion Component types should only be used with Aqueous Phases".format(
+                self.name
+            )
         )
 
     def _add_to_electrolyte_component_list(self):

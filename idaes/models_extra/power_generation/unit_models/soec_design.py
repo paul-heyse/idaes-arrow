@@ -96,8 +96,7 @@ class SoecDesignData(UnitModelBlockData):
             domain=In(EosType),
             description="Physical properties for electrolysis reactions",
             doc=(
-                "Reaction properties equation of state in: "
-                "{EosType.PR, EosType.IDEAL}."
+                "Reaction properties equation of state in: {EosType.PR, EosType.IDEAL}."
             ),
         ),
     )
@@ -285,13 +284,9 @@ class SoecDesignData(UnitModelBlockData):
                 t
             ].flow_mol_comp[
                 "H2O"
-            ] == b.electrolysis_reactor.control_volume.properties_in[
-                t
-            ].flow_mol_comp[
+            ] == b.electrolysis_reactor.control_volume.properties_in[t].flow_mol_comp[
                 "H2O"
-            ] * (
-                1.0 - b.water_utilization[t]
-            )
+            ] * (1.0 - b.water_utilization[t])
 
         @self.Expression(self.flowsheet().time)
         def current_expr(b, t):

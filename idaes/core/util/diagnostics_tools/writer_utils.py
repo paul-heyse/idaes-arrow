@@ -89,8 +89,7 @@ def collect_model_statistics(model):
     stats.append(f"{TAB * 2}Free Variables with only lower bounds: {len(free_vars_lb)}")
     stats.append(f"{TAB * 2}Free Variables with only upper bounds: {len(free_vars_ub)}")
     stats.append(
-        f"{TAB * 2}Free Variables with upper and lower bounds: "
-        f"{len(free_vars_lbub)}"
+        f"{TAB * 2}Free Variables with upper and lower bounds: {len(free_vars_lbub)}"
     )
     stats.append(
         f"{TAB}Fixed Variables in Activated Constraints: "
@@ -98,8 +97,8 @@ def collect_model_statistics(model):
         f"(External: {len(ext_fixed_vars_in_constraints)})"
     )
     stats.append(
-        f"{TAB}Activated Equality Constraints: {len(activated_equalities_set(model))+number_activated_greybox_equalities(model)} "
-        f"(Deactivated: {len(deactivated_equalities_set(model))+number_deactivated_greybox_equalities(model)})"
+        f"{TAB}Activated Equality Constraints: {len(activated_equalities_set(model)) + number_activated_greybox_equalities(model)} "
+        f"(Deactivated: {len(deactivated_equalities_set(model)) + number_deactivated_greybox_equalities(model)})"
     )
     stats.append(
         f"{TAB}Activated Inequality Constraints: {len(activated_inequalities_set(model))} "
@@ -114,15 +113,15 @@ def collect_model_statistics(model):
     if len(greybox_block_set(model)) != 0:
         stats.append(f"{TAB}GreyBox Statistics")
         stats.append(
-            f"{TAB* 2}Activated GreyBox models: {len(activated_greybox_block_set(model))} "
+            f"{TAB * 2}Activated GreyBox models: {len(activated_greybox_block_set(model))} "
             f"(Deactivated: {len(deactivated_greybox_block_set(model))})"
         )
         stats.append(
-            f"{TAB* 2}Activated GreyBox Equalities: {number_activated_greybox_equalities(model)} "
+            f"{TAB * 2}Activated GreyBox Equalities: {number_activated_greybox_equalities(model)} "
             f"(Deactivated: {number_deactivated_greybox_equalities(model)})"
         )
         stats.append(
-            f"{TAB* 2}Free Variables in Activated GreyBox Equalities: {len(unfixed_greybox_variables(model))} (Fixed: {len(greybox_variables(model)-unfixed_greybox_variables(model))})"
+            f"{TAB * 2}Free Variables in Activated GreyBox Equalities: {len(unfixed_greybox_variables(model))} (Fixed: {len(greybox_variables(model) - unfixed_greybox_variables(model))})"
         )
 
     return stats

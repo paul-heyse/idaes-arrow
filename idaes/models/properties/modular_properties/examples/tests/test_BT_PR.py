@@ -91,7 +91,6 @@ class TestBTExampleLegacyScaling(object):
         m.fs.state[1].temperature.setub(600)
 
         for P in logspace(4.8, 5.9, 8):
-
             m.fs.state[1].flow_mol.fix(100)
             m.fs.state[1].mole_frac_comp["benzene"].fix(0.5)
             m.fs.state[1].mole_frac_comp["toluene"].fix(0.5)
@@ -141,7 +140,6 @@ class TestBTExampleLegacyScaling(object):
             assert_optimal_termination(results)
 
             while m.fs.state[1].pressure.value <= 1e6:
-
                 results = solver.solve(m)
                 assert_optimal_termination(results)
 
@@ -726,7 +724,6 @@ class TestBTExampleScalerObject(object):
         m.fs.state[1].temperature.setub(600)
 
         for P in logspace(4.8, 5.9, 8):
-
             m.fs.state[1].flow_mol.fix(100)
             m.fs.state[1].mole_frac_comp["benzene"].fix(0.5)
             m.fs.state[1].mole_frac_comp["toluene"].fix(0.5)
@@ -776,7 +773,6 @@ class TestBTExampleScalerObject(object):
             assert_optimal_termination(results)
 
             while m.fs.state[1].pressure.value <= 1e6:
-
                 results = solver.solve(m)
 
                 assert_optimal_termination(results)

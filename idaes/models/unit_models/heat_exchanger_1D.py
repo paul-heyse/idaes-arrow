@@ -739,8 +739,9 @@ cold side flows from 1 to 0""",
             doc="Heat conservation equality",
         )
         def heat_conservation(self, t, x):
-            return pyunits.convert(self.cold_side.heat[t, x], to_units=q_units) == -(
-                self.hot_side.heat[t, x]
+            return (
+                pyunits.convert(self.cold_side.heat[t, x], to_units=q_units)
+                == -(self.hot_side.heat[t, x])
             )
 
     def _process_config(self):

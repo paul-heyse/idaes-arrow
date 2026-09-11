@@ -105,8 +105,7 @@ def homotopy(
 
         if not isinstance(v, VarData):
             raise TypeError(
-                "Variable provided ({}) was not a valid Pyomo Var "
-                "component.".format(v)
+                "Variable provided ({}) was not a valid Pyomo Var component.".format(v)
             )
 
         # Check that v is part of model
@@ -156,13 +155,15 @@ def homotopy(
     # Validate homotopy parameter selections
     if not 0.05 <= step_init <= 0.8:
         raise ConfigurationError(
-            "Invalid value for step_init ({}). Must lie "
-            "between 0.05 and 0.8.".format(step_init)
+            "Invalid value for step_init ({}). Must lie between 0.05 and 0.8.".format(
+                step_init
+            )
         )
     if not 0.1 <= step_cut <= 0.9:
         raise ConfigurationError(
-            "Invalid value for step_cut ({}). Must lie "
-            "between 0.1 and 0.9.".format(step_cut)
+            "Invalid value for step_cut ({}). Must lie between 0.1 and 0.9.".format(
+                step_cut
+            )
         )
     if step_accel < 0:
         raise ConfigurationError(
@@ -176,18 +177,21 @@ def homotopy(
         )
     if not isinstance(iter_target, int):
         raise ConfigurationError(
-            "Invalid value for iter_target ({}). Must be "
-            "an an integer.".format(iter_target)
+            "Invalid value for iter_target ({}). Must be an an integer.".format(
+                iter_target
+            )
         )
     if not 0.05 <= max_step <= 1:
         raise ConfigurationError(
-            "Invalid value for max_step ({}). Must lie "
-            "between 0.05 and 1.".format(max_step)
+            "Invalid value for max_step ({}). Must lie between 0.05 and 1.".format(
+                max_step
+            )
         )
     if not 0.01 <= min_step <= 0.1:
         raise ConfigurationError(
-            "Invalid value for min_step ({}). Must lie "
-            "between 0.01 and 0.1.".format(min_step)
+            "Invalid value for min_step ({}). Must lie between 0.01 and 0.1.".format(
+                min_step
+            )
         )
     if min_step > max_step:
         raise ConfigurationError(
@@ -204,8 +208,9 @@ def homotopy(
         )
     if not isinstance(max_eval, int):
         raise ConfigurationError(
-            "Invalid value for max_eval ({}). Must be "
-            "an an integer.".format(iter_target)
+            "Invalid value for max_eval ({}). Must be an an integer.".format(
+                iter_target
+            )
         )
 
     # Create solver object

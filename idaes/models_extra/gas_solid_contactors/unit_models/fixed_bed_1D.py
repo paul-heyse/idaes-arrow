@@ -815,7 +815,7 @@ should be constructed,
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Gas side pressure drop calculation -" "simplified pressure drop",
+                doc="Gas side pressure drop calculation -simplified pressure drop",
             )
             def gas_phase_config_pressure_drop(b, t, x):
                 #  0.2/s is a unitted constant in the correlation
@@ -841,7 +841,7 @@ should be constructed,
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Gas side pressure drop calculation -" "Ergun equation",
+                doc="Gas side pressure drop calculation -Ergun equation",
             )
             def gas_phase_config_pressure_drop(b, t, x):
                 return -pyunits.convert(
@@ -858,7 +858,7 @@ should be constructed,
                             to_units=units_meta_solid("length"),
                         )
                         ** 2
-                        * b.solid_properties[t, x].params.voidage**3
+                        * b.solid_properties[t, x].params.voidage ** 3
                     )
                 ) + (
                     (1.75 * pyunits.dimensionless)
@@ -870,7 +870,7 @@ should be constructed,
                             b.solid_properties[t, x].params.particle_dia,
                             to_units=units_meta_solid("length"),
                         )
-                        * b.solid_properties[t, x].params.voidage**3
+                        * b.solid_properties[t, x].params.voidage ** 3
                     )
                 )
 
@@ -909,7 +909,7 @@ should be constructed,
                 self.length_domain,
                 gas_phase.property_package.phase_list,
                 gas_phase.property_package.component_list,
-                doc="Gas side heterogeneous" "rate reaction generation",
+                doc="Gas side heterogeneousrate reaction generation",
             )
             def gas_comp_hetero_rxn(b, t, x, p, j):
                 return b.gas_phase.mass_transfer_term[t, x, p, j] == (
@@ -990,9 +990,7 @@ should be constructed,
                 ) * pyunits.convert(
                     b.solid_properties[t, x].params.particle_dia,
                     to_units=units_meta_gas("length"),
-                ) == 6 * b.gas_solid_htc[
-                    t, x
-                ] * (
+                ) == 6 * b.gas_solid_htc[t, x] * (
                     b.gas_phase.properties[t, x].temperature
                     - pyunits.convert(
                         b.solid_properties[t, x].temperature,
@@ -1719,7 +1717,6 @@ should be constructed,
 
         # =========================================================================
         with TemporarySubsystemManager(to_fix=to_fix, to_deactivate=to_deactivate):
-
             # Check if the system is structurally singular
             igraph = IncidenceGraphInterface(blk)
             N = len(igraph.constraints)
@@ -2084,7 +2081,6 @@ should be constructed,
                 )
 
         if self.config.energy_balance_type != EnergyBalanceType.none:
-
             if hasattr(self, "solid_energy_holdup_calculation"):
                 for (t, x), c in self.solid_energy_holdup_calculation.items():
                     sf1 = iscale.get_scaling_factor(self.solid_phase_area[t, x])

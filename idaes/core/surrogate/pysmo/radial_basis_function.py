@@ -1365,7 +1365,7 @@ class RadialBasisFunctions:
             f"--------------------------\n"
             f"\nModel training errors:"
             f"\n-----------------------\n"
-            f"Mean Squared Error (MSE)         : {self.rmse ** 2}\n"
+            f"Mean Squared Error (MSE)         : {self.rmse**2}\n"
             f"Root Mean Squared Error (RMSE)   : {self.rmse}\n"
             f"Goodness of fit (R2)             : {self.R2}\n"
             f"\n{double_line}"

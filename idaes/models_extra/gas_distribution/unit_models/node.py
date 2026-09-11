@@ -38,7 +38,6 @@ from idaes.core.util.config import (
 
 @declare_process_block_class("PipelineNode")
 class PipelineNodeData(UnitModelBlockData):
-
     CONFIG = UnitModelBlockData.CONFIG()
 
     CONFIG.declare(

@@ -30,19 +30,19 @@ def auto(expected, actual, rtol=0.0, atol=0.0):
     if type(expected).__module__.split(".")[0] == "pyarrow":
         return arrow(expected, actual)
     if isinstance(expected, dict):
-        assert list(expected) == list(
-            actual
-        ), f"dict key order differs: {list(expected)} != {list(actual)}"
+        assert list(expected) == list(actual), (
+            f"dict key order differs: {list(expected)} != {list(actual)}"
+        )
         for key in expected:
             auto(expected[key], actual[key], rtol, atol)
         return None
     if isinstance(expected, (list, tuple)):
-        assert type(expected) is type(
-            actual
-        ), f"container type differs: {type(expected)} != {type(actual)}"
-        assert len(expected) == len(
-            actual
-        ), f"length differs: {len(expected)} != {len(actual)}"
+        assert type(expected) is type(actual), (
+            f"container type differs: {type(expected)} != {type(actual)}"
+        )
+        assert len(expected) == len(actual), (
+            f"length differs: {len(expected)} != {len(actual)}"
+        )
         for exp, act in zip(expected, actual):
             auto(exp, act, rtol, atol)
         return None
@@ -61,15 +61,15 @@ def numeric(expected, actual, rtol=0.0, atol=0.0):
     assert exp.dtype == act.dtype, f"dtype differs: {exp.dtype} != {act.dtype}"
     assert exp.shape == act.shape, f"shape differs: {exp.shape} != {act.shape}"
     if rtol == 0.0 and atol == 0.0:
-        assert np.array_equal(
-            exp, act, equal_nan=exp.dtype.kind == "f"
-        ), f"values differ; first mismatch at {_first_diff(exp, act)}"
+        assert np.array_equal(exp, act, equal_nan=exp.dtype.kind == "f"), (
+            f"values differ; first mismatch at {_first_diff(exp, act)}"
+        )
         if exp.dtype.kind == "f":
             # 0.0 == -0.0 compares equal but serializes differently, and the sign
             # of zero survives into JSON that users diff.
-            assert np.array_equal(
-                np.signbit(exp), np.signbit(act)
-            ), "signed zero differs"
+            assert np.array_equal(np.signbit(exp), np.signbit(act)), (
+                "signed zero differs"
+            )
         return None
     np.testing.assert_allclose(act, exp, rtol=rtol, atol=atol, equal_nan=True)
     return None
@@ -142,7 +142,7 @@ def arrow(expected, actual):
     """Compare Arrow tables including schema metadata, ignoring chunking."""
     exp = expected.combine_chunks()
     act = actual.combine_chunks()
-    assert exp.schema.equals(
-        act.schema, check_metadata=True
-    ), f"schema differs:\n{exp.schema}\n---\n{act.schema}"
+    assert exp.schema.equals(act.schema, check_metadata=True), (
+        f"schema differs:\n{exp.schema}\n---\n{act.schema}"
+    )
     assert exp.equals(act), "table contents differ"

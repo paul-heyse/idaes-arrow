@@ -627,7 +627,6 @@ class ThermalGenerator:
         df_list = []
 
         for t in b.HOUR:
-
             result_dict = {}
             result_dict["Generator"] = self.generator
             result_dict["Date"] = date
@@ -698,7 +697,6 @@ class ThermalGenerator:
 
 
 if __name__ == "__main__":
-
     from idaes.apps.grid_integration.examples.utils import (
         rts_gmlc_generator_dataframe,
         rts_gmlc_bus_dataframe,
@@ -718,7 +716,6 @@ if __name__ == "__main__":
     run_prescient = True
 
     if run_tracker:
-
         # create a tracker model
         tracking_model_object = ThermalGenerator(
             rts_gmlc_generator_dataframe=rts_gmlc_generator_dataframe,
@@ -741,7 +738,6 @@ if __name__ == "__main__":
         thermal_tracker.write_results(path="./")
 
     if run_bidder:
-
         # create a tracker model
         bidding_model_object = ThermalGenerator(
             rts_gmlc_generator_dataframe=rts_gmlc_generator_dataframe,
@@ -772,7 +768,6 @@ if __name__ == "__main__":
         thermal_bidder.write_results(path="./")
 
     if run_prescient and prescient_avail:
-
         options = {
             "data_path": prescient_5bus,
             "input_format": "rts-gmlc",

@@ -36,7 +36,7 @@ if "IDAES_TEST_LOG_LEVEL" in os.environ:
 _h = logging.StreamHandler()
 _h.setFormatter(
     logging.Formatter(
-        "%(asctime)s [%(levelname)s] " "%(filename)s:%(lineno)d :: %(message)s"
+        "%(asctime)s [%(levelname)s] %(filename)s:%(lineno)d :: %(message)s"
     )
 )
 _log.addHandler(_h)

@@ -198,7 +198,7 @@ conditions, and thus corresponding constraints  should be included,
                     self.component_list,
                     self.component_list,
                     initialize=1.0,
-                    doc="Binary interaction parameter " "for NRTL model",
+                    doc="Binary interaction parameter for NRTL model",
                 )
             if self.config.activity_coeff_model == "Wilson":
                 # Wilson Model specific variables (values to be fixed by
@@ -214,7 +214,7 @@ conditions, and thus corresponding constraints  should be included,
                     self.component_list,
                     self.component_list,
                     initialize=1.0,
-                    doc="Binary interaction parameter for " "Wilson model",
+                    doc="Binary interaction parameter for Wilson model",
                 )
         self.set_default_scaling("flow_mol", 1e-3)
         self.set_default_scaling("mole_frac_comp", 10)
@@ -425,7 +425,6 @@ class ActivityCoeffInitializer(InitializerBase):
             or (k.config.parameters.config.valid_phase == ("Liq", "Vap"))
             or (k.config.parameters.config.valid_phase == ("Vap", "Liq"))
         ):
-
             with idaeslog.solver_log(solve_log, idaeslog.DEBUG) as slc:
                 res = solve_indexed_blocks(solver, [model], tee=slc.tee)
         else:
@@ -620,7 +619,6 @@ class _ActivityCoeffStateBlock(StateBlock):
             or (k.config.parameters.config.valid_phase == ("Liq", "Vap"))
             or (k.config.parameters.config.valid_phase == ("Vap", "Liq"))
         ):
-
             with idaeslog.solver_log(solve_log, idaeslog.DEBUG) as slc:
                 res = solve_indexed_blocks(opt, [blk], tee=slc.tee)
 
@@ -1013,27 +1011,26 @@ class ActivityCoeffStateBlockData(StateBlockData):
 
         self._temperature_equilibrium = Var(
             initialize=self.temperature.value,
-            doc="Temperature for calculating " "phase equilibrium",
+            doc="Temperature for calculating phase equilibrium",
             units=pyunits.K,
         )
 
         self._t1 = Var(
             initialize=self.temperature.value,
-            doc="Intermediate temperature for calculating "
-            "the equilibrium temperature",
+            doc="Intermediate temperature for calculating the equilibrium temperature",
             units=pyunits.K,
         )
 
         self.eps_1 = Param(
             default=0.01,
             mutable=True,
-            doc="Smoothing parameter for equilibrium " "temperature",
+            doc="Smoothing parameter for equilibrium temperature",
             units=pyunits.K,
         )
         self.eps_2 = Param(
             default=0.0005,
             mutable=True,
-            doc="Smoothing parameter for equilibrium " "temperature",
+            doc="Smoothing parameter for equilibrium temperature",
             units=pyunits.K,
         )
 
@@ -1086,13 +1083,13 @@ class ActivityCoeffStateBlockData(StateBlockData):
         self.A = Var(
             self.params.component_list,
             initialize=1.0,
-            doc="Intermediate variable to compute activity" " coefficient",
+            doc="Intermediate variable to compute activity coefficient",
         )
 
         self.B = Var(
             self.params.component_list,
             initialize=1.0,
-            doc="Intermediate variable to compute activity" " coefficient",
+            doc="Intermediate variable to compute activity coefficient",
         )
 
         def rule_Gij_coeff(self, i, j):
@@ -1182,13 +1179,13 @@ class ActivityCoeffStateBlockData(StateBlockData):
         self.A = Var(
             self.params.component_list,
             initialize=1.0,
-            doc="Intermediate variable to compute activity" " coefficient",
+            doc="Intermediate variable to compute activity coefficient",
         )
 
         self.B = Var(
             self.params.component_list,
             initialize=1.0,
-            doc="Intermediate variable to compute activity" " coefficient",
+            doc="Intermediate variable to compute activity coefficient",
         )
 
         def rule_Gij_coeff(self, i, j):
@@ -1379,7 +1376,7 @@ class ActivityCoeffStateBlockData(StateBlockData):
     def _enth_mol_phase_comp(self):
         self.enth_mol_phase_comp = Var(
             self.params._phase_component_set,
-            doc="Phase-component molar specific " "enthalpies [J/mol]",
+            doc="Phase-component molar specific enthalpies [J/mol]",
             units=pyunits.J / pyunits.mol,
         )
 
@@ -1744,7 +1741,6 @@ class ActivityCoeffStateBlockData(StateBlockData):
 
             def rule_temp_bubble(self):
                 if self.config.parameters.config.activity_coeff_model == "Ideal":
-
                     return (
                         sum(
                             self.mole_frac_comp[i] * self._p_sat_bubbleT[i]

@@ -91,6 +91,5 @@ def _build_test_utility(block, comp_dict, references=None):
             short_name = comp.local_name.split("[")[0]
             if not short_name in sub_dict.keys():
                 raise AssertionError(
-                    f"Unexpected {ctype} {comp.name} encountered in block "
-                    f"{block.name}."
+                    f"Unexpected {ctype} {comp.name} encountered in block {block.name}."
                 )

@@ -288,7 +288,7 @@ see property package for documentation.}""",
 
         @self.Expression(
             self.flowsheet().time,
-            doc="Angle at joint of tube " "and fin at outside slag layer",
+            doc="Angle at joint of tube and fin at outside slag layer",
         )
         def alpha_slag(b, t):
             return asin(
@@ -676,7 +676,7 @@ see property package for documentation.}""",
         # Forced convection heat transfer coefficient for liquid only
         @self.Constraint(
             self.flowsheet().time,
-            doc="forced convection heat transfer" " coefficient for liquid only",
+            doc="forced convection heat transfer coefficient for liquid only",
         )
         def hconv_eqn(b, t):
             return (

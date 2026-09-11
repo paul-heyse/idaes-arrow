@@ -251,9 +251,9 @@ class TestStatsWriter:
         assert (
             stats[1] == f"{tab}Free Variables in Activated Constraints: 4 (External: 0)"
         )
-        assert stats[2] == f"{tab*2}Free Variables with only lower bounds: 0"
-        assert stats[3] == f"{tab*2}Free Variables with only upper bounds: 0"
-        assert stats[4] == f"{tab*2}Free Variables with upper and lower bounds: 0"
+        assert stats[2] == f"{tab * 2}Free Variables with only lower bounds: 0"
+        assert stats[3] == f"{tab * 2}Free Variables with only upper bounds: 0"
+        assert stats[4] == f"{tab * 2}Free Variables with upper and lower bounds: 0"
         assert (
             stats[5]
             == f"{tab}Fixed Variables in Activated Constraints: 3 (External: 0)"
@@ -262,11 +262,11 @@ class TestStatsWriter:
         assert stats[7] == f"{tab}Activated Inequality Constraints: 0 (Deactivated: 0)"
         assert stats[8] == f"{tab}Activated Objectives: 0 (Deactivated: 0)"
         assert stats[9] == f"{tab}GreyBox Statistics"
-        assert stats[10] == f"{tab*2}Activated GreyBox models: 1 (Deactivated: 1)"
-        assert stats[11] == f"{tab*2}Activated GreyBox Equalities: 3 (Deactivated: 3)"
+        assert stats[10] == f"{tab * 2}Activated GreyBox models: 1 (Deactivated: 1)"
+        assert stats[11] == f"{tab * 2}Activated GreyBox Equalities: 3 (Deactivated: 3)"
         assert (
             stats[12]
-            == f"{tab*2}Free Variables in Activated GreyBox Equalities: 4 (Fixed: 1)"
+            == f"{tab * 2}Free Variables in Activated GreyBox Equalities: 4 (Fixed: 1)"
         )
 
 

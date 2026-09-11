@@ -815,7 +815,7 @@ see reaction package for documentation.}""",
             self.config.gas_phase_config.property_package.component_list,
             domain=Reals,
             initialize=0.0,
-            doc="Heterogeneous Rate Reaction" "Generation in the Gas Emulsion",
+            doc="Heterogeneous Rate ReactionGeneration in the Gas Emulsion",
             units=units_meta_gas("flux_mole") * units_meta_gas("length"),
         )
 
@@ -873,7 +873,7 @@ see reaction package for documentation.}""",
             self.length_domain,
             domain=Reals,
             initialize=1000,
-            doc="Gas to Solid Convective Enthalpy Transfer in" "Emulsion Region",
+            doc="Gas to Solid Convective Enthalpy Transfer inEmulsion Region",
             units=units_meta_gas("power") / units_meta_gas("volume"),
         )
 
@@ -883,7 +883,7 @@ see reaction package for documentation.}""",
             self.length_domain,
             domain=Reals,
             initialize=1,
-            doc="Reformulation Variable in Bubble" "Diameter Equation [reform var 1]",
+            doc="Reformulation Variable in BubbleDiameter Equation [reform var 1]",
             units=units_meta_gas("length"),
         )
         self._reform_var_2 = Var(
@@ -1379,9 +1379,7 @@ see reaction package for documentation.}""",
                     t, x
                 ] ** 2 == reform_var_4_const * b.bubble.properties[
                     t, x
-                ].therm_cond * b.bubble.properties[
-                    t, x
-                ].enth_mol * b.bubble.properties[
+                ].therm_cond * b.bubble.properties[t, x].enth_mol * b.bubble.properties[
                     t, x
                 ].dens_mol * (
                     pyunits.convert(
@@ -1395,8 +1393,7 @@ see reaction package for documentation.}""",
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Convective Heat Transfer"
-                "Coeff. Reformulation Eqn [reform eqn 5]",
+                doc="Convective Heat TransferCoeff. Reformulation Eqn [reform eqn 5]",
             )
             def _reformulation_eqn_5(b, t, x):
                 return (
@@ -1412,7 +1409,7 @@ see reaction package for documentation.}""",
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Bubble to Emulsion Gas Heat Transfer" "Coefficient",
+                doc="Bubble to Emulsion Gas Heat TransferCoefficient",
             )
             def bubble_cloud_heat_trans_coeff(b, t, x):
                 # 4.5 /K is a unitted constant in the correlation
@@ -1461,7 +1458,7 @@ see reaction package for documentation.}""",
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Gas to Solid Convective Enthalpy Transfer" "in Emulsion Region",
+                doc="Gas to Solid Convective Enthalpy Transferin Emulsion Region",
             )
             def convective_heat_transfer(b, t, x):
                 return b.ht_conv[t, x] * pyunits.convert(
@@ -1481,7 +1478,7 @@ see reaction package for documentation.}""",
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Bulk Gas Heat Transfer Between" "Bubble and Emulsion",
+                doc="Bulk Gas Heat Transfer BetweenBubble and Emulsion",
             )
             def bubble_cloud_bulk_heat_trans(b, t, x):
                 conc_diff = (
@@ -1571,9 +1568,7 @@ see reaction package for documentation.}""",
                     - b.gas_emulsion.properties[t, x].temperature
                 ) * b.bubble.area[t, x] - b.Hgbulk[t, x] - b.ht_conv[
                     t, x
-                ] * pyunits.convert(
-                    b.bed_area, to_units=units_meta_gas("area")
-                )
+                ] * pyunits.convert(b.bed_area, to_units=units_meta_gas("area"))
 
             # Solid emulsion - heat transfer
             @self.Constraint(

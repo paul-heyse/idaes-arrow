@@ -427,7 +427,6 @@ class DegeneracyHunter:
         # Find irreducible degenerate sets
         # Check if degenerate_set is not empty
         if self.degenerate_set:
-
             _log.info("Searching for Irreducible Degenerate Sets")
             self._prepare_ids_milp()
 
@@ -471,11 +470,11 @@ class DegeneracyHunter:
         if self.irreducible_degenerate_sets:
             for i, s in enumerate(self.irreducible_degenerate_sets):
                 stream.write(f"\n{TAB}Irreducible Degenerate Set {i}")
-                stream.write(f"\n{TAB*2}nu{TAB}Constraint Name")
+                stream.write(f"\n{TAB * 2}nu{TAB}Constraint Name")
                 for k, v in s.items():
                     value_string = f"{v:.1f}"
                     sep = (2 + len(TAB) - len(value_string)) * " "
-                    stream.write(f"\n{TAB*2}{value_string}{sep}{k.name}")
+                    stream.write(f"\n{TAB * 2}{value_string}{sep}{k.name}")
                 stream.write("\n")
         else:
             stream.write(

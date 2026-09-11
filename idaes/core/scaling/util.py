@@ -669,13 +669,13 @@ def report_scaling_factors(
                 maxname = len(header)
 
             stream.write(
-                f"\n{header}{' '*(maxname-len(header))}{TAB}Scaling Factor{TAB}Value{' '*4}{TAB}Scaled Value\n"
+                f"\n{header}{' ' * (maxname - len(header))}{TAB}Scaling Factor{TAB}Value{' ' * 4}{TAB}Scaled Value\n"
             )
 
             for n, i in vdict.items():
                 # Pad name to length
                 stream.write(
-                    f"{n + ' '*(maxname-len(n))}{TAB}{i[0]}{' '*5}{TAB}{i[1]}{TAB}{i[2]}\n"
+                    f"{n + ' ' * (maxname - len(n))}{TAB}{i[0]}{' ' * 5}{TAB}{i[1]}{TAB}{i[2]}\n"
                 )
 
     if ctype == Constraint or ctype is None:

@@ -615,14 +615,10 @@ and used when constructing these
                 return Constraint.Skip
             else:
                 return blk.vapor_phase.enthalpy_transfer[t, x] == (
-                    (
-                        sum(
-                            blk.vapor_phase.properties[t, x].enth_mol_phase_comp[
-                                "Vap", j
-                            ]
-                            * blk.vapor_phase.mass_transfer_term[t, x, "Vap", j]
-                            for j in equilibrium_comp
-                        )
+                    sum(
+                        blk.vapor_phase.properties[t, x].enth_mol_phase_comp["Vap", j]
+                        * blk.vapor_phase.mass_transfer_term[t, x, "Vap", j]
+                        for j in equilibrium_comp
                     )
                 )
 

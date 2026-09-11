@@ -4094,14 +4094,10 @@ class TestToyProblem:
         ) == pytest.approx(2, rel=1e-5)
         assert value(
             model.fs.unit.stream1_outlet.flow_mol_phase_comp[0, "phase1", "solute1"]
-        ) == pytest.approx(
-            4, rel=1e-5
-        )  # 3 + 0.5 + 0.5
+        ) == pytest.approx(4, rel=1e-5)  # 3 + 0.5 + 0.5
         assert value(
             model.fs.unit.stream1_outlet.flow_mol_phase_comp[0, "phase1", "solute2"]
-        ) == pytest.approx(
-            3, rel=1e-5
-        )  # 3 - 0.5 - 0.5
+        ) == pytest.approx(3, rel=1e-5)  # 3 - 0.5 - 0.5
         assert value(
             model.fs.unit.stream1_outlet.flow_mol_phase_comp[0, "phase1", "solute3"]
         ) == pytest.approx(5, rel=1e-5)
@@ -4111,14 +4107,10 @@ class TestToyProblem:
         ) == pytest.approx(11, rel=1e-5)
         assert value(
             model.fs.unit.stream2_outlet.flow_mol_phase_comp[0, "phase1", "solute1"]
-        ) == pytest.approx(
-            11, rel=1e-5
-        )  # 12 - 0.5 - 0.5
+        ) == pytest.approx(11, rel=1e-5)  # 12 - 0.5 - 0.5
         assert value(
             model.fs.unit.stream2_outlet.flow_mol_phase_comp[0, "phase1", "solute2"]
-        ) == pytest.approx(
-            14, rel=1e-5
-        )  # 13 + 0.5 + 0.5
+        ) == pytest.approx(14, rel=1e-5)  # 13 + 0.5 + 0.5
 
         assert value(model.fs.unit.stream1_outlet.enth_flow[0]) == pytest.approx(
             5200, rel=1e-5
@@ -4723,9 +4715,7 @@ class TestLiCoDiafiltration:
                 m.fs.sieving_coefficient[j] - 1
             ) * log(in_state.flow_vol) == log(in_state.conc_mass_solute[j]) + (
                 m.fs.sieving_coefficient[j] - 1
-            ) * log(
-                b.retentate[0, s].flow_vol
-            )
+            ) * log(b.retentate[0, s].flow_vol)
 
         m.fs.stage1.solvent_flux = Constraint(
             m.fs.stage1.elements,

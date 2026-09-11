@@ -264,7 +264,7 @@ see property package for documentation.}""",
         if self.config.tank_type == "simple_tank":
             # Declare a variable for cross sectional area
             self.tank_cross_sect_area = Var(
-                initialize=1.0, doc="Cross-sectional" " area of the tank"
+                initialize=1.0, doc="Cross-sectional area of the tank"
             )
 
         elif self.config.tank_type == "rectangular_tank":
@@ -324,14 +324,14 @@ see property package for documentation.}""",
 
             @self.Expression(
                 self.flowsheet().time,
-                doc="Angle of the circular" " sector of liquid level",
+                doc="Angle of the circular sector of liquid level",
             )
             def alpha_tank(b, t):
                 return 2 * acos((b.tank_radius - b.tank_level[t]) / b.tank_radius)
 
             @self.Expression(
                 self.flowsheet().time,
-                doc="Area covered by the liquid level" " at one end of the tank",
+                doc="Area covered by the liquid level at one end of the tank",
             )
             def tank_area(b, t):
                 return (

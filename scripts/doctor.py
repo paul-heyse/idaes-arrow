@@ -232,8 +232,12 @@ def check_rust() -> Check:
     # Resolved from inside rust/, so rust-toolchain.toml applies.
     code, out = run("rustc", "--version", cwd=rust_dir)
     if code != 0:
-        return Check("rust", False, out.splitlines()[0] if out else "rustc failed",
-                     f"rustup toolchain install {wanted}")
+        return Check(
+            "rust",
+            False,
+            out.splitlines()[0] if out else "rustc failed",
+            f"rustup toolchain install {wanted}",
+        )
     actual = out.split()[1] if len(out.split()) > 1 else "?"
     ok = actual == wanted or not wanted
     return Check(
@@ -247,8 +251,9 @@ def check_rust() -> Check:
 def check_cargo_tools() -> Check:
     code, out = run("cargo", "install", "--list", timeout=60)
     if code != 0:
-        return Check("cargo-tools", False, "cargo unavailable", "see rustup.rs",
-                     blocking=False)
+        return Check(
+            "cargo-tools", False, "cargo unavailable", "see rustup.rs", blocking=False
+        )
     installed = {
         line.split()[0] for line in out.splitlines() if line and not line[0].isspace()
     }
@@ -298,10 +303,13 @@ def check_upstream() -> Check:
             f"git remote add upstream https://github.com/{UPSTREAM}.git",
             blocking=False,
         )
-    code, out = run("git", "rev-list", "--left-right", "--count", "upstream/main...HEAD")
+    code, out = run(
+        "git", "rev-list", "--left-right", "--count", "upstream/main...HEAD"
+    )
     if code != 0:
-        return Check("upstream", True, "not fetched yet", "just sync-upstream",
-                     blocking=False)
+        return Check(
+            "upstream", True, "not fetched yet", "just sync-upstream", blocking=False
+        )
     behind, _, ahead = out.strip().partition("\t")
     code, modified = run(
         "git", "diff", "--name-only", "--diff-filter=M", "upstream-main...HEAD"
@@ -381,9 +389,7 @@ def emit_json(checks: list[Check]) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--format", choices=("text", "json", "direnv"), default="text"
-    )
+    parser.add_argument("--format", choices=("text", "json", "direnv"), default="text")
     args = parser.parse_args(argv)
 
     checks = [fn() for fn in CHECKS]

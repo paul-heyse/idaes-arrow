@@ -290,9 +290,7 @@ class ControlVolume1DScaler(ControlVolumeScalerBase):
             for (
                 idx,
                 c,
-            ) in (
-                model._flow_terms_length_domain_cont_eq.items()
-            ):  # pylint: disable=protected-access
+            ) in model._flow_terms_length_domain_cont_eq.items():  # pylint: disable=protected-access
                 self.scale_constraint_by_component(
                     c,
                     model._flow_terms[idx],  # pylint: disable=protected-access
@@ -309,9 +307,7 @@ class ControlVolume1DScaler(ControlVolumeScalerBase):
             for (
                 idx,
                 c,
-            ) in (
-                model._enthalpy_flow_length_domain_cont_eq.items()
-            ):  # pylint: disable=protected-access
+            ) in model._enthalpy_flow_length_domain_cont_eq.items():  # pylint: disable=protected-access
                 self.scale_constraint_by_component(
                     c,
                     model._enthalpy_flow[idx],  # pylint: disable=protected-access
@@ -556,8 +552,7 @@ argument).""",
             # Validate length_Var and add a reference
             if not isinstance(length_var, (Var, Param, Expression)):
                 raise ConfigurationError(
-                    f"{self.name} length_var must be a Pyomo Var, Param or "
-                    "Expression."
+                    f"{self.name} length_var must be a Pyomo Var, Param or Expression."
                 )
             elif length_var.is_indexed():
                 raise ConfigurationError(
@@ -936,8 +931,7 @@ argument).""",
                 self.config.property_package.phase_equilibrium_idx,
                 domain=Reals,
                 initialize=0.0,
-                doc="Amount of generation in unit by phase "
-                "equilibria per unit length",
+                doc="Amount of generation in unit by phase equilibria per unit length",
                 units=flow_l_units,
             )  # use property package flow basis
 
@@ -2000,22 +1994,25 @@ argument).""",
     def add_phase_enthalpy_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_enthalpy_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_enthalpy_balances.".format(
+                self.name
+            )
         )
 
     def add_phase_energy_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_energy_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_energy_balances.".format(
+                self.name
+            )
         )
 
     def add_total_energy_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_total_energy_balances.".format(self.name)
+            "{} OD control volumes do not support add_total_energy_balances.".format(
+                self.name
+            )
         )
 
     def add_isothermal_constraint(self, *args, **kwargs):
@@ -2104,22 +2101,25 @@ argument).""",
     def add_phase_pressure_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_pressure_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_pressure_balances.".format(
+                self.name
+            )
         )
 
     def add_phase_momentum_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_phase_momentum_balances.".format(self.name)
+            "{} OD control volumes do not support add_phase_momentum_balances.".format(
+                self.name
+            )
         )
 
     def add_total_momentum_balances(self, *args, **kwargs):
         """Not Supported"""
         raise BalanceTypeNotSupportedError(
-            "{} OD control volumes do not support "
-            "add_total_momentum_balances.".format(self.name)
+            "{} OD control volumes do not support add_total_momentum_balances.".format(
+                self.name
+            )
         )
 
     def apply_transformation(self):

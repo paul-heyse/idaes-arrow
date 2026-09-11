@@ -39,7 +39,7 @@ def phi_residual_expressions_type04(model, parameters):
     return {
         "phir": sum(n[i] * model.delta ** d[i] * model.tau ** t[i] for i in rng[0])
         + sum(
-            pyo.exp(-model.delta**k)
+            pyo.exp(-(model.delta**k))
             * sum(n[i] * model.delta ** d[i] * model.tau ** t[i] for i in rng[k])
             for k in range(1, len(rng))
         ),
@@ -47,7 +47,7 @@ def phi_residual_expressions_type04(model, parameters):
             n[i] * d[i] * model.delta ** (d[i] - 1) * model.tau ** t[i] for i in rng[0]
         )
         + sum(
-            pyo.exp(-model.delta**k)
+            pyo.exp(-(model.delta**k))
             * sum(
                 n[i]
                 * (d[i] - k * model.delta**k)
@@ -62,7 +62,7 @@ def phi_residual_expressions_type04(model, parameters):
             for i in rng[0]
         )
         + sum(
-            pyo.exp(-model.delta**k)
+            pyo.exp(-(model.delta**k))
             * sum(
                 n[i]
                 * (
@@ -80,7 +80,7 @@ def phi_residual_expressions_type04(model, parameters):
             n[i] * t[i] * model.delta ** d[i] * model.tau ** (t[i] - 1) for i in rng[0]
         )
         + sum(
-            pyo.exp(-model.delta**k)
+            pyo.exp(-(model.delta**k))
             * sum(
                 n[i] * t[i] * model.delta ** d[i] * model.tau ** (t[i] - 1)
                 for i in rng[k]
@@ -92,7 +92,7 @@ def phi_residual_expressions_type04(model, parameters):
             for i in rng[0]
         )
         + sum(
-            pyo.exp(-model.delta**k)
+            pyo.exp(-(model.delta**k))
             * sum(
                 n[i] * t[i] * (t[i] - 1) * model.delta ** d[i] * model.tau ** (t[i] - 2)
                 for i in rng[k]
@@ -104,7 +104,7 @@ def phi_residual_expressions_type04(model, parameters):
             for i in rng[0]
         )
         + sum(
-            pyo.exp(-model.delta**k)
+            pyo.exp(-(model.delta**k))
             * sum(
                 n[i]
                 * t[i]

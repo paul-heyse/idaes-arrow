@@ -38,7 +38,7 @@ class TestCheckIllConditioning:
         with pytest.raises(
             ValueError,
             match=re.escape(
-                "Unrecognised value for direction (foo). " "Must be 'row' or 'column'."
+                "Unrecognised value for direction (foo). Must be 'row' or 'column'."
             ),
         ):
             compute_ill_conditioning_certificate(m, direction="foo")

@@ -180,7 +180,6 @@ def Txy_data(
         status = solver.solve(model, tee=False)
         # If solution is optimal store the concentration, and calculated temperatures in the created arrays
         if check_optimal_termination(status):
-
             print(f"Case: {count} Optimal. {component_1} x = {v:.2f}")
 
             if hasattr(model.props[1], "_mole_frac_tdew") and hasattr(
@@ -339,7 +338,6 @@ def build_txy_diagrams(
             ax.plot(txy_data.x, txy_data.TDew, "b", label="Dew Temp", linewidth=1.5)
 
     elif len(txy_data.TDew) == 0:
-
         if include_pressure is True:
             # Plot results for bubble temperature
 
@@ -360,7 +358,6 @@ def build_txy_diagrams(
             ax.plot(txy_data.x, txy_data.TBubb, "b", label="Dew Temp", linewidth=1.5)
 
     elif len(txy_data.TBubb) == 0:
-
         if include_pressure is True:
             # Plot results for bubble temperature
 

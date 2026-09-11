@@ -468,7 +468,7 @@ tube side flows from 1 to 0""",
         # Elevation difference (outlet - inlet) for static pressure calculation
         self.delta_elevation = Var(
             initialize=0.0,
-            doc="Elevation Increase Used for" "Static Pressure Calculation",
+            doc="Elevation Increase Used forStatic Pressure Calculation",
         )
 
         # Number of tube columns in the cross section plane perpendicular
@@ -516,7 +516,7 @@ tube side flows from 1 to 0""",
             self.head_ri_scaling = Param(
                 initialize=0.1,
                 mutable=True,
-                doc="Discretization scaling" "of the header inner radius",
+                doc="Discretization scalingof the header inner radius",
             )
 
         # Pitch of tubes between two neighboring columns (in y direction).
@@ -565,19 +565,17 @@ tube side flows from 1 to 0""",
                 return b.mbl * sqrt(2.0)
 
         # Ratio of pitch_x/tube_do
-        @self.Expression(doc="Ratio of Pitch in x Direction" "to Tube Outside Diameter")
+        @self.Expression(doc="Ratio of Pitch in x Directionto Tube Outside Diameter")
         def pitch_x_to_do(b):
             return b.pitch_x / b.tube_do
 
         # Ratio of pitch_y/tube_do
-        @self.Expression(
-            doc="Ratio of Pitch in y Direction " "to Tube Outside Diameter"
-        )
+        @self.Expression(doc="Ratio of Pitch in y Direction to Tube Outside Diameter")
         def pitch_y_to_do(b):
             return b.pitch_y / b.tube_do
 
         # Total cross section area of tube metal per segment
-        @self.Expression(doc="Total Cross Section Area of" "Tube Metal Per Segment")
+        @self.Expression(doc="Total Cross Section Area ofTube Metal Per Segment")
         def area_wall_seg(b):
             return (
                 0.25
@@ -690,7 +688,7 @@ tube side flows from 1 to 0""",
         self.therm_cond_wall = Param(
             initialize=43.0,
             mutable=True,
-            doc="Thermal Conductivity of" "Tube Wall Material",
+            doc="Thermal Conductivity ofTube Wall Material",
         )
 
         # Wall heat capacity
@@ -715,7 +713,7 @@ tube side flows from 1 to 0""",
         self.coefficient_thermal_expansion = Param(
             initialize=1.2e-5,
             mutable=True,
-            doc="Tube Wall Coefficient" "of Thermal Expansion",
+            doc="Tube Wall Coefficientof Thermal Expansion",
         )
 
         # thermal diffusivity of wall
@@ -742,23 +740,23 @@ tube side flows from 1 to 0""",
         # Correction factor for convective heat transfer
         # coefficient on shell side
         self.fcorrection_htc_shell = Var(
-            initialize=1.0, doc="Correction Factor for" "Convective HTC on Shell"
+            initialize=1.0, doc="Correction Factor forConvective HTC on Shell"
         )
 
         # Correction factor for convective heat transfer
         # coefficient on tube side
         self.fcorrection_htc_tube = Var(
-            initialize=1.0, doc="Correction Factor for Convective" "HTC on Tube Side"
+            initialize=1.0, doc="Correction Factor for ConvectiveHTC on Tube Side"
         )
 
         # Correction factor for tube side pressure drop due to friction
         self.fcorrection_dp_tube = Var(
-            initialize=1.0, doc="Correction Factor for Tube Side" "Pressure Drop"
+            initialize=1.0, doc="Correction Factor for Tube SidePressure Drop"
         )
 
         # Correction factor for shell side pressure drop due to friction
         self.fcorrection_dp_shell = Var(
-            initialize=1.0, doc="Correction Factor for Shell Side" "Pressure Drop"
+            initialize=1.0, doc="Correction Factor for Shell SidePressure Drop"
         )
 
         # Performance variables
@@ -768,7 +766,7 @@ tube side flows from 1 to 0""",
                 self.flowsheet().time,
                 self.shell.length_domain,
                 initialize=0.5,
-                doc="Emissivity at Given" "Mean Beam Length",
+                doc="Emissivity at GivenMean Beam Length",
             )
 
             # Gas emissivity at mbl/sqrt(2)
@@ -776,7 +774,7 @@ tube side flows from 1 to 0""",
                 self.flowsheet().time,
                 self.shell.length_domain,
                 initialize=0.4,
-                doc="Emissivity at Mean Beam Length" "Divided by Sqrt of 2",
+                doc="Emissivity at Mean Beam LengthDivided by Sqrt of 2",
             )
 
             # Gas emissivity at mbl*sqrt(2)
@@ -784,7 +782,7 @@ tube side flows from 1 to 0""",
                 self.flowsheet().time,
                 self.shell.length_domain,
                 initialize=0.6,
-                doc="Emissivity at Mean Beam" "Length Multiplied by Sqrt Of 2",
+                doc="Emissivity at Mean BeamLength Multiplied by Sqrt Of 2",
             )
 
             # Gray fraction of gas in entire spectrum
@@ -792,7 +790,7 @@ tube side flows from 1 to 0""",
                 self.flowsheet().time,
                 self.shell.length_domain,
                 initialize=0.5,
-                doc="Gray Fraction of Gas" "in Entire Spectrum",
+                doc="Gray Fraction of Gasin Entire Spectrum",
             )
 
             # Gas-surface radiation exchange factor for shell side wall
@@ -800,7 +798,7 @@ tube side flows from 1 to 0""",
                 self.flowsheet().time,
                 self.shell.length_domain,
                 initialize=0.5,
-                doc="Gas-Surface Radiation Exchange" "Factor for Shell Side Wall",
+                doc="Gas-Surface Radiation ExchangeFactor for Shell Side Wall",
             )
 
             # Shell side equivalent convective heat transfer coefficient
@@ -809,8 +807,7 @@ tube side flows from 1 to 0""",
                 self.flowsheet().time,
                 self.shell.length_domain,
                 initialize=100.0,
-                doc="Shell Side Convective Heat"
-                "Transfer Coefficient due to Radiation",
+                doc="Shell Side Convective HeatTransfer Coefficient due to Radiation",
             )
 
         # Tube side convective heat transfer coefficient
@@ -818,7 +815,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             initialize=100.0,
-            doc="Tube Side Convective" "Heat Transfer Coefficient",
+            doc="Tube Side ConvectiveHeat Transfer Coefficient",
         )
 
         # Tube side convective heat transfer coefficient combined with fouling
@@ -826,8 +823,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             initialize=100.0,
-            doc="Tube Side Convective Heat Transfer"
-            "Coefficient Combined with Fouling",
+            doc="Tube Side Convective Heat TransferCoefficient Combined with Fouling",
         )
 
         # Shell side convective heat transfer coefficient
@@ -836,7 +832,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.shell.length_domain,
             initialize=100.0,
-            doc="Shell Side Convective Heat Transfer" "Coefficient due to Convection",
+            doc="Shell Side Convective Heat TransferCoefficient due to Convection",
         )
 
         # Total shell side convective heat transfer coefficient
@@ -845,7 +841,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.shell.length_domain,
             initialize=150.0,
-            doc="Total Shell Side Convective" "Heat Transfer Coefficient",
+            doc="Total Shell Side ConvectiveHeat Transfer Coefficient",
         )
 
         # Total shell side convective heat transfer coefficient
@@ -854,15 +850,14 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.shell.length_domain,
             initialize=150.0,
-            doc="Shell Side Convective Heat Transfer"
-            "Coefficient Combined with Fouling",
+            doc="Shell Side Convective Heat TransferCoefficient Combined with Fouling",
         )
 
         # Constraint for hconv_tube_foul
         @self.Constraint(
             self.flowsheet().time,
             self.tube.length_domain,
-            doc="Tube Side Convective Heat Transfer" "Coefficient with Fouling",
+            doc="Tube Side Convective Heat TransferCoefficient with Fouling",
         )
         def hconv_tube_foul_eqn(b, t, x):
             return (
@@ -876,7 +871,7 @@ tube side flows from 1 to 0""",
         @self.Constraint(
             self.flowsheet().time,
             self.shell.length_domain,
-            doc="Shell Side Convective Heat" "Transfer Coefficient with Fouling",
+            doc="Shell Side Convective HeatTransfer Coefficient with Fouling",
         )
         def hconv_shell_foul_eqn(b, t, x):
             return (
@@ -899,14 +894,14 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.shell.length_domain,
             initialize=500,
-            doc="Shell Side Fouling Wall" "Surface Temperature",
+            doc="Shell Side Fouling WallSurface Temperature",
         )
 
         # Fouling wall surface temperature on shell side
         @self.Constraint(
             self.flowsheet().time,
             self.shell.length_domain,
-            doc="Fouling Wall Surface" "Temperature on Shell Side",
+            doc="Fouling Wall SurfaceTemperature on Shell Side",
         )
         def temp_wall_shell_eqn(b, t, x):
             return b.shell_wall_temperature[t, x] == b.tube_wall_temperature[
@@ -994,9 +989,7 @@ tube side flows from 1 to 0""",
                 - b.tube_wall_temperature[t, x, b.r.first()]
             ) + 8 * b.diff_therm_wall / b.therm_cond_wall * b.hconv_tube_foul[
                 t, x
-            ] * b.r.first() / (
-                b.r.at(2) - b.r.first()
-            ) / (
+            ] * b.r.first() / (b.r.at(2) - b.r.first()) / (
                 3 * b.r.first() + b.r.at(2)
             ) / b.ri_scaling * (
                 b.tube.properties[t, x].temperature
@@ -1020,9 +1013,7 @@ tube side flows from 1 to 0""",
                 - b.tube_wall_temperature[t, x, b.r.last()]
             ) + 8 * b.diff_therm_wall / b.therm_cond_wall * b.hconv_shell_foul[
                 t, x
-            ] * b.r.last() / (
-                b.r.last() - b.r.at(-2)
-            ) / (
+            ] * b.r.last() / (b.r.last() - b.r.at(-2)) / (
                 3 * b.r.last() + b.r.at(-2)
             ) / b.ri_scaling * (
                 b.shell.properties[t, x].temperature
@@ -1217,8 +1208,7 @@ tube side flows from 1 to 0""",
             @self.Constraint(
                 self.flowsheet().time,
                 self.shell.length_domain,
-                doc="Equivalent Convective Heat Transfer"
-                "Coefficient due to Radiation",
+                doc="Equivalent Convective Heat TransferCoefficient due to Radiation",
             )
             def hconv_shell_rad_eqn(b, t, x):
                 return b.hconv_shell_rad[
@@ -1262,7 +1252,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             initialize=-10.0,
-            doc="Pressure Drop due to" "Friction on Tube Side",
+            doc="Pressure Drop due toFriction on Tube Side",
         )
 
         # Pressure drop due to 180 degree turn on tube side
@@ -1270,7 +1260,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             initialize=-10.0,
-            doc="Pressure Drop due to U-Turn on" "Tube Side",
+            doc="Pressure Drop due to U-Turn onTube Side",
         )
 
         # Prandtl number on tube side
@@ -1411,7 +1401,7 @@ tube side flows from 1 to 0""",
         @self.Constraint(
             self.flowsheet().time,
             self.tube.length_domain,
-            doc="Convective Heat Transfer Coefficient" "Equation on Tube Side",
+            doc="Convective Heat Transfer CoefficientEquation on Tube Side",
         )
         def hconv_tube_eqn(b, t, x):
             return (
@@ -1612,7 +1602,7 @@ tube side flows from 1 to 0""",
         @self.Constraint(
             self.flowsheet().time,
             self.shell.length_domain,
-            doc="Total Convective Heat Transfer Coefficient" "Equation on Shell Side",
+            doc="Total Convective Heat Transfer CoefficientEquation on Shell Side",
         )
         def hconv_shell_total_eqn(b, t, x):
             if self.config.has_radiation is True:
@@ -1746,7 +1736,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             self.r,
-            doc="Thermal Stress at " "Circumferential Direction for Tube",
+            doc="Thermal Stress at Circumferential Direction for Tube",
         )
         def therm_sigma_theta(b, t, x, r):
             r_2 = (r * b.ri_scaling) ** 2
@@ -1811,7 +1801,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             self.r,
-            doc="Mechanical Stress at" "Circumferential Direction for Tube",
+            doc="Mechanical Stress atCircumferential Direction for Tube",
         )
         def mech_sigma_theta(b, t, x, r):
             return 0.1 * (
@@ -1852,7 +1842,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             self.r,
-            doc="Principal Structural Stress" "at Radial Direction for Tube",
+            doc="Principal Structural Stressat Radial Direction for Tube",
         )
         def sigma_r(b, t, x, r):
             if r == b.r.first():
@@ -1866,7 +1856,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             self.r,
-            doc="Principal Structural Stress" "at Circumferential Direction for Tube",
+            doc="Principal Structural Stressat Circumferential Direction for Tube",
         )
         def sigma_theta(b, t, x, r):
             return b.mech_sigma_theta[t, x, r] + b.therm_sigma_theta[t, x, r]
@@ -1875,7 +1865,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             self.r,
-            doc="Principal Structural Stress" "at Axial Direction for Tube",
+            doc="Principal Structural Stressat Axial Direction for Tube",
         )
         def sigma_z(b, t, x, r):
             return b.mech_sigma_z[t, x] + b.therm_sigma_z[t, x, r]
@@ -1904,7 +1894,7 @@ tube side flows from 1 to 0""",
             self.flowsheet().time,
             self.tube.length_domain,
             self.r,
-            doc="Variation Principal Stress" "between Axial-Radial Directions for Tube",
+            doc="Variation Principal Stressbetween Axial-Radial Directions for Tube",
         )
         def delta_sigma_z_r(b, t, x, r):
             return abs(b.sigma_z[t, x, r] - b.sigma_r[t, x, r])
@@ -2153,7 +2143,7 @@ tube side flows from 1 to 0""",
             # Inner wall BC for dTdt
             @self.Constraint(
                 self.flowsheet().time,
-                doc="Extra Boundary at Inner Wall" "Temperature Derivative",
+                doc="Extra Boundary at Inner WallTemperature Derivative",
             )
             def head_extra_at_inner_wall_eqn(b, t):
                 if self.config.dynamic is True:
@@ -2187,7 +2177,7 @@ tube side flows from 1 to 0""",
 
             @self.Constraint(
                 self.flowsheet().time,
-                doc="Extra Boundary at Outer Wall " "Temperature Derivative",
+                doc="Extra Boundary at Outer Wall Temperature Derivative",
             )
             def head_extra_at_outer_wall_eqn(b, t):
                 if self.config.dynamic is True:
@@ -2412,7 +2402,7 @@ tube side flows from 1 to 0""",
             @self.Expression(
                 self.flowsheet().time,
                 self.head_r,
-                doc="Thermal Stress at" "Radial Direction for Header",
+                doc="Thermal Stress atRadial Direction for Header",
             )
             def therm_sigma_r_header(b, t, r):
                 if r == b.head_r.first() or r == b.head_r.last():
@@ -2435,7 +2425,7 @@ tube side flows from 1 to 0""",
             @self.Expression(
                 self.flowsheet().time,
                 self.head_r,
-                doc="Thermal Stress at Circumferential" "Direction for Header",
+                doc="Thermal Stress at CircumferentialDirection for Header",
             )
             def therm_sigma_theta_header(b, t, r):
                 r_2 = (r * b.head_ri_scaling) ** 2
@@ -2455,7 +2445,7 @@ tube side flows from 1 to 0""",
             @self.Expression(
                 self.flowsheet().time,
                 self.head_r,
-                doc="Thermal Stress at " " Axial Direction for Header",
+                doc="Thermal Stress at  Axial Direction for Header",
             )
             def therm_sigma_z_header(b, t, r):
                 return (
@@ -2468,7 +2458,7 @@ tube side flows from 1 to 0""",
             @self.Expression(
                 self.flowsheet().time,
                 self.head_r,
-                doc="Mechanical Stress " "at Radial Direction for Header",
+                doc="Mechanical Stress at Radial Direction for Header",
             )
             def mech_sigma_r_header(b, t, r):
                 if r == b.head_r.first():
@@ -2513,7 +2503,7 @@ tube side flows from 1 to 0""",
             @self.Expression(
                 self.flowsheet().time,
                 self.head_r,
-                doc="Mechanical Stress" "at Circumferential Direction for Header",
+                doc="Mechanical Stressat Circumferential Direction for Header",
             )
             def mech_sigma_theta_header(b, t, r):
                 return 0.1 * (
@@ -2543,7 +2533,7 @@ tube side flows from 1 to 0""",
 
             @self.Expression(
                 self.flowsheet().time,
-                doc="Mechanical Stress" "at Axial Direction for Header",
+                doc="Mechanical Stressat Axial Direction for Header",
             )
             def mech_sigma_z_header(b, t):
                 return 0.1 * (
@@ -2560,7 +2550,7 @@ tube side flows from 1 to 0""",
             @self.Expression(
                 self.flowsheet().time,
                 self.head_r,
-                doc="Principal Structural Stress " "at Radial Direction for Header",
+                doc="Principal Structural Stress at Radial Direction for Header",
             )
             def sigma_r_header(b, t, r):
                 if r == b.head_r.first():
@@ -2588,7 +2578,7 @@ tube side flows from 1 to 0""",
             @self.Expression(
                 self.flowsheet().time,
                 self.head_r,
-                doc="Principal Structural Stress" "at Axial Direction for Header",
+                doc="Principal Structural Stressat Axial Direction for Header",
             )
             def sigma_z_header(b, t, r):
                 return b.mech_sigma_z_header[t] + b.therm_sigma_z_header[t, r]
@@ -2760,7 +2750,7 @@ tube side flows from 1 to 0""",
             # mechanical stress by pressure at crotch corner
             @self.Expression(
                 self.flowsheet().time,
-                doc="Mechanical Stress at Crotch Corner" "for Header",
+                doc="Mechanical Stress at Crotch Cornerfor Header",
             )
             def sigma_p_P1(b, t):
                 return b.sigma_p[t] * k_m_header
@@ -2768,7 +2758,7 @@ tube side flows from 1 to 0""",
             # mechanical stress at location P2
             @self.Expression(
                 self.flowsheet().time,
-                doc="Mechanical Stress at" "Critical Point P2 for Header",
+                doc="Mechanical Stress atCritical Point P2 for Header",
             )
             def sigma_p_P2(b, t):
                 return b.sigma_p[t] * k_m_header / 5
@@ -2783,7 +2773,7 @@ tube side flows from 1 to 0""",
             # thermal stress at location P2
             @self.Expression(
                 self.flowsheet().time,
-                doc="Thermal Stress" "at Critical Point P2 for Header",
+                doc="Thermal Stressat Critical Point P2 for Header",
             )
             def sigma_t_P2(b, t):
                 return b.sigma_t[t] * k_t_header
@@ -2792,7 +2782,7 @@ tube side flows from 1 to 0""",
             # crotch corner P1
             @self.Expression(
                 self.flowsheet().time,
-                doc="Circumferential Stress" "at Crotch Corner for Header",
+                doc="Circumferential Stressat Crotch Corner for Header",
             )
             def sigma_theta_P1(b, t):
                 return b.sigma_p_P1[t] + b.sigma_t_P1[t]
@@ -2800,7 +2790,7 @@ tube side flows from 1 to 0""",
             # location P2
             @self.Expression(
                 self.flowsheet().time,
-                doc="Circumferential Stress" "at Critical Point P2 for Header",
+                doc="Circumferential Stressat Critical Point P2 for Header",
             )
             def sigma_theta_P2(b, t):
                 return b.sigma_p_P2[t] + b.sigma_t_P2[t]
@@ -2831,7 +2821,7 @@ tube side flows from 1 to 0""",
             # VM stress at crotch corner
             @self.Expression(
                 self.flowsheet().time,
-                doc="Equivalent von Mises Stress" "at Crotch Corner for Header",
+                doc="Equivalent von Mises Stressat Crotch Corner for Header",
             )
             def sigma_eff_P1(b, t):
                 sigma_comer_P1 = b.sigma_theta_P1[t]
@@ -2850,7 +2840,7 @@ tube side flows from 1 to 0""",
             # VM stress at location P2
             @self.Expression(
                 self.flowsheet().time,
-                doc="Equivalent von Mises Stress" "at Critical Point P2 for Header",
+                doc="Equivalent von Mises Stressat Critical Point P2 for Header",
             )
             def sigma_eff_P2(b, t):
                 sigma_comer_P2 = b.sigma_theta_P2[t]
@@ -2891,7 +2881,7 @@ tube side flows from 1 to 0""",
             # rupture time calculation at location P2
             @self.Expression(
                 self.flowsheet().time,
-                doc="Rupture Time at Critical Point P2" "for Header",
+                doc="Rupture Time at Critical Point P2for Header",
             )
             def rupture_time_P2(b, t):
                 if value(b.sigma_eff_P2[t]) > 10:  # MPa
@@ -3026,12 +3016,12 @@ tube side flows from 1 to 0""",
                     "Exceeds the Saturation Temperature."
                 )
                 init_log.info(
-                    "Estimated Outlet"
-                    " Liquid Water Temperature = {}.".format(temp_out_tube_guess)
+                    "Estimated Outlet Liquid Water Temperature = {}.".format(
+                        temp_out_tube_guess
+                    )
                 )
                 init_log.info(
-                    "Saturation Temperature at"
-                    " Inlet Pressure = {}.".format(
+                    "Saturation Temperature at Inlet Pressure = {}.".format(
                         value(blk.tube.properties[0, 0].temperature_sat)
                     )
                 )
@@ -3040,8 +3030,9 @@ tube side flows from 1 to 0""",
                     + 0.1 * blk.tube.properties[0, 0].temperature
                 )
                 init_log.info(
-                    "Reset Estimated Outlet Liquid "
-                    "Water Ttemperature = {}.".format(temp_out_tube_guess)
+                    "Reset Estimated Outlet Liquid Water Ttemperature = {}.".format(
+                        temp_out_tube_guess
+                    )
                 )
         else:
             mcp_shell = value(
@@ -3083,12 +3074,12 @@ tube side flows from 1 to 0""",
                     " Exceeds the Saturation temperature."
                 )
                 init_log.info(
-                    "Estimated Outlet Liquid Water "
-                    "Temperature = {}.".format(temp_out_tube_guess)
+                    "Estimated Outlet Liquid Water Temperature = {}.".format(
+                        temp_out_tube_guess
+                    )
                 )
                 init_log.info(
-                    "Saturation Temperature at Inlet"
-                    " Pressure = {}.".format(
+                    "Saturation Temperature at Inlet Pressure = {}.".format(
                         value(blk.tube.properties[0, 1].temperature_sat)
                     )
                 )
@@ -3097,8 +3088,9 @@ tube side flows from 1 to 0""",
                     + 0.1 * blk.tube.properties[0, 1].temperature
                 )
                 init_log.info(
-                    "Reset Estimated Outlet Liquid Water"
-                    " Temperature = {}.".format(temp_out_tube_guess)
+                    "Reset Estimated Outlet Liquid Water Temperature = {}.".format(
+                        temp_out_tube_guess
+                    )
                 )
 
         for t in blk.flowsheet().time:

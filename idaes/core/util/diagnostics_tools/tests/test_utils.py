@@ -501,7 +501,7 @@ class TestCheckParallelJacobian:
         with pytest.raises(
             ValueError,
             match=re.escape(
-                "Unrecognised value for direction (foo). " "Must be 'row' or 'column'."
+                "Unrecognised value for direction (foo). Must be 'row' or 'column'."
             ),
         ):
             check_parallel_jacobian(m, direction="foo")

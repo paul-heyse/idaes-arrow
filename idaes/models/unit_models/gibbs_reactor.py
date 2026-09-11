@@ -111,9 +111,7 @@ class GibbsReactorScaler(CustomScalerBase):
 
         # Lagrangian multipliers
         # Best guess scaling for these is R*T, need to convert units
-        p_units = (
-            model.control_volume.config.property_package.get_metadata().get_derived_units
-        )
+        p_units = model.control_volume.config.property_package.get_metadata().get_derived_units
         for (t, _), v in model.lagrange_mult.items():
             tsf = self.get_scaling_factor(
                 model.control_volume.properties_out[t].temperature

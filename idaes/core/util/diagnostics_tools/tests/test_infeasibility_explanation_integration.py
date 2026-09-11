@@ -32,7 +32,6 @@ __author__ = "Alex Dowling, Douglas Allan, Andrew Lee"
 
 
 class TestComputeInfeasibilityExplanation:
-
     @pytest.fixture(scope="class")
     def model(self):
         # create an infeasible model for demonstration

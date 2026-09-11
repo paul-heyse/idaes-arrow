@@ -16,6 +16,7 @@ API for accessing core IDAES datasets
 Usage, e.g., for the Pitzer(1984) data::
 
     from idaes.core.datasets import Pitzer
+
     pitzer = Pitzer()
     gibbs_data = pitzer.get_table("Standard G").data
 

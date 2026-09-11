@@ -894,7 +894,7 @@ see reaction package for documentation.}""",
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Gas side pressure drop calculation -" "simplified pressure drop",
+                doc="Gas side pressure drop calculation -simplified pressure drop",
             )
             def gas_phase_config_pressure_drop(b, t, x):
                 #  0.2/s is a unitted constant in the correlation
@@ -920,7 +920,7 @@ see reaction package for documentation.}""",
             @self.Constraint(
                 self.flowsheet().time,
                 self.length_domain,
-                doc="Gas side pressure drop calculation -" "Ergun equation",
+                doc="Gas side pressure drop calculation -Ergun equation",
             )
             def gas_phase_config_pressure_drop(b, t, x):
                 return -pyunits.convert(
@@ -1018,7 +1018,7 @@ see reaction package for documentation.}""",
                 self.length_domain,
                 gas_phase.property_package.phase_list,
                 gas_phase.property_package.component_list,
-                doc="Gas side heterogeneous" "rate reaction generation",
+                doc="Gas side heterogeneousrate reaction generation",
             )
             def gas_comp_hetero_rxn(b, t, x, p, j):
                 return b.gas_phase.mass_transfer_term[t, x, p, j] == (
@@ -1047,9 +1047,7 @@ see reaction package for documentation.}""",
                 ) * pyunits.convert(
                     b.solid_phase.properties[t, x].params.particle_dia,
                     to_units=units_meta_gas("length"),
-                ) == 6 * b.gas_solid_htc[
-                    t, x
-                ] * (
+                ) == 6 * b.gas_solid_htc[t, x] * (
                     b.gas_phase.properties[t, x].temperature
                     - pyunits.convert(
                         b.solid_phase.properties[t, x].temperature,

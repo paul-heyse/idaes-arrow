@@ -421,9 +421,7 @@ def test_get_operation_blocks(dummy_data):
     # Test missing attribute error
     with pytest.raises(
         AttributeError,
-        match=(
-            "Required attribute startup is not found in " "the operational block blk."
-        ),
+        match=("Required attribute startup is not found in the operational block blk."),
     ):
         m._get_operation_blocks(blk_name="blk", attribute_list=["op_mode", "startup"])
 

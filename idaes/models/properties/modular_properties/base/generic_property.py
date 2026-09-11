@@ -134,8 +134,9 @@ def set_param_value(b, param, units):
         )
     else:
         _log.debug(
-            "{} no units provided for parameter {} - assuming default "
-            "units".format(b.name, param)
+            "{} no units provided for parameter {} - assuming default units".format(
+                b.name, param
+            )
         )
         param_obj.value = config
 
@@ -1491,7 +1492,6 @@ class GenericParameterData(PhysicalParameterBlock):
 
                 self.element_comp[c] = {}
                 for e in self.element_list:
-
                     if e not in cobj.config.elemental_composition:
                         self.element_comp[c][e] = 0
                     else:
@@ -2245,9 +2245,7 @@ class ModularPropertiesInitializer(InitializerBase):
                     # Add critical point constraints to cons_list
                     ref_phase = k._get_critical_ref_phase()
                     p_config = k.params.get_phase(ref_phase).config
-                    cons_list += (
-                        p_config.equation_of_state.list_critical_property_constraint_names()
-                    )
+                    cons_list += p_config.equation_of_state.list_critical_property_constraint_names()
 
             # Bubble temperature initialization
             if hasattr(k, "_mole_frac_tbub"):
@@ -2303,7 +2301,6 @@ class ModularPropertiesInitializer(InitializerBase):
         # ---------------------------------------------------------------------
         # Initialize flow rates and compositions
         for k in model.values():
-
             k.params.config.state_definition.state_initialization(k)
 
             if k.params._electrolyte:
@@ -2767,7 +2764,6 @@ class _GenericStateBlock(StateBlock):
         # ---------------------------------------------------------------------
         # Initialize flow rates and compositions
         for k in blk.values():
-
             k.params.config.state_definition.state_initialization(k)
 
             if k.params._electrolyte:
@@ -3001,7 +2997,6 @@ class GenericStateBlockData(StateBlockData):
         if self.params.config.phases_in_equilibrium is not None and (
             not self.config.defined_state or self.always_flash
         ):
-
             t_units = self.params.get_metadata().default_units.TEMPERATURE
             if self.temperature.value is not None:
                 t_value = value(self.temperature)
@@ -3033,7 +3028,6 @@ class GenericStateBlockData(StateBlockData):
         if self.params.config.phases_in_equilibrium is not None and (
             not self.config.defined_state or self.always_flash
         ):
-
             pe_form_config = self.params.config.phase_equilibrium_state
             for pp in self.params._pe_pairs:
                 pe_form_config[pp].phase_equil(self, pp)
@@ -5232,8 +5226,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_mass_frac_phase_comp(b, p, j):
-                return exp(b.log_mass_frac_phase_comp[p, j]) == (
-                    b.mass_frac_phase_comp[p, j]
+                return (
+                    exp(b.log_mass_frac_phase_comp[p, j])
+                    == (b.mass_frac_phase_comp[p, j])
                 )
 
             self.log_mass_frac_phase_comp_eq = Constraint(
@@ -5257,8 +5252,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_mass_frac_phase_comp_appr(b, p, j):
-                return exp(b.log_mass_frac_phase_comp_apparent[p, j]) == (
-                    b.mass_frac_phase_comp_apparent[p, j]
+                return (
+                    exp(b.log_mass_frac_phase_comp_apparent[p, j])
+                    == (b.mass_frac_phase_comp_apparent[p, j])
                 )
 
             self.log_mass_frac_phase_comp_apparent_eq = Constraint(
@@ -5282,8 +5278,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_mass_frac_phase_comp_true(b, p, j):
-                return exp(b.log_mass_frac_phase_comp_true[p, j]) == (
-                    b.mass_frac_phase_comp_true[p, j]
+                return (
+                    exp(b.log_mass_frac_phase_comp_true[p, j])
+                    == (b.mass_frac_phase_comp_true[p, j])
                 )
 
             self.log_mass_frac_phase_comp_true_eq = Constraint(
@@ -5312,8 +5309,9 @@ class GenericStateBlockData(StateBlockData):
                     # Molality is defined per mass of solvent so only makes
                     # sense in liquid phases
                     return Expression.Skip
-                return exp(b.log_molality_phase_comp[p, j]) == (
-                    b.molality_phase_comp[p, j]
+                return (
+                    exp(b.log_molality_phase_comp[p, j])
+                    == (b.molality_phase_comp[p, j])
                 )
 
             self.log_molality_phase_comp_eq = Constraint(
@@ -5342,8 +5340,9 @@ class GenericStateBlockData(StateBlockData):
                     # Molality is defined per mass of solvent so only makes
                     # sense in liquid phases
                     return Expression.Skip
-                return exp(b.log_molality_phase_comp_apparent[p, j]) == (
-                    b.molality_phase_comp_apparent[p, j]
+                return (
+                    exp(b.log_molality_phase_comp_apparent[p, j])
+                    == (b.molality_phase_comp_apparent[p, j])
                 )
 
             self.log_molality_phase_comp_apparent_eq = Constraint(
@@ -5371,8 +5370,9 @@ class GenericStateBlockData(StateBlockData):
                     # Molality is defined per mass of solvent so only makes
                     # sense in liquid phases
                     return Expression.Skip
-                return exp(b.log_molality_phase_comp_true[p, j]) == (
-                    b.molality_phase_comp_true[p, j]
+                return (
+                    exp(b.log_molality_phase_comp_true[p, j])
+                    == (b.molality_phase_comp_true[p, j])
                 )
 
             self.log_molality_phase_comp_true_eq = Constraint(
@@ -5419,8 +5419,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_mole_frac_phase_comp(b, p, j):
-                return exp(b.log_mole_frac_phase_comp[p, j]) == (
-                    b.mole_frac_phase_comp[p, j]
+                return (
+                    exp(b.log_mole_frac_phase_comp[p, j])
+                    == (b.mole_frac_phase_comp[p, j])
                 )
 
             self.log_mole_frac_phase_comp_eqn = Constraint(
@@ -5444,8 +5445,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_mole_frac_phase_comp_appr(b, p, j):
-                return exp(b.log_mole_frac_phase_comp_apparent[p, j]) == (
-                    b.mole_frac_phase_comp_apparent[p, j]
+                return (
+                    exp(b.log_mole_frac_phase_comp_apparent[p, j])
+                    == (b.mole_frac_phase_comp_apparent[p, j])
                 )
 
             self.log_mole_frac_phase_comp_apparent_eq = Constraint(
@@ -5469,8 +5471,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_mole_frac_phase_comp_true(b, p, j):
-                return exp(b.log_mole_frac_phase_comp_true[p, j]) == (
-                    b.mole_frac_phase_comp_true[p, j]
+                return (
+                    exp(b.log_mole_frac_phase_comp_true[p, j])
+                    == (b.mole_frac_phase_comp_true[p, j])
                 )
 
             self.log_mole_frac_phase_comp_true_eq = Constraint(
@@ -5494,8 +5497,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_pressure_phase_comp(b, p, j):
-                return exp(b.log_pressure_phase_comp[p, j]) == (
-                    b.pressure_phase_comp[p, j]
+                return (
+                    exp(b.log_pressure_phase_comp[p, j])
+                    == (b.pressure_phase_comp[p, j])
                 )
 
             self.log_pressure_phase_comp_eq = Constraint(
@@ -5519,8 +5523,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_pressure_phase_comp_appr(b, p, j):
-                return exp(b.log_pressure_phase_comp_apparent[p, j]) == (
-                    b.pressure_phase_comp_apparent[p, j]
+                return (
+                    exp(b.log_pressure_phase_comp_apparent[p, j])
+                    == (b.pressure_phase_comp_apparent[p, j])
                 )
 
             self.log_pressure_phase_comp_apparent_eq = Constraint(
@@ -5544,8 +5549,9 @@ class GenericStateBlockData(StateBlockData):
             )
 
             def rule_log_pressure_phase_comp_true(b, p, j):
-                return exp(b.log_pressure_phase_comp_true[p, j]) == (
-                    b.pressure_phase_comp_true[p, j]
+                return (
+                    exp(b.log_pressure_phase_comp_true[p, j])
+                    == (b.pressure_phase_comp_true[p, j])
                 )
 
             self.log_pressure_phase_comp_true_eq = Constraint(
@@ -5604,7 +5610,6 @@ def _valid_VL_component_list(blk, pp):
         pparams.get_phase(pp[0]).is_vapor_phase()
         and pparams.get_phase(pp[1]).is_liquid_phase()
     ):
-
         for j in blk.component_list:
             if (pp[0], j) in blk.phase_component_set and (
                 pp[1],
