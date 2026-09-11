@@ -54,9 +54,32 @@ def git(repo: Path, *args: str) -> str:
     ).stdout.strip()
 
 
-def tracked_files(repo: Path, pattern: str) -> list[str]:
-    out = git(repo, "ls-files", pattern)
+def tracked_files(repo: Path, pattern: str, rev: str | None = None) -> list[str]:
+    """List tracked paths under `pattern`, at `rev` if given, else the worktree."""
+    if rev:
+        out = git(repo, "ls-tree", "-r", "--name-only", rev, "--", pattern.rstrip("*"))
+    else:
+        out = git(repo, "ls-files", pattern)
     return [line for line in out.splitlines() if line]
+
+
+def read_at_rev(repo: Path, rel: str, rev: str | None) -> str:
+    """Read a file's content at `rev`, or from the worktree when rev is None."""
+    if rev is None:
+        return (repo / rel).read_text(encoding="utf-8", errors="replace")
+    raw = subprocess.run(
+        ["git", "show", f"{rev}:{rel}"],
+        cwd=repo, capture_output=True, check=True,
+    ).stdout
+    return raw.decode("utf-8", errors="replace")
+
+
+def size_at_rev(repo: Path, rel: str, rev: str | None) -> int:
+    if rev is None:
+        p = repo / rel
+        return p.stat().st_size if p.exists() else 0
+    out = git(repo, "cat-file", "-s", f"{rev}:{rel}")
+    return int(out)
 
 
 def is_test_path(path: str) -> bool:
@@ -178,8 +201,12 @@ class ModuleScan:
                     }
                 )
 
+        # Match both the bare base name and a dotted form such as `enum.Enum`.
+        # Keying only on the bare name silently missed classes declared as
+        # `class EosType(enum.Enum)`.
+        enum_bases = {"Enum", "IntEnum", "StrEnum", "Flag", "IntFlag"}
         for base in bases:
-            if base in ("Enum", "IntEnum", "StrEnum", "str, Enum", "Flag", "IntFlag"):
+            if base.split(".")[-1] in enum_bases or base == "str, Enum":
                 members = [
                     (t.id, unparse(stmt.value))
                     for stmt in node.body
@@ -404,10 +431,19 @@ def write_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
 
 MARKER_RE = re.compile(r"@pytest\.mark\.([A-Za-z_][A-Za-z0-9_]*)")
 
+# The revision the document set describes. Anchors and counts are pinned here.
+PINNED_SHA = "70a8f4fe1"
+
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--repo", default=str(Path(__file__).resolve().parents[3]))
+    ap.add_argument(
+        "--rev",
+        default=PINNED_SHA,
+        help="git revision to inventory (default: the documented revision). "
+             "Pass WORKTREE to inventory the working tree instead.",
+    )
     ap.add_argument(
         "--out", default=str(Path(__file__).resolve().parents[1] / "_generated")
     )
@@ -420,8 +456,23 @@ def main() -> int:
     sha = git(repo, "rev-parse", "HEAD")
     short_sha = git(repo, "rev-parse", "--short", "HEAD")
 
-    py_files = [p for p in tracked_files(repo, "idaes/*") if p.endswith(".py")]
-    non_py = [p for p in tracked_files(repo, "idaes/*") if not p.endswith(".py")]
+    # The document set is pinned to one revision of the IDAES library. The
+    # working tree may carry commits on top of it (fork scaffolding, a Rust
+    # workspace, tooling) that do not touch `idaes/`. Record whether the
+    # documented subtree has actually moved, so a drifting tree is visible in
+    # the manifest rather than discovered later through a stale anchor.
+    documented_subtree_changed = None
+    if PINNED_SHA and sha != PINNED_SHA:
+        try:
+            diff = git(repo, "diff", "--name-only", f"{PINNED_SHA}..HEAD", "--", "idaes")
+            documented_subtree_changed = [f for f in diff.splitlines() if f]
+        except subprocess.CalledProcessError:
+            documented_subtree_changed = ["<could not compare: pinned revision not present>"]
+
+    rev = None if args.rev.upper() == "WORKTREE" else args.rev
+    all_tracked = tracked_files(repo, "idaes/*", rev)
+    py_files = [p for p in all_tracked if p.endswith(".py")]
+    non_py = [p for p in all_tracked if not p.endswith(".py")]
 
     modules: list[dict] = []
     all_classes: list[dict] = []
@@ -438,8 +489,7 @@ def main() -> int:
     parse_failures: list[str] = []
 
     for rel in sorted(py_files):
-        abs_path = repo / rel
-        source = abs_path.read_text(encoding="utf-8", errors="replace")
+        source = read_at_rev(repo, rel, rev)
         loc = source.count("\n") + (0 if source.endswith("\n") or not source else 1)
         test = is_test_path(rel)
 
@@ -568,13 +618,12 @@ def main() -> int:
     # ---- assets ----------------------------------------------------------
     assets: list[dict] = []
     for rel in sorted(non_py):
-        p = repo / rel
         assets.append(
             {
                 "file": rel,
                 "package": str(Path(rel).parent),
                 "ext": Path(rel).suffix.lstrip(".") or "(none)",
-                "bytes": p.stat().st_size if p.exists() else 0,
+                "bytes": size_at_rev(repo, rel, rev),
                 "in_tests": "/tests/" in rel,
             }
         )
@@ -631,6 +680,10 @@ def main() -> int:
         "repo": str(repo),
         "sha": sha,
         "short_sha": short_sha,
+        "documented_revision": PINNED_SHA,
+        "inventoried_revision": args.rev,
+        "head_matches_documented_revision": sha.startswith(PINNED_SHA),
+        "documented_subtree_changed_since_pin": documented_subtree_changed,
         "tool": "docs-code-update/authoritative_design/_scripts/inventory.py",
         "method": "static ast parse; idaes is never imported",
         "counts": {
@@ -676,6 +729,22 @@ def main() -> int:
     )
 
     print(json.dumps(manifest["counts"], indent=2))
+    print(f"\ninventoried revision: {args.rev}")
+    if documented_subtree_changed is not None:
+        if documented_subtree_changed:
+            print(
+                f"HEAD ({short_sha}) differs from the documented revision "
+                f"{PINNED_SHA} in {len(documented_subtree_changed)} files under "
+                f"idaes/. The inventory above is taken at {args.rev}, so the "
+                "counts describe the documented revision, not the working tree."
+            )
+            for f in documented_subtree_changed[:20]:
+                print("  worktree-only change: " + f)
+        else:
+            print(
+                f"HEAD is {short_sha}, ahead of the documented revision "
+                f"{PINNED_SHA}, but idaes/ is unchanged between them."
+            )
     if parse_failures:
         print("PARSE FAILURES:", file=sys.stderr)
         for f in parse_failures:

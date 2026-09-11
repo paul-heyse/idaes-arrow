@@ -1,4 +1,13 @@
 file,line,name,base,n_members,members
+idaes/apps/caprese/common/config.py,23,ControlInitOption,enum.Enum,4,FROM_PREVIOUS=11;BY_TIME_ELEMENT=12;FROM_INITIAL_CONDITIONS=13;SETPOINT=14
+idaes/apps/caprese/common/config.py,30,ElementInitializationInputOption,enum.Enum,3,SETPOINT=21;INITIAL=22;CURRENT_VALUES=23
+idaes/apps/caprese/common/config.py,36,InputOption,enum.Enum,3,CURRENT=20;INITIAL=21;SETPOINT=22
+idaes/apps/caprese/common/config.py,43,TimeResolutionOption,enum.Enum,4,COLLOCATION_POINTS=31;FINITE_ELEMENTS=32;SAMPLE_POINTS=33;INITIAL_POINT=34
+idaes/apps/caprese/common/config.py,50,ControlPenaltyType,enum.Enum,3,ERROR=41;ACTION=42;NONE=43
+idaes/apps/caprese/common/config.py,56,VariableCategory,enum.Enum,9,DIFFERENTIAL=1;ALGEBRAIC=2;DERIVATIVE=3;INPUT=4;FIXED=5;SCALAR=6;UNUSED=7;DISTURBANCE=8;MEASUREMENT=9
+idaes/apps/caprese/common/config.py,68,ConstraintCategory,enum.Enum,10,DIFFERENTIAL=1;ALGEBRAIC=2;DISCRETIZATION=3;INPUT=4;INITIAL=5;TERMINAL=6;SENSITIVITY=7;SCALAR=8;UNUSED=9;INEQUALITY=10
+idaes/apps/caprese/common/config.py,81,NoiseBoundOption,enum.Enum,3,FAIL=60;DISCARD=61;PUSH=62
+idaes/apps/caprese/common/config.py,87,PlantHorizonType,enum.Enum,2,FULL=71;ROLLING=72
 idaes/core/base/control_volume1d.py,76,DistributedVars,Enum,2,variant=0;uniform=1
 idaes/core/base/control_volume_base.py,55,MaterialBalanceType,Enum,6,useDefault=-1;none=0;componentPhase=1;componentTotal=2;elementTotal=3;total=4
 idaes/core/base/control_volume_base.py,69,EnergyBalanceType,Enum,7,useDefault=-1;none=0;enthalpyPhase=1;enthalpyTotal=2;energyPhase=3;energyTotal=4;isothermal=5
@@ -10,11 +19,15 @@ idaes/core/base/process_base.py,67,MaterialFlowBasis,Enum,3,molar=0;mass=1;other
 idaes/core/initialization/initializer_base.py,43,InitializationStatus,Enum,6,Ok=1;none=0;Failed=-1;DoF=-2;PrecheckFailed=-3;Error=-4
 idaes/core/scaling/custom_scaler_base.py,57,ConstraintScalingScheme,StrEnum,5,harmonicMean='harmonic_mean';inverseSum='inverse_sum';inverseRSS='inverse_root_sum_squared';inverseMaximum='inverse_maximum';inverseMinimum='inverse_minimum'
 idaes/core/scaling/custom_scaler_base.py,75,DefaultScalingRecommendation,StrEnum,3,userInputRecommended='User input recommended';userInputRequired='User input required';userSetManually='User set manually'
+idaes/core/solvers/petsc.py,98,DaeVarTypes,enum.IntEnum,4,ALGEBRAIC=0;DIFFERENTIAL=1;DERIVATIVE=2;TIME=3
 idaes/core/surrogate/alamopy.py,49,Modelers,Enum,8,BIC=1;MallowsCp=2;AICc=3;HQC=4;MSE=5;SSEP=6;RIC=7;MADp=8
 idaes/core/surrogate/alamopy.py,64,Screener,Enum,3,none=0;lasso=1;SIS=2
 idaes/core/surrogate/omlt_base_surrogate_class.py,115,Formulation,Enum,4,FULL_SPACE=1;REDUCED_SPACE=2;RELU_BIGM=3;RELU_COMPLEMENTARITY=4
 idaes/core/surrogate/onnx_surrogate.py,93,Formulation,Enum,4,FULL_SPACE=1;REDUCED_SPACE=2;RELU_BIGM=3;RELU_COMPLEMENTARITY=4
 idaes/core/util/misc.py,176,StrEnum,Enum,0,
+idaes/models/control/controller.py,35,ControllerType,enum.Enum,4,P=1;PI=2;PD=3;PID=4
+idaes/models/control/controller.py,44,ControllerMVBoundType,enum.Enum,3,NONE=1;SMOOTH_BOUND=2;LOGISTIC=3
+idaes/models/control/controller.py,57,ControllerAntiwindupType,enum.Enum,3,NONE=1;CONDITIONAL_INTEGRATION=2;BACK_CALCULATION=3
 idaes/models/costing/SSLW.py,64,HXType,StrEnum,4,floating_head='floating_head';fixed_head='fixed_head';Utube='Utube';kettle_vap='Kettle_vap'
 idaes/models/costing/SSLW.py,75,HXMaterial,StrEnum,10,CarbonSteelCarbonSteel='CarbonSteelCarbonSteel';CarbonSteelBrass='CarbonSteelBrass';CarbonSteelStainlessSteel='CarbonSteelStainlessSteel';CarbonSteelMonel='CarbonSteelMonel';CarbonSteelTitanium='CarbonSteelTitanium';CarbonSteelCrMoSteel='CarbonSteelCrMoSteel';CrMoSteelCrMoSteel='CrMoSteelCrMoSteel';StainlessSteelStainlessSteel='StainlessSteelStainlessSteel';MonelMonel='MonelMonel';TitaniumTitanium='TitaniumTitanium'
 idaes/models/costing/SSLW.py,92,HXTubeLength,StrEnum,4,EightFoot='8ft';TwelveFoot='12ft';SixteenFoot='16ft';TwentyFoot='20ft'
@@ -33,10 +46,14 @@ idaes/models/costing/SSLW.py,234,FanType,StrEnum,4,CentrifugalBackward='Centrifu
 idaes/models/costing/SSLW.py,245,FanMaterial,StrEnum,4,CarbonSteel='CarbonSteel';Fiberglass='Fiberglass';StainlessSteel='StainlessSteel';NickelAlloy='NickelAlloy'
 idaes/models/costing/SSLW.py,256,BlowerType,StrEnum,2,Centrifugal='Centrifugal';Rotary='Rotary'
 idaes/models/costing/SSLW.py,265,BlowerMaterial,StrEnum,5,CarbonSteel='CarbonSteel';Aluminum='Aluminum';Fiberglass='Fiberglass';StainlessSteel='StainlessSteel';NickelAlloy='NickelAlloy'
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,91,StateVars,enum.Enum,4,PH=1;PS=2;PU=3;TPX=4
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,107,PhaseType,enum.Enum,4,MIX=1;LG=2;L=3;G=4
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,123,AmountBasis,enum.Enum,2,MOLE=1;MASS=2
 idaes/models/properties/modular_properties/base/utility.py,39,StateIndex,Enum,2,true=1;apparent=2
 idaes/models/properties/modular_properties/base/utility.py,252,ConcentrationForm,Enum,6,molarity=1;activity=2;molality=3;moleFraction=4;massFraction=5;partialPressure=6
 idaes/models/properties/modular_properties/eos/ceos.py,75,MixingRuleA,Enum,1,default=0
 idaes/models/properties/modular_properties/eos/ceos.py,82,MixingRuleB,Enum,1,default=0
+idaes/models/properties/modular_properties/eos/ceos_common.py,43,CubicType,enum.Enum,2,PR=0;SRK=1
 idaes/models/properties/modular_properties/phase_equil/henry.py,34,HenryType,Enum,5,Hcp=1;Kpc=51;Hxp=2;Kpx=52;Dummy=999
 idaes/models/unit_models/feed_flash.py,42,FlashType,Enum,2,isothermal=1;isenthalpic=2
 idaes/models/unit_models/heat_exchanger.py,59,HeatExchangerFlowPattern,Enum,3,countercurrent=1;cocurrent=2;crossflow=3
@@ -49,8 +66,10 @@ idaes/models/unit_models/valve.py,42,ValveFunctionType,Enum,3,linear=1;quick_ope
 idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,43,MembraneFlowPattern,Enum,2,COUNTERCURRENT=1;COCURRENT=2
 idaes/models_extra/column_models/condenser.py,60,CondenserType,Enum,2,totalCondenser=0;partialCondenser=1
 idaes/models_extra/column_models/condenser.py,69,TemperatureSpec,Enum,2,atBubblePoint=0;customTemperature=1
+idaes/models_extra/power_generation/properties/natural_gas_PR.py,71,EosType,enum.Enum,2,PR=1;IDEAL=2
 idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger.py,89,TubeArrangement,Enum,2,inLine=0;staggered=1
 idaes/models_extra/power_generation/unit_models/helm/valve_steam.py,37,ValveFunctionType,Enum,4,linear=1;quick_opening=2;equal_percentage=3;custom=4
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,33,CV_Bound,enum.Enum,2,EXTRAPOLATE=1;NODE_VALUE=2
 idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,92,Adsorbent,Enum,3,zeolite_13x=1;mmen_mg_mof_74=2;polystyrene_amine=3
 idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,102,SteamCalculationType,Enum,3,none=0;simplified=1;rigorous=2
 idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,112,TransformationScheme,Enum,4,useDefault=0;backward=1;forward=2;lagrangeRadau=3

@@ -1,0 +1,18 @@
+id: idaes-enum-class
+language: python
+severity: hint
+message: enumeration class
+note: |
+  Enumerations carry the library's fixed vocabularies - balance types, phase
+  types, flow directions, solver and scaling schemes. This rule exists because
+  the enum count was the one structural fact the cross-check did not cover, and
+  a bare-name base match silently missed 19 classes declared as
+  `class X(enum.Enum)`. Matching on the class definition rather than on a base
+  name spelling avoids that whole class of error.
+rule:
+  kind: class_definition
+  has:
+    field: superclasses
+    has:
+      any:
+        - regex: "^(enum\\.)?(Enum|IntEnum|StrEnum|Flag|IntFlag)$"

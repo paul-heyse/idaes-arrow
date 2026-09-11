@@ -144,7 +144,10 @@ DOC_TITLES = {
     "05": "05_property_and_reaction_framework",
     "06": "06_model_preparation_initializers_and_scalers",
     "07": "07_diagnostics_and_run_orchestration",
-    "08": "08_core_utility_library",
+    # Document 08 exceeded the length cap and took the pre-approved split. The
+    # ledger keeps one id per file, so its rows name the first half; both halves
+    # are listed in verify.py's PLANNED set and in document 00.
+    "08": "08a_model_introspection_and_persistence",
     "09": "09_surrogate_subsystem",
     "10": "10_unit_models_control_volume_based",
     "11": "11_unit_models_network_contactors_and_control",

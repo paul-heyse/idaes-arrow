@@ -173,12 +173,23 @@ first column is a review defect.
 | flow | a material flow term | a `FlowDirection` enum member | flowsheet execution order | "flow term" / "flow direction" / "execution order" |
 | extension | a downloaded binary from `idaes get-extensions` | a plug-in seam in the Python API | — | "binary extension" / "extension point" |
 | unit | a unit model | a unit of measurement | the `unit` pytest marker | "unit model" / "unit of measurement" / "the `unit` marker" |
+| `PhaseType` | the phase-classification enum (`idaes/core/base/phases.py:33`): `undefined`, `liquidPhase`, `vaporPhase`, `solidPhase`, `aqueousPhase` | the phase-presentation enum (`idaes/models/properties/general_helmholtz/helmholtz_functions.py:107`): `MIX`, `LG`, `L`, `G` | — | always qualified by import path; the member sets are disjoint |
 
 Two further naming hazards, both real classes in the tree:
 
 - **`QGESSCosting`** names two different classes in two different modules. Every
   reference disambiguates by import path, never by class name alone. See
   [17 §12](17_costing_framework_and_libraries.md#12-duplications-deprecations-and-sharp-edges).
+- **`PhaseType`** names two enumerations with **disjoint** member sets: the
+  phase classification in `idaes/core/base/phases.py:33` and the phase
+  presentation in
+  `idaes/models/properties/general_helmholtz/helmholtz_functions.py:107`. The
+  second reaches every module of the Helmholtz steam-cycle unit models through
+  the star-import shim at
+  `idaes/models/properties/helmholtz/helmholtz.py:16`, so in those modules the
+  bare name resolves to the Helmholtz enum. Every reference qualifies by import
+  path. See [16 §12](16_general_helmholtz_property_system.md#12-duplications-deprecations-and-sharp-edges).
+
 - **`matopt`** is importable both as `idaes.apps.matopt` and as the top-level
   name `matopt`, because `idaes/apps/matopt/__init__.py:16` inserts its parent
   directory onto `sys.path` before importing its own subpackages under the bare
@@ -273,7 +284,7 @@ and the MEA correlations in `models_extra/column_models/properties/` — use:
 | Outer class | Inner property class | `build_parameters` | `return_expression` | Coefficient source | Anchor |
 |---|---|---|---|---|---|
 
-**Enums.** All 55 enum classes are presented as:
+**Enums.** All 74 enum classes are presented as:
 
 | Member | Value | Meaning | Consumed at |
 |---|---|---|---|
@@ -406,7 +417,7 @@ through `ast-grep scan` — and `_scripts/crosscheck.py` asserts they agree.
 | Classes declared by `declare_process_block_class` | 160 | Counted from the decorator, not the class name |
 | `CONFIG.declare` keys | 1,083 | Only calls whose first argument is a string literal |
 | `NotImplementedError` hook sites | 159 | A plain grep returns 161; two are commented out, at `idaes/models/properties/modular_properties/state_definitions/FpTPxpc.py:143` and `:380` |
-| Classes named `*Scaler` | 45 | Not the same as the next row |
+| Classes named `*Scaler` | 46 | Not the same as the next row; 39 are in `idaes/models`, 7 in `idaes/core` |
 | Process blocks declaring `default_scaler` | 24 | |
 | Process blocks declaring `default_initializer` | 23 | |
 | Deprecation sites | 49 | Counting a multi-line `@deprecated(...)` both as a call and as a decorator returns 53 |
