@@ -1,0 +1,20 @@
+id: no-direct-accel-import
+language: python
+severity: error
+message: "import the extension through idaes.accel, not idaes_accel directly"
+note: |
+  Only idaes/accel/ may touch the extension module. Everything else goes through
+  the dispatcher, which owns the IDAES_ACCEL mode, the ABI compatibility check
+  and the pure-Python fallback.
+
+  A direct import bypasses all three: the call site then hard-fails on a machine
+  where the wheel is absent, which is a supported configuration.
+files:
+  - "idaes/**/*.py"
+ignores:
+  - "idaes/accel/**"
+rule:
+  any:
+    - pattern: import idaes_accel
+    - pattern: from idaes_accel import $$$REST
+    - pattern: import idaes_accel.$$$REST

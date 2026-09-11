@@ -18,15 +18,15 @@ ignore = []
 # "MIT OR Apache-2.0". Our own code is BSD-3-Clause to match upstream IDAES.
 # Copyleft is absent by omission -- anything not listed fails.
 allow = [
-    "Apache-2.0",
-    "Apache-2.0 WITH LLVM-exception",
-    "BSD-2-Clause",
-    "BSD-3-Clause",
-    "ISC",
-    "MIT",
-    "MIT-0",
-    "Unicode-3.0",
-    "Zlib",
+  "Apache-2.0",
+  "Apache-2.0 WITH LLVM-exception",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "ISC",
+  "MIT",
+  "MIT-0",
+  "Unicode-3.0",
+  "Zlib",
 ]
 # The allow-list is written for the full Arrow/DataFusion stack, which is not in
 # the graph yet. Do not warn about allowances nothing currently uses.
@@ -41,7 +41,7 @@ exceptions = []
 # thing more cheaply and with a clearer message.
 multiple-versions = "deny"
 wildcards = "deny"
-allow-wildcard-paths = true          # path deps inside this workspace
+allow-wildcard-paths = true # path deps inside this workspace
 highlight = "all"
 deny = []
 # Add entries here ONLY with a comment naming who accepted the duplication and why.

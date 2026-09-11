@@ -1,0 +1,101 @@
+# Non-Rust quality gate: formatting, lint, types, and the config files that
+# describe the repository itself.
+#
+# actionlint is here because it would have caught a real bug in this repo: a
+# schedule guard inserted into jobs that already had an `if:` produced duplicate
+# YAML keys, which yaml.safe_load accepts silently (last wins), so the guard was
+# inert and nothing noticed until actionlint was run.
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  python:
+    name: ruff + pyrefly
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # setuptools-scm needs tag history
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Build the environment
+        # The tools come from pyproject [dependency-groups], pinned exactly, so
+        # CI and every developer run the same versions. Never `pip install ruff`
+        # here -- that is how formatters drift.
+        run: |
+          set -euo pipefail
+          uv venv .venv --python "$(cat .python-version)"
+          uv pip install --python .venv/bin/python -e .
+          uv pip install --python .venv/bin/python --group quality
+
+      - name: Tool versions match the pins
+        run: |
+          .venv/bin/ruff --version
+          .venv/bin/pyrefly --version
+
+      - name: Formatting
+        run: .venv/bin/ruff format --check .
+
+      - name: Lint against baseline
+        run: python3 scripts/quality_baseline.py check ruff
+
+      - name: Types against baseline
+        run: python3 scripts/quality_baseline.py check pyrefly
+
+  repo-config:
+    name: workflows, TOML, shell, skills
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: actionlint
+        # --severity=warning: the remaining info-level SC2086 findings are in
+        # upstream's own run-scripts, which this fork only added `if:` guards to.
+        env:
+          SHELLCHECK_OPTS: --severity=warning
+        uses: docker://rhysd/actionlint:latest
+        with:
+          args: -color
+
+      - name: Install taplo
+        run: |
+          curl -fsSL https://github.com/tamasfe/taplo/releases/latest/download/taplo-linux-x86_64.gz \
+            | gunzip > /usr/local/bin/taplo
+          chmod +x /usr/local/bin/taplo
+
+      - name: TOML formatting
+        run: taplo fmt --check --diff
+
+      - name: shellcheck
+        run: shellcheck scripts/*.sh .envrc
+
+      - name: Custom structural rules
+        # Ruff has no plugin API, so project-specific invariants live in
+        # sgrules/ and are enforced by ast-grep. Each rule encodes a mistake
+        # this project has actually made.
+        run: |
+          curl -fsSL https://github.com/ast-grep/ast-grep/releases/latest/download/app-x86_64-unknown-linux-gnu.zip -o /tmp/sg.zip
+          unzip -qo /tmp/sg.zip -d /usr/local/bin
+          ast-grep scan --config sgconfig.yml
+
+      - name: Agent skill references resolve
+        # A skill pointing at a missing document fails silently at the moment an
+        # agent tries to use it. All 33 references in this repo were dead once.
+        run: python3 scripts/check_skill_refs.py
+
+      - name: Environment doctor is honest on a bare checkout
+        # doctor must run without a venv -- that is exactly when it is needed.
+        run: python3 scripts/doctor.py --format=json | python3 -c "import json,sys; json.load(sys.stdin); print('doctor json ok')"

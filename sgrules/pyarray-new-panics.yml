@@ -1,0 +1,12 @@
+id: pyarray-new-panics
+language: rust
+severity: warning
+message: "PyArray::new panics on a field/array type mismatch; prefer try_new"
+note: |
+  PyArray::new asserts that the FieldRef matches the ArrayRef. A panic crossing
+  the PyO3 boundary is an abort risk, which is why clippy::panic is denied in
+  this workspace.
+
+  Use PyArray::try_new and map the error to a Python exception.
+rule:
+  pattern: PyArray::new($$$ARGS)

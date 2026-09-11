@@ -6,7 +6,7 @@
 
 project-includes = ["idaes", "scripts", "rust/py/idaes-accel/python"]
 project-excludes = [
-  "**/docs-code-update/**",   # vendored references + another workflow's corpus
+  "**/docs-code-update/**", # vendored references + another workflow's corpus
   "**/rust/target/**",
   "**/.venv/**",
   "**/node_modules/**",

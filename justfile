@@ -311,15 +311,25 @@ typecheck:
 
 [group('python')]
 [doc('Everything non-Rust: format, lint, types, workflows, TOML, shell, skills')]
-quality: fmt-py-check lint-py typecheck lint-workflows lint-skills
+quality: fmt-py-check lint-py typecheck lint-rules lint-workflows lint-skills
 
 [group('python')]
+[doc('Lint GitHub workflows: duplicate keys, bad expressions, unknown runners')]
 lint-workflows:
-    actionlint .github/workflows/*.yml
+    # --severity=warning: the remaining info-level SC2086 findings are in
+    # upstream's own run-scripts (integration.yml, publish.yml), which this fork
+    # only added `if:` guards to. Fixing them would be pure merge cost; warnings
+    # and errors still fail.
+    SHELLCHECK_OPTS="--severity=warning" actionlint .github/workflows/*.yml
 
 [group('python')]
 lint-skills:
     @python3 scripts/check_skill_refs.py
+
+[group('python')]
+[doc('Custom structural rules (ast-grep). Ruff has no plugin API; these fill that gap.')]
+lint-rules:
+    ast-grep scan --config sgconfig.yml
 
 [group('python')]
 py-test marks="not integration":

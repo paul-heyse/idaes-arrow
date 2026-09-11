@@ -1,0 +1,22 @@
+id: arrow-through-datafusion
+language: rust
+severity: error
+message: "import Arrow through datafusion::arrow, not the bare arrow crate"
+note: |
+  Two paths to Arrow means two versions can coexist in the dependency graph, and
+  the failure is silent: downcast_ref returns None with no compile error.
+
+  Use `datafusion::arrow::...`. The exception is the PyO3 boundary crate, which
+  must speak pyo3-arrow's types directly -- it is excluded below.
+
+  `cargo tree -d` and `cargo deny check bans` catch the duplicate after the fact;
+  this catches the import that causes it.
+files:
+  - "rust/crates/**/*.rs"
+ignores:
+  - "rust/py/**"
+rule:
+  # A `use arrow::...` path does not decompose into a metavariable pattern in
+  # Rust's grammar, so match the declaration node and inspect its text.
+  kind: use_declaration
+  regex: '^use\s+(arrow|arrow_array|arrow_schema|arrow_buffer|arrow_select|parquet|object_store)\s*::'

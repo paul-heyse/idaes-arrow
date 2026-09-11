@@ -76,6 +76,27 @@ stage_rust() {
   cargo binstall --no-confirm "${CARGO_TOOLS[@]}"
 }
 
+stage_repo_linters() {
+  # Linters for the repository's own configuration, not for its source. These
+  # are plain binaries with no Python or Cargo home, so they are fetched
+  # directly and pinned by tag.
+  local bindir="${HOME}/.local/bin"
+  mkdir -p "$bindir"
+
+  if ! command -v actionlint >/dev/null 2>&1; then
+    say "Installing actionlint"
+    # Catches duplicate YAML keys, bad shell expressions and unknown runner
+    # labels in workflows. Each has already broken CI in this repo.
+    curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash \
+      | bash -s -- latest "$bindir"
+  fi
+
+  if ! command -v taplo >/dev/null 2>&1 && command -v cargo >/dev/null 2>&1; then
+    say "Installing taplo"
+    cargo binstall --no-confirm taplo-cli
+  fi
+}
+
 stage_hooks() {
   if command -v pre-commit >/dev/null 2>&1; then
     say "Installing git hooks"
@@ -89,14 +110,16 @@ main() {
     --quality-only) stage_quality ;;
     --solvers-only) stage_solvers ;;
     --rust-only)    stage_rust ;;
+    --linters-only) stage_repo_linters ;;
     all)
       stage_venv
       stage_quality
       stage_solvers
       stage_rust
+      stage_repo_linters
       stage_hooks
       ;;
-    *) echo "usage: $0 [--venv-only|--quality-only|--solvers-only|--rust-only]" >&2
+    *) echo "usage: $0 [--venv-only|--quality-only|--solvers-only|--rust-only|--linters-only]" >&2
        exit 2 ;;
   esac
 

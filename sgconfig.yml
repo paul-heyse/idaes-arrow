@@ -1,0 +1,14 @@
+# Custom lint rules for the idaes-arrow fork.
+#
+# Ruff has no plugin API -- its rules are compiled into the binary and Astral
+# has declined user-defined rules. ast-grep fills that gap: it is already a
+# dependency of this repository (docs-code-update/authoritative_design uses it
+# as a second structural extractor), it handles Python and Rust with one syntax,
+# and its rules are data rather than code.
+#
+# Every rule here encodes an invariant that has already cost this project real
+# time. They are not style opinions; ruff owns style.
+#
+# Run: just lint-rules
+ruleDirs:
+  - sgrules

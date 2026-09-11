@@ -9,6 +9,16 @@ allow-panic-in-tests = true
 # mixed-case word as a missing code span; backticking a product name is wrong --
 # it is not an identifier. ".." extends clippy's default list rather than replacing it.
 doc-valid-idents = [
-    "NumPy", "SciPy", "PyO3", "PyArrow", "DataFusion", "PySMO", "IDAES", "PyPI",
-    "CPython", "RecordBatch", "SessionContext", "..",
+  "NumPy",
+  "SciPy",
+  "PyO3",
+  "PyArrow",
+  "DataFusion",
+  "PySMO",
+  "IDAES",
+  "PyPI",
+  "CPython",
+  "RecordBatch",
+  "SessionContext",
+  "..",
 ]

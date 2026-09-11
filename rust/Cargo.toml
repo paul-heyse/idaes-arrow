@@ -79,7 +79,7 @@ lto = "thin"
 codegen-units = 16
 panic = "unwind"
 debug = 1
-strip = false          # maturin's own `strip = true` handles the shipped wheel
+strip = false      # maturin's own `strip = true` handles the shipped wheel
 
 [profile.profiling]
 inherits = "release"

@@ -1,0 +1,21 @@
+id: accelerate-not-on-method
+language: python
+severity: error
+message: "@accelerate must decorate a module-level function, never a method"
+note: |
+  A bound method's `self` would be marshalled across the PyO3 boundary as the
+  first positional argument, where the Rust signature expects real data.
+
+  Extract the body to a module-level function, decorate that, and have the
+  method delegate to it -- see the prime_number_generator port in
+  idaes/core/surrogate/pysmo/sampling.py.
+rule:
+  kind: decorated_definition
+  inside:
+    kind: block
+    inside:
+      kind: class_definition
+      stopBy: end
+  has:
+    kind: decorator
+    regex: '^@accelerate\('

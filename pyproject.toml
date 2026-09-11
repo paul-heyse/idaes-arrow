@@ -44,15 +44,15 @@ dynamic = ["version"]
 
 dependencies = [
   "pyomo >= 6.10.1",
-  "pint >= 0.24.1",   # required to use Pyomo units. Pint 0.24.1 needed for Python 3.9 support,
-  "networkx", # required to use Pyomo network
+  "pint >= 0.24.1",  # required to use Pyomo units. Pint 0.24.1 needed for Python 3.9 support,
+  "networkx",        # required to use Pyomo network
   "numpy>=1,<3",
   "pandas != 2.1.0", # pandas constraint added on 2023-08-30 b/c bug in v2.1. See IDAES/idaes-pse#1253
   "scipy",
-  "sympy",            # idaes.core.util.expr_doc
+  "sympy",           # idaes.core.util.expr_doc
   "matplotlib",
   "click>=8",
-  "pydantic",         # used by core.util.structfs, at a minimum
+  "pydantic",        # used by core.util.structfs, at a minimum
 ]
 
 [project.optional-dependencies]
@@ -64,7 +64,7 @@ grid = [
   "gridx-prescient>=2.2.3", # idaes.tests.prescient
 ]
 omlt = [
-  "omlt==1.1",  # fix the version for now as package evolves
+  "omlt==1.1", # fix the version for now as package evolves
   # TODO: Remove the marker when TensorFlow publishes Python 3.14 distributions.
   "tensorflow; python_version < '3.14'",
   "onnx",
@@ -109,8 +109,8 @@ dev = [
 # FORK: ruff replaces black (format), flake8 and pylint (lint). One tool, one
 # pass, pinned exactly in [dependency-groups].quality so CI and every developer
 # agree. Resolve it from .venv, never $PATH.
-target-version = "py310"   # the floor the classifiers claim, not the 3.14 we develop on
-line-length = 88           # carried over from the flake8 config it replaces
+target-version = "py310" # the floor the classifiers claim, not the 3.14 we develop on
+line-length = 88 # carried over from the flake8 config it replaces
 extend-exclude = [
   # Vendored third-party API references and a separate workflow's document
   # corpus. Not IDAES source; see FORK.md.
@@ -124,24 +124,46 @@ extend-exclude = [
 # Ruff 0.16's defaults are already broad. This makes the selection explicit so a
 # ruff upgrade cannot silently change what the gate means.
 select = [
-  "E", "W",    # pycodestyle
-  "F",         # pyflakes
-  "I",         # import sorting
-  "B",         # bugbear
-  "C4",        # comprehensions
-  "UP",        # pyupgrade
-  "SIM",       # simplify
-  "RUF",       # ruff-specific
-  "PT",        # pytest style
-  "PERF",      # performance
-  "N",         # naming
-  "ARG",       # unused arguments
-  "PTH",       # pathlib
-  "TRY",       # exception handling
+  "E",
+  "W",    # pycodestyle
+  "F",    # pyflakes
+  "I",    # import sorting
+  "B",    # bugbear
+  "C4",   # comprehensions
+  "UP",   # pyupgrade
+  "SIM",  # simplify
+  "RUF",  # ruff-specific
+  "PT",   # pytest style
+  "PERF", # performance
+  "N",    # naming
+  "ARG",  # unused arguments
+  "PTH",  # pathlib
+  "TRY",  # exception handling
+  # Pylint's own checks, ported into ruff. This fork replaced pylint outright, so
+  # leaving these out would quietly drop coverage rather than move it.
+  #
+  # PLC/PLE/PLW only -- deliberately NOT PLR. The old gate ran
+  # `pylint --disable=R`, so the refactor category was never enforced here, and
+  # turning it on now would be a new policy wearing a migration's clothes.
+  # PLR2004 (magic-value-comparison) alone is 5,959 findings in a codebase whose
+  # domain is numeric literals.
+  "PLC",
+  "PLE",
+  "PLW",
+  # `implicit-str-concat` was one of only nine checks the old pylint config
+  # enabled by name; ruff spells it ISC.
+  "ISC",
 ]
 # Existing violations are recorded in .quality/ruff-baseline.json rather than
-# ignored, so they stay visible and can only ratchet down.
-ignore = []
+# ignored, so they stay visible and can only ratchet down. The entries here are
+# policy, not backlog.
+ignore = [
+  # ISC001 flags implicit concatenation on a single line, which `ruff format`
+  # itself produces when it wraps a long string. Enabling both makes the
+  # formatter and the linter disagree; ruff's own docs say to drop this one.
+  # ISC002/ISC003 still apply.
+  "ISC001",
+]
 
 [tool.ruff.lint.per-file-ignores]
 # Tests legitimately assert on private state and reuse fixture names.

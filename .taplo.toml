@@ -1,0 +1,17 @@
+# TOML formatting. One canonical shape so nobody argues about array wrapping.
+exclude = [
+  ".venv/**",
+  "rust/target/**",
+  "docs-code-update/**",
+  "**/node_modules/**",
+]
+
+[formatting]
+# Arrays one entry per line. Verbose, but it makes a diff that adds a dependency
+# or an exclusion a single-line change rather than a reflowed blob.
+array_auto_expand = true
+array_auto_collapse = false
+# Never reorder: several arrays here are ordered deliberately (pin rationale in
+# rust/Cargo.toml, lint selection in pyproject.toml).
+reorder_keys = false
+reorder_arrays = false

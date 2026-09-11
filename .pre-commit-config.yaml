@@ -1,20 +1,41 @@
+# Fast local gates. Everything here also runs in CI; the point of having it
+# locally is to fail in two seconds instead of two minutes.
+#
+# Versions are pinned to match pyproject [dependency-groups].quality exactly. If
+# they drift, pre-commit and CI will disagree about what "formatted" means.
 repos:
-  - repo: https://github.com/psf/black
-    rev: 26.3.1
+  # FORK: ruff replaces black. `ruff-format` first so the linter sees formatted
+  # code; `ruff check` here is fix-only on safe rules -- the authoritative lint
+  # gate is `just lint-py`, which compares against the recorded baseline.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.7
     hooks:
-    - id: black
-      language_version: python3
-      types:
-        - python
-      # FORK: vendored reference docs and agent skills are not IDAES source.
-      # Kept in sync with [tool.black] extend-exclude in pyproject.toml and with
-      # .github/workflows/typos.toml.
-      exclude: ^(docs-code-update|\.codex|\.agents)/
+      - id: ruff-format
+        exclude: ^(docs-code-update|\.codex|\.agents)/
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        exclude: ^(docs-code-update|\.codex|\.agents)/
 
-  # FORK: Rust hooks. `language: system` because the toolchain is pinned by
-  # rust/rust-toolchain.toml -- letting pre-commit manage a second, unpinned
-  # Rust would defeat the pin. `pass_filenames: false` because cargo operates on
-  # the workspace, not on a file list.
+  - repo: https://github.com/tamasfe/taplo
+    rev: 0.10.0
+    hooks:
+      - id: taplo-format
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+        # Catches duplicate YAML keys, shell-expression errors and unknown
+        # runner labels. Each of those has already bitten this repository.
+
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+      - id: shellcheck
+
+  # Local hooks: these use the toolchain pinned by rust/rust-toolchain.toml and
+  # the project's own scripts, so pre-commit must not manage a second copy.
+  # `pass_filenames: false` because cargo operates on the workspace, not a list.
   - repo: local
     hooks:
       - id: cargo-fmt
@@ -36,4 +57,18 @@ repos:
         entry: python3 scripts/check_rust_headers.py
         language: system
         types: [rust]
+        pass_filenames: false
+
+      - id: ast-grep-rules
+        name: custom structural rules (ast-grep)
+        entry: ast-grep scan --config sgconfig.yml
+        language: system
+        types_or: [python, rust]
+        pass_filenames: false
+
+      - id: skill-references
+        name: agent skill references resolve
+        entry: python3 scripts/check_skill_refs.py
+        language: system
+        files: ^\.codex/skills/.*\.md$
         pass_filenames: false
