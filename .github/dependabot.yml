@@ -1,9 +1,13 @@
-# Dependency updates arrive as reviewable pull requests rather than as silent
-# drift. This matters most for ruff and pyrefly: their versions are pinned
-# exactly because a formatter or type checker that moves on its own produces
-# phantom diffs and baseline churn.
+# Dependency updates, scoped to what this fork actually owns.
+#
+# Deliberately narrow. Upstream owns requirements-dev.txt and the [project]
+# dependencies; proposing bumps there produces modified upstream files, which is
+# the recurring merge cost AGENTS.md warns about. Upstream bumps its own.
+# Likewise the upstream workflows -- an action version bump in core.yml or
+# publish.yml is a guaranteed conflict for no benefit to this fork.
 version: 2
 updates:
+  # rust/ is entirely ours.
   - package-ecosystem: cargo
     directory: /rust
     schedule:
@@ -11,7 +15,8 @@ updates:
     open-pull-requests-limit: 5
     groups:
       # The Arrow/DataFusion stack must move as one unit or the type universe
-      # splits. Never let these land as separate PRs.
+      # splits, and the failure is silent (downcast_ref returns None). Never let
+      # these land as separate PRs.
       arrow-datafusion:
         patterns:
           - "arrow*"
@@ -23,19 +28,21 @@ updates:
           - "pyo3*"
           - "numpy"
 
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 5
-
+  # Only the quality tools this fork pins. `allow` is what restricts the set --
+  # `groups` only controls how PRs are batched, not which dependencies are
+  # considered, which is how the first version of this file opened ten PRs
+  # against upstream's documentation dependencies.
   - package-ecosystem: pip
     directory: /
     schedule:
       interval: monthly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 2
+    allow:
+      - dependency-name: ruff
+      - dependency-name: pyrefly
     groups:
-      # A bump here requires `just baseline-update` in the same PR.
+      # A bump here requires `just baseline-update` in the same PR, since both
+      # tools' findings are baselined.
       quality-tools:
         patterns:
           - "ruff"
