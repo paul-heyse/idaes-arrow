@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout code to be packaged
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           # setuptools-scm needs the complete tag history to determine the version.
           fetch-depth: 0

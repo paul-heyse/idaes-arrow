@@ -39,7 +39,7 @@ jobs:
     name: coverage
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: Swatinem/rust-cache@v2
         with: { workspaces: rust }
       - uses: taiki-e/install-action@v2
@@ -52,7 +52,7 @@ jobs:
     name: feature matrix
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: Swatinem/rust-cache@v2
         with: { workspaces: rust }
       - uses: taiki-e/install-action@v2
@@ -66,7 +66,7 @@ jobs:
     name: msrv
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: taiki-e/install-action@v2
         with: { tool: cargo-msrv }
       # cargo-msrv reads package.rust-version, so it cannot be pointed at a
@@ -81,7 +81,7 @@ jobs:
     name: miri (${{ github.event.inputs.miri-seeds || '32' }} seeds)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: rustup toolchain install "$NIGHTLY" --component miri --profile minimal
       - run: cargo "+$NIGHTLY" miri setup
       # One passing seed covers one explored interleaving and allocation layout.
@@ -93,7 +93,7 @@ jobs:
     name: unused dependencies (compiler-oriented)
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - run: rustup toolchain install "$NIGHTLY" --profile minimal
       - uses: taiki-e/install-action@v2
         with: { tool: cargo-udeps }
@@ -104,7 +104,7 @@ jobs:
     name: mutation testing
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: Swatinem/rust-cache@v2
         with: { workspaces: rust }
       - uses: taiki-e/install-action@v2
@@ -121,7 +121,7 @@ jobs:
     name: unsafe surface
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: taiki-e/install-action@v2
         with: { tool: cargo-geiger }
       # An inventory and a trend line, not a vulnerability scan.

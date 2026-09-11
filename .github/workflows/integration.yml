@@ -67,7 +67,7 @@ jobs:
       is-pr-approved: ${{ steps.check-pr-approval.outputs.is-approved }}
       workflow-trigger: ${{ steps.determine-trigger.outputs.workflow-trigger }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: ./.github/actions/display-debug-info
@@ -144,7 +144,7 @@ jobs:
           - os: win64
             runner-image: windows-2022
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: ./.github/actions/display-debug-info
@@ -189,7 +189,7 @@ jobs:
           - os: win64
             runner-image: windows-2022
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: ./.github/actions/display-debug-info
@@ -251,7 +251,7 @@ jobs:
             pip-install-target: '.'
             dependencies-to-uninstall: omlt
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Set up Conda environment

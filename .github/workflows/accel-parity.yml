@@ -47,7 +47,7 @@ jobs:
         # PowerShell ParserError before doing any work.
         shell: bash
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # setuptools-scm needs tag history
       - uses: astral-sh/setup-uv@v6

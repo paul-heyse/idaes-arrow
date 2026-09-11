@@ -48,7 +48,7 @@ jobs:
     name: fmt + clippy
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       # rust-toolchain.toml lives in rust/, so rustup resolves the pinned
       # version from the working directory with no explicit setup action.
       - run: rustc -vV && cargo -V
@@ -62,7 +62,7 @@ jobs:
     name: nextest + doctests
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: rust
@@ -83,7 +83,7 @@ jobs:
     name: dependency policy
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: rust
@@ -113,7 +113,7 @@ jobs:
       run:
         working-directory: .
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: "3.14"
