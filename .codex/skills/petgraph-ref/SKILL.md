@@ -14,7 +14,7 @@ See [REFERENCE.md](REFERENCE.md) for chapter indexes and API routing.
 
 ## References
 
-- `docs/library_ref/petgraph.md`
+- `docs-code-update/library_ref/petgraph.md`
 
 Keep provider/application boundaries and the selected public type universe. Use proportionate
 compatibility checks for dependency changes. No doctrine mapping, artifact bundle, repeated

@@ -16,10 +16,9 @@ sphinx-autodoc2>=0.5.0 # for autodoc2
 pytest
 coverage
 pytest-cov
-# @lbianchi-lbl: both pylint and astroid should be tightly pinned; see .pylint/idaes_transform.py for more info
-pylint==3.3.9
-astroid==3.3.11
-black==26.3.1
+# FORK: pylint, astroid and black were replaced by ruff, pinned exactly in
+# pyproject.toml under [dependency-groups].quality. Install with:
+#   uv pip install --group quality
 # pre-commit install, manage, and run pre-commit hooks
 pre-commit
 

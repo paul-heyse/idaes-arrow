@@ -6,7 +6,7 @@ invariants); this file carries the **section index** with line numbers, the **ca
 the **decision trees**, the **20 operating rules**, and the **catalog-only coverage map**.
 
 Cross-references back into the core map are written `SKILL §...`. One document is in scope —
-`docs/library_ref/petgraph.md`, 22,805 lines, pinned to **petgraph 0.8.3** — so every `§N.M` below is
+`docs-code-update/library_ref/petgraph.md`, 22,805 lines, pinned to **petgraph 0.8.3** — so every `§N.M` below is
 a section of that document unless it says otherwise.
 
 Read SKILL.md first. Come here when you know *what you want to compute* (§2), when a modelling or

@@ -15,7 +15,7 @@ before trusting anything else in that table.
 
 Aliases follow `docs/spec_index/library-routing.md` §1 and must stay in sync with it.
 
-| Alias | Document (under `docs/library_ref/`) | Chapters | Lines |
+| Alias | Document (under `docs-code-update/library_ref/`) | Chapters | Lines |
 |---|---|---|---:|
 | `df` | `datafusion_rust_55_arrow59_comprehensive_advanced_reference_2026-08-23.md` | §0–§40, §40A | 115,587 |
 | `df-schema` | same file | S1–S15 | — |
@@ -43,8 +43,8 @@ Aliases follow `docs/spec_index/library-routing.md` §1 and must stay in sync wi
 Re-derive with:
 
 ```bash
-rg -n '^# DataFusion Advanced — |^# Part ' docs/library_ref/datafusion_rust_55_arrow59_comprehensive_advanced_reference_2026-08-23.md
-rg -n '^## V[1-6]\) ' docs/library_ref/datafusion_rust_55_arrow59_comprehensive_advanced_reference_2026-08-23.md
+rg -n '^# DataFusion Advanced — |^# Part ' docs-code-update/library_ref/datafusion_rust_55_arrow59_comprehensive_advanced_reference_2026-08-23.md
+rg -n '^## V[1-6]\) ' docs-code-update/library_ref/datafusion_rust_55_arrow59_comprehensive_advanced_reference_2026-08-23.md
 ```
 
 **Hazard:** the file contains ~250 spurious h1s — authoring slips shaped like `# C1.6 …`
@@ -184,7 +184,7 @@ between V4 and V5 in the file** — a "V1–V5" sweep misses the corrections log
 Re-derive with:
 
 ```bash
-rg -n '^# [0-9]+\) ' docs/library_ref/arrow_rust_59_datafusion55_advanced_reference_2026-08-23.md
+rg -n '^# [0-9]+\) ' docs-code-update/library_ref/arrow_rust_59_datafusion55_advanced_reference_2026-08-23.md
 ```
 
 and drop any hit at a line ≤ 590 (one stray in-catalog h1 sits at line 427).
@@ -240,4 +240,4 @@ topic map (148–577) · recommended deep-dive order (578).
 
 ## Current principles and optional alignment
 
-The current P1–P36 guidance is in `docs/library_ref/full_data_fabric_design_principles_v2.md`. Alignment manuals are optional capability references. Their former workflow/artifact matrices are retired; use current headings with `just lib-outline`. No principle crosswalk or exhaustive API survey is required before implementation. Preserve native API details from the indexes above and verify current Cargo source selections when using them.
+The current P1–P36 guidance is in `docs-code-update/library_ref/full_data_fabric_design_principles_v2.md`. Alignment manuals are optional capability references. Their former workflow/artifact matrices are retired; use current headings with `just lib-outline`. No principle crosswalk or exhaustive API survey is required before implementation. Preserve native API details from the indexes above and verify current Cargo source selections when using them.

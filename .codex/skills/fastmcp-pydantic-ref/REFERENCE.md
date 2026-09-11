@@ -1,7 +1,7 @@
 # FastMCP + Pydantic — Reference Companion
 
 Companion to `SKILL.md` in this folder. SKILL.md is the map you read first; this file is what you
-come back to once you know which document you need. Both target `docs/library_ref/`:
+come back to once you know which document you need. Both target `docs-code-update/library_ref/`:
 
 * **`fastmcp`** = `fastmcp_python_advanced_reference_4.0.0.md` — 12,692 lines, §0-§44
 * **`pydantic`** = `pydantic_python_advanced_reference_2.13.4.md` — 7,340 lines, §0-§51

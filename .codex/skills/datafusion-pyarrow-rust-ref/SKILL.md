@@ -14,14 +14,14 @@ See [REFERENCE.md](REFERENCE.md) for chapter indexes and API routing.
 
 ## References
 
-- `docs/library_ref/arrow_rust_59_datafusion55_advanced_reference_2026-08-23.md`
-- `docs/library_ref/datafusion55_arrow59_design_principle_alignment_manual_2026-08-24.md`
-- `docs/library_ref/datafusion_calculations_rust.md`
-- `docs/library_ref/datafusion_planning_rust.md`
-- `docs/library_ref/datafusion_rust_55_arrow59_comprehensive_advanced_reference_2026-08-23.md`
-- `docs/library_ref/datafusion_schemas_rust.md`
-- `docs/library_ref/full_data_fabric_design_principles_v2.md`
-- `docs/library_ref/pyarrow_rust.md`
+- `docs-code-update/library_ref/arrow_rust_59_datafusion55_advanced_reference_2026-08-23.md`
+- `docs-code-update/library_ref/datafusion55_arrow59_design_principle_alignment_manual_2026-08-24.md`
+- `docs-code-update/library_ref/datafusion_calculations_rust.md`
+- `docs-code-update/library_ref/datafusion_planning_rust.md`
+- `docs-code-update/library_ref/datafusion_rust_55_arrow59_comprehensive_advanced_reference_2026-08-23.md`
+- `docs-code-update/library_ref/datafusion_schemas_rust.md`
+- `docs-code-update/library_ref/full_data_fabric_design_principles_v2.md`
+- `docs-code-update/library_ref/pyarrow_rust.md`
 
 Keep provider/application boundaries and the selected public type universe. Use proportionate
 compatibility checks for dependency changes. No doctrine mapping, artifact bundle, repeated

@@ -78,18 +78,80 @@ accel = ["idaes-accel"]
 # this will install all optional dependencies
 all = ["idaes-pse[ui,grid,omlt,coolprop]"]
 
-[tool.black]
-# FORK: `docs-code-update/` is vendored third-party API reference material and a
-# separate design workspace, not IDAES source. CI runs `black --check .` over the
-# whole repository root, so it has to be excluded here rather than at the call
-# site. Same reasoning as the typos exclusion in .github/workflows/typos.toml.
-extend-exclude = """
-(
-  ^/docs-code-update/
-  | ^/\\.codex/
-  | ^/\\.agents/
-)
-"""
+# FORK: quality tooling, pinned exactly.
+#
+# PEP 735 dependency groups rather than an extra: these never belong in the
+# published wheel's metadata, and Read the Docs (which installs via
+# requirements-dev.txt) must not drag them in.
+#
+# Exact pins, not floors, and for a specific reason. A formatter that drifts
+# produces phantom diffs -- this repo already hit that when a local black
+# 25.9.0 disagreed with the repo-pinned 26.3.1 -- and a type checker that
+# drifts churns the suppression baselines. Bumping is a deliberate commit that
+# re-runs `just baseline-update`.
+#
+# Install with:  uv pip install --group quality
+[dependency-groups]
+quality = [
+  "ruff==0.16.7",
+  "pyrefly==1.3.0",
+]
+# Building the optional Rust extension in-place (`just accel-develop`).
+accel = [
+  "maturin>=1.15,<2.0",
+]
+dev = [
+  { include-group = "quality" },
+  { include-group = "accel" },
+]
+
+[tool.ruff]
+# FORK: ruff replaces black (format), flake8 and pylint (lint). One tool, one
+# pass, pinned exactly in [dependency-groups].quality so CI and every developer
+# agree. Resolve it from .venv, never $PATH.
+target-version = "py310"   # the floor the classifiers claim, not the 3.14 we develop on
+line-length = 88           # carried over from the flake8 config it replaces
+extend-exclude = [
+  # Vendored third-party API references and a separate workflow's document
+  # corpus. Not IDAES source; see FORK.md.
+  "docs-code-update",
+  ".codex",
+  ".agents",
+  "rust/target",
+]
+
+[tool.ruff.lint]
+# Ruff 0.16's defaults are already broad. This makes the selection explicit so a
+# ruff upgrade cannot silently change what the gate means.
+select = [
+  "E", "W",    # pycodestyle
+  "F",         # pyflakes
+  "I",         # import sorting
+  "B",         # bugbear
+  "C4",        # comprehensions
+  "UP",        # pyupgrade
+  "SIM",       # simplify
+  "RUF",       # ruff-specific
+  "PT",        # pytest style
+  "PERF",      # performance
+  "N",         # naming
+  "ARG",       # unused arguments
+  "PTH",       # pathlib
+  "TRY",       # exception handling
+]
+# Existing violations are recorded in .quality/ruff-baseline.json rather than
+# ignored, so they stay visible and can only ratchet down.
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+# Tests legitimately assert on private state and reuse fixture names.
+"**/tests/**" = ["ARG001", "ARG002", "PT011"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["idaes", "idaes_accel"]
+
+[tool.ruff.format]
+docstring-code-format = true
 
 [tool.setuptools_scm]
 version_scheme = "guess-next-dev"
@@ -100,9 +162,6 @@ tag_regex = '^(?P<version>\d+\.\d+\.\d+(?:\.dev\d+|a\d+|b\d+|rc\d+)?)$'
 zip-safe = false
 include-package-data = true
 
-
-[tool.pylint.main]
-py-version = "3.10"
 
 [tool.setuptools.packages.find]
 # FORK: was ["idaes*"], which also matches `idaes_accel` (the separate
@@ -141,30 +200,3 @@ idaes-run = "idaes.commands.run_flowsheet:main"
 
 [project.entry-points."idaes.flowsheets"]
 "0D_Fixed_Bed_TSA" = "idaes.models_extra.temperature_swing_adsorption.fixed_bed_tsa0d_ui"
-
-[tool.pylint."messages control"]
-disable = [
-  "E", # all errors
-  "W", # all warnings
-  "C", # all conventions
-  "R", # all refactor
-]
-
-# see https://pylint.readthedocs.io/en/v2.17.7/user_guide/messages/index.html
-# for a list of all messages
-enable = [
-  "import-error",
-  "unused-import",
-  "wildcard-import",
-  "wrong-import-order",
-  "wrong-import-position",
-  "ungrouped-imports",
-  "implicit-str-concat",
-  "dangerous-default-value",
-  "invalid-name",
-]
-
-[tool.flake8]
-ignore = ["W293", "W291", "W503", "W504", "E203"]
-exclude = "tests"
-max-line-length = 88

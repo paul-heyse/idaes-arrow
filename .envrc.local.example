@@ -1,0 +1,11 @@
+# Copy to .envrc.local for machine-local overrides. Gitignored; never committed.
+#
+# Force the pure-Python path while debugging a parity failure:
+# export IDAES_ACCEL=off
+#
+# Use a shared sccache instance (note: sccache cannot cache cdylib crates, so
+# this helps the rlib dependency graph, not the extension itself):
+# export RUSTC_WRAPPER=sccache
+#
+# Point at a different IDAES data directory:
+# export IDAES_DATA="$HOME/.idaes-alt"

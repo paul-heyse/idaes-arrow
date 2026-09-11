@@ -141,3 +141,10 @@ docs/apidoc/
 *.rlib
 *.pdb
 .bacon-locations
+
+# Agent / tooling environment (fork)
+/.venv/
+.envrc.local
+.claude/settings.local.json
+.ruff_cache/
+.pyrefly_cache/

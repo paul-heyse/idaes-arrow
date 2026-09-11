@@ -5,7 +5,7 @@ engines, fourteen search jobs, the seam between the documents. **This file is
 where things are**, by line, by flag, by construct, and by question. Come here
 once you know *which* capability you need.
 
-The two documents, at `docs/library_ref/`:
+The two documents, at `docs-code-update/library_ref/`:
 
 - **ast-grep** — `ast-grep_0.45.1_advanced_reference.md` · 8,297 lines ·
   **§0-§25** · 368 `## N.M` subsections · body prefix `# N) `
@@ -939,9 +939,9 @@ files.**
 13. **Reach for the matrix chapters before the prose.** `ast-grep §24` (28
     matrices) and `ripgrep §45`/`§46`/`§47` answer most flag and capability
     questions in one table.
-14. **`rg` over `docs/library_ref/` swamps everything.** These two files alone
+14. **`rg` over `docs-code-update/library_ref/` swamps everything.** These two files alone
     are 11,569 lines inside a ~9 MB directory. Scope to one file at a time, and
-    exclude the directory entirely (`-g '!docs/library_ref/**'`) when the
+    exclude the directory entirely (`-g '!docs-code-update/library_ref/**'`) when the
     question is not about the references.
 
 ---
@@ -994,7 +994,7 @@ invocation.
 | Extractor | Item | Member | Corpus |
 |---|---|---|---|
 | `specs.yml` | `## N. Section` | `### N.N Subsection` | `docs/authoritative_design/` (h2-rooted) |
-| `library-ref.yml` | `# Chapter` | `## Subsection` | `docs/library_ref/` (h1-rooted) |
+| `library-ref.yml` | `# Chapter` | `## Subsection` | `docs-code-update/library_ref/` (h1-rooted) |
 
 Each script refuses the other's tree rather than emit a misleading flat outline.
 `selector: section` is load-bearing in both — without it the matched node is the
@@ -1011,8 +1011,8 @@ REFERENCE §1 of this file was generated from it.
   tracked hits — which reads exactly like completeness. Use
   `--hidden -g '!.git/**'` whenever skills, settings or any dotfile are in scope
   (`ripgrep §16.0`).
-- **`docs/library_ref/` is ~9 MB of prose** mentioning nearly every identifier
-  you will ever search for. Exclude it with `-g '!docs/library_ref/**'` unless
+- **`docs-code-update/library_ref/` is ~9 MB of prose** mentioning nearly every identifier
+  you will ever search for. Exclude it with `-g '!docs-code-update/library_ref/**'` unless
   the question is about the references.
 
 ### Choosing search evidence

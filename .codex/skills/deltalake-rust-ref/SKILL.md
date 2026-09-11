@@ -14,10 +14,9 @@ See [REFERENCE.md](REFERENCE.md) for chapter indexes and API routing.
 
 ## References
 
-- `docs/library_ref/deltalake_1.0.0_43a0cf10_design_principle_alignment_manual_2026-08-26.md`
-- `docs/library_ref/deltalake_rust_1.0.0_43a0cf10_datafusion55_arrow59_advanced_reference_2026-08-23.md`
-- `docs/library_ref/deltalake_rust_1.0.0_9f922319_advanced_reference_2026-08-20.md`
-- `docs/library_ref/full_data_fabric_design_principles_v2.md`
+- `docs-code-update/library_ref/deltalake_1.0.0_43a0cf10_design_principle_alignment_manual_2026-08-26.md`
+- `docs-code-update/library_ref/deltalake_rust_1.0.0_43a0cf10_datafusion55_arrow59_advanced_reference_2026-08-23.md`
+- `docs-code-update/library_ref/full_data_fabric_design_principles_v2.md`
 
 Keep provider/application boundaries and the selected public type universe. Use proportionate
 compatibility checks for dependency changes. No doctrine mapping, artifact bundle, repeated

@@ -14,8 +14,8 @@ See [REFERENCE.md](REFERENCE.md) for chapter indexes and API routing.
 
 ## References
 
-- `docs/library_ref/ast-grep_0.45.1_advanced_reference.md`
-- `docs/library_ref/ripgrep_advanced_reference_15.2.0_pcre2_10.47.md`
+- `docs-code-update/library_ref/ast-grep_0.45.1_advanced_reference.md`
+- `docs-code-update/library_ref/ripgrep_advanced_reference_15.2.0_pcre2_10.47.md`
 
 Keep provider/application boundaries and the selected public type universe. Use proportionate
 compatibility checks for dependency changes. No doctrine mapping, artifact bundle, repeated

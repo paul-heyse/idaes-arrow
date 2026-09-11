@@ -14,10 +14,10 @@ See [REFERENCE.md](REFERENCE.md) for chapter indexes and API routing.
 
 ## References
 
-- `docs/library_ref/fastapi_python_advanced_reference_0.141.1.md`
-- `docs/library_ref/fastmcp_python_advanced_reference_3.4.7.md`
-- `docs/library_ref/fastmcp_python_advanced_reference_4.0.0.md`
-- `docs/library_ref/pydantic_python_advanced_reference_2.13.4.md`
+- `docs-code-update/library_ref/fastapi_python_advanced_reference_0.141.1.md`
+- `docs-code-update/library_ref/fastmcp_python_advanced_reference_3.4.7.md`
+- `docs-code-update/library_ref/fastmcp_python_advanced_reference_4.0.0.md`
+- `docs-code-update/library_ref/pydantic_python_advanced_reference_2.13.4.md`
 
 Keep provider/application boundaries and the selected public type universe. Use proportionate
 compatibility checks for dependency changes. No doctrine mapping, artifact bundle, repeated

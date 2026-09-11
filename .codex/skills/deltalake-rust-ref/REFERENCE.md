@@ -16,7 +16,7 @@ before trusting anything else in that table.
 
 Aliases follow `docs/spec_index/library-routing.md` §1 and must stay in sync with it.
 
-| Alias | Document (under `docs/library_ref/`) | Chapters | Lines |
+| Alias | Document (under `docs-code-update/library_ref/`) | Chapters | Lines |
 |---|---|---|---:|
 | `delta` | `deltalake_rust_1.0.0_43a0cf10_datafusion55_arrow59_advanced_reference_2026-08-23.md` | §0, §2–§13 (**no §1**); §7 carries h1 sub-chapters §7.0–§7.13 | 17,270 |
 | `principles` | `full_data_fabric_design_principles_v2.md` | current P1–P36 guidance | revised |
@@ -41,7 +41,7 @@ this skill's own files, never to a document.
 Re-derive with:
 
 ```bash
-rg -n '^# [0-9]+(\.[0-9]+)? ' docs/library_ref/deltalake_rust_1.0.0_43a0cf10_datafusion55_arrow59_advanced_reference_2026-08-23.md
+rg -n '^# [0-9]+(\.[0-9]+)? ' docs-code-update/library_ref/deltalake_rust_1.0.0_43a0cf10_datafusion55_arrow59_advanced_reference_2026-08-23.md
 ```
 
 **Hazards.**
@@ -344,4 +344,4 @@ itself must be verified against the pinned source.
 
 ## Current principles and optional alignment
 
-The current P1–P36 guidance is in `docs/library_ref/full_data_fabric_design_principles_v2.md`. Alignment manuals are optional capability references. Their former workflow/artifact matrices are retired; use current headings with `just lib-outline`. No principle crosswalk or exhaustive API survey is required before implementation. Preserve native API details from the indexes above and verify current Cargo source selections when using them.
+The current P1–P36 guidance is in `docs-code-update/library_ref/full_data_fabric_design_principles_v2.md`. Alignment manuals are optional capability references. Their former workflow/artifact matrices are retired; use current headings with `just lib-outline`. No principle crosswalk or exhaustive API survey is required before implementation. Preserve native API details from the indexes above and verify current Cargo source selections when using them.

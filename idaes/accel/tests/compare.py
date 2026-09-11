@@ -104,8 +104,11 @@ def frames(expected, actual, rtol=0.0, atol=0.0):
     """
     import pandas.testing as pdt  # pylint: disable=import-outside-toplevel
 
+    # rtol/atol are passed unconditionally rather than through a **kwargs dict:
+    # pandas consults them only when check_exact is False, and unpacking an
+    # untyped dict into this call makes every keyword look like it might receive
+    # a float to a type checker.
     exact = rtol == 0.0 and atol == 0.0
-    kwargs = {} if exact else {"rtol": rtol, "atol": atol}
     pdt.assert_frame_equal(
         actual,
         expected,
@@ -115,7 +118,8 @@ def frames(expected, actual, rtol=0.0, atol=0.0):
         check_names=True,
         check_like=False,
         check_exact=exact,
-        **kwargs,
+        rtol=rtol,
+        atol=atol,
     )
 
 
@@ -124,9 +128,13 @@ def series(expected, actual, rtol=0.0, atol=0.0):
     import pandas.testing as pdt  # pylint: disable=import-outside-toplevel
 
     exact = rtol == 0.0 and atol == 0.0
-    kwargs = {} if exact else {"rtol": rtol, "atol": atol}
     pdt.assert_series_equal(
-        actual, expected, check_dtype=True, check_exact=exact, **kwargs
+        actual,
+        expected,
+        check_dtype=True,
+        check_exact=exact,
+        rtol=rtol,
+        atol=atol,
     )
 
 

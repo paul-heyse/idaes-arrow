@@ -24,6 +24,12 @@ set shell := ["bash", "-euo", "pipefail", "-c"]
 # concern (CI covers 3.10-3.14), not the default you develop against.
 python := env("IDAES_PYTHON", "3.14.7")
 venv := ".venv"
+# Always the project's own tools, never whatever is on PATH. A stale global ruff
+# silently produces a different diff than CI; this repo has already been bitten
+# by exactly that with black.
+py := venv / "bin/python"
+ruff := venv / "bin/ruff"
+pyrefly := venv / "bin/pyrefly"
 
 default:
     @just --list --unsorted
@@ -31,38 +37,39 @@ default:
 # --------------------------------------------------------------------- env --
 
 [group('env')]
-[doc('Create .venv on the pinned interpreter and install IDAES in editable mode')]
-dev-env:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    uv venv "{{ venv }}" --python "{{ python }}"
-    # --no-build-isolation keeps the editable install from re-resolving the
-    # build backend on every run; idaes-pse is pure Python, so this is safe.
-    uv pip install --python "{{ venv }}/bin/python" -e ".[ui,grid,coolprop]"
-    uv pip install --python "{{ venv }}/bin/python" -r requirements-dev.txt
-    echo "ready: {{ venv }} on $("{{ venv }}/bin/python" -V)"
+[doc('Full environment from nothing: venv, deps, tooling, solvers, hooks')]
+bootstrap:
+    ./scripts/bootstrap.sh
 
 [group('env')]
-[doc('Build the extension and install it into .venv')]
-dev-env-accel: dev-env
-    #!/usr/bin/env bash
-    set -euo pipefail
-    VIRTUAL_ENV="{{ venv }}" maturin develop --release -m rust/py/idaes-accel/Cargo.toml
-    "{{ venv }}/bin/python" -c "import idaes_accel; print('accel', idaes_accel.__version__)"
+[doc('Interpreter and Python dependencies only (fast, no big downloads)')]
+bootstrap-venv:
+    ./scripts/bootstrap.sh --venv-only
 
 [group('env')]
-[doc('Which interpreter and backend a bare `just` run would use')]
-env-info:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    echo "pinned python : {{ python }}  (.python-version: $(cat .python-version 2>/dev/null || echo none))"
-    uv --version
-    if [ -x "{{ venv }}/bin/python" ]; then
-      echo "venv          : $("{{ venv }}/bin/python" -V)"
-      "{{ venv }}/bin/python" -c "import idaes.accel as a; print('backend       :', a.status())" 2>/dev/null || true
-    else
-      echo "venv          : not created (run \`just dev-env\`)"
-    fi
+[doc('Pinned ruff/pyrefly/maturin from pyproject [dependency-groups]')]
+bootstrap-quality:
+    ./scripts/bootstrap.sh --quality-only
+
+[group('env')]
+[doc('IDAES solvers and compiled libraries (~100 MB). Required for the test suite.')]
+bootstrap-solvers:
+    ./scripts/bootstrap.sh --solvers-only
+
+[group('env')]
+[doc('Pinned cargo development tools via cargo-binstall')]
+bootstrap-rust-tools:
+    ./scripts/bootstrap.sh --rust-only
+
+[group('env')]
+[doc('Is this working copy ready to do work? Prints the fix for anything missing.')]
+doctor *args:
+    @python3 scripts/doctor.py {{ args }}
+
+[group('env')]
+[doc('Machine-readable environment status, for agents and CI')]
+doctor-json:
+    @python3 scripts/doctor.py --format=json
 
 # ---------------------------------------------------------------- discovery --
 
@@ -84,6 +91,22 @@ versions:
       sccache --show-stats 2>/dev/null || true
     } > target/tooling-inventory.txt
     echo "wrote rust/target/tooling-inventory.txt"
+
+[group('discovery')]
+[doc('Heading outline of a pinned library reference. The skills call this.')]
+lib-outline doc:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    d="docs-code-update/library_ref/{{ doc }}"
+    [ -f "$d" ] || d="docs-code-update/library_ref/{{ doc }}.md"
+    if [ ! -f "$d" ]; then
+      echo "no such reference: {{ doc }}" >&2
+      echo "available:" >&2
+      ls docs-code-update/library_ref/ >&2
+      exit 1
+    fi
+    echo "== $d ($(wc -l < "$d") lines)"
+    grep -nE '^#{1,2} ' "$d"
 
 [group('discovery')]
 [working-directory('rust')]
@@ -267,16 +290,40 @@ accel-wheel-verify py=python:
 # ------------------------------------------------------------------ python --
 
 [group('python')]
-py-format-check:
-    black --check --diff .
+[doc('Format Python with the pinned ruff')]
+fmt-py:
+    {{ ruff }} format .
 
 [group('python')]
-py-lint:
-    pylint --rcfile=./.pylint/pylintrc idaes/
+[doc('Check formatting without writing')]
+fmt-py-check:
+    {{ ruff }} format --check .
+
+[group('python')]
+[doc('Lint, compared against .quality/ruff-baseline.json')]
+lint-py:
+    @python3 scripts/quality_baseline.py check ruff
+
+[group('python')]
+[doc('Type-check, compared against .quality/pyrefly-baseline.json')]
+typecheck:
+    @python3 scripts/quality_baseline.py check pyrefly
+
+[group('python')]
+[doc('Everything non-Rust: format, lint, types, workflows, TOML, shell, skills')]
+quality: fmt-py-check lint-py typecheck lint-workflows lint-skills
+
+[group('python')]
+lint-workflows:
+    actionlint .github/workflows/*.yml
+
+[group('python')]
+lint-skills:
+    @python3 scripts/check_skill_refs.py
 
 [group('python')]
 py-test marks="not integration":
-    pytest --pyargs idaes -m "{{ marks }}"
+    {{ py }} -m pytest --pyargs idaes -m "{{ marks }}"
 
 [group('python')]
 [doc('Run the whole suite on every supported interpreter, 3.10 through 3.14')]
@@ -295,12 +342,12 @@ py-test-matrix:
 [group('python')]
 [doc('Whole suite on the pure-Python path')]
 py-test-noaccel:
-    IDAES_ACCEL=off pytest --pyargs idaes -m "not integration"
+    IDAES_ACCEL=off {{ py }} -m pytest --pyargs idaes -m "not integration"
 
 [group('python')]
 [doc('Whole suite on the Rust path; fails loudly if acceleration is unavailable')]
 py-test-accel:
-    IDAES_ACCEL=force pytest --pyargs idaes -m "not integration"
+    IDAES_ACCEL=force {{ py }} -m pytest --pyargs idaes -m "not integration"
 
 # ---------------------------------------------------------------- upstream --
 
@@ -347,3 +394,10 @@ typos-write:
 [doc('Apply the IDAES license header to python files under idaes/')]
 py-headers:
     addheader -c addheader.yml
+
+[group('mutating')]
+[confirm('Rewrite the ruff and pyrefly baselines to accept current findings?')]
+[doc('Re-record the suppression baselines. Run after fixing findings, or after a tool bump.')]
+baseline-update:
+    python3 scripts/quality_baseline.py update ruff
+    python3 scripts/quality_baseline.py update pyrefly

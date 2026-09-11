@@ -1,6 +1,6 @@
 ---
 name: sympy-ref
-description: "Reference navigator for SymPy 1.14.x — the Python-native computer algebra system. Routes one deep-dive at docs/library_ref/symypy.md (28,701 lines, 26 chapters): scope/mental model + version anchors + numeric stack boundary (§0); core object model (§2); assumptions system (§3); manipulation primitives (§4); simplification strategy (§5); numbers/exact arithmetic/precision (§6); calculus (§7); solvers — equations/systems/inequalities/ODE/PDE/roots (§8); polynomials, domains, algebraic fields (§9); matrices, tensors, vectors, arrays (§10); functions — elementary/special/undefined/custom (§11); sets, logic, booleans, relations (§12); discrete math, combinatorics, number theory, cryptography (§13); geometry, differential geometry, holonomic, Lie, category (§14); physics modules (§15); statistics + probability (§16); plotting (§17); printing, parsing, external representation (§18); numeric bridge — subs/evalf/lambdify/ufuncify/autowrap (§19); code generation (§20); performance engineering (§21); best practices and pitfalls (§22); testing/QA (§23); interoperability with NumPy/SciPy/mpmath/JAX/CuPy/pandas/xarray/matplotlib (§24); extending SymPy (§25). Use when code touches `import sympy`, `from sympy`, `Symbol`/`symbols`/`Function`, `simplify`/`solve`/`solveset`/`integrate`/`diff`/`series`/`limit`, `lambdify`/`ufuncify`/`autowrap`/`codegen`, `Matrix`/`Poly`/`Q`/`ask`/`assuming`/`refine`, `Eq`/`.equals`/`.subs`/`.xreplace`/`.replace`, `Rational`/`Integer`/`Float`/`AlgebraicNumber`, `dsolve`/`pdsolve`, or any `sympy.*` submodule (`sympy.stats`/`sympy.physics`/`sympy.geometry`/`sympy.combinatorics`/`sympy.crypto`/`sympy.codegen`/`sympy.plotting`/`sympy.parsing`/`sympy.printing`/`sympy.matrices`/`sympy.tensor`/`sympy.vector`)."
+description: "Reference navigator for SymPy 1.14.x — the Python-native computer algebra system. Routes one deep-dive at docs-code-update/library_ref/symypy.md (28,701 lines, 26 chapters): scope/mental model + version anchors + numeric stack boundary (§0); core object model (§2); assumptions system (§3); manipulation primitives (§4); simplification strategy (§5); numbers/exact arithmetic/precision (§6); calculus (§7); solvers — equations/systems/inequalities/ODE/PDE/roots (§8); polynomials, domains, algebraic fields (§9); matrices, tensors, vectors, arrays (§10); functions — elementary/special/undefined/custom (§11); sets, logic, booleans, relations (§12); discrete math, combinatorics, number theory, cryptography (§13); geometry, differential geometry, holonomic, Lie, category (§14); physics modules (§15); statistics + probability (§16); plotting (§17); printing, parsing, external representation (§18); numeric bridge — subs/evalf/lambdify/ufuncify/autowrap (§19); code generation (§20); performance engineering (§21); best practices and pitfalls (§22); testing/QA (§23); interoperability with NumPy/SciPy/mpmath/JAX/CuPy/pandas/xarray/matplotlib (§24); extending SymPy (§25). Use when code touches `import sympy`, `from sympy`, `Symbol`/`symbols`/`Function`, `simplify`/`solve`/`solveset`/`integrate`/`diff`/`series`/`limit`, `lambdify`/`ufuncify`/`autowrap`/`codegen`, `Matrix`/`Poly`/`Q`/`ask`/`assuming`/`refine`, `Eq`/`.equals`/`.subs`/`.xreplace`/`.replace`, `Rational`/`Integer`/`Float`/`AlgebraicNumber`, `dsolve`/`pdsolve`, or any `sympy.*` submodule (`sympy.stats`/`sympy.physics`/`sympy.geometry`/`sympy.combinatorics`/`sympy.crypto`/`sympy.codegen`/`sympy.plotting`/`sympy.parsing`/`sympy.printing`/`sympy.matrices`/`sympy.tensor`/`sympy.vector`)."
 allowed-tools: Read, Grep, Glob, Bash
 model-baseline: claude-5 (2026-08)
 ---
@@ -31,7 +31,7 @@ This skill covers the SymPy 1.14 library surface end-to-end, organized around th
 
 ## How the reference document is organized
 
-`docs/library_ref/symypy.md` is 28,701 lines, organized as 26 chapter-level H1 sections. There is no upfront catalog. The chapter sequence is **§0, §2, §3, … §25** — §1 is **folded into §0** and does not exist as a separate chapter. Most chapters follow this internal shape:
+`docs-code-update/library_ref/symypy.md` is 28,701 lines, organized as 26 chapter-level H1 sections. There is no upfront catalog. The chapter sequence is **§0, §2, §3, … §25** — §1 is **folded into §0** and does not exist as a separate chapter. Most chapters follow this internal shape:
 
 | Subsection family | Typical labels |
 |-------------------|----------------|
@@ -50,7 +50,7 @@ Heading style is consistent: H1 `# N) <title> — agent-ready deep dive` for cha
 
 ## symypy.md — full section index
 
-The table below lists every chapter with line range, key subsections, and the kind of question that routes there. Numbers are line numbers in `docs/library_ref/symypy.md` (28,701 lines total).
+The table below lists every chapter with line range, key subsections, and the kind of question that routes there. Numbers are line numbers in `docs-code-update/library_ref/symypy.md` (28,701 lines total).
 
 | § | Line | Title | Key subsections / agent value |
 |---|------|-------|-------------------------------|
