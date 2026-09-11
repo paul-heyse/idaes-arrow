@@ -1,0 +1,42 @@
+# Dependency updates arrive as reviewable pull requests rather than as silent
+# drift. This matters most for ruff and pyrefly: their versions are pinned
+# exactly because a formatter or type checker that moves on its own produces
+# phantom diffs and baseline churn.
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /rust
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      # The Arrow/DataFusion stack must move as one unit or the type universe
+      # splits. Never let these land as separate PRs.
+      arrow-datafusion:
+        patterns:
+          - "arrow*"
+          - "parquet"
+          - "datafusion*"
+          - "object_store"
+      pyo3:
+        patterns:
+          - "pyo3*"
+          - "numpy"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      # A bump here requires `just baseline-update` in the same PR.
+      quality-tools:
+        patterns:
+          - "ruff"
+          - "pyrefly"

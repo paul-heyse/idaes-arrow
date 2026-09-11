@@ -1,0 +1,36 @@
+# One indent/EOL/charset truth for every editor and agent working here.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{py,pyi}]
+indent_size = 4
+max_line_length = 88          # matches [tool.ruff] line-length
+
+[*.rs]
+indent_size = 4
+max_line_length = 100         # rustfmt default
+
+[*.{toml,yml,yaml,json}]
+indent_size = 2
+
+[justfile]
+indent_size = 4
+
+[*.md]
+# Trailing double-space is a hard line break in Markdown; stripping it changes
+# rendering.
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+
+[*.nl]
+# .gitattributes already pins these to LF; keep the two in agreement.
+end_of_line = lf

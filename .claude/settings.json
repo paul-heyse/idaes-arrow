@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(just --list)",
+      "Bash(just doctor:*)",
+      "Bash(just check)",
+      "Bash(just clippy)",
+      "Bash(just test:*)",
+      "Bash(just quality)",
+      "Bash(just ci-fast)",
+      "Bash(just lib-outline:*)",
+      "Bash(just divergence)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(cargo check:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(cargo tree:*)",
+      "Bash(cargo metadata:*)",
+      "Bash(cargo nextest run:*)",
+      "Bash(.venv/bin/ruff check:*)",
+      "Bash(.venv/bin/ruff format --check:*)",
+      "Bash(.venv/bin/pyrefly check:*)",
+      "Bash(.venv/bin/python -m pytest:*)",
+      "Bash(ast-grep scan:*)",
+      "Bash(actionlint:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(sed -n:*)",
+      "Bash(wc:*)",
+      "Bash(python3 scripts/doctor.py:*)",
+      "Bash(python3 scripts/check_skill_refs.py)",
+      "Bash(python3 scripts/quality_baseline.py check:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git merge:*)",
+      "Bash(git reset:*)",
+      "Bash(gh repo:*)",
+      "Bash(maturin publish:*)",
+      "Bash(cargo publish:*)",
+      "Bash(cargo vet certify:*)",
+      "Bash(just baseline-update)",
+      "Bash(uv pip install:*)",
+      "Bash(idaes get-extensions:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(git push --force:*)",
+      "Edit(./.git/**)",
+      "Write(./.git/**)",
+      "Edit(./rust/target/**)",
+      "Write(./rust/target/**)",
+      "Edit(./docs-code-update/authoritative_design/**)",
+      "Write(./docs-code-update/authoritative_design/**)"
+    ]
+  },
+  "env": {
+    "IDAES_ACCEL": "auto",
+    "UV_PROJECT_ENVIRONMENT": ".venv"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/session-start.sh",
+            "timeout": 30000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/format-after-edit.sh",
+            "timeout": 60000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/guard-protected-paths.sh",
+            "timeout": 10000
+          }
+        ]
+      }
+    ]
+  }
+}

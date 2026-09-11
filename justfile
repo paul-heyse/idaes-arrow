@@ -361,6 +361,36 @@ py-test-accel:
 
 # ---------------------------------------------------------------- upstream --
 
+[group('docs')]
+[doc('Start a new plan document in docs-code-update/plans/')]
+plan name:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    n="$(printf '%02d' "$(( $(ls docs-code-update/plans/[0-9]*_*.md 2>/dev/null | wc -l) + 1 ))")"
+    f="docs-code-update/plans/${n}_{{ name }}.md"
+    [ -e "$f" ] && { echo "exists: $f" >&2; exit 1; }
+    cat > "$f" <<'TEMPLATE'
+    # <title>
+
+    ## Context
+
+    Why this change, what problem it addresses, and what the intended outcome is.
+    Measurements, not assumptions.
+
+    ## Decisions
+
+    What was chosen, and what was rejected and why.
+
+    ## Plan
+
+    ## Verification
+
+    The commands that prove it worked, and what each one actually proves.
+
+    ## Open items
+    TEMPLATE
+    echo "created $f"
+
 [group('upstream')]
 [doc('Merge upstream IDAES/idaes-pse into this fork')]
 sync-upstream:
