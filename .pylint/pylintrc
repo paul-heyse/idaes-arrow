@@ -5,6 +5,9 @@ ignore-patterns=test_.*,__init__.*
 ignore=alamopy_depr,grid_integration,helmet,matopt,ripe,roundingRegression
 extension-pkg-allow-list=
     pyomo.core.expr.numeric_expr,
+    # FORK: the compiled module shipped by the optional idaes-accel distribution.
+    # pylint refuses to introspect a C extension unless it is allow-listed.
+    idaes_accel._core,
 
 [MESSAGES CONTROL]
 disable=no-self-argument,
@@ -32,7 +35,10 @@ disable=no-self-argument,
     no-member,  # Triggers many false positives from Pyomo due to diamond structure
 
 [IMPORTS]
-ignored-modules=cvalsim,almsim
+# FORK: idaes_accel is an OPTIONAL distribution. It is absent in most lint
+# environments (including RTD and the docs job), and its absence is a
+# supported runtime state, not an import error.
+ignored-modules=cvalsim,almsim,idaes_accel,idaes_accel._core
 
 [TYPECHECK]
 # prevents members specified here from causing E1101 (no-member)

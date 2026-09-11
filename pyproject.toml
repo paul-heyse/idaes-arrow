@@ -74,6 +74,19 @@ testing = ["pytest", "addheader", "pyyaml"]
 # this will install all optional dependencies
 all = ["idaes-pse[ui,grid,omlt,coolprop]"]
 
+[tool.black]
+# FORK: `docs-code-update/` is vendored third-party API reference material and a
+# separate design workspace, not IDAES source. CI runs `black --check .` over the
+# whole repository root, so it has to be excluded here rather than at the call
+# site. Same reasoning as the typos exclusion in .github/workflows/typos.toml.
+extend-exclude = """
+(
+  ^/docs-code-update/
+  | ^/\\.codex/
+  | ^/\\.agents/
+)
+"""
+
 [tool.setuptools_scm]
 version_scheme = "guess-next-dev"
 local_scheme = "node-and-date"

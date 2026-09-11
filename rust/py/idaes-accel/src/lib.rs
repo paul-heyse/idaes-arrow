@@ -29,9 +29,13 @@ const ABI_VERSION: u32 = 1;
 ///
 /// Returns a Python `list[int]`, not a NumPy array: `HaltonSampling.sample_points`
 /// indexes this and feeds the element into integer arithmetic.
+///
+/// `n` is `f64` because the Python function is untyped and is called with floats
+/// in the IDAES test suite. Accepting `i64` here would raise `TypeError` where
+/// the pure-Python path returns a list -- a divergence, not a stricter contract.
 #[pyfunction]
 #[pyo3(name = "pysmo__sampling__prime_number_generator")]
-fn pysmo_sampling_prime_number_generator(py: Python<'_>, n: i64) -> Vec<u64> {
+fn pysmo_sampling_prime_number_generator(py: Python<'_>, n: f64) -> Vec<u64> {
     // Pure Rust, no Python objects touched: safe to drop the GIL.
     py.detach(|| idaes_accel_core::sampling::prime_number_generator(n))
 }

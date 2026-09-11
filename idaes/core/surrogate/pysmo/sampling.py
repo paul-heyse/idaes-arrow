@@ -20,6 +20,8 @@ import itertools
 import numpy as np
 import pandas as pd
 import idaes.logger as idaeslog
+from idaes.accel import accelerate
+from idaes.accel import parity
 
 _log = idaeslog.getLogger(__name__)
 
@@ -118,6 +120,50 @@ class FeatureScaling:
     #     data_mean = data_mean.reshape(1, data_mean.shape[0])
     #     data_stdev = data_stdev.reshape(1, data_stdev.shape[0])
     #     return scaled_data, data_mean, data_stdev
+
+
+@accelerate("pysmo.sampling.prime_number_generator")
+def _prime_number_generator(n):
+    """Generate a list of the first n prime numbers.
+
+    Module-level so it can be accelerated: `accelerate` must never wrap a bound
+    method, or `self` would be marshalled across the boundary as the first
+    positional argument. `SamplingMethods.prime_number_generator` delegates here
+    and keeps its original signature and docstring.
+
+    Returns a list of Python ints, not an array: `HaltonSampling.sample_points`
+    indexes the result and feeds the element into integer arithmetic.
+    """
+    prime_list = []
+    current_no = 2
+    while len(prime_list) < n:
+        for i in range(2, current_no):
+            if (current_no % i) == 0:
+                break
+        else:
+            prime_list.append(current_no)
+        current_no += 1
+    return prime_list
+
+
+# Parity cases. All bit-exact (the default): the output is integers, and "the
+# leading primes while the count is below n" admits exactly one answer.
+#
+# The float values are not padding. This function is untyped and the IDAES suite
+# calls it with a float -- test_prime_number_generator_05 passes 2.9 and expects
+# [2, 3, 5], because the loop condition `len(prime_list) < n` goes false at 3.
+# An integer-typed Rust signature raised TypeError there while the Python path
+# returned a list. Fractional and negative n terminate immediately rather than
+# erroring, and that contract is pinned here.
+for _n in (-5, -0.5, 0, 0.5, 1, 1.000001, 2, 2.9, 3, 3.0, 25, 100, 500):
+    parity.register(
+        parity.ParityCase(
+            key="pysmo.sampling.prime_number_generator",
+            id=f"prime_number_generator-n{_n}",
+            make_args=lambda n=_n: ((n,), {}),
+        )
+    )
+del _n
 
 
 class SamplingMethods:
@@ -222,16 +268,7 @@ class SamplingMethods:
         #         prime_list.append(current_no)
         #     current_no += 1
 
-        prime_list = []
-        current_no = 2
-        while len(prime_list) < n:
-            for i in range(2, current_no):
-                if (current_no % i) == 0:
-                    break
-            else:
-                prime_list.append(current_no)
-            current_no += 1
-        return prime_list
+        return _prime_number_generator(n)
 
     def base_conversion(self, a, b):
         """

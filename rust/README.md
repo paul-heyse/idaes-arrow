@@ -47,7 +47,8 @@ packaging -- `maturin develop` does not).
 See the header comment in `Cargo.toml`. Short version: `datafusion 55.0.0`,
 `arrow`/`parquet` `59.3.0`, `object_store 0.13.2` (**not** the newer 0.14.x --
 DataFusion 55 requires `^0.13.2`), `pyo3 0.29`, `pyo3-arrow 0.19.0`.
-MSRV is 1.94.0, set by DataFusion.
+MSRV is 1.98.1 -- equal to the pinned toolchain, not to DataFusion's
+lower floor of 1.94.0.
 
 ## Licensing
 

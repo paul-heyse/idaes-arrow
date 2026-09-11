@@ -18,8 +18,51 @@
 
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
+# The default development interpreter. uv is the environment manager for this
+# fork; `.python-version` carries the same value so a bare `uv run`/`uv venv`
+# picks it up with no flags. Earlier interpreters are a compatibility matrix
+# concern (CI covers 3.10-3.14), not the default you develop against.
+python := env("IDAES_PYTHON", "3.14.7")
+venv := ".venv"
+
 default:
     @just --list --unsorted
+
+# --------------------------------------------------------------------- env --
+
+[group('env')]
+[doc('Create .venv on the pinned interpreter and install IDAES in editable mode')]
+dev-env:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    uv venv "{{ venv }}" --python "{{ python }}"
+    # --no-build-isolation keeps the editable install from re-resolving the
+    # build backend on every run; idaes-pse is pure Python, so this is safe.
+    uv pip install --python "{{ venv }}/bin/python" -e ".[ui,grid,coolprop]"
+    uv pip install --python "{{ venv }}/bin/python" -r requirements-dev.txt
+    echo "ready: {{ venv }} on $("{{ venv }}/bin/python" -V)"
+
+[group('env')]
+[doc('Build the extension and install it into .venv')]
+dev-env-accel: dev-env
+    #!/usr/bin/env bash
+    set -euo pipefail
+    VIRTUAL_ENV="{{ venv }}" maturin develop --release -m rust/py/idaes-accel/Cargo.toml
+    "{{ venv }}/bin/python" -c "import idaes_accel; print('accel', idaes_accel.__version__)"
+
+[group('env')]
+[doc('Which interpreter and backend a bare `just` run would use')]
+env-info:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "pinned python : {{ python }}  (.python-version: $(cat .python-version 2>/dev/null || echo none))"
+    uv --version
+    if [ -x "{{ venv }}/bin/python" ]; then
+      echo "venv          : $("{{ venv }}/bin/python" -V)"
+      "{{ venv }}/bin/python" -c "import idaes.accel as a; print('backend       :', a.status())" 2>/dev/null || true
+    else
+      echo "venv          : not created (run \`just dev-env\`)"
+    fi
 
 # ---------------------------------------------------------------- discovery --
 
@@ -150,9 +193,17 @@ features-powerset:
     cargo hack check --workspace --feature-powerset
 
 [group('scheduled')]
+[doc('Verify each package builds on the declared rust-version')]
 [working-directory('rust')]
 msrv:
-    cargo msrv verify
+    #!/usr/bin/env bash
+    set -euo pipefail
+    # cargo-msrv reads `package.rust-version`, so it cannot be pointed at a
+    # virtual workspace manifest -- it has to be run per package.
+    for manifest in crates/*/Cargo.toml py/*/Cargo.toml; do
+      echo "== $manifest"
+      cargo msrv verify --manifest-path "$manifest"
+    done
 
 [group('scheduled')]
 [doc('UB / aliasing / data-race interpretation. Records nothing about inputs not explored.')]
@@ -199,14 +250,14 @@ accel-wheel:
 
 [group('accel')]
 [doc('Build a wheel, install it into a THROWAWAY venv, import it. The real gate.')]
-accel-wheel-verify python="3.12":
+accel-wheel-verify py=python:
     #!/usr/bin/env bash
     set -euo pipefail
     maturin build --release -m rust/py/idaes-accel/Cargo.toml
     whl="$(ls -t rust/target/wheels/idaes_accel-*.whl | head -1)"
     echo "verifying $whl"
     tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
-    uv venv "$tmp/venv" --python "{{ python }}" -q
+    uv venv "$tmp/venv" --python "{{ py }}" -q
     uv pip install --python "$tmp/venv/bin/python" -q "$whl"
     "$tmp/venv/bin/python" -c "
     import idaes_accel
@@ -226,6 +277,20 @@ py-lint:
 [group('python')]
 py-test marks="not integration":
     pytest --pyargs idaes -m "{{ marks }}"
+
+[group('python')]
+[doc('Run the whole suite on every supported interpreter, 3.10 through 3.14')]
+py-test-matrix:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for v in 3.10 3.11 3.12 3.13 3.14; do
+      echo "=== python $v ==="
+      tmp="$(mktemp -d)"
+      uv venv "$tmp/venv" --python "$v" -q
+      uv pip install --python "$tmp/venv/bin/python" -q -e .
+      "$tmp/venv/bin/python" -m pytest --pyargs idaes -m unit -q -x || echo "FAILED on $v"
+      rm -rf "$tmp"
+    done
 
 [group('python')]
 [doc('Whole suite on the pure-Python path')]

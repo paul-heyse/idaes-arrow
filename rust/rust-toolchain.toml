@@ -3,9 +3,10 @@
 # compiler-private checks can never silently change the compiler that builds the
 # wheels shipped to users.
 #
-# Floor is dictated by DataFusion 55.0.0 (rust-version = 1.94.0), even though
-# DataFusion does not enter the dependency graph until the first query-shaped
-# target. See rust/Cargo.toml [workspace.package] rust-version.
+# This is the version everything is built and tested with, and it is also the
+# declared MSRV in rust/Cargo.toml -- the two are kept equal on purpose. A
+# declared floor below what CI exercises is a promise nothing verifies.
+# (DataFusion 55's own floor is 1.94.0; we sit above it.)
 [toolchain]
 channel = "1.98.1"
 profile = "minimal"

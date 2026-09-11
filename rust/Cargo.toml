@@ -14,7 +14,7 @@
 # Resolved pins for the Arrow/DataFusion stack, verified against crates.io and
 # against datafusion 55.0.0's own dependency requirements on 2026-09-10:
 #
-#   datafusion   = "=55.0.0"    rust-version 1.94.0
+#   datafusion   = "=55.0.0"    its own floor is 1.94.0; we pin higher
 #   arrow        = "=59.3.0"    DF55 requires ^59.2.0; 59.3.0 is a bugfix release
 #   parquet      = "=59.3.0"    same family, same requirement
 #   object_store = "=0.13.2"    DF55 requires ^0.13.2 => >=0.13.2, <0.14.0.
@@ -36,7 +36,13 @@ members = ["crates/*", "py/idaes-accel"]
 
 [workspace.package]
 edition = "2024"
-rust-version = "1.94.0"
+# Pinned to the stable release we actually build and test with, matching
+# rust-toolchain.toml. DataFusion 55's own floor is 1.94.0, but declaring a floor
+# lower than anything we exercise is an unverified promise -- and it buys nothing
+# here, because idaes-accel ships as a wheel we build ourselves rather than as a
+# library third parties compile against. `cargo msrv verify` checks this value.
+# Raising it also lets the MSRV-aware resolver pick newer dependency versions.
+rust-version = "1.98.1"
 license = "BSD-3-Clause"
 repository = "https://github.com/paul-heyse/idaes-arrow"
 authors = ["Paul Heyse"]
