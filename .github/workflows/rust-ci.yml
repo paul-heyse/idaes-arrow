@@ -1,0 +1,120 @@
+# Fast, required gate for the Rust workspace and the Python dispatch layer.
+# Tier 1/2 only -- Miri, mutants, fuzzing and the feature powerset live in
+# rust-scheduled.yml so that a pull request is never gated on an hour of compute.
+name: Rust
+
+on:
+  # NOTE: the two path lists are duplicated on purpose. GitHub Actions' workflow
+  # parser does not support YAML anchors/aliases, so `&x`/`*x` here would be a
+  # parse error at dispatch time rather than a lint failure.
+  push:
+    branches: [main]
+    paths:
+      - "rust/**"
+      - "idaes/accel/**"
+      - "justfile"
+      - ".github/workflows/rust-ci.yml"
+  pull_request:
+    paths:
+      - "rust/**"
+      - "idaes/accel/**"
+      - "justfile"
+      - ".github/workflows/rust-ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+  # sccache is not used in CI: it cannot cache cdylib crates, and Swatinem's
+  # cache already covers the rlib dependency graph we actually rebuild.
+  CARGO_INCREMENTAL: 0
+  # Tool versions are pinned. Consuming "latest" on every run makes CI
+  # non-reproducible and lets an upstream release break an unrelated PR.
+  NEXTEST_VERSION: "0.9.143"
+  DENY_VERSION: "0.20.2"
+  AUDIT_VERSION: "0.22.2"
+  SHEAR_VERSION: "1.13.4"
+
+defaults:
+  run:
+    shell: bash
+    working-directory: rust
+
+jobs:
+  lint:
+    name: fmt + clippy
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      # rust-toolchain.toml lives in rust/, so rustup resolves the pinned
+      # version from the working directory with no explicit setup action.
+      - run: rustc -vV && cargo -V
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+
+  test:
+    name: nextest + doctests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-nextest@${{ env.NEXTEST_VERSION }}
+      - run: cargo nextest run --workspace --profile ci
+      # nextest does not run doctests. This is not redundant.
+      - run: cargo test --workspace --doc
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: nextest-junit
+          path: rust/target/nextest/ci/junit.xml
+          if-no-files-found: warn
+
+  policy:
+    name: dependency policy
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny@${{ env.DENY_VERSION }},cargo-audit@${{ env.AUDIT_VERSION }},cargo-shear@${{ env.SHEAR_VERSION }}
+      - run: cargo deny check
+      - run: cargo audit
+      - run: cargo shear
+      - name: One type universe
+        # Two majors of arrow/parquet/object_store/datafusion make downcast_ref
+        # return None silently, with no compile error. This is the cheap check;
+        # `cargo deny check bans` enforces the same rule more broadly.
+        run: |
+          dupes="$(cargo tree -d 2>/dev/null || true)"
+          if grep -qE '^(arrow|parquet|object_store|datafusion)' <<<"$dupes"; then
+            echo "::error::duplicate major of a type-universe crate"
+            echo "$dupes"
+            exit 1
+          fi
+          echo "one type universe: ok"
+
+  headers:
+    name: license headers
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - run: python scripts/check_rust_headers.py

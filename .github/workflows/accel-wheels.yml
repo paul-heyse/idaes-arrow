@@ -1,0 +1,117 @@
+# Build idaes-accel wheels and prove each one installs into a CLEAN environment.
+#
+# `maturin develop` validates nothing about packaging: it installs into the
+# environment that built it. The only real evidence is a wheel installed
+# somewhere that never saw the build.
+name: Accel wheels
+
+on:
+  push:
+    branches: [main]
+    tags: ["accel-v*"]
+    paths:
+      - "rust/**"
+      - ".github/workflows/accel-wheels.yml"
+  pull_request:
+    paths:
+      - "rust/**"
+      - ".github/workflows/accel-wheels.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  MANIFEST: rust/py/idaes-accel/Cargo.toml
+
+jobs:
+  build:
+    name: ${{ matrix.target }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # manylinux2014 (glibc 2.17) rather than whatever the runner happens to
+          # have: a locally built wheel picks up the host's glibc and silently
+          # stops installing on older systems.
+          - os: ubuntu-24.04
+            target: x86_64
+            manylinux: "2014"
+          - os: ubuntu-24.04
+            target: aarch64
+            manylinux: "2014"
+          - os: macos-15
+            target: aarch64
+          # macos-13 is retired; macos-15-intel is the current x86_64 image.
+          - os: macos-15-intel
+            target: x86_64
+          - os: windows-2022
+            target: x64
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Build wheel
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.target }}
+          manylinux: ${{ matrix.manylinux || 'auto' }}
+          args: --release --out dist --manifest-path ${{ env.MANIFEST }}
+          sccache: "false"
+      - name: Inspect wheel tags
+        shell: bash
+        run: |
+          ls -la dist/
+          # abi3-py310 must hold: one wheel per platform covering 3.10-3.14.
+          # If a dependency ever re-enables pyo3-arrow's buffer_protocol feature
+          # this silently becomes a version-specific wheel, and the matrix below
+          # would start failing on some interpreters only.
+          for whl in dist/*.whl; do
+            echo "$whl"
+            case "$whl" in
+              *cp310-abi3*) ;;
+              *) echo "::error::expected a cp310-abi3 wheel, got $whl"; exit 1 ;;
+            esac
+          done
+      - uses: actions/upload-artifact@v7
+        with:
+          name: wheels-${{ matrix.os }}-${{ matrix.target }}
+          path: dist/*.whl
+          if-no-files-found: error
+
+  verify-clean-install:
+    name: clean install py${{ matrix.python-version }}
+    needs: [build]
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # Both ends of the abi3 range. One wheel has to serve both; that claim
+        # is worth testing rather than trusting.
+        python-version: ["3.10", "3.14"]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          name: wheels-ubuntu-24.04-x86_64
+          path: dist
+      - uses: astral-sh/setup-uv@v6
+      - name: Install the wheel into a fresh environment and import it
+        run: |
+          set -euo pipefail
+          uv venv /tmp/clean --python "${{ matrix.python-version }}"
+          uv pip install --python /tmp/clean/bin/python dist/*.whl
+          /tmp/clean/bin/python - <<'PY'
+          import idaes_accel
+          from idaes_accel import _core
+          print("version:", idaes_accel.__version__, "abi:", idaes_accel.__abi_version__)
+          fn = _core.pysmo__sampling__prime_number_generator
+          assert fn(3) == [2, 3, 5], fn(3)
+          # The float contract: `while len(prime_list) < 2.9` stops at three.
+          assert fn(2.9) == [2, 3, 5], fn(2.9)
+          assert fn(0) == [] and fn(-5) == []
+          print("smoke ok")
+          PY

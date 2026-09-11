@@ -70,6 +70,10 @@ omlt = [
   "onnx",
 ]
 testing = ["pytest", "addheader", "pyyaml"]
+# FORK: the optional Rust acceleration wheel. Deliberately NOT in
+# requirements-dev.txt -- that file is installed on Read the Docs and on every
+# cell of the core.yml matrix, none of which have a Rust toolchain.
+accel = ["idaes-accel"]
 
 # this will install all optional dependencies
 all = ["idaes-pse[ui,grid,omlt,coolprop]"]

@@ -6,10 +6,13 @@ on:
 
 jobs:
   clean-labels:
-    if: github.repository == 'IDAES/idaes-pse'
     name: (util) Remove workflow trigger labels
     runs-on: ubuntu-latest
-    if: contains(github.event.label.description, 'triggers_workflow')
+    # FORK: first conjunct disables this here -- it needs secrets.IDAES_BUILD_TOKEN,
+    # which only exists upstream.
+    if: >-
+      github.repository == 'IDAES/idaes-pse'
+      && contains(github.event.label.description, 'triggers_workflow')
     env:
       GITHUB_TOKEN: ${{ secrets.IDAES_BUILD_TOKEN }}
       pull_number: ${{ github.event.pull_request.number }}

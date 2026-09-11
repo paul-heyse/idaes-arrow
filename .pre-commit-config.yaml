@@ -6,3 +6,34 @@ repos:
       language_version: python3
       types:
         - python
+      # FORK: vendored reference docs and agent skills are not IDAES source.
+      # Kept in sync with [tool.black] extend-exclude in pyproject.toml and with
+      # .github/workflows/typos.toml.
+      exclude: ^(docs-code-update|\.codex|\.agents)/
+
+  # FORK: Rust hooks. `language: system` because the toolchain is pinned by
+  # rust/rust-toolchain.toml -- letting pre-commit manage a second, unpinned
+  # Rust would defeat the pin. `pass_filenames: false` because cargo operates on
+  # the workspace, not on a file list.
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt (rust/)
+        entry: bash -c 'cd rust && cargo fmt --all -- --check'
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+      - id: cargo-clippy
+        name: cargo clippy (rust/)
+        entry: bash -c 'cd rust && cargo clippy --workspace --all-targets -- -D warnings'
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+      - id: rust-license-headers
+        name: SPDX headers on Rust sources
+        entry: python3 scripts/check_rust_headers.py
+        language: system
+        types: [rust]
+        pass_filenames: false

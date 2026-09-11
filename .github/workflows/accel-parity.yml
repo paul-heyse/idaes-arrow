@@ -1,0 +1,110 @@
+# The gate that matters: run the real IDAES suite against both backends.
+#
+# Parity unit tests compare one function against its twin. They cannot see
+# divergence at an actual call site -- a wrong argument type, a coercion the
+# Python version performed implicitly, a mutated input. Only running the
+# existing suite under IDAES_ACCEL=force catches that, which is exactly how the
+# float-argument bug in prime_number_generator was found.
+name: Accel parity
+
+on:
+  # Duplicated rather than anchored: GitHub Actions does not support YAML aliases.
+  push:
+    branches: [main]
+    paths:
+      - "rust/**"
+      - "idaes/**"
+      - ".github/workflows/accel-parity.yml"
+  pull_request:
+    paths:
+      - "rust/**"
+      - "idaes/**"
+      - ".github/workflows/accel-parity.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  parity:
+    name: ${{ matrix.os }} / IDAES_ACCEL=${{ matrix.accel }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+        # `off` is the control. It must produce exactly the same result as the
+        # pure-Python baseline, or the dispatch layer itself has changed
+        # behaviour -- which would be invisible if only `force` were run.
+        accel: ["off", "force"]
+    env:
+      IDAES_ACCEL: ${{ matrix.accel }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # setuptools-scm needs tag history
+      - uses: astral-sh/setup-uv@v6
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+
+      - name: Shorten the Cargo target path on Windows
+        # Deep dependency trees under D:\a\... exceed MAX_PATH. Set only where it
+        # applies: an empty CARGO_TARGET_DIR is not the same as an unset one.
+        if: runner.os == 'Windows'
+        run: printf 'CARGO_TARGET_DIR=C:\\t\n' >> "$GITHUB_ENV"
+
+      - name: Create environment
+        run: |
+          set -euo pipefail
+          uv venv .venv --python 3.14
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            echo "PY=$PWD/.venv/Scripts/python.exe" >> "$GITHUB_ENV"
+            echo "BIN=$PWD/.venv/Scripts" >> "$GITHUB_ENV"
+          else
+            echo "PY=$PWD/.venv/bin/python" >> "$GITHUB_ENV"
+            echo "BIN=$PWD/.venv/bin" >> "$GITHUB_ENV"
+          fi
+
+      - name: Install idaes-pse
+        run: uv pip install --python "$PY" -e . pytest
+
+      - name: Build and install idaes-accel
+        # Installed from a built wheel, never through requirements-dev.txt:
+        # adding it there would demand a Rust toolchain on Read the Docs and on
+        # every cell of the existing 10-way core.yml matrix.
+        if: matrix.accel == 'force'
+        run: |
+          set -euo pipefail
+          uv pip install --python "$PY" maturin
+          "$BIN/maturin" build --release --out dist -m rust/py/idaes-accel/Cargo.toml
+          uv pip install --python "$PY" dist/*.whl
+
+      - name: Confirm the backend actually in use
+        # A `force` job that silently fell back would pass every test for the
+        # wrong reason, and an `off` job that picked up a stray install would
+        # not be testing the control.
+        run: |
+          "$PY" - <<'PY_EOF'
+          import os, sys
+          import idaes.accel as accel
+          status = accel.status()
+          expected = os.environ["IDAES_ACCEL"] == "force"
+          print(f"mode={status.mode} available={status.available} reason={status.reason}")
+          if status.available != expected:
+              sys.exit(f"expected available={expected}, got {status.available}")
+          PY_EOF
+
+      - name: Acceleration suite
+        run: |
+          "$PY" -m pytest --pyargs idaes.accel -m "unit or component" -q
+
+      - name: IDAES suite
+        run: |
+          "$PY" -m pytest --pyargs idaes -m "not integration" -q
+
+      # Coverage is uploaded ONLY from core.yml, which runs with no extension
+      # installed. Under `force` the Python implementations stop executing, so
+      # idaes/ coverage drops well past Codecov's 1% project threshold and would
+      # fail every acceleration PR for no real reason.

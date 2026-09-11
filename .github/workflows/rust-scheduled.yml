@@ -1,0 +1,128 @@
+# Tier 3: expensive evidence, on a schedule or on demand.
+#
+# Every job here answers a question the fast gate cannot, and none of them
+# belongs on a pull request. Each needs an owner and a documented response when
+# it goes red -- a scheduled job nobody reads is worse than no job.
+name: Rust scheduled
+
+on:
+  schedule:
+    # Weekly, Monday 06:00 UTC. Not daily: these jobs are minutes to hours, and
+    # nothing here changes fast enough to justify it.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      miri-seeds:
+        description: Number of Miri seeds to explore
+        required: false
+        default: "32"
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  # Compiler-private tooling is pinned to an exact nightly. Following the
+  # nightly channel means an unrelated compiler change can turn this red, and
+  # `cargo +nightly` in a recipe is not a pin.
+  NIGHTLY: nightly-2026-09-08
+
+defaults:
+  run:
+    shell: bash
+    working-directory: rust
+
+jobs:
+  coverage:
+    name: coverage
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: rust }
+      - uses: taiki-e/install-action@v2
+        with: { tool: "cargo-llvm-cov,cargo-nextest" }
+      - run: cargo llvm-cov nextest --workspace --all-features --lcov --output-path lcov.info
+      - uses: actions/upload-artifact@v7
+        with: { name: rust-coverage, path: rust/lcov.info }
+
+  features:
+    name: feature matrix
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: rust }
+      - uses: taiki-e/install-action@v2
+        with: { tool: cargo-hack }
+      # --all-features proves nothing about any individual feature, and
+      # --no-default-features is where accidental feature coupling shows up.
+      - run: cargo hack check --workspace --feature-powerset
+      - run: cargo hack check --workspace --no-default-features
+
+  msrv:
+    name: msrv
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: taiki-e/install-action@v2
+        with: { tool: cargo-msrv }
+      # cargo-msrv reads package.rust-version, so it cannot be pointed at a
+      # virtual workspace manifest; it runs per package.
+      - run: |
+          for manifest in crates/*/Cargo.toml py/*/Cargo.toml; do
+            echo "== $manifest"
+            cargo msrv verify --manifest-path "$manifest"
+          done
+
+  miri:
+    name: miri (${{ github.event.inputs.miri-seeds || '32' }} seeds)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - run: rustup toolchain install "$NIGHTLY" --component miri --profile minimal
+      - run: cargo "+$NIGHTLY" miri setup
+      # One passing seed covers one explored interleaving and allocation layout.
+      # A range is the only thing that makes a Miri result worth quoting -- and
+      # it still proves nothing about inputs that were never executed.
+      - run: MIRIFLAGS="-Zmiri-many-seeds=0..${{ github.event.inputs.miri-seeds || '32' }}" cargo "+$NIGHTLY" miri test -p idaes-accel-core
+
+  udeps:
+    name: unused dependencies (compiler-oriented)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - run: rustup toolchain install "$NIGHTLY" --profile minimal
+      - uses: taiki-e/install-action@v2
+        with: { tool: cargo-udeps }
+      # Adjudicates what cargo-shear only hypothesises about on the fast gate.
+      - run: cargo "+$NIGHTLY" udeps --workspace --all-targets
+
+  mutants:
+    name: mutation testing
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: rust }
+      - uses: taiki-e/install-action@v2
+        with: { tool: "cargo-mutants,cargo-nextest" }
+      # Coverage says which lines ran. This says whether the assertions would
+      # have noticed if they were wrong. Survivors need triage, not a threshold.
+      - run: cargo mutants --package idaes-accel-core --no-shuffle -j 2
+        continue-on-error: true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: mutants, path: rust/mutants.out/ }
+
+  unsafe-surface:
+    name: unsafe surface
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: taiki-e/install-action@v2
+        with: { tool: cargo-geiger }
+      # An inventory and a trend line, not a vulnerability scan.
+      - run: cargo geiger --all-features || true

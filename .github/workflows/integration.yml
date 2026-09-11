@@ -42,12 +42,14 @@ defaults:
 
 jobs:
   precheck:
-    if: github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse'
     name: (util) Check if should run
     runs-on: ubuntu-24.04
     # the ">-" YAML syntax will result in a single string without terminating newline
     # it is used here to make the relatively complex if clause more readable by adding line breaks
+    # FORK: first conjunct keeps scheduled runs from firing outside upstream.
     if: >-
+      (github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse')
+      &&
       (
         (
           github.event.action == 'labeled'
@@ -117,11 +119,13 @@ jobs:
           _display_on_run_dashboard(msg)
           _set_output('workflow-trigger', workflow_trigger)
   pytest:
-    if: github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse'
     name: pytest (py${{ matrix.python-version }}/${{ matrix.os }}/integration)
     runs-on: ${{ matrix.runner-image }}
     needs: [precheck]
+    # FORK: first conjunct keeps scheduled runs from firing outside upstream.
     if: >-
+      (github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse')
+      &&
       (
         needs.precheck.outputs.workflow-trigger == 'user_dispatch'
         || needs.precheck.outputs.workflow-trigger == 'not_pr'
@@ -160,11 +164,13 @@ jobs:
         run: pytest --pyargs idaes -m integration
 
   examples:
-    if: github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse'
     name: Run examples (py${{ matrix.python-version }}/${{ matrix.os }})
     runs-on: ${{ matrix.runner-image }}
     needs: [precheck]
+    # FORK: first conjunct keeps scheduled runs from firing outside upstream.
     if: >-
+      (github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse')
+      &&
       (
         needs.precheck.outputs.workflow-trigger == 'user_dispatch'
         || needs.precheck.outputs.workflow-trigger == 'not_pr'
@@ -209,12 +215,14 @@ jobs:
           working-dir: ${{ runner.temp }}
 
   pytest-site-packages:
-    if: github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse'
     name: Run tests from site-packages (non-editable) installation (${{ matrix.install-mode }}/${{ matrix.os }})
     # NOTE: using ubuntu-latest (20.04) instead of 18.04 results in failures in power_generation/carbon_capture/mea_solvent_system/unit_models/tests/test_column.py
     runs-on: ${{ matrix.runner-image }}
     needs: [precheck]
+    # FORK: first conjunct keeps scheduled runs from firing outside upstream.
     if: >-
+      (github.event_name != 'schedule' || github.repository == 'IDAES/idaes-pse')
+      &&
       (
         needs.precheck.outputs.workflow-trigger == 'user_dispatch'
         || needs.precheck.outputs.workflow-trigger == 'not_pr'
