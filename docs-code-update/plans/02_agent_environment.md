@@ -461,3 +461,64 @@ gh run list --repo paul-heyse/idaes-arrow --limit 6
 4. `idaes get-extensions` downloads ~100 MB on first bootstrap and in the parity CI job. If that is
    unwelcome in CI, the alternative is scoping the parity suite to markers needing no compiled
    binaries, at some loss of coverage.
+
+---
+
+# Outcome (recorded after implementation)
+
+## What the re-measurement changed
+
+The plan's numbers came from ruff 0.14.2 and pyrefly 0.51.1, which is what was on
+`PATH`. Re-measured on the pinned ruff 0.16.7 and pyrefly 1.3.0:
+
+| Measure | Planned (stale tools) | Actual (pinned tools) |
+|---|---:|---:|
+| Files reformatted | 226 | **170** |
+| pyrefly errors, whole repo | 49,891 | 48,522 |
+| pyrefly after calibration | ~4,074 | **3,306** |
+| pyrefly in fork code | 11 | 8, then **0** (fixed) |
+| ruff baseline | 3,224 | **20,442** |
+
+The ruff figure grew because 0.16's default rule set is much wider *and* because
+the final `select` is broader than what 0.14.2 reported by default. It is a
+baseline, not a debt target.
+
+The pyrefly `[[sub-config]]` schema was verified empirically on 1.3.0 with a
+fixture (one error without the block, zero with it) rather than carried over
+from 0.51.
+
+## A correction to the plan's premise about pylint
+
+The plan said dropping pylint would cost the `declare_process_block_class()`
+awareness provided by `.pylint/idaes_transform.py`. Reading the file showed that
+is wrong in a useful way: the plugin **added no checks**. Its own comments
+describe it — "causes pylint to stop further checks", "a quick fix for this false
+positive", "uninferability stubs". It existed to stop pylint's inference lying
+about Pyomo metaprogramming. There was nothing to port.
+
+What *was* nearly lost is different and was caught late: the first `[tool.ruff]`
+omitted ruff's `PL` and `ISC` families entirely, which would have silently
+dropped coverage rather than moving it. Corrected to `PLC`/`PLE`/`PLW` + `ISC`,
+with `PLR` excluded because the old gate ran `pylint --disable=R`.
+
+Custom rules went to **ast-grep**, not ruff: ruff's rules are compiled into its
+binary and it has no plugin API. Four rules in `sgrules/`, each verified to fire
+on a probe and stay silent on correct code.
+
+## A mistake made and corrected during implementation
+
+The first `dependabot.yml` grouped dependencies but did not restrict them —
+`groups` controls PR batching, not which dependencies are considered. Dependabot
+immediately opened ten PRs against upstream's documentation dependencies and the
+upstream workflows. All ten would have produced modified upstream files, the
+exact cost `AGENTS.md` warns about. Now scoped with `allow` to ruff and pyrefly
+plus the cargo workspace.
+
+## Deviations from the plan, deliberate
+
+- `yamllint` was dropped. `actionlint` covers the workflows, which is where the
+  bugs actually were, and a second YAML linter adds noise without signal.
+- `actionlint` runs at `--severity=warning`. The remaining findings are
+  info-level SC2086 inside upstream's own `run:` scripts.
+- The justfile keeps one flat recipe list with `[group(...)]` rather than a
+  separate `rust/justfile`, so `just --list` shows the whole surface at once.
