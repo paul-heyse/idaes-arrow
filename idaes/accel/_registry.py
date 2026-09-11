@@ -14,7 +14,7 @@
 
 import functools
 import inspect
-from typing import Callable, Dict, Optional
+from typing import Callable, Dict
 
 from idaes.accel import _loader
 
@@ -42,9 +42,10 @@ class Accelerated:
     pair can never be observed half-updated.
     """
 
-    def __init__(self, key: str, python_impl: Callable):
+    def __init__(self, key: str, python_impl: Callable, guard: Callable | None = None):
         self.key = key
         self.python_impl = python_impl
+        self.guard = guard
         self._cache = (-1, python_impl)
         functools.update_wrapper(self, python_impl)
         # Without this, Sphinx renders every accelerated function as
@@ -53,7 +54,7 @@ class Accelerated:
         self.__signature__ = inspect.signature(python_impl)
 
     @property
-    def rust_impl(self) -> Optional[Callable]:
+    def rust_impl(self) -> Callable | None:
         """The Rust implementation, or ``None`` if unavailable or not built."""
         current = _loader.status()
         if not current.available:
@@ -62,8 +63,16 @@ class Accelerated:
 
     @property
     def backend(self) -> str:
-        """``"rust"`` or ``"python"`` -- whichever a call would use right now."""
-        return "rust" if self._resolved() is not self.python_impl else "python"
+        """Which implementation a call would reach.
+
+        ``"rust (guarded)"`` means the Rust path is available but each call is
+        still subject to :attr:`guard`, which can route individual arguments back
+        to Python. The guard needs the arguments, so this property cannot resolve
+        it -- do not read ``backend`` as a per-call answer when a guard exists.
+        """
+        if self._resolved() is self.python_impl:
+            return "python"
+        return "rust (guarded)" if self.guard is not None else "rust"
 
     def _resolved(self) -> Callable:
         generation, cached = self._cache
@@ -87,13 +96,29 @@ class Accelerated:
         return chosen
 
     def __call__(self, *args, **kwargs):
-        return self._resolved()(*args, **kwargs)
+        resolved = self._resolved()
+        if resolved is not self.python_impl and self.guard is not None:
+            # An acceleration precondition. The Rust implementation is only
+            # dispatched to for inputs where it is provably equivalent; anything
+            # else takes the Python path, which is the whole point of keeping it.
+            #
+            # This exists because a port necessarily narrows an untyped Python
+            # signature to a concrete Rust one, and the two contracts overlap
+            # rather than nest. Falling back is correct and cheap; guessing is
+            # neither.
+            try:
+                accelerable = self.guard(*args, **kwargs)
+            except Exception:  # pylint: disable=broad-except
+                accelerable = False
+            if not accelerable:
+                return self.python_impl(*args, **kwargs)
+        return resolved(*args, **kwargs)
 
     def __repr__(self):
         return f"<Accelerated {self.key!r} backend={self.backend}>"
 
 
-def accelerate(key: str):
+def accelerate(key: str, guard: Callable | None = None):
     """Decorate a **module-level** pure-Python function as accelerable.
 
     The decorated object keeps the original function reachable, so the call site
@@ -102,6 +127,16 @@ def accelerate(key: str):
     Never apply this to a method. ``self`` would be marshalled across the
     boundary as the first positional argument; extract the body to a
     module-level function and have the method delegate to it.
+
+    :param guard: optional precondition receiving the call's arguments and
+        returning whether the Rust path is *provably equivalent* for them. When
+        it returns false -- or raises -- the call takes the Python path.
+
+        Use it whenever porting narrowed an untyped signature. A Rust ``f64``
+        parameter, for instance, accepts everything with ``__float__`` but
+        rejects everything that is merely order-comparable, and it silently
+        rounds exact types such as ``Decimal``. Those are different contracts,
+        not a stricter one, and the guard is where the difference is declared.
     """
 
     def decorate(python_impl):
@@ -112,7 +147,7 @@ def accelerate(key: str):
             )
         if key in _REGISTRY:
             raise KeyError(f"duplicate accel key {key!r}")
-        wrapper = Accelerated(key, python_impl)
+        wrapper = Accelerated(key, python_impl, guard=guard)
         _REGISTRY[key] = wrapper
         return wrapper
 

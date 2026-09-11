@@ -1,7 +1,7 @@
 {
   "tool": "ruff",
   "tool_version": "0.16.7",
-  "total": 20442,
+  "total": 20441,
   "counts": {
     ".github/actions/run-examples/examples_for_idaes_ci.py::ARG001": 1,
     ".github/actions/run-examples/examples_for_idaes_ci.py::E501": 1,
@@ -72,7 +72,6 @@
     "idaes/accel/_registry.py::TRY003": 3,
     "idaes/accel/_registry.py::UP006": 2,
     "idaes/accel/_registry.py::UP035": 2,
-    "idaes/accel/_registry.py::UP045": 1,
     "idaes/accel/parity.py::TRY003": 3,
     "idaes/accel/parity.py::UP006": 4,
     "idaes/accel/parity.py::UP035": 3,

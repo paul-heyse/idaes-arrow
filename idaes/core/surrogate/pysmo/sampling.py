@@ -122,7 +122,40 @@ class FeatureScaling:
     #     return scaled_data, data_mean, data_stdev
 
 
-@accelerate("pysmo.sampling.prime_number_generator")
+def _prime_number_generator_accelerable(n):
+    """Whether the Rust kernel is provably equivalent to Python for this `n`.
+
+    The Python loop only ever evaluates `len(prime_list) < n`, so its real
+    contract is "anything order-comparable with int". The Rust kernel takes an
+    `f64`, whose contract is "anything float-convertible". Those overlap; neither
+    contains the other. Three concrete divergences motivated this guard, all
+    confirmed against both backends:
+
+    * `Decimal("3.0000000000000000001")` compares above 3 exactly, but rounds to
+      3.0 in f64 -- the Rust path returns one prime fewer, silently. The same
+      holds for `Fraction` and `numpy.longdouble`.
+    * `numpy.array([3])` never converts under Python (it broadcasts and takes a
+      truth value) but raises under f64 conversion.
+    * `-(2**1024)` terminates immediately under Python and raises `OverflowError`
+      under f64 conversion.
+
+    So restrict acceleration to the types f64 represents exactly and let
+    everything else take the Python path. `bool` is deliberately included -- it is
+    an `int` subclass and both paths agree on it.
+    """
+    if isinstance(n, float):
+        return True
+    if isinstance(n, int):
+        # Beyond 2**53 an int is not exactly representable as f64, and beyond the
+        # f64 range the conversion raises outright.
+        return abs(n) <= 2**53
+    return False
+
+
+@accelerate(
+    "pysmo.sampling.prime_number_generator",
+    guard=_prime_number_generator_accelerable,
+)
 def _prime_number_generator(n):
     """Generate a list of the first n prime numbers.
 
@@ -164,6 +197,69 @@ for _n in (-5, -0.5, 0, 0.5, 1, 1.000001, 2, 2.9, 3, 3.0, 25, 100, 500):
         )
     )
 del _n
+
+# Types the guard above must route to the Python path. Each of these was a
+# confirmed divergence before the guard existed; they are registered so the
+# dispatch decision itself is tested, not just the kernel.
+#
+# Every case must be RUNNABLE. `2**53 + 1` is a real guard boundary but asks for
+# nine quadrillion primes, so it is asserted against the guard directly in
+# idaes/accel/tests/test_registry_coverage.py instead of being run.
+for _label, _factory in (
+    (
+        "decimal-just-above-int",
+        lambda: __import__("decimal").Decimal("3.0000000000000000001"),
+    ),
+    (
+        "fraction-just-above-int",
+        lambda: __import__("fractions").Fraction(3 * 10**18 + 1, 10**18),
+    ),
+    ("huge-negative-int", lambda: -(2**1024)),
+):
+    parity.register(
+        parity.ParityCase(
+            key="pysmo.sampling.prime_number_generator",
+            id=f"prime_number_generator-{_label}",
+            make_args=lambda f=_factory: ((f(),), {}),
+        )
+    )
+del _label, _factory
+
+# NumPy scalars and arrays. `np.array([3])` in particular was a divergence with
+# exactly the shape of the float bug: Python never converts `n`, it only
+# evaluates `len(prime_list) < n`, which broadcasts; an f64 parameter cannot.
+for _label, _factory in (
+    ("ndarray-1elem", lambda: __import__("numpy").array([3])),
+    ("ndarray-0d", lambda: __import__("numpy").array(3)),
+    ("np-int64", lambda: __import__("numpy").int64(3)),
+    ("np-float32", lambda: __import__("numpy").float32(2.9)),
+):
+    parity.register(
+        parity.ParityCase(
+            key="pysmo.sampling.prime_number_generator",
+            id=f"prime_number_generator-{_label}",
+            make_args=lambda f=_factory: ((f(),), {}),
+            requires=("numpy",),
+        )
+    )
+del _label, _factory
+
+# Inputs where BOTH implementations must fail, and fail as the same type. A port
+# that turns one exception class into another breaks `except` blocks silently,
+# and no value comparison can see it.
+for _label, _factory in (
+    ("raises-none", lambda: None),
+    ("raises-str", lambda: "3"),
+):
+    parity.register(
+        parity.ParityCase(
+            key="pysmo.sampling.prime_number_generator",
+            id=f"prime_number_generator-{_label}",
+            make_args=lambda f=_factory: ((f(),), {}),
+            raises=True,
+        )
+    )
+del _label, _factory
 
 
 class SamplingMethods:

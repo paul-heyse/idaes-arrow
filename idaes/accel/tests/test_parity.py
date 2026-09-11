@@ -35,6 +35,72 @@ from idaes.accel.tests import compare
 from idaes.accel.tests._harness import to_params
 
 
+def _guard_allows(accelerated, args, kwargs):
+    """Whether the acceleration precondition admits these arguments."""
+    try:
+        return bool(accelerated.guard(*args, **kwargs))
+    except Exception:  # a guard that raises means "not accelerable"
+        return False
+
+
+def _assert_falls_back(accelerated, case, args, kwargs):
+    """A guard-rejected input must behave exactly like the Python implementation.
+
+    Compared through the dispatcher, not the kernel: this asserts the routing
+    decision, which is the thing that can regress when a guard is loosened.
+    """
+    python_exc = dispatch_exc = None
+    try:
+        expected = accelerated.python_impl(*deepcopy(args), **deepcopy(kwargs))
+    except BaseException as exc:  # comparing failure modes, so catch everything
+        python_exc, expected = exc, None
+    try:
+        actual = accelerated(*args, **kwargs)
+    except BaseException as exc:  # comparing failure modes, so catch everything
+        dispatch_exc, actual = exc, None
+
+    if python_exc is not None or dispatch_exc is not None:
+        assert type(python_exc) is type(dispatch_exc), (
+            f"{case.id}: guard-rejected input diverged -- python raised "
+            f"{type(python_exc).__name__ if python_exc else None}, dispatch raised "
+            f"{type(dispatch_exc).__name__ if dispatch_exc else None}"
+        )
+        return
+    compare.auto(expected, actual)
+
+
+def _assert_raises_alike(accelerated, rust, case, args, kwargs):
+    """Both implementations must fail, and fail as the same exception type.
+
+    A port that turns a `PyomoException` into a `TypeError` breaks every caller
+    with `except PyomoException` around it, and no value comparison can see that.
+    """
+    python_exc = rust_exc = None
+    try:
+        result = accelerated.python_impl(*deepcopy(args), **deepcopy(kwargs))
+    except BaseException as exc:  # comparing failure modes, so catch everything
+        python_exc = exc
+    else:
+        pytest.fail(
+            f"{case.id}: python implementation returned {result!r}, expected a raise"
+        )
+
+    try:
+        rust(*args, **kwargs)
+    except BaseException as exc:  # comparing failure modes, so catch everything
+        rust_exc = exc
+    else:
+        pytest.fail(
+            f"{case.id}: rust implementation returned normally, expected a raise"
+        )
+
+    assert type(python_exc) is type(rust_exc), (
+        f"{case.id}: exception type differs -- "
+        f"python raised {type(python_exc).__name__}({python_exc}), "
+        f"rust raised {type(rust_exc).__name__}({rust_exc})"
+    )
+
+
 def run_case(case):
     """Assert the Python and Rust implementations agree for one case."""
     accelerated = registry().get(case.key)
@@ -47,6 +113,18 @@ def run_case(case):
 
     args, kwargs = case.make_args()
     python_args, python_kwargs = deepcopy(args), deepcopy(kwargs)
+
+    # An input the guard rejects must not be compared against the Rust kernel --
+    # the whole point of the guard is that the kernel is NOT equivalent there.
+    # What has to hold instead is that the dispatcher actually falls back, which
+    # is the behaviour users get.
+    if accelerated.guard is not None and not _guard_allows(accelerated, args, kwargs):
+        _assert_falls_back(accelerated, case, args, kwargs)
+        return
+
+    if case.raises:
+        _assert_raises_alike(accelerated, rust, case, args, kwargs)
+        return
 
     expected = accelerated.python_impl(*python_args, **python_kwargs)
     actual = rust(*args, **kwargs)

@@ -13,6 +13,7 @@
 """Guards keeping the registry and the parity suite in step."""
 
 import inspect
+from decimal import Decimal
 
 import pytest
 
@@ -54,6 +55,32 @@ def test_wrappers_remain_resolvable_by_name():
             f"{key}: {module.__name__}.{accelerated.python_impl.__name__} "
             "no longer resolves to the wrapper; pickling would break"
         )
+
+
+@pytest.mark.unit
+def test_guards_reject_inexact_inputs():
+    """Guard boundaries that cannot be exercised by running the function.
+
+    `2**53 + 1` is the exact point where an int stops being representable in
+    f64, but asking for that many primes never returns -- so the precondition is
+    asserted directly instead.
+    """
+    accelerated = registry().get("pysmo.sampling.prime_number_generator")
+    if accelerated is None or accelerated.guard is None:
+        pytest.skip("prime_number_generator is not registered with a guard")
+
+    guard = accelerated.guard
+    # Exactly representable: the Rust kernel is equivalent.
+    assert guard(3)
+    assert guard(2.9)
+    assert guard(2**53)
+    assert guard(-(2**53))
+    # Not representable, or a different comparison contract entirely.
+    assert not guard(2**53 + 1)
+    assert not guard(-(2**1024))
+    assert not guard(Decimal("3.0000000000000000001"))
+    assert not guard("3")
+    assert not guard(None)
 
 
 @pytest.mark.unit

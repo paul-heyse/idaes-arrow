@@ -53,6 +53,16 @@ class ParityCase:
     atol: float = 0.0
     """Tolerances. Zero means bit-exact, which is the default on purpose."""
 
+    raises: bool = False
+    """Expect *both* implementations to raise, and compare the exception types.
+
+    Without this the harness calls the Python implementation unguarded, so a case
+    whose Python side raises errors the test rather than comparing anything --
+    meaning exception parity could not be expressed at all. Type equality is what
+    is compared, not the message: callers write ``except SomeError``, and a port
+    that swaps the class silently stops being caught.
+    """
+
     note: str = ""
     """Why a loosened tolerance is acceptable. Required whenever one is set."""
 
