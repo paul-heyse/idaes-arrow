@@ -3,7 +3,7 @@
 ### docs
 # Newer sphinx needed for proper type hint support in docstrings
 sphinx>=3.0.0,!=8.2.0
-sphinxcontrib-napoleon>=0.5.0
+sphinxcontrib-napoleon>=0.7
 sphinx-argparse==0.5.2
 sphinx-book-theme<=1.1.2,>=1.0.0
 sphinx-copybutton==0.5.2
