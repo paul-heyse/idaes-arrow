@@ -145,7 +145,7 @@ jobs:
           path: dist
 
       - name: Upload dist files to TestPyPI
-        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33
         with:
           repository-url: https://test.pypi.org/legacy/
 
@@ -197,7 +197,7 @@ jobs:
           path: dist
 
       - name: Upload dist files to PyPI
-        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33
 
   env-snapshot:
     if: github.repository == 'IDAES/idaes-pse'
