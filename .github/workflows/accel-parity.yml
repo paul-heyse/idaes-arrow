@@ -40,6 +40,12 @@ jobs:
         accel: ["off", "force"]
     env:
       IDAES_ACCEL: ${{ matrix.accel }}
+    defaults:
+      run:
+        # REQUIRED. On windows-* runners the default shell is PowerShell; every
+        # script in this job is bash. Without this the Windows cells fail with a
+        # PowerShell ParserError before doing any work.
+        shell: bash
     steps:
       - uses: actions/checkout@v6
         with:
@@ -67,8 +73,24 @@ jobs:
             echo "BIN=$PWD/.venv/bin" >> "$GITHUB_ENV"
           fi
 
+      - name: Install OS libraries the IDAES binaries link against
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgfortran5 libgomp1 liblapack3 libblas3
+
       - name: Install idaes-pse
         run: uv pip install --python "$PY" -e . pytest
+
+      - name: Download IDAES solvers and compiled libraries
+        # NOT optional. `idaes/core/util/functions.py` does
+        # os.path.isfile(find_library("functions")), which is os.path.isfile(None)
+        # -> TypeError when the extensions are absent. That kills the whole pytest
+        # session at COLLECTION, which is exactly how this job failed before.
+        run: |
+          set -euo pipefail
+          "$BIN/idaes" get-extensions --extra petsc --verbose
+          ls -l "$("$BIN/idaes" bin-directory)"
 
       - name: Build and install idaes-accel
         # Installed from a built wheel, never through requirements-dev.txt:
