@@ -98,7 +98,7 @@ jobs:
         with:
           name: wheels-ubuntu-24.04-x86_64
           path: dist
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v7
       - name: Install the wheel into a fresh environment and import it
         run: |
           set -euo pipefail
