@@ -1,43 +1,57 @@
 # Fast local gates. Everything here also runs in CI; the point of having it
 # locally is to fail in two seconds instead of two minutes.
 #
-# Versions are pinned to match pyproject [dependency-groups].quality exactly. If
-# they drift, pre-commit and CI will disagree about what "formatted" means.
+# Deliberately NO auto-fixing lint hook. `ruff --fix` across a repo whose lint
+# findings are baselined is actively harmful: it rewrites hundreds of files,
+# changes the counts in .quality/ruff-baseline.json, and can make some rules
+# worse (a reflow that fixes one rule pushes lines past E501). Formatting is
+# unambiguous and belongs here; lint is a baseline comparison and belongs in
+# `just lint-py`.
+#
+# Versions match pyproject [dependency-groups].quality exactly. If they drift,
+# pre-commit and CI disagree about what "formatted" means.
 repos:
-  # FORK: ruff replaces black. `ruff-format` first so the linter sees formatted
-  # code; `ruff check` here is fix-only on safe rules -- the authoritative lint
-  # gate is `just lint-py`, which compares against the recorded baseline.
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.16.7
     hooks:
+      # Format only. See the note above about --fix.
       - id: ruff-format
         exclude: ^(docs-code-update|\.codex|\.agents)/
-      - id: ruff
-        args: [--fix, --exit-non-zero-on-fix]
-        exclude: ^(docs-code-update|\.codex|\.agents)/
-
-  - repo: https://github.com/tamasfe/taplo
-    rev: 0.10.0
-    hooks:
-      - id: taplo-format
-
-  - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.12
-    hooks:
-      - id: actionlint
-        # Catches duplicate YAML keys, shell-expression errors and unknown
-        # runner labels. Each of those has already bitten this repository.
 
   - repo: https://github.com/koalaman/shellcheck-precommit
     rev: v0.11.0
     hooks:
       - id: shellcheck
+        # Fork-authored shell only. docs/scripts/devdocs.sh and
+        # scripts/remove-idaes-from-path.sh are upstream's (the latter dates to
+        # their CircleCI era) and carry findings; fixing them is merge cost for
+        # no benefit, and they are not on any path this fork exercises.
+        files: ^(scripts/bootstrap\.sh|\.claude/hooks/.*\.sh)$
 
-  # Local hooks: these use the toolchain pinned by rust/rust-toolchain.toml and
-  # the project's own scripts, so pre-commit must not manage a second copy.
-  # `pass_filenames: false` because cargo operates on the workspace, not a list.
+  # Local hooks use the toolchain pinned by rust/rust-toolchain.toml and the
+  # binaries `just bootstrap` installs, so pre-commit must not manage a second
+  # copy. `pass_filenames: false` because these operate on the workspace.
   - repo: local
     hooks:
+      - id: taplo-format
+        name: taplo fmt (TOML)
+        # Local rather than hosted: tamasfe/taplo publishes no
+        # .pre-commit-hooks.yaml, and the community mirror lags the release.
+        entry: taplo fmt
+        language: system
+        types: [toml]
+        pass_filenames: false
+
+      - id: actionlint
+        name: actionlint (workflows)
+        # Catches duplicate YAML keys, bad expressions and unknown runner
+        # labels -- each has already broken CI here. --severity=warning because
+        # the remaining info findings are in upstream's own run-scripts.
+        entry: bash -c 'SHELLCHECK_OPTS="--severity=warning" actionlint .github/workflows/*.yml'
+        language: system
+        files: ^\.github/workflows/.*\.ya?ml$
+        pass_filenames: false
+
       - id: cargo-fmt
         name: cargo fmt (rust/)
         entry: bash -c 'cd rust && cargo fmt --all -- --check'

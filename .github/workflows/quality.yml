@@ -80,7 +80,13 @@ jobs:
         run: taplo fmt --check --diff
 
       - name: shellcheck
-        run: shellcheck scripts/*.sh .envrc
+        # Fork-authored shell only. scripts/remove-idaes-from-path.sh and
+        # docs/scripts/devdocs.sh are upstream's; fixing their findings would be
+        # merge cost for no benefit. .envrc needs -e SC2148 because direnv
+        # supplies the interpreter.
+        run: |
+          shellcheck scripts/bootstrap.sh .claude/hooks/*.sh
+          shellcheck -e SC2148 .envrc
 
       - name: Custom structural rules
         # Ruff has no plugin API, so project-specific invariants live in
