@@ -1,0 +1,16 @@
+id: idaes-not-implemented-hook
+language: python
+severity: hint
+message: abstract hook - method raises NotImplementedError
+note: |
+  IDAES has no abc.ABC hierarchy. A method that raises NotImplementedError is
+  the de facto abstract-method declaration, and is an extension point a
+  subclass is expected to fill. Structural matching excludes commented-out
+  raises, which a text search would count.
+rule:
+  any:
+    - pattern: raise NotImplementedError($$$ARGS)
+    - pattern: raise NotImplementedError
+  inside:
+    stopBy: end
+    kind: function_definition

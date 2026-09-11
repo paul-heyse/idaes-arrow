@@ -1,0 +1,27 @@
+file,line,kind,call
+idaes/__init__.py,105,find_library,"find_library(os.path.join(bin_directory, func_name))"
+idaes/core/solvers/ipopt_l1.py,29,Executable,Executable('ipopt_l1')
+idaes/core/solvers/petsc.py,121,Executable,Executable('petsc')
+idaes/core/solvers/petsc.py,71,Executable,Executable('petsc')
+idaes/core/surrogate/alamopy.py,42,Executable,Executable('alamo')
+idaes/core/util/functions.py,22,find_library,find_library('functions')
+idaes/models/properties/general_helmholtz/components/parameters/h2o.py,87,find_library,find_library('general_helmholtz_external')
+idaes/models/properties/general_helmholtz/components/parameters/h2o.py,88,ExternalFunction,"pyo.ExternalFunction(library=lib_path, function='cp')"
+idaes/models/properties/general_helmholtz/components/parameters/h2o.py,89,ExternalFunction,"pyo.ExternalFunction(library=lib_path, function='cv')"
+idaes/models/properties/general_helmholtz/components/parameters/h2o.py,90,ExternalFunction,"pyo.ExternalFunction(library=lib_path, function='mu')"
+idaes/models/properties/general_helmholtz/components/parameters/h2o.py,91,ExternalFunction,"pyo.ExternalFunction(library=lib_path, function='itc')"
+idaes/models/properties/general_helmholtz/components/parameters/propane.py,75,ExternalFunction,"pyo.ExternalFunction(library='', function='cp')"
+idaes/models/properties/general_helmholtz/components/parameters/propane.py,76,ExternalFunction,"pyo.ExternalFunction(library='', function='cv')"
+idaes/models/properties/general_helmholtz/components/parameters/propane.py,77,ExternalFunction,"pyo.ExternalFunction(library='', function='mu')"
+idaes/models/properties/general_helmholtz/components/parameters/propane.py,78,ExternalFunction,"pyo.ExternalFunction(library='', function='itc')"
+idaes/models/properties/general_helmholtz/components/parameters/r134a.py,65,ExternalFunction,"pyo.ExternalFunction(library='', function='cp')"
+idaes/models/properties/general_helmholtz/components/parameters/r134a.py,66,ExternalFunction,"pyo.ExternalFunction(library='', function='cv')"
+idaes/models/properties/general_helmholtz/components/parameters/r134a.py,67,ExternalFunction,"pyo.ExternalFunction(library='', function='mu')"
+idaes/models/properties/general_helmholtz/components/parameters/r134a.py,68,ExternalFunction,"pyo.ExternalFunction(library='', function='itc')"
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,67,find_library,find_library('general_helmholtz_external')
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,68,LoadLibrary,ctypes.cdll.LoadLibrary(_flib)
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,157,ExternalFunction,"pyo.ExternalFunction(library=_flib, function=fdict['fname'], units=fdict['units'], arg_units=fdict['arg_units'], doc=fdict.get('doc', None))"
+idaes/models/properties/modular_properties/eos/ceos_common.py,28,find_library,find_library('cubic_roots')
+idaes/models/properties/modular_properties/eos/ceos_common.py,29,LoadLibrary,ctypes.cdll.LoadLibrary(cubic_so_path)
+idaes/models/properties/modular_properties/eos/ceos_common.py,118,ExternalFunction,ExternalFunction(**self._external[name].kwargs())
+idaes/models/unit_models/heat_exchanger.py,503,ExternalFunction,"ExternalFunction(library=functions_lib(), function='cbrt', arg_units=[temp_units])"

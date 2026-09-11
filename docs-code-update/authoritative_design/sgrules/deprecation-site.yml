@@ -1,0 +1,18 @@
+id: idaes-deprecation-site
+language: python
+severity: hint
+message: deprecation surface
+note: |
+  Live-but-inert code kept to give callers a message pointing at a replacement.
+  Covers the three mechanisms in use: the deprecation_warning call, the
+  relocated_module_attribute forwarder, and the @deprecated decorator. The
+  document set records these in one register rather than describing them as
+  functional subsystems.
+rule:
+  any:
+    - pattern: deprecation_warning($$$ARGS)
+    - pattern: $X.deprecation_warning($$$ARGS)
+    - pattern: relocated_module_attribute($$$ARGS)
+    - pattern: $X.relocated_module_attribute($$$ARGS)
+    - pattern: "@deprecated($$$ARGS)"
+    - pattern: "@$X.deprecated($$$ARGS)"

@@ -6,6 +6,7 @@ on:
 
 jobs:
   clean-labels:
+    if: github.repository == 'IDAES/idaes-pse'
     name: (util) Remove workflow trigger labels
     runs-on: ubuntu-latest
     if: contains(github.event.label.description, 'triggers_workflow')

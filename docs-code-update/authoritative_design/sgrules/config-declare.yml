@@ -1,0 +1,15 @@
+id: idaes-config-declare
+language: python
+severity: hint
+message: CONFIG key declaration
+note: |
+  Every configuration option a user can pass to a process block is declared by
+  one of these calls. The document set requires each key to appear verbatim in
+  the document that owns the declaring module.
+rule:
+  any:
+    - pattern: $CFG.declare($KEY, $VALUE)
+    - pattern: $CFG.declare($KEY)
+constraints:
+  KEY:
+    kind: string

@@ -1,0 +1,1084 @@
+file,line,config_object,enclosing_class,key,value_kind,domain,default,description
+idaes/apps/caprese/dynamic_block.py,73,CONFIG,_DynamicBlockData,tee,ConfigValue,bool,True,
+idaes/apps/caprese/dynamic_block.py,82,CONFIG,_DynamicBlockData,outlvl,ConfigValue,,idaeslog.INFO,
+idaes/apps/grid_integration/coordinator.py,114,config,DoubleLoopCoordinator,bidding_generator,ConfigValue,str,None,Specifies the generator we derive bidding strategies for.
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,180,CONFIG,DesignModelData,model_func,ConfigValue,,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,186,CONFIG,DesignModelData,model_args,ConfigValue,,{},
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,193,CONFIG,DesignModelData,fixed_design_data,ConfigValue,dict,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,200,CONFIG,DesignModelData,variable_design_data,ConfigValue,is_valid_variable_design_data,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,324,CONFIG,OperationModelData,model_func,ConfigValue,,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,330,CONFIG,OperationModelData,model_args,ConfigValue,,{},
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,337,CONFIG,OperationModelData,declare_op_vars,ConfigValue,Bool,True,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,348,CONFIG,OperationModelData,declare_lmp_param,ConfigValue,Bool,True,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,359,CONFIG,OperationModelData,polynomial_surrogate_data,ConfigValue,is_valid_polynomial_surrogate_data,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,367,CONFIG,OperationModelData,design_block_name,ConfigValue,str,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,374,CONFIG,OperationModelData,commodity,ConfigValue,str,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,381,CONFIG,OperationModelData,capacity,ConfigValue,,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,385,CONFIG,OperationModelData,op_range_lb,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,392,CONFIG,OperationModelData,minimum_up_time,ConfigValue,PositiveInt,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,403,CONFIG,OperationModelData,minimum_down_time,ConfigValue,PositiveInt,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,414,CONFIG,OperationModelData,startup_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,421,CONFIG,OperationModelData,shutdown_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,428,CONFIG,OperationModelData,rampup_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,435,CONFIG,OperationModelData,rampdown_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,443,CONFIG,OperationModelData,startup_types,ConfigValue,is_valid_startup_types,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,568,CONFIG,StorageModelData,time_interval,ConfigValue,NonNegativeFloat,1,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,576,CONFIG,StorageModelData,charge_efficiency,ConfigValue,"is_in_range(0, 1)",1,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,584,CONFIG,StorageModelData,discharge_efficiency,ConfigValue,"is_in_range(0, 1)",1,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,592,CONFIG,StorageModelData,min_holdup,ConfigValue,_is_valid_data_type_for_storage_model,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,599,CONFIG,StorageModelData,max_holdup,ConfigValue,_is_valid_data_type_for_storage_model,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,606,CONFIG,StorageModelData,max_charge_rate,ConfigValue,_is_valid_data_type_for_storage_model,,
+idaes/apps/grid_integration/pricetaker/design_and_operation_models.py,613,CONFIG,StorageModelData,max_discharge_rate,ConfigValue,_is_valid_data_type_for_storage_model,,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,69,CONFIG,,seed,ConfigValue,NonNegativeInt,20,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,77,CONFIG,,horizon_length,ConfigValue,PositiveInt,,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,84,CONFIG,,num_clusters_range,ConfigValue,"ListOf(int, PositiveInt)","(5, 30)",
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,92,CONFIG,,num_clusters,ConfigValue,PositiveInt,,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,99,CONFIG,,lmp_data,ConfigValue,ListOf(float),,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,108,CONFIG,,minimum_up_time,ConfigValue,PositiveInt,,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,115,CONFIG,,minimum_down_time,ConfigValue,PositiveInt,,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,124,CONFIG,,lifetime,ConfigValue,PositiveInt,,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,131,CONFIG,,discount_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,138,CONFIG,,corporate_tax_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,145,CONFIG,,annualization_factor,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,152,CONFIG,,cash_inflow_scale_factor,ConfigValue,NonNegativeFloat,,
+idaes/apps/grid_integration/pricetaker/price_taker_model.py,160,CONFIG,,startup_types,ConfigValue,is_valid_startup_types,,
+idaes/apps/grid_integration/pricetaker/unit_commitment.py,37,config,UnitCommitmentData,startup_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/unit_commitment.py,44,config,UnitCommitmentData,shutdown_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/unit_commitment.py,51,config,UnitCommitmentData,rampup_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/unit_commitment.py,58,config,UnitCommitmentData,rampdown_rate,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/unit_commitment.py,65,config,UnitCommitmentData,op_range_lb,ConfigValue,"is_in_range(0, 1)",,
+idaes/apps/grid_integration/pricetaker/unit_commitment.py,72,config,UnitCommitmentData,capacity,ConfigValue,,,
+idaes/config.py,148,cfg,ConfigBlockJSONEncoder,warning_to_exception,pyomo.common.config.ConfigValue,bool,False,Convert any logged warnings or errors to exceptions
+idaes/config.py,157,cfg,ConfigBlockJSONEncoder,deprecation_to_exception,pyomo.common.config.ConfigValue,bool,False,Convert any logged deprecation warnings to exceptions
+idaes/config.py,166,cfg,ConfigBlockJSONEncoder,logging,pyomo.common.config.ConfigBlock,,,Logging configuration dictionary
+idaes/config.py,175,cfg['logging'],ConfigBlockJSONEncoder,version,pyomo.common.config.ConfigValue,int,1,
+idaes/config.py,178,cfg['logging'],ConfigBlockJSONEncoder,disable_existing_loggers,pyomo.common.config.ConfigValue,bool,False,
+idaes/config.py,182,cfg['logging'],ConfigBlockJSONEncoder,formatters,pyomo.common.config.ConfigBlock,,,
+idaes/config.py,183,cfg['logging']['formatters'],ConfigBlockJSONEncoder,default_format,pyomo.common.config.ConfigBlock,,,
+idaes/config.py,186,cfg['logging']['formatters']['default_format'],ConfigBlockJSONEncoder,format,pyomo.common.config.ConfigValue,str,'%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+idaes/config.py,192,cfg['logging']['formatters']['default_format'],ConfigBlockJSONEncoder,datefmt,pyomo.common.config.ConfigValue,str,'%Y-%m-%d %H:%M:%S',
+idaes/config.py,196,cfg['logging']['formatters'],ConfigBlockJSONEncoder,blank_format,pyomo.common.config.ConfigBlock,,,
+idaes/config.py,199,cfg['logging']['formatters']['blank_format'],ConfigBlockJSONEncoder,format,pyomo.common.config.ConfigValue,str,'%(message)s',
+idaes/config.py,203,cfg['logging'],ConfigBlockJSONEncoder,handlers,pyomo.common.config.ConfigBlock,,,
+idaes/config.py,204,cfg['logging']['handlers'],ConfigBlockJSONEncoder,console,pyomo.common.config.ConfigBlock,,,
+idaes/config.py,207,cfg['logging']['handlers']['console'],ConfigBlockJSONEncoder,class,pyomo.common.config.ConfigValue,str,'logging.StreamHandler',
+idaes/config.py,211,cfg['logging']['handlers']['console'],ConfigBlockJSONEncoder,formatter,pyomo.common.config.ConfigValue,str,'default_format',
+idaes/config.py,215,cfg['logging']['handlers']['console'],ConfigBlockJSONEncoder,stream,pyomo.common.config.ConfigValue,str,'ext://sys.stdout',
+idaes/config.py,219,cfg['logging']['handlers'],ConfigBlockJSONEncoder,console_blank,pyomo.common.config.ConfigBlock,,,
+idaes/config.py,222,cfg['logging']['handlers']['console_blank'],ConfigBlockJSONEncoder,class,pyomo.common.config.ConfigValue,str,'logging.StreamHandler',
+idaes/config.py,226,cfg['logging']['handlers']['console_blank'],ConfigBlockJSONEncoder,formatter,pyomo.common.config.ConfigValue,str,'blank_format',
+idaes/config.py,230,cfg['logging']['handlers']['console_blank'],ConfigBlockJSONEncoder,stream,pyomo.common.config.ConfigValue,str,'ext://sys.stdout',
+idaes/config.py,234,cfg['logging'],ConfigBlockJSONEncoder,loggers,pyomo.common.config.ConfigValue,dict,"{'idaes': {'level': 'INFO', 'propagate': True, 'handlers': ['console']}, 'idaes.solve': {'propagate': False, 'handlers': ['console']}, 'idaes.init': {'propag...",
+idaes/config.py,250,cfg,ConfigBlockJSONEncoder,properties,pyomo.common.config.ConfigBlock,,,Physical-property-related options
+idaes/config.py,258,cfg['properties'],ConfigBlockJSONEncoder,helmholtz,pyomo.common.config.ConfigBlock,,,Helmholtz equation of state configuration block
+idaes/config.py,266,cfg['properties']['helmholtz'],ConfigBlockJSONEncoder,parameter_file_path,pyomo.common.config.ConfigValue,str,None,Helmholtz parameter file path
+idaes/config.py,277,cfg,ConfigBlockJSONEncoder,ipopt,pyomo.common.config.ConfigBlock,,,Default config for 'ipopt' solver
+idaes/config.py,285,cfg['ipopt'],ConfigBlockJSONEncoder,options,pyomo.common.config.ConfigBlock,,,Default solver options for 'ipopt'
+idaes/config.py,294,cfg['ipopt']['options'],ConfigBlockJSONEncoder,nlp_scaling_method,pyomo.common.config.ConfigValue,str,'gradient-based',Ipopt NLP scaling method
+idaes/config.py,304,cfg['ipopt']['options'],ConfigBlockJSONEncoder,tol,pyomo.common.config.ConfigValue,float,1e-06,Ipopt tol option
+idaes/config.py,314,cfg['ipopt']['options'],ConfigBlockJSONEncoder,max_iter,pyomo.common.config.ConfigValue,int,200,Ipopt max_iter option
+idaes/config.py,324,cfg,ConfigBlockJSONEncoder,ipopt_v2,pyomo.common.config.ConfigBlock,,,Default config for 'ipopt' solver
+idaes/config.py,331,cfg['ipopt_v2'],ConfigBlockJSONEncoder,options,pyomo.common.config.ConfigBlock,,,Default solver options for 'ipopt'
+idaes/config.py,339,cfg['ipopt_v2']['options'],ConfigBlockJSONEncoder,nlp_scaling_method,pyomo.common.config.ConfigValue,str,'gradient-based',Ipopt NLP scaling method
+idaes/config.py,348,cfg['ipopt_v2']['options'],ConfigBlockJSONEncoder,tol,pyomo.common.config.ConfigValue,float,1e-06,Ipopt tol option
+idaes/config.py,357,cfg['ipopt_v2']['options'],ConfigBlockJSONEncoder,max_iter,pyomo.common.config.ConfigValue,int,200,Ipopt max_iter option
+idaes/config.py,366,cfg['ipopt_v2']['options'],ConfigBlockJSONEncoder,linear_solver,pyomo.common.config.ConfigValue,str,'ma57',Linear solver to be used by IPOPT
+idaes/config.py,375,cfg['ipopt_v2'],ConfigBlockJSONEncoder,writer_config,pyomo.common.config.ConfigBlock,,,Default writer configuration for 'ipopt'
+idaes/config.py,384,cfg['ipopt_v2']['writer_config'],ConfigBlockJSONEncoder,scale_model,pyomo.common.config.ConfigValue,Bool,True,Whether to apply model scaling in writer
+idaes/config.py,393,cfg['ipopt_v2']['writer_config'],ConfigBlockJSONEncoder,linear_presolve,pyomo.common.config.ConfigValue,Bool,True,Whether to apply linear presolve in writer
+idaes/config.py,402,cfg,ConfigBlockJSONEncoder,ipopt_l1,pyomo.common.config.ConfigBlock,,,Default config for 'ipopt_l1' solver
+idaes/config.py,411,cfg['ipopt_l1'],ConfigBlockJSONEncoder,options,pyomo.common.config.ConfigBlock,,,Default solver options for 'ipopt_l1'
+idaes/config.py,420,cfg['ipopt_l1']['options'],ConfigBlockJSONEncoder,nlp_scaling_method,pyomo.common.config.ConfigValue,str,'gradient-based',Ipopt_l1 NLP scaling method
+idaes/config.py,430,cfg['ipopt_l1']['options'],ConfigBlockJSONEncoder,tol,pyomo.common.config.ConfigValue,float,1e-06,Ipopt_l1 tol option
+idaes/config.py,440,cfg['ipopt_l1']['options'],ConfigBlockJSONEncoder,max_iter,pyomo.common.config.ConfigValue,int,200,Ipopt_l1 max_iter option
+idaes/config.py,450,cfg,ConfigBlockJSONEncoder,petsc_ts,pyomo.common.config.ConfigBlock,,,Default config for 'petsc_ts' solver
+idaes/config.py,459,cfg['petsc_ts'],ConfigBlockJSONEncoder,options,pyomo.common.config.ConfigBlock,,,Default solver options for 'petsc_ts'
+idaes/config.py,468,cfg['petsc_ts']['options'],ConfigBlockJSONEncoder,--ts_save_trajectory,pyomo.common.config.ConfigValue,int,1,Save the trajectory data from PETSc
+idaes/config.py,478,cfg['petsc_ts']['options'],ConfigBlockJSONEncoder,--ts_max_snes_failures,pyomo.common.config.ConfigValue,int,200,Number of nonlinear solver failures before giving up
+idaes/config.py,488,cfg['petsc_ts']['options'],ConfigBlockJSONEncoder,--ts_max_reject,pyomo.common.config.ConfigValue,int,20,Maximum number of time steps to reject
+idaes/config.py,498,cfg['petsc_ts']['options'],ConfigBlockJSONEncoder,--ts_type,pyomo.common.config.ConfigValue,str,'beuler',TS solver to use
+idaes/config.py,508,cfg['petsc_ts']['options'],ConfigBlockJSONEncoder,--ts_adapt_type,pyomo.common.config.ConfigValue,str,'basic',TS adaptive step size method to use
+idaes/config.py,518,cfg['petsc_ts']['options'],ConfigBlockJSONEncoder,--ts_exact_final_time,pyomo.common.config.ConfigValue,str,'matchstep',How to handle the final time step
+idaes/config.py,528,cfg,ConfigBlockJSONEncoder,default_solver,pyomo.common.config.ConfigValue,str,'ipopt',Default solver. See Pyomo's SolverFactory for details.
+idaes/config.py,538,cfg,ConfigBlockJSONEncoder,use_idaes_solvers,pyomo.common.config.ConfigValue,bool,True,"If True, search the IDAES bin directory for executables first; otherwise, use IDAES bin directory as last resort."
+idaes/config.py,553,cfg,ConfigBlockJSONEncoder,use_idaes_solver_config,pyomo.common.config.ConfigValue,bool,False,"If True, use the configure IDAES solver default options."
+idaes/config.py,563,cfg,ConfigBlockJSONEncoder,valid_logger_tags,pyomo.common.config.ConfigValue,set,"set(['framework', 'model', 'flowsheet', 'unit', 'control_volume', 'properties', 'reactions', 'ui'])",List of valid logger tags
+idaes/config.py,583,cfg,ConfigBlockJSONEncoder,logger_tags,pyomo.common.config.ConfigValue,set,"set(['framework', 'model', 'flowsheet', 'unit', 'control_volume', 'properties', 'reactions'])",List of logger tags to allow
+idaes/config.py,602,cfg,ConfigBlockJSONEncoder,logger_capture_solver,pyomo.common.config.ConfigValue,,True,Solver output captured by logger?
+idaes/config.py,610,cfg,ConfigBlockJSONEncoder,reporting_units,pyomo.common.config.ConfigValue,,default_uom,Units of measurement for reporting quantities
+idaes/core/base/components.py,43,CONFIG,ComponentData,valid_phase_types,ConfigValue,ListOf(PhaseType),,
+idaes/core/base/components.py,51,CONFIG,ComponentData,elemental_composition,ConfigValue,dict,,Elemental composition of component
+idaes/core/base/components.py,61,CONFIG,ComponentData,henry_component,ConfigValue,dict,,Phases in which component follows Henry's Law
+idaes/core/base/components.py,71,CONFIG,ComponentData,vol_mol_liq_comp,ConfigValue,,,Method to use to calculate liquid phase molar volume
+idaes/core/base/components.py,79,CONFIG,ComponentData,vol_mol_sol_comp,ConfigValue,,,Method to use to calculate solid phase molar volume
+idaes/core/base/components.py,87,CONFIG,ComponentData,dens_mol_liq_comp,ConfigValue,,,Method to use to calculate liquid phase molar density
+idaes/core/base/components.py,95,CONFIG,ComponentData,dens_mol_sol_comp,ConfigValue,,,Method to use to calculate solid phase molar density
+idaes/core/base/components.py,104,CONFIG,ComponentData,cp_mol_liq_comp,ConfigValue,,,Method to calculate liquid component specific heats
+idaes/core/base/components.py,108,CONFIG,ComponentData,cp_mol_sol_comp,ConfigValue,,,Method to calculate solid component specific heats
+idaes/core/base/components.py,112,CONFIG,ComponentData,cp_mol_ig_comp,ConfigValue,,,Method to calculate ideal gas component specific heats
+idaes/core/base/components.py,118,CONFIG,ComponentData,enth_mol_liq_comp,ConfigValue,,,Method to calculate liquid component molar enthalpies
+idaes/core/base/components.py,124,CONFIG,ComponentData,enth_mol_sol_comp,ConfigValue,,,Method to calculate solid component molar enthalpies
+idaes/core/base/components.py,128,CONFIG,ComponentData,enth_mol_ig_comp,ConfigValue,,,Method to calculate ideal gas component molar enthalpies
+idaes/core/base/components.py,134,CONFIG,ComponentData,entr_mol_liq_comp,ConfigValue,,,Method to calculate liquid component molar entropies
+idaes/core/base/components.py,138,CONFIG,ComponentData,entr_mol_sol_comp,ConfigValue,,,Method to calculate solid component molar entropies
+idaes/core/base/components.py,142,CONFIG,ComponentData,entr_mol_ig_comp,ConfigValue,,,Method to calculate ideal gas component molar entropies
+idaes/core/base/components.py,149,CONFIG,ComponentData,diffus_phase_comp,ConfigValue,,,Method to calculate component diffusivities in each phase. Must be a dict with keys being phase names.
+idaes/core/base/components.py,156,CONFIG,ComponentData,visc_d_phase_comp,ConfigValue,,,Method to calculate pure component viscosities in each phase. Must be a dict with keys being phase names.
+idaes/core/base/components.py,163,CONFIG,ComponentData,therm_cond_phase_comp,ConfigValue,,,Method to calculate pure component thermal conductivities in each phase. Must be a dict with keys being phase names.
+idaes/core/base/components.py,170,CONFIG,ComponentData,has_vapor_pressure,ConfigValue,Bool,True,Flag indicating whether component has a vapor pressure
+idaes/core/base/components.py,178,CONFIG,ComponentData,pressure_sat_comp,ConfigValue,,,Method to use to calculate saturation pressure
+idaes/core/base/components.py,182,CONFIG,ComponentData,relative_permittivity_liq_comp,ConfigValue,,,Method to use to calculate liquid phase relative permittivity
+idaes/core/base/components.py,189,CONFIG,ComponentData,phase_equilibrium_form,ConfigValue,dict,,Form of phase equilibrium constraints for component
+idaes/core/base/components.py,197,CONFIG,ComponentData,parameter_data,ConfigValue,dict,{},Dict containing initialization data for parameters
+idaes/core/base/components.py,206,CONFIG,ComponentData,_component_list_exists,ConfigValue,,False,
+idaes/core/base/components.py,214,CONFIG,ComponentData,_electrolyte,ConfigValue,,False,
+idaes/core/base/components.py,449,CONFIG,IonData,charge,ConfigValue,int,,
+idaes/core/base/components.py,557,CONFIG,ApparentData,dissociation_species,ConfigValue,dict,None,Dict of dissociation species
+idaes/core/base/control_volume1d.py,369,CONFIG,ControlVolume1DBlockData,area_definition,ConfigValue,In(DistributedVars),DistributedVars.uniform,Argument for defining form of area variable
+idaes/core/base/control_volume1d.py,383,CONFIG,ControlVolume1DBlockData,transformation_method,ConfigValue,is_transformation_method,None,DAE transformation method
+idaes/core/base/control_volume1d.py,393,CONFIG,ControlVolume1DBlockData,transformation_scheme,ConfigValue,is_transformation_scheme,None,DAE transformation scheme
+idaes/core/base/control_volume1d.py,403,CONFIG,ControlVolume1DBlockData,finite_elements,ConfigValue,int,None,Number of finite elements
+idaes/core/base/control_volume1d.py,413,CONFIG,ControlVolume1DBlockData,collocation_points,ConfigValue,int,None,Number of collocation points
+idaes/core/base/control_volume_base.py,718,CONFIG_Template,ControlVolumeScalerBase,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/core/base/control_volume_base.py,732,CONFIG_Template,ControlVolumeScalerBase,has_holdup,ConfigValue,Bool,False,Holdup construction flag
+idaes/core/base/control_volume_base.py,746,CONFIG_Template,ControlVolumeScalerBase,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/core/base/control_volume_base.py,762,CONFIG_Template,ControlVolumeScalerBase,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/core/base/control_volume_base.py,778,CONFIG_Template,ControlVolumeScalerBase,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/core/base/control_volume_base.py,794,CONFIG_Template,ControlVolumeScalerBase,has_rate_reactions,ConfigValue,Bool,False,Rate reaction construction flag
+idaes/core/base/control_volume_base.py,808,CONFIG_Template,ControlVolumeScalerBase,has_equilibrium_reactions,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/core/base/control_volume_base.py,822,CONFIG_Template,ControlVolumeScalerBase,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium construction flag
+idaes/core/base/control_volume_base.py,836,CONFIG_Template,ControlVolumeScalerBase,has_mass_transfer,ConfigValue,Bool,False,Mass transfer term construction flag
+idaes/core/base/control_volume_base.py,849,CONFIG_Template,ControlVolumeScalerBase,has_heat_of_reaction,ConfigValue,Bool,False,Heat of reaction term construction flag
+idaes/core/base/control_volume_base.py,862,CONFIG_Template,ControlVolumeScalerBase,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/core/base/control_volume_base.py,875,CONFIG_Template,ControlVolumeScalerBase,has_work_transfer,ConfigValue,Bool,False,Work transfer term construction flag
+idaes/core/base/control_volume_base.py,888,CONFIG_Template,ControlVolumeScalerBase,has_enthalpy_transfer,ConfigValue,Bool,False,Enthalpy transfer term construction flag
+idaes/core/base/control_volume_base.py,901,CONFIG_Template,ControlVolumeScalerBase,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/core/base/control_volume_base.py,915,CONFIG_Template,ControlVolumeScalerBase,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/core/base/control_volume_base.py,928,CONFIG_Template,ControlVolumeScalerBase,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/core/base/control_volume_base.py,940,CONFIG_Template,ControlVolumeScalerBase,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/core/base/control_volume_base.py,953,CONFIG_Template,ControlVolumeScalerBase,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/core/base/control_volume_base.py,987,CONFIG,ControlVolumeBlockData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/core/base/control_volume_base.py,1001,CONFIG,ControlVolumeBlockData,has_holdup,ConfigValue,DefaultBool,useDefault,Holdup construction flag
+idaes/core/base/control_volume_base.py,1015,CONFIG,ControlVolumeBlockData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/core/base/control_volume_base.py,1028,CONFIG,ControlVolumeBlockData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/core/base/control_volume_base.py,1038,CONFIG,ControlVolumeBlockData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/core/base/control_volume_base.py,1051,CONFIG,ControlVolumeBlockData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/core/base/control_volume_base.py,1063,CONFIG,ControlVolumeBlockData,auto_construct,ConfigValue,Bool,False,Argument indicating whether ControlVolume should automatically construct balance equations
+idaes/core/base/costing_base.py,604,CONFIG,UnitModelCostingBlockData,flowsheet_costing_block,ConfigValue,assert_flowsheet_costing_block,,
+idaes/core/base/costing_base.py,611,CONFIG,UnitModelCostingBlockData,costing_method,ConfigValue,,,
+idaes/core/base/costing_base.py,620,CONFIG,UnitModelCostingBlockData,costing_method_arguments,ConfigValue,dict,{},
+idaes/core/base/flowsheet_model.py,112,CONFIG,FlowsheetBlockData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/core/base/flowsheet_model.py,126,CONFIG,FlowsheetBlockData,time,ConfigValue,is_time_domain,None,Flowsheet time domain
+idaes/core/base/flowsheet_model.py,138,CONFIG,FlowsheetBlockData,time_set,ConfigValue,ListOf(float),[0],Set of points for initializing time domain
+idaes/core/base/flowsheet_model.py,149,CONFIG,FlowsheetBlockData,time_units,ConfigValue,,,Units for time domain
+idaes/core/base/flowsheet_model.py,157,CONFIG,FlowsheetBlockData,default_property_package,ConfigValue,is_physical_parameter_block,None,Default property package to use in flowsheet
+idaes/core/base/phases.py,53,CONFIG,PhaseData,component_list,ConfigValue,list,None,List of components in phase
+idaes/core/base/phases.py,63,CONFIG,PhaseData,equation_of_state,ConfigValue,,None,Equation of state for phase
+idaes/core/base/phases.py,73,CONFIG,PhaseData,equation_of_state_options,ConfigValue,,None,Options for equation of state
+idaes/core/base/phases.py,82,CONFIG,PhaseData,parameter_data,ConfigValue,dict,{},Dict containing initialization data for parameters
+idaes/core/base/phases.py,90,CONFIG,PhaseData,_phase_list_exists,ConfigValue,,False,
+idaes/core/base/phases.py,99,CONFIG,PhaseData,therm_cond_phase,ConfigValue,,,Method to calculate thermal conductivity phase
+idaes/core/base/phases.py,103,CONFIG,PhaseData,surf_tens_phase,ConfigValue,,,Method to calculate surface tension of phase
+idaes/core/base/phases.py,107,CONFIG,PhaseData,visc_d_phase,ConfigValue,,,Method to calculate dynamic viscosity of phase
+idaes/core/base/phases.py,111,CONFIG,PhaseData,transport_property_options,ConfigDict,,,"Options for transport properties like viscosity, surface tension, and thermal conductivity"
+idaes/core/base/property_base.py,87,CONFIG,PhysicalParameterBlock,default_arguments,ConfigBlock,,,Default arguments to use with Property Package
+idaes/core/base/property_base.py,544,CONFIG,StateBlockData,parameters,ConfigValue,is_physical_parameter_block,,A reference to an instance of the Property Parameter Block associated with this property package.
+idaes/core/base/property_base.py,552,CONFIG,StateBlockData,defined_state,ConfigValue,Bool,False,Flag indicating if incoming state is fully defined
+idaes/core/base/property_base.py,567,CONFIG,StateBlockData,has_phase_equilibrium,ConfigValue,Bool,True,Phase equilibrium constraint flag
+idaes/core/base/reaction_base.py,78,CONFIG,ReactionParameterBlock,property_package,ConfigValue,is_physical_parameter_block,,Reference to associated PropertyPackageParameter object
+idaes/core/base/reaction_base.py,85,CONFIG,ReactionParameterBlock,default_arguments,ConfigBlock,,,Default arguments to use with Property Package
+idaes/core/base/reaction_base.py,261,CONFIG,ReactionBlockDataBase,parameters,ConfigValue,is_reaction_parameter_block,,A reference to an instance of the Reaction Parameter Block associated with this property package.
+idaes/core/base/reaction_base.py,269,CONFIG,ReactionBlockDataBase,state_block,ConfigValue,is_state_block,,A reference to an instance of a StateBlock with which this reaction block should be associated.
+idaes/core/base/reaction_base.py,277,CONFIG,ReactionBlockDataBase,has_equilibrium,ConfigValue,Bool,True,Equilibrium constraint flag
+idaes/core/base/unit_model.py,65,CONFIG,UnitModelBlockData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/core/base/unit_model.py,79,CONFIG,UnitModelBlockData,has_holdup,ConfigValue,DefaultBool,useDefault,Holdup construction flag
+idaes/core/initialization/block_triangularization.py,49,CONFIG,BlockTriangularizationInitializer,block_solver,ConfigValue,,'ipopt_v2',Solver to use for NxN blocks
+idaes/core/initialization/block_triangularization.py,56,CONFIG,BlockTriangularizationInitializer,block_solver_options,ConfigDict,,,Dict of options to pass to block solver
+idaes/core/initialization/block_triangularization.py,64,CONFIG.block_solver_options,BlockTriangularizationInitializer,tol,ConfigValue,float,1e-08,Convergence tolerance for block solver
+idaes/core/initialization/block_triangularization.py,72,CONFIG.block_solver_options,BlockTriangularizationInitializer,max_iter,ConfigValue,int,200,Iteration limit for block solver
+idaes/core/initialization/block_triangularization.py,80,CONFIG,BlockTriangularizationInitializer,block_solver_writer_config,ConfigDict,,,Dict of writer_config arguments to pass to block solver
+idaes/core/initialization/block_triangularization.py,87,CONFIG.block_solver_writer_config,BlockTriangularizationInitializer,linear_presolve,ConfigValue,Bool,True,Whether to use linear presolver with block solver
+idaes/core/initialization/block_triangularization.py,95,CONFIG.block_solver_writer_config,BlockTriangularizationInitializer,scale_model,ConfigValue,Bool,True,Whether to apply model scaling with block solver
+idaes/core/initialization/block_triangularization.py,103,CONFIG,BlockTriangularizationInitializer,block_solver_call_options,ConfigDict,,,Dict of arguments to pass to solver.solve call
+idaes/core/initialization/block_triangularization.py,112,CONFIG,BlockTriangularizationInitializer,calculate_variable_options,ConfigDict,,,Dict of options to pass to 1x1 block solver
+idaes/core/initialization/block_triangularization.py,121,CONFIG,BlockTriangularizationInitializer,skip_final_solve,ConfigValue,Bool,False,Skip solving the block after block triangularization finishes
+idaes/core/initialization/general_hierarchical.py,39,CONFIG,SingleControlVolumeUnitInitializer,always_estimate_states,ConfigValue,Bool,False,
+idaes/core/initialization/initializer_base.py,89,CONFIG,InitializerBase,constraint_tolerance,ConfigValue,float,1e-05,Tolerance for checking constraint convergence
+idaes/core/initialization/initializer_base.py,97,CONFIG,InitializerBase,output_level,ConfigValue,,idaeslog.NOTSET,Set output level for logging messages
+idaes/core/initialization/initializer_base.py,552,CONFIG,ModularInitializerBase,solver,ConfigValue,,'ipopt_v2',Solver to use for initialization
+idaes/core/initialization/initializer_base.py,560,CONFIG,ModularInitializerBase,solver_options,ConfigDict,,,Dict of options to pass to solver
+idaes/core/initialization/initializer_base.py,567,CONFIG,ModularInitializerBase,writer_config,ConfigDict,,,Dict of writer_config arguments to pass to solver
+idaes/core/initialization/initializer_base.py,574,CONFIG,ModularInitializerBase,default_submodel_initializer,ConfigValue,,None,Default Initializer object to use for sub-models.
+idaes/core/plugins/variable_replace.py,51,CONFIG,ReplaceVariables,substitute,ConfigValue,,[],List-like of tuples where the first item in a tuple is a Pyomo variable to be replaced and the second item in the tuple is a Pyomo variable to replace it with. This transformation is not reversible.
+idaes/core/scaling/scaling_base.py,38,CONFIG,,zero_tolerance,ConfigValue,float,1e-12,Value at which a variable will be considered equal to zero for scaling.
+idaes/core/scaling/scaling_base.py,46,CONFIG,,max_variable_scaling_factor,ConfigValue,float,10000000000.0,Maximum value for variable scaling factors.
+idaes/core/scaling/scaling_base.py,54,CONFIG,,min_variable_scaling_factor,ConfigValue,float,1e-10,Minimum value for variable scaling factors.
+idaes/core/scaling/scaling_base.py,62,CONFIG,,max_constraint_scaling_factor,ConfigValue,float,10000000000.0,Maximum value for constraint scaling factors.
+idaes/core/scaling/scaling_base.py,70,CONFIG,,min_constraint_scaling_factor,ConfigValue,float,1e-10,Minimum value for constraint scaling factors.
+idaes/core/scaling/scaling_base.py,78,CONFIG,,max_expression_scaling_hint,ConfigValue,float,10000000000.0,Maximum value for expression scaling hints.
+idaes/core/scaling/scaling_base.py,86,CONFIG,,min_expression_scaling_hint,ConfigValue,float,1e-10,Minimum value for constraint scaling hints.
+idaes/core/scaling/scaling_base.py,94,CONFIG,,overwrite,ConfigValue,Bool,False,Whether to overwrite existing scaling factors.
+idaes/core/surrogate/alamopy.py,171,CONFIG,AlamoTrainer,xfactor,ConfigValue,ListOf(float),None,List of scaling factors for input variables.
+idaes/core/surrogate/alamopy.py,179,CONFIG,AlamoTrainer,xscaling,ConfigValue,Bool,None,Option to scale input variables.
+idaes/core/surrogate/alamopy.py,190,CONFIG,AlamoTrainer,scalez,ConfigValue,Bool,None,Option to scale output variables.
+idaes/core/surrogate/alamopy.py,198,CONFIG,AlamoTrainer,monomialpower,ConfigValue,"ListOf(int, In(Reals - {0, 1}))",None,Vector of monomial powers considered in basis functions - cannot include 0 or 1.
+idaes/core/surrogate/alamopy.py,209,CONFIG,AlamoTrainer,multi2power,ConfigValue,ListOf(float),None,Vector of powers to be considered for pairwise combinations in basis functions.
+idaes/core/surrogate/alamopy.py,218,CONFIG,AlamoTrainer,multi3power,ConfigValue,ListOf(float),None,Vector of three variable combinations of powers to be considered as basis functions.
+idaes/core/surrogate/alamopy.py,227,CONFIG,AlamoTrainer,ratiopower,ConfigValue,ListOf(float),None,Vector of ratio combinations of powers to be considered in the basis functions.
+idaes/core/surrogate/alamopy.py,236,CONFIG,AlamoTrainer,constant,ConfigValue,Bool,True,Include constant basis function if True. Default = True
+idaes/core/surrogate/alamopy.py,244,CONFIG,AlamoTrainer,linfcns,ConfigValue,Bool,True,Include linear basis functions if True. Default = True
+idaes/core/surrogate/alamopy.py,252,CONFIG,AlamoTrainer,expfcns,ConfigValue,Bool,None,Include exponential basis functions if True.
+idaes/core/surrogate/alamopy.py,260,CONFIG,AlamoTrainer,logfcns,ConfigValue,Bool,None,Include logarithmic basis functions if True.
+idaes/core/surrogate/alamopy.py,268,CONFIG,AlamoTrainer,sinfcns,ConfigValue,Bool,None,Include sine basis functions if True.
+idaes/core/surrogate/alamopy.py,276,CONFIG,AlamoTrainer,cosfcns,ConfigValue,Bool,None,Include cosine basis functions if True.
+idaes/core/surrogate/alamopy.py,284,CONFIG,AlamoTrainer,grbfcns,ConfigValue,Bool,None,Include Gaussian radial basis functions if True.
+idaes/core/surrogate/alamopy.py,292,CONFIG,AlamoTrainer,rbfparam,ConfigValue,float,None,Multiplicative constant used in the Gaussian radial basis functions.
+idaes/core/surrogate/alamopy.py,301,CONFIG,AlamoTrainer,custom_basis_functions,ConfigValue,ListOf(str),None,List of custom basis functions to include in surrogate fitting.
+idaes/core/surrogate/alamopy.py,315,CONFIG,AlamoTrainer,modeler,ConfigValue,In(Modelers),None,Fitness metric to be used for model building. Must be an instance of Modelers Enum.
+idaes/core/surrogate/alamopy.py,324,CONFIG,AlamoTrainer,builder,ConfigValue,Bool,None,"If True, a greedy heuristic builds up a model by adding one variable at a time."
+idaes/core/surrogate/alamopy.py,338,CONFIG,AlamoTrainer,backstepper,ConfigValue,Bool,None,"If set to 1, a greedy heuristic builds down a model by starting from the least squares model and removing one variable at a time."
+idaes/core/surrogate/alamopy.py,348,CONFIG,AlamoTrainer,convpen,ConfigValue,float,None,Convex penalty term to use if Modeler == SSEP or MADp.
+idaes/core/surrogate/alamopy.py,362,CONFIG,AlamoTrainer,screener,ConfigValue,In(Screener),None,Regularization method used to reduce the number of potential basis functions before optimization. Must be instance of Screener Enum.
+idaes/core/surrogate/alamopy.py,372,CONFIG,AlamoTrainer,ncvf,ConfigValue,int,None,Number of folds to be used for cross validation by the lasso screener. ALAMO will use a two-fold validation if fewer than 10 data points are available. NCVF must be a nonnegative integer.
+idaes/core/surrogate/alamopy.py,382,CONFIG,AlamoTrainer,sismult,ConfigValue,int,None,"This parameter must be non-negative and is used to determine the number of basis functions retained by the SIS screener. The number of basis functions retained equals the floor of SSISmult n ln(n), wh"
+idaes/core/surrogate/alamopy.py,395,CONFIG,AlamoTrainer,maxiter,ConfigValue,int,None,"Maximum number of ALAMO iterations. 1 = no adaptive sampling, 0 = no limit."
+idaes/core/surrogate/alamopy.py,408,CONFIG,AlamoTrainer,maxtime,ConfigValue,float,1000,Maximum total execution time allowed in seconds. Default = 1000.
+idaes/core/surrogate/alamopy.py,420,CONFIG,AlamoTrainer,datalimitterms,ConfigValue,Bool,None,Limit model terms to number of measurements.
+idaes/core/surrogate/alamopy.py,433,CONFIG,AlamoTrainer,maxterms,ConfigValue,ListOf(int),None,List of maximum number of model terms to per output.
+idaes/core/surrogate/alamopy.py,444,CONFIG,AlamoTrainer,minterms,ConfigValue,ListOf(int),None,List of minimum number of model terms to per output.
+idaes/core/surrogate/alamopy.py,455,CONFIG,AlamoTrainer,numlimitbasis,ConfigValue,Bool,True,Eliminate infeasible basis functions. Default = True
+idaes/core/surrogate/alamopy.py,469,CONFIG,AlamoTrainer,exclude,ConfigValue,ListOf(int),None,"List of inputs to exclude during building,"
+idaes/core/surrogate/alamopy.py,483,CONFIG,AlamoTrainer,ignore,ConfigValue,ListOf(int),None,List of outputs to ignore during building.
+idaes/core/surrogate/alamopy.py,495,CONFIG,AlamoTrainer,xisint,ConfigValue,ListOf(int),None,List of inputs that should be treated as integers.
+idaes/core/surrogate/alamopy.py,506,CONFIG,AlamoTrainer,zisint,ConfigValue,ListOf(int),None,List of outputs that should be treated as integers.
+idaes/core/surrogate/alamopy.py,519,CONFIG,AlamoTrainer,tolrelmetric,ConfigValue,ListOf(float),None,Relative tolerance for outputs.
+idaes/core/surrogate/alamopy.py,531,CONFIG,AlamoTrainer,tolabsmetric,ConfigValue,ListOf(float),None,Absolute tolerance for outputs.
+idaes/core/surrogate/alamopy.py,543,CONFIG,AlamoTrainer,tolmeanerror,ConfigValue,ListOf(float),None,Convergence tolerance for mean errors in outputs.
+idaes/core/surrogate/alamopy.py,555,CONFIG,AlamoTrainer,tolsse,ConfigValue,float,None,Absolute tolerance on SSE
+idaes/core/surrogate/alamopy.py,567,CONFIG,AlamoTrainer,mipoptca,ConfigValue,float,None,Absolute tolerance for MIP.
+idaes/core/surrogate/alamopy.py,573,CONFIG,AlamoTrainer,mipoptcr,ConfigValue,float,None,Relative tolerance for MIP.
+idaes/core/surrogate/alamopy.py,579,CONFIG,AlamoTrainer,linearerror,ConfigValue,Bool,None,"If True, a linear objective is used when solving mixed-integer optimization problems; otherwise, a squared error will be employed."
+idaes/core/surrogate/alamopy.py,589,CONFIG,AlamoTrainer,GAMS,ConfigValue,str,None,Complete path of GAMS executable (or name if GAMS is in the user path).
+idaes/core/surrogate/alamopy.py,598,CONFIG,AlamoTrainer,GAMSSOLVER,ConfigValue,str,None,Name of preferred GAMS solver for solving ALAMO’s mixed-integer quadratic subproblems. Special facilities have been implemented in ALAMO and BARON that make BARON the preferred selection for this opti
+idaes/core/surrogate/alamopy.py,610,CONFIG,AlamoTrainer,solvemip,ConfigValue,Bool,None,Whether to use an optimizer to solve MIP.
+idaes/core/surrogate/alamopy.py,618,CONFIG,AlamoTrainer,print_to_screen,ConfigValue,Bool,None,Send ALAMO output to stdout. Output is returned by the call_alamo method.
+idaes/core/surrogate/alamopy.py,629,CONFIG,AlamoTrainer,alamo_path,ConfigValue,Path,None,
+idaes/core/surrogate/alamopy.py,635,CONFIG,AlamoTrainer,filename,ConfigValue,str,None,"File name to use for ALAMO files - must be full path of a .alm file. Other files will be defined from this pattern. If this option is not None, then working files will not be deleted."
+idaes/core/surrogate/alamopy.py,645,CONFIG,AlamoTrainer,working_directory,ConfigValue,str,None,"Full path to working directory for ALAMO to use. If this option is not None, then working files will not be deleted."
+idaes/core/surrogate/alamopy.py,654,CONFIG,AlamoTrainer,overwrite_files,ConfigValue,Bool,False,Flag indicating whether existing files can be overwritten.
+idaes/core/surrogate/pysmo_surrogate.py,245,CONFIG,PysmoPolyTrainer,maximum_polynomial_order,ConfigValue,PositiveInt,None,Maximum order of univariate terms. Maximum value is 10.
+idaes/core/surrogate/pysmo_surrogate.py,254,CONFIG,PysmoPolyTrainer,number_of_crossvalidations,ConfigValue,PositiveInt,3,Number of crossvalidations.
+idaes/core/surrogate/pysmo_surrogate.py,261,CONFIG,PysmoPolyTrainer,training_split,ConfigValue,PositiveFloat,0.8,Training-testing data split for PySMO.
+idaes/core/surrogate/pysmo_surrogate.py,270,CONFIG,PysmoPolyTrainer,solution_method,ConfigValue,"In(['pyomo', 'mle', 'bfgs'])",None,"Method for solving regression problem. Must be one of the options ['pyomo', 'mle', 'bfgs']."
+idaes/core/surrogate/pysmo_surrogate.py,279,CONFIG,PysmoPolyTrainer,multinomials,ConfigValue,Bool,False,Option for bi-variate pairwise terms in final polynomial
+idaes/core/surrogate/pysmo_surrogate.py,288,CONFIG,PysmoPolyTrainer,extra_features,ConfigValue,list,None,"List of extra features to be considered for regression (if any), e.g. ['x1 / x2']."
+idaes/core/surrogate/pysmo_surrogate.py,375,CONFIG,PysmoRBFTrainer,basis_function,ConfigValue,"In(['linear', 'cubic', 'gaussian', 'mq', 'imq', 'spline'])",None,Basis function for RBF.
+idaes/core/surrogate/pysmo_surrogate.py,384,CONFIG,PysmoRBFTrainer,solution_method,ConfigValue,"In(['pyomo', 'algebraic', 'bfgs'])",None,Method for solving RBF problem. Must be an instance of 'SolutionMethod (Enum)'
+idaes/core/surrogate/pysmo_surrogate.py,393,CONFIG,PysmoRBFTrainer,regularization,ConfigValue,Bool,None,Option for regularization - results in a regression rather than interpolation. Produces more generalizable models. Useful for noisy data.
+idaes/core/surrogate/pysmo_surrogate.py,436,CONFIG,PysmoKrigingTrainer,numerical_gradients,ConfigValue,Bool,True,Choice of whether numerical gradients are used in Kriging model training.Determines choice of optimization algorithm: Basinhopping (False) or BFGS (True).Using the numerical gradient option leads to q
+idaes/core/surrogate/pysmo_surrogate.py,448,CONFIG,PysmoKrigingTrainer,regularization,ConfigValue,Bool,True,Option for regularization - results in a regression rather than interpolation. Produces more generalizable models. Useful for noisy data.
+idaes/core/util/diagnostics_tools/convergence_analysis.py,65,CACONFIG,,input_specification,ConfigValue,is_psweepspec,,
+idaes/core/util/diagnostics_tools/convergence_analysis.py,72,CACONFIG,,workflow_runner,ConfigValue,psweep_runner_validator,SequentialSweepRunner,
+idaes/core/util/diagnostics_tools/convergence_analysis.py,80,CACONFIG,,solver_options,ConfigValue,None,,Options to pass to IPOPT.
+idaes/core/util/diagnostics_tools/convergence_analysis.py,87,CACONFIG,,halt_on_error,ConfigValue,bool,False,
+idaes/core/util/diagnostics_tools/degeneracy_hunter.py,66,DHCONFIG,,solver,ConfigValue,str,'scip',MILP solver to use for finding irreducible degenerate sets.
+idaes/core/util/diagnostics_tools/degeneracy_hunter.py,74,DHCONFIG,,solver_options,ConfigValue,None,,Options to pass to MILP solver.
+idaes/core/util/diagnostics_tools/degeneracy_hunter.py,81,DHCONFIG,,M,ConfigValue,NonNegativeFloat,100000.0,Maximum value for nu in MILP models.
+idaes/core/util/diagnostics_tools/degeneracy_hunter.py,89,DHCONFIG,,m_small,ConfigValue,NonNegativeFloat,1e-05,Smallest value for nu to be considered non-zero in MILP models.
+idaes/core/util/diagnostics_tools/degeneracy_hunter.py,97,DHCONFIG,,trivial_constraint_tolerance,ConfigValue,NonNegativeFloat,1e-06,Tolerance for identifying non-zero rows in Jacobian.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,98,CONFIG,,variable_bounds_absolute_tolerance,ConfigValue,NonNegativeFloat,0.0001,Absolute tolerance for considering a variable to be close to its bounds.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,108,CONFIG,,variable_bounds_relative_tolerance,ConfigValue,NonNegativeFloat,0.0001,Relative tolerance for considering a variable to be close to its bounds.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,117,CONFIG,,variable_bounds_violation_tolerance,ConfigValue,NonNegativeFloat,0,Absolute tolerance for considering a variable to violate its bounds.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,128,CONFIG,,constraint_residual_tolerance,ConfigValue,NonNegativeFloat,1e-05,Absolute tolerance to use when checking constraint residuals.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,136,CONFIG,,constraint_term_mismatch_tolerance,ConfigValue,NonNegativeFloat,1000000.0,Magnitude difference to use when checking for mismatched additive terms in constraints.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,144,CONFIG,,constraint_term_cancellation_tolerance,ConfigValue,NonNegativeFloat,0.0001,Absolute tolerance to use when checking for canceling additive terms in constraints.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,152,CONFIG,,max_canceling_terms,ConfigValue,NonNegativeInt,5,Maximum number of terms to consider when looking for canceling combinations in expressions.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,160,CONFIG,,constraint_term_zero_tolerance,ConfigValue,NonNegativeFloat,1e-10,Absolute tolerance to use when determining if a constraint term is equal to zero.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,168,CONFIG,,variable_large_value_tolerance,ConfigValue,NonNegativeFloat,10000.0,Absolute tolerance for considering a value to be large.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,176,CONFIG,,variable_small_value_tolerance,ConfigValue,NonNegativeFloat,0.0001,Absolute tolerance for considering a value to be small.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,184,CONFIG,,variable_zero_value_tolerance,ConfigValue,NonNegativeFloat,1e-08,Absolute tolerance for considering a value to be near to zero.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,192,CONFIG,,jacobian_large_value_caution,ConfigValue,NonNegativeFloat,10000.0,Tolerance for raising a caution for large Jacobian values.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,200,CONFIG,,jacobian_large_value_warning,ConfigValue,NonNegativeFloat,100000000.0,Tolerance for raising a warning for large Jacobian values.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,208,CONFIG,,jacobian_small_value_caution,ConfigValue,NonNegativeFloat,0.0001,Tolerance for raising a caution for small Jacobian values.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,216,CONFIG,,jacobian_small_value_warning,ConfigValue,NonNegativeFloat,1e-08,Tolerance for raising a warning for small Jacobian values.
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,224,CONFIG,,warn_for_evaluation_error_at_bounds,ConfigValue,bool,True,"If False, warnings will not be generated for things like log(x) with x >= 0"
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,232,CONFIG,,parallel_component_tolerance,ConfigValue,NonNegativeFloat,1e-08,Tolerance for identifying near-parallel Jacobian rows/columns
+idaes/core/util/diagnostics_tools/diagnostics_toolbox.py,240,CONFIG,,absolute_feasibility_tolerance,ConfigValue,NonNegativeFloat,1e-06,Feasibility tolerance for identifying infeasible constraints and bounds
+idaes/core/util/diagnostics_tools/svd_toolbox.py,118,SVDCONFIG,,number_of_smallest_singular_values,ConfigValue,PositiveInt,,Number of smallest singular values to compute
+idaes/core/util/diagnostics_tools/svd_toolbox.py,125,SVDCONFIG,,svd_callback,ConfigValue,svd_callback_validator,svd_dense,Callback to SVD method of choice (default = svd_dense)
+idaes/core/util/diagnostics_tools/svd_toolbox.py,137,SVDCONFIG,,svd_callback_arguments,ConfigValue,dict,None,Optional arguments to pass to SVD callback (default = None)
+idaes/core/util/diagnostics_tools/svd_toolbox.py,145,SVDCONFIG,,singular_value_tolerance,ConfigValue,NonNegativeFloat,1e-06,Tolerance for defining a small singular value
+idaes/core/util/diagnostics_tools/svd_toolbox.py,153,SVDCONFIG,,size_cutoff_in_singular_vector,ConfigValue,NonNegativeFloat,0.1,Size below which to ignore constraints and variables in the singular vector
+idaes/core/util/parameter_sweep.py,341,CONFIG,ParameterSweepSpecification,rebuild_model,ConfigValue,bool,True,
+idaes/core/util/parameter_sweep.py,350,CONFIG,ParameterSweepSpecification,build_model,ConfigValue,,,
+idaes/core/util/parameter_sweep.py,354,CONFIG,ParameterSweepSpecification,build_model_arguments,ConfigValue,dict,,
+idaes/core/util/parameter_sweep.py,361,CONFIG,ParameterSweepSpecification,run_model,ConfigValue,,,
+idaes/core/util/parameter_sweep.py,367,CONFIG,ParameterSweepSpecification,run_model_arguments,ConfigValue,dict,,
+idaes/core/util/parameter_sweep.py,374,CONFIG,ParameterSweepSpecification,build_outputs,ConfigValue,,,
+idaes/core/util/parameter_sweep.py,380,CONFIG,ParameterSweepSpecification,build_outputs_arguments,ConfigValue,dict,,
+idaes/core/util/parameter_sweep.py,387,CONFIG,ParameterSweepSpecification,handle_solver_error,ConfigValue,,,
+idaes/core/util/parameter_sweep.py,393,CONFIG,ParameterSweepSpecification,handle_solver_error_arguments,ConfigValue,dict,,
+idaes/core/util/parameter_sweep.py,400,CONFIG,ParameterSweepSpecification,halt_on_error,ConfigValue,bool,False,
+idaes/core/util/parameter_sweep.py,408,CONFIG,ParameterSweepSpecification,input_specification,ConfigValue,is_psweepspec,,
+idaes/core/util/parameter_sweep.py,415,CONFIG,ParameterSweepSpecification,solver,ConfigValue,_is_solver,None,
+idaes/models/control/controller.py,90,CONFIG,PIDControllerData,process_var,ConfigValue,,None,Process variable to be controlled
+idaes/models/control/controller.py,101,CONFIG,PIDControllerData,manipulated_var,ConfigValue,,None,Manipulated variable
+idaes/models/control/controller.py,114,CONFIG,PIDControllerData,mv_bound_type,ConfigValue,"In([ControllerMVBoundType.NONE, ControllerMVBoundType.SMOOTH_BOUND, ControllerMVBoundType.LOGISTIC])",ControllerMVBoundType.NONE,Type of bounds to apply to the manipulated variable (mv)).
+idaes/models/control/controller.py,136,CONFIG,PIDControllerData,calculate_initial_integral,ConfigValue,Bool,True,Calculate the initial integral term value if True
+idaes/models/control/controller.py,145,CONFIG,PIDControllerData,controller_type,ConfigValue,"In([ControllerType.P, ControllerType.PI, ControllerType.PD, ControllerType.PID])",ControllerType.PI,Control type
+idaes/models/control/controller.py,165,CONFIG,PIDControllerData,antiwindup_type,ConfigValue,"In([ControllerAntiwindupType.NONE, ControllerAntiwindupType.CONDITIONAL_INTEGRATION, ControllerAntiwindupType.BACK_CALCULATION])",ControllerAntiwindupType.NONE,Type of antiwindup technique to use.
+idaes/models/control/controller.py,185,CONFIG,PIDControllerData,derivative_on_error,ConfigValue,Bool,False,Whether basing derivative action on process var or error
+idaes/models/costing/QGESS.py,92,CONFIG,QGESSCostingData,Lang_factor,ConfigValue,float,None,"Installation cost factor. If not set, uses installation factors based on selected tech."
+idaes/models/costing/QGESS.py,101,CONFIG,QGESSCostingData,has_fixed_OM,ConfigValue,bool,False,Boolean to enable fixed operating & maintenance cost calculations.
+idaes/models/costing/QGESS.py,110,CONFIG,QGESSCostingData,has_variable_OM,ConfigValue,bool,False,Boolean to enable variable operating & maintenance cost calculations.
+idaes/models/costing/QGESS.py,119,CONFIG,QGESSCostingData,has_taxes_and_credits,ConfigValue,bool,False,Boolean to enable tax and production credit calculations.
+idaes/models/costing/QGESS.py,128,CONFIG,QGESSCostingData,has_production_credit_phaseout,ConfigValue,bool,False,Boolean for whether to consider phaseout of production incentive tax credit.
+idaes/models/costing/QGESS.py,137,CONFIG,QGESSCostingData,phaseout_fractions,ConfigValue,dict,None,dictionary of phaseout fractiosn indexed by years during which production incentive tax credit is phased out. MUST be in chronological (ascending) order. The list MUST have the same length as phaseout
+idaes/models/costing/QGESS.py,150,CONFIG,QGESSCostingData,has_net_present_value,ConfigValue,bool,False,Boolean to enable net present value calculations.
+idaes/models/costing/QGESS.py,159,CONFIG,QGESSCostingData,has_capital_expenditure_period,ConfigValue,bool,False,Boolean for whether a capital expenditure period occurs.
+idaes/models/costing/QGESS.py,168,CONFIG,QGESSCostingData,capital_expenditure_percentages,ConfigValue,ListOf(float),None,"A list of values that sum to 100 representing how capital costs are spread over a capital expenditure period; for example, an input of [10, 60, 30] is parsed as a 3-year period where capital costs are"
+idaes/models/costing/QGESS.py,185,CONFIG,QGESSCostingData,has_economy_of_numbers,ConfigValue,bool,False,Boolean to enable economy of numbers calculations.
+idaes/models/costing/QGESS.py,194,CONFIG,QGESSCostingData,CEPCI_year,ConfigValue,str,'2018',"Basis year for costing. Must be a supported value from 1990 to 2023 or a user-defined value. For details, see the IDAES 'costing_base.py' module"
+idaes/models/costing/QGESS.py,203,CONFIG,QGESSCostingData,tech,ConfigValue,int,None,"Integer corresponding to supported technology libraries, where 1-7 are various power plant types, 8-9 are specific case studies, and 10 is UKy REE."
+idaes/models/costing/QGESS.py,242,CONFIG,QGESSCostingData,location,ConfigValue,location_validator,"['United States', 'Washington DC / Northeast', 'average']","Basis location for costing. Must be a supported list of three strings passed as [country, city, value];see the IDAES 'location_factors.json' dictionary for a list of supported countries and cities. Th"
+idaes/models/properties/activity_coeff_models/activity_coeff_prop_pack.py,111,CONFIG,ActivityCoeffParameterData,activity_coeff_model,ConfigValue,"In(['Ideal', 'NRTL', 'Wilson'])",'Ideal',Flag indicating the activity coefficient model
+idaes/models/properties/activity_coeff_models/activity_coeff_prop_pack.py,127,CONFIG,ActivityCoeffParameterData,state_vars,ConfigValue,"In(['FTPz', 'FcTP'])",'FTPz',Flag indicating the choice for state variables
+idaes/models/properties/activity_coeff_models/activity_coeff_prop_pack.py,143,CONFIG,ActivityCoeffParameterData,valid_phase,ConfigValue,"In(['Liq', 'Vap', ('Vap', 'Liq'), ('Liq', 'Vap')])","('Vap', 'Liq')",Flag indicating the valid phase
+idaes/models/properties/activity_coeff_models/activity_coeff_prop_pack.py,322,CONFIG,ActivityCoeffInitializer,solver,ConfigValue,,'ipopt_v2',Solver to use for initialization
+idaes/models/properties/activity_coeff_models/activity_coeff_prop_pack.py,329,CONFIG,ActivityCoeffInitializer,solver_options,ConfigDict,,,Dict of options to pass to solver
+idaes/models/properties/activity_coeff_models/activity_coeff_prop_pack.py,336,CONFIG,ActivityCoeffInitializer,solver_writer_config,ConfigDict,,,Dict of writer_config arguments to pass to solver
+idaes/models/properties/activity_coeff_models/activity_coeff_prop_pack.py,343,CONFIG,ActivityCoeffInitializer,calculate_variable_options,ConfigDict,,,Dict of options to pass to 1x1 block solver
+idaes/models/properties/activity_coeff_models/methane_combustion_ideal.py,52,CONFIG,MethaneParameterData,activity_coeff_model,ConfigValue,In(['Ideal']),'Ideal',Methane combustion supports ideal gas only
+idaes/models/properties/activity_coeff_models/methane_combustion_ideal.py,61,CONFIG,MethaneParameterData,state_vars,ConfigValue,"In(['FTPz', 'FcTP'])",'FTPz',Flag indicating the choice for state variables
+idaes/models/properties/activity_coeff_models/methane_combustion_ideal.py,77,CONFIG,MethaneParameterData,valid_phase,ConfigValue,In(['Vap']),'Vap',Methane combustion supports ideal gas only
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,1109,CONFIG,HelmholtzParameterBlockData,pure_component,ConfigValue,str,None,Pure chemical component
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,1118,CONFIG,HelmholtzParameterBlockData,phase_presentation,ConfigValue,In(PhaseType),PhaseType.MIX,Set the way phases are presented to models
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,1140,CONFIG,HelmholtzParameterBlockData,state_vars,ConfigValue,In(StateVars),StateVars.PH,State variable set
+idaes/models/properties/general_helmholtz/helmholtz_functions.py,1159,CONFIG,HelmholtzParameterBlockData,amount_basis,ConfigValue,In(AmountBasis),AmountBasis.MOLE,Quantities on a mass or mole basis
+idaes/models/properties/interrogator/properties_interrogator.py,65,CONFIG,PropertyInterrogatorData,phase_list,ConfigValue,dict,,User defined phase list. Dict with form {name: Type}
+idaes/models/properties/interrogator/properties_interrogator.py,72,CONFIG,PropertyInterrogatorData,component_list,ConfigValue,dict,,User defined component list. Dict with form {name: Type}
+idaes/models/properties/modular_properties/base/generic_property.py,1000,CONFIG,GenericParameterData,components,ConfigValue,dict,,Dictionary of components in material
+idaes/models/properties/modular_properties/base/generic_property.py,1011,CONFIG,GenericParameterData,phases,ConfigValue,,,Dictionary of phases of interest
+idaes/models/properties/modular_properties/base/generic_property.py,1023,CONFIG,GenericParameterData,state_definition,ConfigValue,,,Choice of State Variables
+idaes/models/properties/modular_properties/base/generic_property.py,1033,CONFIG,GenericParameterData,state_bounds,ConfigValue,dict,,Bounds for state variables
+idaes/models/properties/modular_properties/base/generic_property.py,1041,CONFIG,GenericParameterData,state_components,ConfigValue,In(StateIndex),StateIndex.true,Argument indicating whether the true or apparent species set should be used for indexing state variables. Must be StateIndex.true or StateIndex.apparent.
+idaes/models/properties/modular_properties/base/generic_property.py,1054,CONFIG,GenericParameterData,pressure_ref,ConfigValue,,,Pressure at reference state
+idaes/models/properties/modular_properties/base/generic_property.py,1057,CONFIG,GenericParameterData,temperature_ref,ConfigValue,,,Temperature at reference state
+idaes/models/properties/modular_properties/base/generic_property.py,1062,CONFIG,GenericParameterData,phases_in_equilibrium,ConfigValue,list,None,List of phase pairs which are in equilibrium
+idaes/models/properties/modular_properties/base/generic_property.py,1073,CONFIG,GenericParameterData,phase_equilibrium_state,ConfigValue,dict,None,Formulation to use when calculating equilibrium state
+idaes/models/properties/modular_properties/base/generic_property.py,1087,CONFIG,GenericParameterData,bubble_dew_method,ConfigValue,,LogBubbleDew,Method to use to calculate bubble and dew points
+idaes/models/properties/modular_properties/base/generic_property.py,1098,CONFIG,GenericParameterData,parameter_data,ConfigValue,dict,{},Dict containing initialization data for parameters
+idaes/models/properties/modular_properties/base/generic_property.py,1108,CONFIG,GenericParameterData,base_units,ConfigValue,dict,{},Base units for property package
+idaes/models/properties/modular_properties/base/generic_property.py,1120,CONFIG,GenericParameterData,include_enthalpy_of_formation,ConfigValue,Bool,True,Include enthalpy of formation in property calculations
+idaes/models/properties/modular_properties/base/generic_property.py,1132,CONFIG,GenericParameterData,reaction_basis,ConfigValue,In(MaterialFlowBasis),MaterialFlowBasis.molar,Argument indicating basis of reaction terms. Should be an instance of a MaterialFlowBasis Enum
+idaes/models/properties/modular_properties/base/generic_property.py,1143,CONFIG,GenericParameterData,inherent_reactions,ConfigBlock,,,
+idaes/models/properties/modular_properties/base/generic_property.py,1149,CONFIG,GenericParameterData,default_scaling_factors,ConfigValue,dict,,DEPRECATED: Set default scaling factors on the scaler object instead
+idaes/models/properties/modular_properties/base/generic_property.py,2094,CONFIG,ModularPropertiesInitializer,solver,ConfigValue,,'ipopt_v2',Solver to use for initialization
+idaes/models/properties/modular_properties/base/generic_property.py,2101,CONFIG,ModularPropertiesInitializer,solver_options,ConfigDict,,,Dict of options to pass to solver
+idaes/models/properties/modular_properties/base/generic_property.py,2108,CONFIG,ModularPropertiesInitializer,solver_writer_config,ConfigDict,,,Dict of writer_config arguments to pass to solver
+idaes/models/properties/modular_properties/base/generic_property.py,2115,CONFIG,ModularPropertiesInitializer,calculate_variable_options,ConfigDict,,,Dict of options to pass to 1x1 block solver
+idaes/models/properties/modular_properties/base/generic_reaction.py,174,rxn_config,ModularReactionScaler,stoichiometry,ConfigValue,dict,,Stoichiometry of reaction
+idaes/models/properties/modular_properties/base/generic_reaction.py,182,rxn_config,ModularReactionScaler,heat_of_reaction,ConfigValue,,,Method for calculating specific heat of reaction
+idaes/models/properties/modular_properties/base/generic_reaction.py,190,rxn_config,ModularReactionScaler,concentration_form,ConfigValue,In(ConcentrationForm),None,Form to use for concentration terms in reaction equation
+idaes/models/properties/modular_properties/base/generic_reaction.py,200,rxn_config,ModularReactionScaler,parameter_data,ConfigValue,dict,{},Dict containing initialization data for parameters
+idaes/models/properties/modular_properties/base/generic_reaction.py,210,rate_rxn_config,ModularReactionScaler,rate_constant,ConfigValue,,,Expression form describing rate constant
+idaes/models/properties/modular_properties/base/generic_reaction.py,218,rate_rxn_config,ModularReactionScaler,rate_form,ConfigValue,,,Expression form describing rate of reaction
+idaes/models/properties/modular_properties/base/generic_reaction.py,228,equil_rxn_config,ModularReactionScaler,equilibrium_constant,ConfigValue,,,Expression form describing equilibrium constant
+idaes/models/properties/modular_properties/base/generic_reaction.py,236,equil_rxn_config,ModularReactionScaler,equilibrium_form,ConfigValue,,,Expression form describing reaction equilibrium
+idaes/models/properties/modular_properties/base/generic_reaction.py,254,CONFIG,GenericReactionParameterData,reaction_basis,ConfigValue,In(MaterialFlowBasis),MaterialFlowBasis.molar,Argument indicating basis of reaction terms. Should be an instance of a MaterialFlowBasis Enum
+idaes/models/properties/modular_properties/base/generic_reaction.py,265,CONFIG,GenericReactionParameterData,rate_reactions,ConfigBlock,,,
+idaes/models/properties/modular_properties/base/generic_reaction.py,269,CONFIG,GenericReactionParameterData,equilibrium_reactions,ConfigBlock,,,
+idaes/models/properties/modular_properties/base/generic_reaction.py,275,CONFIG,GenericReactionParameterData,base_units,ConfigValue,dict,{},Base units for property package
+idaes/models/properties/modular_properties/base/generic_reaction.py,287,CONFIG,GenericReactionParameterData,default_scaling_factors,ConfigValue,dict,,User-defined default scaling factors
+idaes/models/properties/modular_properties/eos/ceos.py,93,CubicConfig,MixingRuleB,type,ConfigValue,In(CubicType),,Equation of state to use
+idaes/models/properties/modular_properties/eos/ceos.py,101,CubicConfig,MixingRuleB,mixing_rule_a,ConfigValue,In(MixingRuleA),MixingRuleA.default,Mixing rule for parameter am for cubic EoS
+idaes/models/properties/modular_properties/eos/ceos.py,110,CubicConfig,MixingRuleB,mixing_rule_b,ConfigValue,In(MixingRuleB),MixingRuleB.default,Mixing rule for parameter bm for cubic EoS
+idaes/models/unit_models/cstr.py,184,CONFIG,CSTRData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/cstr.py,202,CONFIG,CSTRData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/cstr.py,220,CONFIG,CSTRData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/cstr.py,236,CONFIG,CSTRData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models/unit_models/cstr.py,249,CONFIG,CSTRData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/cstr.py,263,CONFIG,CSTRData,has_equilibrium_reactions,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/models/unit_models/cstr.py,277,CONFIG,CSTRData,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium construction flag
+idaes/models/unit_models/cstr.py,291,CONFIG,CSTRData,has_heat_of_reaction,ConfigValue,Bool,False,Heat of reaction term construction flag
+idaes/models/unit_models/cstr.py,305,CONFIG,CSTRData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/cstr.py,318,CONFIG,CSTRData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/cstr.py,330,CONFIG,CSTRData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/models/unit_models/cstr.py,343,CONFIG,CSTRData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models/unit_models/equilibrium_reactor.py,255,CONFIG,EquilibriumReactorData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/equilibrium_reactor.py,265,CONFIG,EquilibriumReactorData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/equilibrium_reactor.py,276,CONFIG,EquilibriumReactorData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/equilibrium_reactor.py,294,CONFIG,EquilibriumReactorData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/equilibrium_reactor.py,312,CONFIG,EquilibriumReactorData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/equilibrium_reactor.py,328,CONFIG,EquilibriumReactorData,has_rate_reactions,ConfigValue,Bool,True,Rate reaction construction flag
+idaes/models/unit_models/equilibrium_reactor.py,342,CONFIG,EquilibriumReactorData,has_equilibrium_reactions,ConfigValue,Bool,True,Equilibrium reaction construction flag
+idaes/models/unit_models/equilibrium_reactor.py,356,CONFIG,EquilibriumReactorData,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium term construction flag
+idaes/models/unit_models/equilibrium_reactor.py,369,CONFIG,EquilibriumReactorData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models/unit_models/equilibrium_reactor.py,382,CONFIG,EquilibriumReactorData,has_heat_of_reaction,ConfigValue,Bool,False,Heat of reaction term construction flag
+idaes/models/unit_models/equilibrium_reactor.py,396,CONFIG,EquilibriumReactorData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/equilibrium_reactor.py,410,CONFIG,EquilibriumReactorData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/equilibrium_reactor.py,423,CONFIG,EquilibriumReactorData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/equilibrium_reactor.py,435,CONFIG,EquilibriumReactorData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/models/unit_models/equilibrium_reactor.py,448,CONFIG,EquilibriumReactorData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models/unit_models/feed.py,105,CONFIG,FeedData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/feed.py,115,CONFIG,FeedData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/feed.py,124,CONFIG,FeedData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/feed.py,137,CONFIG,FeedData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/feed_flash.py,111,CONFIG,FeedFlashData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/feed_flash.py,120,CONFIG,FeedFlashData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/feed_flash.py,130,CONFIG,FeedFlashData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/feed_flash.py,148,CONFIG,FeedFlashData,flash_type,ConfigValue,In(FlashType),FlashType.isothermal,Type of flash to perform
+idaes/models/unit_models/feed_flash.py,161,CONFIG,FeedFlashData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/feed_flash.py,174,CONFIG,FeedFlashData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/flash.py,105,CONFIG,FlashData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/flash.py,115,CONFIG,FlashData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/flash.py,126,CONFIG,FlashData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/flash.py,144,CONFIG,FlashData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/flash.py,162,CONFIG,FlashData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/flash.py,178,CONFIG,FlashData,energy_split_basis,ConfigValue,EnergySplittingType,EnergySplittingType.equal_temperature,Type of constraint to write for energy splitting
+idaes/models/unit_models/flash.py,195,CONFIG,FlashData,ideal_separation,ConfigValue,Bool,True,Ideal splitting flag
+idaes/models/unit_models/flash.py,212,CONFIG,FlashData,has_heat_transfer,ConfigValue,Bool,True,Heat transfer term construction flag
+idaes/models/unit_models/flash.py,225,CONFIG,FlashData,has_pressure_change,ConfigValue,Bool,True,Pressure change term construction flag
+idaes/models/unit_models/flash.py,239,CONFIG,FlashData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/flash.py,252,CONFIG,FlashData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/gibbs_reactor.py,206,CONFIG,GibbsReactorData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/gibbs_reactor.py,216,CONFIG,GibbsReactorData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag
+idaes/models/unit_models/gibbs_reactor.py,226,CONFIG,GibbsReactorData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/gibbs_reactor.py,244,CONFIG,GibbsReactorData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/gibbs_reactor.py,260,CONFIG,GibbsReactorData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models/unit_models/gibbs_reactor.py,273,CONFIG,GibbsReactorData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/gibbs_reactor.py,287,CONFIG,GibbsReactorData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/gibbs_reactor.py,300,CONFIG,GibbsReactorData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/gibbs_reactor.py,312,CONFIG,GibbsReactorData,inert_species,ConfigValue,ListOf(str),[],List of inert species
+idaes/models/unit_models/heat_exchanger.py,291,config,HX0DInitializer,hot_side_name,ConfigValue,str,None,
+idaes/models/unit_models/heat_exchanger.py,299,config,HX0DInitializer,cold_side_name,ConfigValue,str,None,
+idaes/models/unit_models/heat_exchanger.py,307,config,HX0DInitializer,hot_side,ConfigBlock,,,Config block for hot side
+idaes/models/unit_models/heat_exchanger.py,315,config,HX0DInitializer,cold_side,ConfigBlock,,,Config block for cold side
+idaes/models/unit_models/heat_exchanger.py,325,config,HX0DInitializer,delta_temperature_callback,ConfigValue,,delta_temperature_lmtd_callback,Callback for for temperature difference calculations
+idaes/models/unit_models/heat_exchanger.py,332,config,HX0DInitializer,flow_pattern,ConfigValue,In(HeatExchangerFlowPattern),HeatExchangerFlowPattern.countercurrent,Heat exchanger flow pattern
+idaes/models/unit_models/heat_exchanger_1D.py,292,_SideTemplate,HeatExchanger1DData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/models/unit_models/heat_exchanger_1D.py,306,_SideTemplate,HeatExchanger1DData,has_holdup,ConfigValue,DefaultBool,useDefault,Holdup construction flag
+idaes/models/unit_models/heat_exchanger_1D.py,321,_SideTemplate,HeatExchanger1DData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/heat_exchanger_1D.py,339,_SideTemplate,HeatExchanger1DData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/heat_exchanger_1D.py,357,_SideTemplate,HeatExchanger1DData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/heat_exchanger_1D.py,374,_SideTemplate,HeatExchanger1DData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/heat_exchanger_1D.py,388,_SideTemplate,HeatExchanger1DData,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium term construction flag
+idaes/models/unit_models/heat_exchanger_1D.py,399,_SideTemplate,HeatExchanger1DData,property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for control volume
+idaes/models/unit_models/heat_exchanger_1D.py,412,_SideTemplate,HeatExchanger1DData,property_package_args,ConfigValue,,{},Arguments for constructing property package
+idaes/models/unit_models/heat_exchanger_1D.py,426,_SideTemplate,HeatExchanger1DData,transformation_method,ConfigValue,,useDefault,Discretization method to use for DAE transformation
+idaes/models/unit_models/heat_exchanger_1D.py,435,_SideTemplate,HeatExchanger1DData,transformation_scheme,ConfigValue,,useDefault,Discretization scheme to use for DAE transformation
+idaes/models/unit_models/heat_exchanger_1D.py,446,CONFIG,HeatExchanger1DData,hot_side,_SideTemplate,,,
+idaes/models/unit_models/heat_exchanger_1D.py,447,CONFIG,HeatExchanger1DData,cold_side,_SideTemplate,,,
+idaes/models/unit_models/heat_exchanger_1D.py,450,CONFIG,HeatExchanger1DData,finite_elements,ConfigValue,int,20,Number of finite elements length domain
+idaes/models/unit_models/heat_exchanger_1D.py,460,CONFIG,HeatExchanger1DData,collocation_points,ConfigValue,int,5,Number of collocation points per finite element
+idaes/models/unit_models/heat_exchanger_1D.py,470,CONFIG,HeatExchanger1DData,flow_type,ConfigValue,In(HeatExchangerFlowPattern),HeatExchangerFlowPattern.cocurrent,Flow configuration of heat exchanger
+idaes/models/unit_models/heat_exchanger_1D.py,483,CONFIG,HeatExchanger1DData,hot_side_name,ConfigValue,str,None,
+idaes/models/unit_models/heat_exchanger_1D.py,492,CONFIG,HeatExchanger1DData,cold_side_name,ConfigValue,str,None,
+idaes/models/unit_models/heat_exchanger_lc.py,38,CONFIG,HeatExchangerLumpedCapacitanceData,dynamic_heat_balance,ConfigValue,DefaultBool,useDefault,
+idaes/models/unit_models/heat_exchanger_ntu.py,176,_SideCONFIG,HeatExchangerNTUData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/heat_exchanger_ntu.py,194,_SideCONFIG,HeatExchangerNTUData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/heat_exchanger_ntu.py,212,_SideCONFIG,HeatExchangerNTUData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/heat_exchanger_ntu.py,228,_SideCONFIG,HeatExchangerNTUData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/heat_exchanger_ntu.py,242,_SideCONFIG,HeatExchangerNTUData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use
+idaes/models/unit_models/heat_exchanger_ntu.py,255,_SideCONFIG,HeatExchangerNTUData,property_package_args,ConfigBlock,,,Arguments to use for constructing property package
+idaes/models/unit_models/heat_exchanger_ntu.py,269,CONFIG,HeatExchangerNTUData,hot_side,_SideCONFIG,,,
+idaes/models/unit_models/heat_exchanger_ntu.py,270,CONFIG,HeatExchangerNTUData,cold_side,_SideCONFIG,,,
+idaes/models/unit_models/heat_exchanger_ntu.py,271,CONFIG,HeatExchangerNTUData,hot_side_name,ConfigValue,str,None,
+idaes/models/unit_models/heat_exchanger_ntu.py,279,CONFIG,HeatExchangerNTUData,cold_side_name,ConfigValue,str,None,
+idaes/models/unit_models/heater.py,138,config,HeaterScaler,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/heater.py,156,config,HeaterScaler,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/heater.py,174,config,HeaterScaler,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/heater.py,190,config,HeaterScaler,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium construction flag
+idaes/models/unit_models/heater.py,203,config,HeaterScaler,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/heater.py,217,config,HeaterScaler,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/heater.py,230,config,HeaterScaler,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/mixer.py,328,CONFIG,MixerData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/mixer.py,338,CONFIG,MixerData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/mixer.py,348,CONFIG,MixerData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for mixer
+idaes/models/unit_models/mixer.py,361,CONFIG,MixerData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/mixer.py,373,CONFIG,MixerData,inlet_list,ConfigValue,ListOf(str),,List of inlet names
+idaes/models/unit_models/mixer.py,385,CONFIG,MixerData,num_inlets,ConfigValue,int,,Number of inlets to unit
+idaes/models/unit_models/mixer.py,400,CONFIG,MixerData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/mixer.py,418,CONFIG,MixerData,has_phase_equilibrium,ConfigValue,Bool,False,Calculate phase equilibrium in mixed stream
+idaes/models/unit_models/mixer.py,432,CONFIG,MixerData,energy_mixing_type,ConfigValue,MixingType,MixingType.extensive,Method to use when mixing energy flows
+idaes/models/unit_models/mixer.py,446,CONFIG,MixerData,momentum_mixing_type,ConfigValue,MomentumMixingType,MomentumMixingType.minimize,Method to use when mixing momentum/pressure
+idaes/models/unit_models/mixer.py,468,CONFIG,MixerData,mixed_state_block,ConfigValue,is_state_block,None,Existing StateBlock to use as mixed stream
+idaes/models/unit_models/mixer.py,483,CONFIG,MixerData,construct_ports,ConfigValue,Bool,True,Construct inlet and outlet Port objects
+idaes/models/unit_models/mscontactor.py,832,STREAM_CONFIG,MSContactorInitializer,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for given stream
+idaes/models/unit_models/mscontactor.py,845,STREAM_CONFIG,MSContactorInitializer,property_package_args,ConfigDict,,,Dict of arguments to use for constructing property package
+idaes/models/unit_models/mscontactor.py,857,STREAM_CONFIG,MSContactorInitializer,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for stream
+idaes/models/unit_models/mscontactor.py,870,STREAM_CONFIG,MSContactorInitializer,reaction_package_args,ConfigDict,,,Arguments to use for constructing reaction packages
+idaes/models/unit_models/mscontactor.py,882,STREAM_CONFIG,MSContactorInitializer,flow_direction,ConfigValue,In(FlowDirection),FlowDirection.forward,FlowDirection Enum indicating direction of flow for given stream. Default=FlowDirection.forward.
+idaes/models/unit_models/mscontactor.py,892,STREAM_CONFIG,MSContactorInitializer,has_feed,ConfigValue,Bool,True,"Bool indicating whether stream has a feed Port and inlet state, or if all flow is provided via mass transfer. Default=True."
+idaes/models/unit_models/mscontactor.py,902,STREAM_CONFIG,MSContactorInitializer,has_rate_reactions,ConfigValue,Bool,False,
+idaes/models/unit_models/mscontactor.py,910,STREAM_CONFIG,MSContactorInitializer,has_equilibrium_reactions,ConfigValue,Bool,False,
+idaes/models/unit_models/mscontactor.py,918,STREAM_CONFIG,MSContactorInitializer,has_energy_balance,ConfigValue,Bool,True,
+idaes/models/unit_models/mscontactor.py,926,STREAM_CONFIG,MSContactorInitializer,has_heat_transfer,ConfigValue,Bool,False,
+idaes/models/unit_models/mscontactor.py,935,STREAM_CONFIG,MSContactorInitializer,has_heat_of_reaction,ConfigValue,Bool,False,
+idaes/models/unit_models/mscontactor.py,944,STREAM_CONFIG,MSContactorInitializer,has_pressure_balance,ConfigValue,Bool,True,
+idaes/models/unit_models/mscontactor.py,952,STREAM_CONFIG,MSContactorInitializer,has_pressure_change,ConfigValue,Bool,False,
+idaes/models/unit_models/mscontactor.py,961,STREAM_CONFIG,MSContactorInitializer,side_streams,ConfigValue,list,None,
+idaes/models/unit_models/mscontactor.py,711,CONFIG,MSContactorInitializer,ssc_solver_options,ConfigDict,,,Dict of arguments for solver calls by ssc_solver
+idaes/models/unit_models/mscontactor.py,718,CONFIG,MSContactorInitializer,calculate_variable_options,ConfigDict,,,Dict of options to pass to 1x1 block solver
+idaes/models/unit_models/mscontactor.py,982,CONFIG,MSContactorData,streams,ConfigDict,,,Dict of streams and associated property packages
+idaes/models/unit_models/mscontactor.py,992,CONFIG,MSContactorData,number_of_finite_elements,ConfigValue,int,,Number of finite elements to use
+idaes/models/unit_models/mscontactor.py,996,CONFIG,MSContactorData,interacting_streams,ConfigValue,list,,
+idaes/models/unit_models/mscontactor.py,1004,CONFIG,MSContactorData,heterogeneous_reactions,ConfigValue,,None,Heterogeneous reaction package to use in contactor.
+idaes/models/unit_models/mscontactor.py,1015,CONFIG,MSContactorData,heterogeneous_reactions_args,ConfigDict,,,Arguments to use for constructing reaction packages
+idaes/models/unit_models/pipe.py,105,CONFIG,PipeData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/pipe.py,123,CONFIG,PipeData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/pipe.py,141,CONFIG,PipeData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/pipe.py,157,CONFIG,PipeData,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium construction flag
+idaes/models/unit_models/pipe.py,171,CONFIG,PipeData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models/unit_models/pipe.py,184,CONFIG,PipeData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/pipe.py,198,CONFIG,PipeData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/pipe.py,211,CONFIG,PipeData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/pipe.py,223,CONFIG,PipeData,length_domain_set,ConfigValue,ListOf(float),"[0.0, 1.0]",List of points to use to initialize length domain
+idaes/models/unit_models/pipe.py,236,CONFIG,PipeData,transformation_method,ConfigValue,,'dae.finite_difference',Method to use for DAE transformation
+idaes/models/unit_models/pipe.py,246,CONFIG,PipeData,transformation_scheme,ConfigValue,,'BACKWARD',Scheme to use for DAE transformation
+idaes/models/unit_models/pipe.py,256,CONFIG,PipeData,finite_elements,ConfigValue,,20,Number of finite elements to use for DAE transformation
+idaes/models/unit_models/pipe.py,266,CONFIG,PipeData,collocation_points,ConfigValue,,3,No. collocation points to use for DAE transformation
+idaes/models/unit_models/plug_flow_reactor.py,114,CONFIG,PFRData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/plug_flow_reactor.py,132,CONFIG,PFRData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/plug_flow_reactor.py,150,CONFIG,PFRData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/plug_flow_reactor.py,166,CONFIG,PFRData,has_equilibrium_reactions,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/models/unit_models/plug_flow_reactor.py,180,CONFIG,PFRData,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium construction flag
+idaes/models/unit_models/plug_flow_reactor.py,194,CONFIG,PFRData,has_heat_of_reaction,ConfigValue,Bool,False,Heat of reaction term construction flag
+idaes/models/unit_models/plug_flow_reactor.py,208,CONFIG,PFRData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models/unit_models/plug_flow_reactor.py,221,CONFIG,PFRData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/plug_flow_reactor.py,235,CONFIG,PFRData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/plug_flow_reactor.py,248,CONFIG,PFRData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/plug_flow_reactor.py,260,CONFIG,PFRData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/models/unit_models/plug_flow_reactor.py,273,CONFIG,PFRData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models/unit_models/plug_flow_reactor.py,285,CONFIG,PFRData,length_domain_set,ConfigValue,ListOf(float),"[0.0, 1.0]",List of points to use to initialize length domain
+idaes/models/unit_models/plug_flow_reactor.py,298,CONFIG,PFRData,transformation_method,ConfigValue,,'dae.finite_difference',Method to use for DAE transformation
+idaes/models/unit_models/plug_flow_reactor.py,308,CONFIG,PFRData,transformation_scheme,ConfigValue,,'BACKWARD',Scheme to use for DAE transformation
+idaes/models/unit_models/plug_flow_reactor.py,318,CONFIG,PFRData,finite_elements,ConfigValue,,20,Number of finite elements to use for DAE transformation
+idaes/models/unit_models/plug_flow_reactor.py,328,CONFIG,PFRData,collocation_points,ConfigValue,,3,No. collocation points to use for DAE transformation
+idaes/models/unit_models/pressure_changer.py,267,CONFIG,IsentropicPerformanceCurveData,build_callback,ConfigValue,,None,
+idaes/models/unit_models/pressure_changer.py,273,CONFIG,IsentropicPerformanceCurveData,build_head_expressions,ConfigValue,bool,True,
+idaes/models/unit_models/pressure_changer.py,447,CONFIG,PressureChangerData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/pressure_changer.py,465,CONFIG,PressureChangerData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/pressure_changer.py,483,CONFIG,PressureChangerData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/pressure_changer.py,499,CONFIG,PressureChangerData,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium construction flag
+idaes/models/unit_models/pressure_changer.py,512,CONFIG,PressureChangerData,compressor,ConfigValue,Bool,True,Compressor flag
+idaes/models/unit_models/pressure_changer.py,523,CONFIG,PressureChangerData,thermodynamic_assumption,ConfigValue,In(ThermodynamicAssumption),ThermodynamicAssumption.isothermal,Thermodynamic assumption to use
+idaes/models/unit_models/pressure_changer.py,536,CONFIG,PressureChangerData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/pressure_changer.py,549,CONFIG,PressureChangerData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/pressure_changer.py,561,CONFIG,PressureChangerData,support_isentropic_performance_curves,ConfigValue,Bool,False,
+idaes/models/unit_models/pressure_changer.py,570,CONFIG,PressureChangerData,isentropic_performance_curves,IsentropicPerformanceCurveData.CONFIG,,,
+idaes/models/unit_models/product.py,52,CONFIG,ProductData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/product.py,62,CONFIG,ProductData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/product.py,72,CONFIG,ProductData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/product.py,85,CONFIG,ProductData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/separator.py,661,CONFIG,SeparatorData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/separator.py,671,CONFIG,SeparatorData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/separator.py,681,CONFIG,SeparatorData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for mixer
+idaes/models/unit_models/separator.py,695,CONFIG,SeparatorData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/separator.py,707,CONFIG,SeparatorData,outlet_list,ConfigValue,ListOf(str),,List of outlet names
+idaes/models/unit_models/separator.py,719,CONFIG,SeparatorData,num_outlets,ConfigValue,int,,Number of outlets to unit
+idaes/models/unit_models/separator.py,734,CONFIG,SeparatorData,split_basis,ConfigValue,SplittingType,SplittingType.totalFlow,Basis for splitting stream
+idaes/models/unit_models/separator.py,753,CONFIG,SeparatorData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/separator.py,771,CONFIG,SeparatorData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/separator.py,787,CONFIG,SeparatorData,has_phase_equilibrium,ConfigValue,Bool,False,Calculate phase equilibrium in mixed stream
+idaes/models/unit_models/separator.py,801,CONFIG,SeparatorData,energy_split_basis,ConfigValue,EnergySplittingType,EnergySplittingType.equal_temperature,Type of constraint to write for energy splitting
+idaes/models/unit_models/separator.py,819,CONFIG,SeparatorData,ideal_separation,ConfigValue,Bool,False,Ideal splitting flag
+idaes/models/unit_models/separator.py,836,CONFIG,SeparatorData,ideal_split_map,ConfigValue,dict,,Ideal splitting partitioning map
+idaes/models/unit_models/separator.py,850,CONFIG,SeparatorData,mixed_state_block,ConfigValue,is_state_block,,Existing StateBlock to use as mixed stream
+idaes/models/unit_models/separator.py,863,CONFIG,SeparatorData,construct_ports,ConfigValue,Bool,True,Construct inlet and outlet Port objects
+idaes/models/unit_models/shell_and_tube_1d.py,159,CONFIG,ShellAndTube1DData,shell_is_hot,ConfigValue,Bool,True,Shell side contains hot fluid
+idaes/models/unit_models/skeleton_model.py,66,CONFIG,SkeletonUnitModelData,dynamic,ConfigValue,In([False]),False,Dynamic model flag
+idaes/models/unit_models/skeleton_model.py,78,CONFIG,SkeletonUnitModelData,initializer,ConfigValue,,_default_initializer.__func__,Initializer to be used
+idaes/models/unit_models/solid_liquid/sl_separator.py,131,CONFIG,SLSeparatorData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/solid_liquid/sl_separator.py,141,CONFIG,SLSeparatorData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/solid_liquid/sl_separator.py,152,CONFIG,SLSeparatorData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/solid_liquid/sl_separator.py,170,CONFIG,SLSeparatorData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/solid_liquid/sl_separator.py,186,CONFIG,SLSeparatorData,energy_split_basis,ConfigValue,EnergySplittingType,EnergySplittingType.equal_temperature,Type of constraint to write for energy splitting
+idaes/models/unit_models/solid_liquid/sl_separator.py,203,CONFIG,SLSeparatorData,solid_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for solid phase
+idaes/models/unit_models/solid_liquid/sl_separator.py,217,CONFIG,SLSeparatorData,solid_property_package_args,ConfigBlock,,,Arguments to use for constructing solid phase property packages
+idaes/models/unit_models/solid_liquid/sl_separator.py,229,CONFIG,SLSeparatorData,liquid_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for liquid phase
+idaes/models/unit_models/solid_liquid/sl_separator.py,243,CONFIG,SLSeparatorData,liquid_property_package_args,ConfigBlock,,,Arguments to use for constructing liquid phase property packages
+idaes/models/unit_models/solid_liquid/thickener.py,73,CONFIG,Thickener0DData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/solid_liquid/thickener.py,83,CONFIG,Thickener0DData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/solid_liquid/thickener.py,94,CONFIG,Thickener0DData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/solid_liquid/thickener.py,112,CONFIG,Thickener0DData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/solid_liquid/thickener.py,128,CONFIG,Thickener0DData,energy_split_basis,ConfigValue,EnergySplittingType,EnergySplittingType.equal_temperature,Type of constraint to write for energy splitting
+idaes/models/unit_models/solid_liquid/thickener.py,145,CONFIG,Thickener0DData,solid_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for solid phase
+idaes/models/unit_models/solid_liquid/thickener.py,159,CONFIG,Thickener0DData,solid_property_package_args,ConfigBlock,,,Arguments to use for constructing solid phase property packages
+idaes/models/unit_models/solid_liquid/thickener.py,171,CONFIG,Thickener0DData,liquid_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for liquid phase
+idaes/models/unit_models/solid_liquid/thickener.py,185,CONFIG,Thickener0DData,liquid_property_package_args,ConfigBlock,,,Arguments to use for constructing liquid phase property packages
+idaes/models/unit_models/statejunction.py,48,CONFIG,StateJunctionData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/statejunction.py,58,CONFIG,StateJunctionData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/statejunction.py,69,CONFIG,StateJunctionData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use in StateJunction
+idaes/models/unit_models/statejunction.py,82,CONFIG,StateJunctionData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/stoichiometric_reactor.py,95,CONFIG,StoichiometricReactorData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models/unit_models/stoichiometric_reactor.py,113,CONFIG,StoichiometricReactorData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models/unit_models/stoichiometric_reactor.py,131,CONFIG,StoichiometricReactorData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models/unit_models/stoichiometric_reactor.py,147,CONFIG,StoichiometricReactorData,has_heat_of_reaction,ConfigValue,Bool,False,Heat of reaction term construction flag
+idaes/models/unit_models/stoichiometric_reactor.py,161,CONFIG,StoichiometricReactorData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models/unit_models/stoichiometric_reactor.py,174,CONFIG,StoichiometricReactorData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models/unit_models/stoichiometric_reactor.py,188,CONFIG,StoichiometricReactorData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models/unit_models/stoichiometric_reactor.py,201,CONFIG,StoichiometricReactorData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/stoichiometric_reactor.py,213,CONFIG,StoichiometricReactorData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/models/unit_models/stoichiometric_reactor.py,226,CONFIG,StoichiometricReactorData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models/unit_models/stream_scaler.py,61,CONFIG,StreamScalerData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/stream_scaler.py,71,CONFIG,StreamScalerData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/stream_scaler.py,80,CONFIG,StreamScalerData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for StreamScaler
+idaes/models/unit_models/stream_scaler.py,93,CONFIG,StreamScalerData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models/unit_models/translator.py,47,CONFIG,TranslatorData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models/unit_models/translator.py,56,CONFIG,TranslatorData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models/unit_models/translator.py,65,CONFIG,TranslatorData,outlet_state_defined,ConfigValue,Bool,True,Indicated whether outlet state will be fully defined
+idaes/models/unit_models/translator.py,81,CONFIG,TranslatorData,has_phase_equilibrium,ConfigValue,Bool,False,Indicates whether outlet is in phase equilibrium
+idaes/models/unit_models/translator.py,96,CONFIG,TranslatorData,inlet_property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for incoming stream
+idaes/models/unit_models/translator.py,109,CONFIG,TranslatorData,inlet_property_package_args,ConfigBlock,,,Arguments to use for constructing property package of the incoming stream
+idaes/models/unit_models/translator.py,122,CONFIG,TranslatorData,outlet_property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for outgoing stream
+idaes/models/unit_models/translator.py,135,CONFIG,TranslatorData,outlet_property_package_args,ConfigBlock,,,Arguments to use for constructing property package of the outgoing stream
+idaes/models/unit_models/valve.py,137,CONFIG,ValveData,valve_function_callback,ConfigValue,,ValveFunctionType.linear,Valve function type or callback for custom
+idaes/models/unit_models/valve.py,150,CONFIG,ValveData,pressure_flow_callback,ConfigValue,,pressure_flow_default_callback,Callback function providing the valve_function expression
+idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,61,Stream_Config,Membrane1DData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for given stream
+idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,74,Stream_Config,Membrane1DData,property_package_args,ConfigDict,,,Dict of arguments to use for constructing property package
+idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,87,Stream_Config,Membrane1DData,has_energy_balance,ConfigValue,Bool,True,
+idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,95,Stream_Config,Membrane1DData,has_pressure_balance,ConfigValue,Bool,True,
+idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,104,CONFIG,Membrane1DData,sweep_flow,ConfigValue,Bool,True,"Bool indicating whether stream has a feed Port and inlet state, or if all flow is provided via mass transfer. Default=True."
+idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,114,CONFIG,Membrane1DData,finite_elements,ConfigValue,int,5,Number of finite elements in length domain
+idaes/models_extra/co2_capture_and_utilization/unit_models/membrane_1d.py,124,CONFIG,Membrane1DData,flow_type,ConfigValue,In(MembraneFlowPattern),MembraneFlowPattern.COUNTERCURRENT,Flow configuration of membrane
+idaes/models_extra/column_models/MEAsolvent_column.py,71,CONFIG,MEAColumnData,enhancement_factor_model,ConfigValue,,PseudoSecondOrderExplicit,Enhancement factor model to use in column
+idaes/models_extra/column_models/MEAsolvent_column.py,78,CONFIG,MEAColumnData,enhancement_factor_kwargs,ConfigValue,,None,Keyword arguments to pass when making enhancement factor model
+idaes/models_extra/column_models/condenser.py,87,CONFIG,CondenserData,condenser_type,ConfigValue,In(CondenserType),CondenserType.totalCondenser,Type of condenser flag
+idaes/models_extra/column_models/condenser.py,102,CONFIG,CondenserData,temperature_spec,ConfigValue,In(TemperatureSpec),None,Temperature spec for the condenser
+idaes/models_extra/column_models/condenser.py,118,CONFIG,CondenserData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models_extra/column_models/condenser.py,134,CONFIG,CondenserData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models_extra/column_models/condenser.py,150,CONFIG,CondenserData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/column_models/condenser.py,163,CONFIG,CondenserData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/column_models/plate_heat_exchanger.py,78,CONFIG,PlateHeatExchangerData,passes,ConfigValue,Integer,4,Number of passes
+idaes/models_extra/column_models/plate_heat_exchanger.py,87,CONFIG,PlateHeatExchangerData,channels_per_pass,ConfigValue,Integer,12,Number of channels for each pass
+idaes/models_extra/column_models/plate_heat_exchanger.py,97,CONFIG,PlateHeatExchangerData,number_of_divider_plates,ConfigValue,Integer,0,Number of divider plates in heat exchanger
+idaes/models_extra/column_models/reboiler.py,70,CONFIG,ReboilerData,has_boilup_ratio,ConfigValue,Bool,False,Boilup ratio term construction flag
+idaes/models_extra/column_models/reboiler.py,84,CONFIG,ReboilerData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models_extra/column_models/reboiler.py,100,CONFIG,ReboilerData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models_extra/column_models/reboiler.py,116,CONFIG,ReboilerData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/column_models/reboiler.py,132,CONFIG,ReboilerData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/column_models/reboiler.py,146,CONFIG,ReboilerData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/column_models/reboiler.py,159,CONFIG,ReboilerData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/column_models/solvent_column.py,66,CONFIG,PackedColumnData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models_extra/column_models/solvent_column.py,76,CONFIG,PackedColumnData,has_holdup,ConfigValue,DefaultBool,useDefault,Holdup construction flag
+idaes/models_extra/column_models/solvent_column.py,95,CONFIG,PackedColumnData,finite_elements,ConfigValue,int,20,Number of finite elements length domain
+idaes/models_extra/column_models/solvent_column.py,106,CONFIG,PackedColumnData,length_domain_set,ConfigValue,list,"[0.0, 1.0]",List of points in length domain
+idaes/models_extra/column_models/solvent_column.py,118,CONFIG,PackedColumnData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/column_models/solvent_column.py,133,_PhaseCONFIG,PackedColumnData,property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for control volume
+idaes/models_extra/column_models/solvent_column.py,146,_PhaseCONFIG,PackedColumnData,property_package_args,ConfigValue,,{},Arguments for constructing vapor property package
+idaes/models_extra/column_models/solvent_column.py,161,CONFIG,PackedColumnData,vapor_phase,_PhaseCONFIG,,,
+idaes/models_extra/column_models/solvent_column.py,163,CONFIG,PackedColumnData,liquid_phase,_PhaseCONFIG,,,
+idaes/models_extra/column_models/solvent_condenser.py,70,CONFIG,SolventCondenserData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models_extra/column_models/solvent_condenser.py,80,CONFIG,SolventCondenserData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models_extra/column_models/solvent_condenser.py,92,CONFIG,SolventCondenserData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models_extra/column_models/solvent_condenser.py,108,CONFIG,SolventCondenserData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models_extra/column_models/solvent_condenser.py,124,CONFIG,SolventCondenserData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/column_models/solvent_condenser.py,140,CONFIG,SolventCondenserData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/column_models/solvent_condenser.py,154,CONFIG,SolventCondenserData,liquid_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for liquid phase
+idaes/models_extra/column_models/solvent_condenser.py,168,CONFIG,SolventCondenserData,liquid_property_package_args,ConfigBlock,,,Arguments to use for constructing liquid phase properties
+idaes/models_extra/column_models/solvent_condenser.py,180,CONFIG,SolventCondenserData,vapor_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for vapor phase
+idaes/models_extra/column_models/solvent_condenser.py,194,CONFIG,SolventCondenserData,vapor_property_package_args,ConfigBlock,,,Arguments to use for constructing vapor phase properties
+idaes/models_extra/column_models/solvent_reboiler.py,205,CONFIG,SolventReboilerData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models_extra/column_models/solvent_reboiler.py,215,CONFIG,SolventReboilerData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models_extra/column_models/solvent_reboiler.py,227,CONFIG,SolventReboilerData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models_extra/column_models/solvent_reboiler.py,243,CONFIG,SolventReboilerData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models_extra/column_models/solvent_reboiler.py,259,CONFIG,SolventReboilerData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/column_models/solvent_reboiler.py,275,CONFIG,SolventReboilerData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/column_models/solvent_reboiler.py,289,CONFIG,SolventReboilerData,liquid_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for liquid phase
+idaes/models_extra/column_models/solvent_reboiler.py,303,CONFIG,SolventReboilerData,liquid_property_package_args,ConfigBlock,,,Arguments to use for constructing liquid phase properties
+idaes/models_extra/column_models/solvent_reboiler.py,315,CONFIG,SolventReboilerData,vapor_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for vapor phase
+idaes/models_extra/column_models/solvent_reboiler.py,329,CONFIG,SolventReboilerData,vapor_property_package_args,ConfigBlock,,,Arguments to use for constructing vapor phase properties
+idaes/models_extra/column_models/tray.py,59,CONFIG,TrayData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models_extra/column_models/tray.py,69,CONFIG,TrayData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models_extra/column_models/tray.py,80,CONFIG,TrayData,is_feed_tray,ConfigValue,Bool,False,flag to indicate feed tray.
+idaes/models_extra/column_models/tray.py,94,CONFIG,TrayData,has_liquid_side_draw,ConfigValue,Bool,False,liquid side draw construction flag.
+idaes/models_extra/column_models/tray.py,107,CONFIG,TrayData,has_vapor_side_draw,ConfigValue,Bool,False,vapor side draw construction flag.
+idaes/models_extra/column_models/tray.py,120,CONFIG,TrayData,has_heat_transfer,ConfigValue,Bool,False,heat duty to/from tray construction flag.
+idaes/models_extra/column_models/tray.py,133,CONFIG,TrayData,has_pressure_change,ConfigValue,Bool,False,pressure change term construction flag
+idaes/models_extra/column_models/tray.py,147,CONFIG,TrayData,property_package,ConfigValue,is_physical_parameter_block,useDefault,property package to use for control volume
+idaes/models_extra/column_models/tray.py,160,CONFIG,TrayData,property_package_args,ConfigBlock,,,arguments to use for constructing property packages
+idaes/models_extra/column_models/tray_column.py,54,CONFIG,TrayColumnData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models_extra/column_models/tray_column.py,64,CONFIG,TrayColumnData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models_extra/column_models/tray_column.py,75,CONFIG,TrayColumnData,number_of_trays,ConfigValue,In(Integers),None,Number of trays in the column
+idaes/models_extra/column_models/tray_column.py,87,CONFIG,TrayColumnData,feed_tray_location,ConfigValue,In(Integers),None,Feed tray location in the column
+idaes/models_extra/column_models/tray_column.py,99,CONFIG,TrayColumnData,condenser_type,ConfigValue,In(CondenserType),CondenserType.totalCondenser,Type of condenser flag
+idaes/models_extra/column_models/tray_column.py,114,CONFIG,TrayColumnData,condenser_temperature_spec,ConfigValue,In(TemperatureSpec),None,Temperature spec for the condenser
+idaes/models_extra/column_models/tray_column.py,130,CONFIG,TrayColumnData,has_heat_transfer,ConfigValue,Bool,False,heat duty to/from tray construction flag.
+idaes/models_extra/column_models/tray_column.py,143,CONFIG,TrayColumnData,has_pressure_change,ConfigValue,Bool,False,pressure change term construction flag
+idaes/models_extra/column_models/tray_column.py,157,CONFIG,TrayColumnData,has_liquid_side_draw,ConfigValue,Bool,False,liquid side draw construction flag.
+idaes/models_extra/column_models/tray_column.py,170,CONFIG,TrayColumnData,has_vapor_side_draw,ConfigValue,Bool,False,vapor side draw construction flag.
+idaes/models_extra/column_models/tray_column.py,183,CONFIG,TrayColumnData,property_package,ConfigValue,is_physical_parameter_block,useDefault,property package to use for control volume
+idaes/models_extra/column_models/tray_column.py,196,CONFIG,TrayColumnData,property_package_args,ConfigBlock,,,arguments to use for constructing property packages
+idaes/models_extra/gas_distribution/unit_models/compressor.py,43,CONFIG,IsothermalCompressorData,property_package,ConfigValue,is_physical_parameter_block,None,
+idaes/models_extra/gas_distribution/unit_models/node.py,44,CONFIG,PipelineNodeData,property_package,ConfigValue,is_physical_parameter_block,None,
+idaes/models_extra/gas_distribution/unit_models/node.py,48,CONFIG,PipelineNodeData,n_inlet_pipelines,ConfigValue,int,1,
+idaes/models_extra/gas_distribution/unit_models/node.py,52,CONFIG,PipelineNodeData,n_outlet_pipelines,ConfigValue,int,1,
+idaes/models_extra/gas_distribution/unit_models/node.py,56,CONFIG,PipelineNodeData,n_supplies,ConfigValue,int,0,
+idaes/models_extra/gas_distribution/unit_models/node.py,60,CONFIG,PipelineNodeData,n_demands,ConfigValue,int,0,
+idaes/models_extra/gas_distribution/unit_models/pipeline.py,69,CONFIG,GasPipelineData,property_package,ConfigValue,is_physical_parameter_block,None,
+idaes/models_extra/gas_distribution/unit_models/pipeline.py,73,CONFIG,GasPipelineData,transformation_method,ConfigValue,is_transformation_method,'dae.finite_difference',DAE transformation method
+idaes/models_extra/gas_distribution/unit_models/pipeline.py,83,CONFIG,GasPipelineData,transformation_scheme,ConfigValue,is_transformation_scheme,'FORWARD',DAE transformation scheme
+idaes/models_extra/gas_distribution/unit_models/pipeline.py,93,CONFIG,GasPipelineData,finite_elements,ConfigValue,int,1,Number of finite elements
+idaes/models_extra/gas_distribution/unit_models/pipeline.py,103,CONFIG,GasPipelineData,collocation_points,ConfigValue,int,None,Number of collocation points
+idaes/models_extra/gas_solid_contactors/properties/methane_iron_OC_reduction/hetero_reactions.py,90,CONFIG,ReactionParameterData,gas_property_package,ConfigValue,is_physical_parameter_block,,Reference to associated PropertyPackageParameter object for the gas phase.
+idaes/models_extra/gas_solid_contactors/properties/methane_iron_OC_reduction/hetero_reactions.py,98,CONFIG,ReactionParameterData,solid_property_package,ConfigValue,is_physical_parameter_block,,Reference to associated PropertyPackageParameter object for the solid phase.
+idaes/models_extra/gas_solid_contactors/properties/methane_iron_OC_reduction/hetero_reactions.py,106,CONFIG,ReactionParameterData,default_arguments,ConfigBlock,,,Default arguments to use with Property Package
+idaes/models_extra/gas_solid_contactors/properties/methane_iron_OC_reduction/hetero_reactions.py,368,CONFIG,ReactionBlockData,parameters,ConfigValue,is_reaction_parameter_block,,A reference to an instance of the Reaction Parameter Block associated with this property package.
+idaes/models_extra/gas_solid_contactors/properties/methane_iron_OC_reduction/hetero_reactions.py,378,CONFIG,ReactionBlockData,solid_state_block,ConfigValue,is_state_block,,A reference to an instance of a StateBlock for the solid phase with which this reaction block should be associated.
+idaes/models_extra/gas_solid_contactors/properties/methane_iron_OC_reduction/hetero_reactions.py,388,CONFIG,ReactionBlockData,gas_state_block,ConfigValue,is_state_block,,A reference to an instance of a StateBlock for the gas phase with which this reaction block should be associated.
+idaes/models_extra/gas_solid_contactors/properties/methane_iron_OC_reduction/hetero_reactions.py,398,CONFIG,ReactionBlockData,has_equilibrium,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/models_extra/gas_solid_contactors/properties/oxygen_iron_OC_oxidation/hetero_reactions.py,90,CONFIG,ReactionParameterData,gas_property_package,ConfigValue,is_physical_parameter_block,,Reference to associated PropertyPackageParameter object for the gas phase.
+idaes/models_extra/gas_solid_contactors/properties/oxygen_iron_OC_oxidation/hetero_reactions.py,98,CONFIG,ReactionParameterData,solid_property_package,ConfigValue,is_physical_parameter_block,,Reference to associated PropertyPackageParameter object for the solid phase.
+idaes/models_extra/gas_solid_contactors/properties/oxygen_iron_OC_oxidation/hetero_reactions.py,106,CONFIG,ReactionParameterData,default_arguments,ConfigBlock,,,Default arguments to use with Property Package
+idaes/models_extra/gas_solid_contactors/properties/oxygen_iron_OC_oxidation/hetero_reactions.py,369,CONFIG,ReactionBlockData,parameters,ConfigValue,is_reaction_parameter_block,,A reference to an instance of the Reaction Parameter Block associated with this property package.
+idaes/models_extra/gas_solid_contactors/properties/oxygen_iron_OC_oxidation/hetero_reactions.py,379,CONFIG,ReactionBlockData,solid_state_block,ConfigValue,is_state_block,,A reference to an instance of a StateBlock for the solid phase with which this reaction block should be associated.
+idaes/models_extra/gas_solid_contactors/properties/oxygen_iron_OC_oxidation/hetero_reactions.py,389,CONFIG,ReactionBlockData,gas_state_block,ConfigValue,is_state_block,,A reference to an instance of a StateBlock for the gas phase with which this reaction block should be associated.
+idaes/models_extra/gas_solid_contactors/properties/oxygen_iron_OC_oxidation/hetero_reactions.py,399,CONFIG,ReactionBlockData,has_equilibrium,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,96,CONFIG,BubblingFluidizedBedData,finite_elements,ConfigValue,int,5,Number of finite elements length domain
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,106,CONFIG,BubblingFluidizedBedData,length_domain_set,ConfigValue,list,"[0.0, 1.0]",Number of finite elements length domain
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,117,CONFIG,BubblingFluidizedBedData,transformation_method,ConfigValue,"In(['dae.finite_difference', 'dae.collocation'])",'dae.finite_difference',Method to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,131,CONFIG,BubblingFluidizedBedData,transformation_scheme,ConfigValue,"In([None, 'BACKWARD', 'FORWARD', 'LAGRANGE-RADAU'])",None,Scheme to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,148,CONFIG,BubblingFluidizedBedData,collocation_points,ConfigValue,int,3,Number of collocation points per finite element
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,158,CONFIG,BubblingFluidizedBedData,flow_type,ConfigValue,"In(['co_current', 'counter_current'])",'co_current',Flow configuration of Bubbling Fluidized Bed
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,171,CONFIG,BubblingFluidizedBedData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentTotal,Material balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,187,CONFIG,BubblingFluidizedBedData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,203,CONFIG,BubblingFluidizedBedData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,219,CONFIG,BubblingFluidizedBedData,has_pressure_change,ConfigValue,Bool,True,Pressure change term construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,236,_PhaseTemplate,BubblingFluidizedBedData,has_equilibrium_reactions,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,250,_PhaseTemplate,BubblingFluidizedBedData,property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for control volume
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,262,_PhaseTemplate,BubblingFluidizedBedData,property_package_args,ConfigValue,dict,{},Arguments for constructing gas property package
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,275,_PhaseTemplate,BubblingFluidizedBedData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,288,_PhaseTemplate,BubblingFluidizedBedData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,303,CONFIG,BubblingFluidizedBedData,gas_phase_config,_PhaseTemplate,,,
+idaes/models_extra/gas_solid_contactors/unit_models/bubbling_fluidized_bed.py,304,CONFIG,BubblingFluidizedBedData,solid_phase_config,_PhaseTemplate,,,
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,57,CONFIG,FixedBed0DData,dynamic,ConfigValue,In([True]),True,Dynamic model flag - must be True
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,67,CONFIG,FixedBed0DData,has_holdup,ConfigValue,In([True]),True,Holdup construction flag - must be True
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,78,CONFIG,FixedBed0DData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,94,CONFIG,FixedBed0DData,gas_property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for gas phase
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,107,CONFIG,FixedBed0DData,gas_property_package_args,ConfigValue,is_physical_parameter_block,None,Arguments to use for constructing gas phase property packages
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,121,CONFIG,FixedBed0DData,solid_property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for solid phase
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,134,CONFIG,FixedBed0DData,solid_property_package_args,ConfigValue,is_physical_parameter_block,None,Arguments to use for constructing solid phase property packages
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,148,CONFIG,FixedBed0DData,reaction_package,ConfigValue,,None,Reaction package to use for unit
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_0D.py,162,CONFIG,FixedBed0DData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,91,CONFIG,FixedBed1DData,finite_elements,ConfigValue,int,10,Number of finite elements length domain
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,101,CONFIG,FixedBed1DData,length_domain_set,ConfigValue,list,"[0.0, 1.0]",Number of finite elements length domain
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,112,CONFIG,FixedBed1DData,transformation_method,ConfigValue,,'dae.finite_difference',Method to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,125,CONFIG,FixedBed1DData,transformation_scheme,ConfigValue,"In([None, 'BACKWARD', 'FORWARD', 'LAGRANGE-RADAU'])",None,Scheme to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,142,CONFIG,FixedBed1DData,collocation_points,ConfigValue,int,3,Number of collocation points per finite element
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,152,CONFIG,FixedBed1DData,flow_type,ConfigValue,"In(['forward_flow', 'reverse_flow'])",'forward_flow',Flow configuration of Fixed Bed
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,165,CONFIG,FixedBed1DData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentTotal,Material balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,181,CONFIG,FixedBed1DData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,197,CONFIG,FixedBed1DData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,213,CONFIG,FixedBed1DData,has_pressure_change,ConfigValue,Bool,True,Pressure change term construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,227,CONFIG,FixedBed1DData,pressure_drop_type,ConfigValue,"In(['ergun_correlation', 'simple_correlation'])",'ergun_correlation',Construction flag for type of pressure drop
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,243,_PhaseTemplate,FixedBed1DData,property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for control volume
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,255,_PhaseTemplate,FixedBed1DData,property_package_args,ConfigValue,dict,{},Arguments for constructing gas property package
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,268,_PhaseTemplate,FixedBed1DData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,281,_PhaseTemplate,FixedBed1DData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,294,_PhaseTemplate,FixedBed1DData,has_equilibrium_reactions,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,310,CONFIG,FixedBed1DData,gas_phase_config,_PhaseTemplate,,,
+idaes/models_extra/gas_solid_contactors/unit_models/fixed_bed_1D.py,311,CONFIG,FixedBed1DData,solid_phase_config,_PhaseTemplate,,,
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,98,CONFIG,MBRData,finite_elements,ConfigValue,int,10,Number of finite elements length domain
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,108,CONFIG,MBRData,length_domain_set,ConfigValue,list,"[0.0, 1.0]",Number of finite elements length domain
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,119,CONFIG,MBRData,transformation_method,ConfigValue,,'dae.finite_difference',Method to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,132,CONFIG,MBRData,transformation_scheme,ConfigValue,"In([None, 'BACKWARD', 'FORWARD', 'LAGRANGE-RADAU'])",None,Scheme to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,151,CONFIG,MBRData,gas_transformation_scheme,ConfigValue,"In([None, 'BACKWARD', 'FORWARD'])",None,Scheme to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,169,CONFIG,MBRData,solid_transformation_scheme,ConfigValue,"In([None, 'BACKWARD', 'FORWARD'])",None,Scheme to use for DAE transformation
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,187,CONFIG,MBRData,collocation_points,ConfigValue,int,3,Number of collocation points per finite element
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,197,CONFIG,MBRData,flow_type,ConfigValue,In(['counter_current']),'counter_current',Flow configuration of Moving Bed
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,208,CONFIG,MBRData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentTotal,Material balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,224,CONFIG,MBRData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,240,CONFIG,MBRData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,256,CONFIG,MBRData,has_pressure_change,ConfigValue,Bool,True,Pressure change term construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,270,CONFIG,MBRData,pressure_drop_type,ConfigValue,"In(['simple_correlation', 'ergun_correlation'])",'simple_correlation',Construction flag for type of pressure drop
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,286,_PhaseTemplate,MBRData,has_equilibrium_reactions,ConfigValue,Bool,False,Equilibrium reaction construction flag
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,300,_PhaseTemplate,MBRData,property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for control volume
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,312,_PhaseTemplate,MBRData,property_package_args,ConfigValue,dict,{},Arguments for constructing gas property package
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,325,_PhaseTemplate,MBRData,reaction_package,ConfigValue,is_reaction_parameter_block,None,Reaction package to use for control volume
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,338,_PhaseTemplate,MBRData,reaction_package_args,ConfigBlock,,,Arguments to use for constructing reaction packages
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,353,CONFIG,MBRData,gas_phase_config,_PhaseTemplate,,,
+idaes/models_extra/gas_solid_contactors/unit_models/moving_bed.py,354,CONFIG,MBRData,solid_phase_config,_PhaseTemplate,,,
+idaes/models_extra/power_generation/properties/flue_gas_ideal.py,82,CONFIG,FlueGasParameterData,components,ConfigValue,list,"['N2', 'O2', 'NO', 'CO2', 'H2O', 'SO2']",Components to include
+idaes/models_extra/power_generation/unit_models/balance.py,96,config,,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.useDefault,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/balance.py,114,config,,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.useDefault,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/balance.py,132,config,,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/balance.py,148,config,,has_phase_equilibrium,ConfigValue,Bool,False,Phase equilibrium construction flag
+idaes/models_extra/power_generation/unit_models/balance.py,161,config,,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/balance.py,175,config,,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/balance.py,188,config,,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/balance.py,200,config,,has_work_transfer,ConfigValue,Bool,True,True if model a has work transfer term.
+idaes/models_extra/power_generation/unit_models/balance.py,208,config,,has_heat_transfer,ConfigValue,Bool,True,True if model has a heat transfer term.
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,109,CONFIG,BoilerFiresideData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,123,CONFIG,BoilerFiresideData,has_holdup,ConfigValue,Bool,False,Holdup construction flag
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,137,CONFIG,BoilerFiresideData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,150,CONFIG,BoilerFiresideData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,162,CONFIG,BoilerFiresideData,calculate_PA_SA_flows,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,177,CONFIG,BoilerFiresideData,number_of_zones,ConfigValue,,16,number of boiler zones
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,185,CONFIG,BoilerFiresideData,has_platen_superheater,ConfigValue,Bool,True,True if boiler includes a platen superheater
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,198,CONFIG,BoilerFiresideData,has_roof_superheater,ConfigValue,Bool,True,True if roof is treated as a superheater
+idaes/models_extra/power_generation/unit_models/boiler_fireside.py,211,CONFIG,BoilerFiresideData,surrogate_dictionary,ConfigValue,,None,surrogate model dictionary
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger.py,98,CONFIG,BoilerHeatExchangerData,tube_arrangement,ConfigValue,In(TubeArrangement),TubeArrangement.inLine,tube configuration
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger.py,107,CONFIG,BoilerHeatExchangerData,cold_side_water_phase,ConfigValue,"In(['Liq', 'Vap'])",'Liq',side 1 water phase
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger.py,116,CONFIG,BoilerHeatExchangerData,has_radiation,ConfigValue,"In([False, True])",False,Has hot side gas radiation
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,81,_SideTemplate,HeatExchangerCrossFlow2D_HeaderData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentTotal,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,97,_SideTemplate,HeatExchangerCrossFlow2D_HeaderData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,113,_SideTemplate,HeatExchangerCrossFlow2D_HeaderData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,129,_SideTemplate,HeatExchangerCrossFlow2D_HeaderData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,143,_SideTemplate,HeatExchangerCrossFlow2D_HeaderData,property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,155,_SideTemplate,HeatExchangerCrossFlow2D_HeaderData,property_package_args,ConfigValue,,{},Arguments for constructing shell property package
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,169,CONFIG,HeatExchangerCrossFlow2D_HeaderData,shell_side,_SideTemplate,,,
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,170,CONFIG,HeatExchangerCrossFlow2D_HeaderData,tube_side,_SideTemplate,,,
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,173,CONFIG,HeatExchangerCrossFlow2D_HeaderData,transformation_method,ConfigValue,,'dae.finite_difference',Discretization method to use for DAE transformation
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,182,CONFIG,HeatExchangerCrossFlow2D_HeaderData,transformation_scheme,ConfigValue,,'BACKWARD',Discretization scheme to use for DAE transformation
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,191,CONFIG,HeatExchangerCrossFlow2D_HeaderData,finite_elements,ConfigValue,int,5,Number of finite elements length domain
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,201,CONFIG,HeatExchangerCrossFlow2D_HeaderData,collocation_points,ConfigValue,int,3,Number of collocation points per finite element
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,211,CONFIG,HeatExchangerCrossFlow2D_HeaderData,flow_type,ConfigValue,"In(['co_current', 'counter_current'])",'co_current',Flow configuration of heat exchanger
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,223,CONFIG,HeatExchangerCrossFlow2D_HeaderData,tube_arrangement,ConfigValue,"In(['in-line', 'staggered'])",'in-line',tube configuration
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,232,CONFIG,HeatExchangerCrossFlow2D_HeaderData,tube_side_water_phase,ConfigValue,"In(['Liq', 'Vap'])",'Liq',tube side water phase
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,241,CONFIG,HeatExchangerCrossFlow2D_HeaderData,has_radiation,ConfigValue,"In([False, True])",False,Has side 2 gas radiation
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,250,CONFIG,HeatExchangerCrossFlow2D_HeaderData,tube_inner_diameter,ConfigValue,,None,Inner diameter of tube
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,258,CONFIG,HeatExchangerCrossFlow2D_HeaderData,tube_thickness,ConfigValue,,None,Tube wall thickness
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,266,CONFIG,HeatExchangerCrossFlow2D_HeaderData,radial_elements,ConfigValue,int,5,Number of finite elements in radius domain
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,276,CONFIG,HeatExchangerCrossFlow2D_HeaderData,header_inner_diameter,ConfigValue,,None,Inner diameter of header
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,284,CONFIG,HeatExchangerCrossFlow2D_HeaderData,header_wall_thickness,ConfigValue,,None,Header wall thickness
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,292,CONFIG,HeatExchangerCrossFlow2D_HeaderData,header_radial_elements,ConfigValue,int,5,Number of finite elements in radius domain
+idaes/models_extra/power_generation/unit_models/boiler_heat_exchanger_2D.py,302,CONFIG,HeatExchangerCrossFlow2D_HeaderData,has_header,ConfigValue,Bool,True,Flag to include tube header
+idaes/models_extra/power_generation/unit_models/cross_flow_heat_exchanger_1D.py,412,CONFIG,CrossFlowHeatExchanger1DData,shell_is_hot,ConfigValue,Bool,True,Shell side contains hot fluid
+idaes/models_extra/power_generation/unit_models/cross_flow_heat_exchanger_1D.py,422,CONFIG,CrossFlowHeatExchanger1DData,tube_arrangement,ConfigValue,"In(['in-line', 'staggered'])",'in-line',tube configuration
+idaes/models_extra/power_generation/unit_models/downcomer.py,62,CONFIG,DowncomerData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/downcomer.py,76,CONFIG,DowncomerData,has_holdup,ConfigValue,Bool,False,Holdup construction flag
+idaes/models_extra/power_generation/unit_models/downcomer.py,90,CONFIG,DowncomerData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/downcomer.py,106,CONFIG,DowncomerData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/downcomer.py,122,CONFIG,DowncomerData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/downcomer.py,138,CONFIG,DowncomerData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/downcomer.py,151,CONFIG,DowncomerData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/downcomer.py,164,CONFIG,DowncomerData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/drum.py,91,CONFIG,DrumData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/drum.py,105,CONFIG,DrumData,has_holdup,ConfigValue,Bool,False,Holdup construction flag
+idaes/models_extra/power_generation/unit_models/drum.py,119,CONFIG,DrumData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/drum.py,135,CONFIG,DrumData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/drum.py,151,CONFIG,DrumData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/drum.py,167,CONFIG,DrumData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/drum.py,180,CONFIG,DrumData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/drum.py,194,CONFIG,DrumData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/drum.py,207,CONFIG,DrumData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/drum1D.py,124,CONFIG,Drum1DData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/drum1D.py,140,CONFIG,Drum1DData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/drum1D.py,156,CONFIG,Drum1DData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/drum1D.py,172,CONFIG,Drum1DData,has_heat_transfer,ConfigValue,Bool,True,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/drum1D.py,185,CONFIG,Drum1DData,has_pressure_change,ConfigValue,Bool,True,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/drum1D.py,199,CONFIG,Drum1DData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/drum1D.py,212,CONFIG,Drum1DData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/drum1D.py,224,CONFIG,Drum1DData,finite_elements,ConfigValue,int,5,Number of finite elements in length (drum radius) domain
+idaes/models_extra/power_generation/unit_models/drum1D.py,234,CONFIG,Drum1DData,collocation_points,ConfigValue,int,3,Number of collocation points per finite element
+idaes/models_extra/power_generation/unit_models/drum1D.py,244,CONFIG,Drum1DData,drum_inner_diameter,ConfigValue,,None,DEPRECATED. Fix drum_diameter directly.
+idaes/models_extra/power_generation/unit_models/drum1D.py,253,CONFIG,Drum1DData,drum_thickness,ConfigValue,,None,DEPRECATED. Fix drum_thickness directly.
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,55,config,,has_drain_mixer,ConfigValue,Bool,True,Add a mixer to the inlet of the condensing section
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,65,config,,has_desuperheat,ConfigValue,Bool,True,Add a mixer desuperheat section to the heat exchanger
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,74,config,,has_drain_cooling,ConfigValue,Bool,True,Add a section after condensing section cool condensate.
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,83,config,,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,96,config,,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,108,config,,condense,HeatExchangerData.CONFIG,,,
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,109,config,,desuperheat,HeatExchangerData.CONFIG,,,
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D.py,110,config,,cooling,HeatExchangerData.CONFIG,,,
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,61,config,,has_drain_mixer,ConfigValue,Bool,True,Add a mixer to the inlet of the condensing section
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,71,config,,has_desuperheat,ConfigValue,Bool,True,Add a desuperheat section to the heat exchanger
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,80,config,,has_drain_cooling,ConfigValue,Bool,True,Add a drain cooler section to the heat exchanger.
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,89,config,,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,102,config,,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,114,config,,condense,CondenserData.CONFIG,,,
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,115,config,,desuperheat,HeatExchangerData.CONFIG,,,
+idaes/models_extra/power_generation/unit_models/feedwater_heater_0D_dynamic.py,116,config,,cooling,HeatExchangerData.CONFIG,,,
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,48,CONFIG,HeatExchangerWith3StreamsData,side_1_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,61,CONFIG,HeatExchangerWith3StreamsData,side_1_property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,73,CONFIG,HeatExchangerWith3StreamsData,side_2_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,86,CONFIG,HeatExchangerWith3StreamsData,side_2_property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,98,CONFIG,HeatExchangerWith3StreamsData,side_3_property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,111,CONFIG,HeatExchangerWith3StreamsData,side_3_property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,123,CONFIG,HeatExchangerWith3StreamsData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,139,CONFIG,HeatExchangerWith3StreamsData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,155,CONFIG,HeatExchangerWith3StreamsData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,171,CONFIG,HeatExchangerWith3StreamsData,has_heat_transfer,ConfigValue,Bool,True,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,184,CONFIG,HeatExchangerWith3StreamsData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,198,CONFIG,HeatExchangerWith3StreamsData,flow_type_side_2,ConfigValue,"In(['counter-current', 'co-current'])",'counter-current',Flow configuration in unit
+idaes/models_extra/power_generation/unit_models/heat_exchanger_3streams.py,208,CONFIG,HeatExchangerWith3StreamsData,flow_type_side_3,ConfigValue,"In(['counter-current', 'co-current'])",'counter-current',Flow configuration in unit
+idaes/models_extra/power_generation/unit_models/heater_1D.py,166,CONFIG,Heater1DData,has_fluid_holdup,ConfigValue,In([False]),False,Holdup construction flag
+idaes/models_extra/power_generation/unit_models/heater_1D.py,178,CONFIG,Heater1DData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentTotal,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/heater_1D.py,194,CONFIG,Heater1DData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/heater_1D.py,210,CONFIG,Heater1DData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/heater_1D.py,226,CONFIG,Heater1DData,has_pressure_change,ConfigValue,"In([True, False])",False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/heater_1D.py,240,CONFIG,Heater1DData,property_package,ConfigValue,is_physical_parameter_block,,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/heater_1D.py,251,CONFIG,Heater1DData,property_package_args,ConfigValue,,None,Arguments for constructing shell property package
+idaes/models_extra/power_generation/unit_models/heater_1D.py,263,CONFIG,Heater1DData,transformation_method,ConfigValue,,useDefault,Discretization method to use for DAE transformation
+idaes/models_extra/power_generation/unit_models/heater_1D.py,272,CONFIG,Heater1DData,transformation_scheme,ConfigValue,,useDefault,Discretization scheme to use for DAE transformation
+idaes/models_extra/power_generation/unit_models/heater_1D.py,283,CONFIG,Heater1DData,finite_elements,ConfigValue,int,5,Number of finite elements length domain
+idaes/models_extra/power_generation/unit_models/heater_1D.py,293,CONFIG,Heater1DData,collocation_points,ConfigValue,int,3,Number of collocation points per finite element
+idaes/models_extra/power_generation/unit_models/heater_1D.py,303,CONFIG,Heater1DData,tube_arrangement,ConfigValue,"In(['in-line', 'staggered'])",'in-line',tube configuration
+idaes/models_extra/power_generation/unit_models/helm/condenser_ntu.py,45,config,,hot_side_name,ConfigValue,str,'shell',
+idaes/models_extra/power_generation/unit_models/helm/condenser_ntu.py,53,config,,cold_side_name,ConfigValue,str,'tube',
+idaes/models_extra/power_generation/unit_models/helm/condenser_ntu.py,61,config,,hot_side,ConfigBlock,,,Config block for hot side
+idaes/models_extra/power_generation/unit_models/helm/condenser_ntu.py,70,config,,cold_side,ConfigBlock,,,Config block for cold side
+idaes/models_extra/power_generation/unit_models/helm/mixer.py,50,CONFIG,HelmMixerData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models_extra/power_generation/unit_models/helm/mixer.py,60,CONFIG,HelmMixerData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models_extra/power_generation/unit_models/helm/mixer.py,70,CONFIG,HelmMixerData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for mixer
+idaes/models_extra/power_generation/unit_models/helm/mixer.py,83,CONFIG,HelmMixerData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/helm/mixer.py,95,CONFIG,HelmMixerData,inlet_list,ConfigValue,ListOf(str),,List of inlet names
+idaes/models_extra/power_generation/unit_models/helm/mixer.py,107,CONFIG,HelmMixerData,num_inlets,ConfigValue,int,,Number of inlets to unit
+idaes/models_extra/power_generation/unit_models/helm/mixer.py,122,CONFIG,HelmMixerData,momentum_mixing_type,ConfigValue,MomentumMixingType,MomentumMixingType.minimize,Method to use when mixing momentum/pressure
+idaes/models_extra/power_generation/unit_models/helm/phase_separator.py,45,CONFIG,WaterFlashData,dynamic,ConfigValue,In([False]),False,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/helm/phase_separator.py,54,CONFIG,WaterFlashData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag
+idaes/models_extra/power_generation/unit_models/helm/phase_separator.py,68,CONFIG,WaterFlashData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/helm/phase_separator.py,81,CONFIG,WaterFlashData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/helm/splitter.py,61,CONFIG,HelmSplitterData,dynamic,ConfigValue,In([False]),False,Dynamic model flag - must be False
+idaes/models_extra/power_generation/unit_models/helm/splitter.py,69,CONFIG,HelmSplitterData,has_holdup,ConfigValue,In([False]),False,Holdup construction flag - must be False
+idaes/models_extra/power_generation/unit_models/helm/splitter.py,77,CONFIG,HelmSplitterData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for mixer
+idaes/models_extra/power_generation/unit_models/helm/splitter.py,91,CONFIG,HelmSplitterData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/helm/splitter.py,103,CONFIG,HelmSplitterData,outlet_list,ConfigValue,ListOf(str),,List of outlet names
+idaes/models_extra/power_generation/unit_models/helm/splitter.py,115,CONFIG,HelmSplitterData,num_outlets,ConfigValue,int,,Number of outlets to unit
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,53,config,,dynamic,ConfigValue,In([False]),False,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,62,config,,has_holdup,ConfigValue,In([False]),False,Holdup construction flag
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,71,config,,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,84,config,,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,96,config,,num_parallel_inlet_stages,ConfigValue,int,4,Number of parallel inlet stages to simulate partial arc admission. Default=4
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,105,config,,throttle_valve_function,ConfigValue,In(ValveFunctionType),ValveFunctionType.linear,"Valve function type, if custom provide an expression rule"
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,121,config,,throttle_valve_function_callback,ConfigValue,,None,"A callback to add a custom valve function to the throttle valves or None. If a callback is provided, it should take the valve block data as an argument and add a valve_function expressions to it. Defa"
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,131,config,,num_hp,ConfigValue,int,2,Number of high pressure stages not including inlet stage
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,140,config,,num_ip,ConfigValue,int,10,Number of intermediate pressure stages
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,149,config,,num_lp,ConfigValue,int,5,Number of low pressure stages not including outlet stage
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,158,config,,hp_split_locations,ConfigList,int,[],Locations of splitters in HP section
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,169,config,,ip_split_locations,ConfigList,int,[],Locations of splitters in IP section
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,179,config,,lp_split_locations,ConfigList,int,[],Locations of splitter in LP section
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,189,config,,hp_disconnect,ConfigList,int,[],HP Turbine stages to not connect to next with an arc.
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,200,config,,ip_disconnect,ConfigList,int,[],IP Turbine stages to not connect to next with an arc.
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,211,config,,lp_disconnect,ConfigList,int,[],LP Turbine stages to not connect to next with an arc.
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,222,config,,hp_split_num_outlets,ConfigValue,dict,{},"Dict, hp split index: number of splitter outlets, if not 2"
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,230,config,,ip_split_num_outlets,ConfigValue,dict,{},"Dict, ip split index: number of splitter outlets, if not 2"
+idaes/models_extra/power_generation/unit_models/helm/turbine_multistage.py,238,config,,lp_split_num_outlets,ConfigValue,dict,{},"Dict, lp split index: number of splitter outlets, if not 2"
+idaes/models_extra/power_generation/unit_models/helm/valve_steam.py,143,CONFIG,HelmValveData,valve_function,ConfigValue,In(ValveFunctionType),ValveFunctionType.linear,"Valve function type, if custom provide an expression rule"
+idaes/models_extra/power_generation/unit_models/helm/valve_steam.py,159,CONFIG,HelmValveData,valve_function_callback,ConfigValue,,None,This is a callback that adds a valve function. The callback function takes the valve bock data argument.
+idaes/models_extra/power_generation/unit_models/helm/valve_steam.py,167,CONFIG,HelmValveData,phase,ConfigValue,"In(('Vap', 'Liq'))",'Vap',"Expected phase of fluid in valve in {""Liq"", ""Vap""}"
+idaes/models_extra/power_generation/unit_models/soc_submodels/channel.py,85,CONFIG,SocChannelData,component_list,ConfigValue,common._SubsetOf(_gas_species_list),,List of components
+idaes/models_extra/power_generation/unit_models/soc_submodels/channel.py,92,CONFIG,SocChannelData,control_volume_zfaces,ConfigValue,ListOf(float),,"List containing coordinates of control volume faces in z direction. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/channel.py,101,CONFIG,SocChannelData,length_z,ConfigValue,,None,Length in the direction of flow (z-direction)
+idaes/models_extra/power_generation/unit_models/soc_submodels/channel.py,107,CONFIG,SocChannelData,length_y,ConfigValue,,None,Width of cell (y-direction)
+idaes/models_extra/power_generation/unit_models/soc_submodels/channel.py,110,CONFIG,SocChannelData,include_temperature_x_thermo,ConfigValue,"In([useDefault, True, False])",True,Whether to consider temperature variations in x direction in thermodynamic equations
+idaes/models_extra/power_generation/unit_models/soc_submodels/channel.py,120,CONFIG,SocChannelData,opposite_flow,ConfigValue,Bool,False,"If True, gas flows from z=1 to z=0. Otherwise gas flows from z=0 to z=1."
+idaes/models_extra/power_generation/unit_models/soc_submodels/channel.py,129,CONFIG,SocChannelData,below_electrode,ConfigValue,Bool,,"If True, the top of the channel is the electrode boundary and material flux terms are created there. If False the bottom is the electrode boundary and material flux terms are created there."
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,638,CONFIG,_SubsetOf,control_volume_zfaces,ConfigValue,,,"List containing coordinates of control volume faces in z direction. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,646,CONFIG,_SubsetOf,length_z,ConfigValue,,None,Length in the direction of flow (z-direction)
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,652,CONFIG,_SubsetOf,length_y,ConfigValue,,None,Width of cell (y-direction)
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,655,CONFIG,_SubsetOf,current_density,ConfigValue,,None,Optional current_density variable
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,659,CONFIG,_SubsetOf,include_temperature_x_thermo,ConfigValue,"In([useDefault, True, False])",True,Whether to consider temperature variations in x direction in thermodynamic equations
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,689,CONFIG,_SubsetOf,temperature_z,ConfigValue,,None,Temperature as indexed by time and z
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,718,CONFIG,_SubsetOf,heat_flux_x0,ConfigValue,,None,Heat flux through x=0 (positive is in)
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,724,CONFIG,_SubsetOf,heat_flux_x1,ConfigValue,,None,Heat flux through x=1 (positive is out)
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,696,CONFIG,_SubsetOf,temperature_deviation_x,ConfigValue,,None,Deviation of temperature from temperature_z
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,704,CONFIG,_SubsetOf,temperature_deviation_x0,ConfigValue,,None,Deviation of temperature at x=0 from temperature_z
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,711,CONFIG,_SubsetOf,temperature_deviation_x1,ConfigValue,,None,Deviation of temperature at x=1 from temperature_z
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,797,CONFIG,_SubsetOf,material_flux_x,ConfigValue,,None,Variable for material flux
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,801,CONFIG,_SubsetOf,conc_mol_comp_deviation_x,ConfigValue,,None,Deviation of concentration from channel bulk concentration
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,810,CONFIG,_SubsetOf,conc_mol_comp_deviation_x0,ConfigValue,,None,Deviation of concentration at x= 0 from channel bulk concentration
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,818,CONFIG,_SubsetOf,conc_mol_comp_deviation_x1,ConfigValue,,None,Deviation of concentration at x= 0 from channel bulk concentration
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,826,CONFIG,_SubsetOf,material_flux_x0,ConfigValue,,None,Variable for material flux at x=0
+idaes/models_extra/power_generation/unit_models/soc_submodels/common.py,830,CONFIG,_SubsetOf,material_flux_x1,ConfigValue,,None,Variable for material flux at x=1
+idaes/models_extra/power_generation/unit_models/soc_submodels/conductive_slab.py,59,CONFIG,SocConductiveSlabData,control_volume_xfaces,ConfigValue,,,"List containing coordinates of control volume faces in x direction. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/conductive_slab.py,67,CONFIG,SocConductiveSlabData,voltage_drop_custom,ConfigValue,Bool,False,"If True, add voltage_drop_custom Var to be connected to degradation models"
+idaes/models_extra/power_generation/unit_models/soc_submodels/contact_resistor.py,55,CONFIG,SocContactResistorData,dynamic,ConfigValue,In([False]),False,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/soc_submodels/contact_resistor.py,64,CONFIG,SocContactResistorData,has_holdup,ConfigValue,In([False]),False,
+idaes/models_extra/power_generation/unit_models/soc_submodels/contact_resistor.py,68,CONFIG,SocContactResistorData,voltage_drop_custom,ConfigValue,Bool,False,"If True, add voltage_drop_custom Var to be connected to degradation models"
+idaes/models_extra/power_generation/unit_models/soc_submodels/porous_conductive_slab.py,86,CONFIG,PorousConductiveSlabData,has_gas_holdup,ConfigValue,Bool,False,"If True, make holdup terms corresponding to gas phase"
+idaes/models_extra/power_generation/unit_models/soc_submodels/porous_conductive_slab.py,94,CONFIG,PorousConductiveSlabData,control_volume_xfaces,ConfigValue,ListOf(float),,"List containing coordinates of control volume faces in x direction. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/porous_conductive_slab.py,103,CONFIG,PorousConductiveSlabData,component_list,ConfigValue,common._SubsetOf(_gas_species_list),,List of components
+idaes/models_extra/power_generation/unit_models/soc_submodels/porous_conductive_slab.py,109,CONFIG,PorousConductiveSlabData,conc_mol_comp_ref,ConfigValue,,None,Variable for the component concentration in bulk channel
+idaes/models_extra/power_generation/unit_models/soc_submodels/porous_conductive_slab.py,116,CONFIG,PorousConductiveSlabData,dconc_mol_comp_refdt,ConfigValue,,None,Variable for time derivative of the component concentration in the bulk channel
+idaes/models_extra/power_generation/unit_models/soc_submodels/porous_conductive_slab.py,124,CONFIG,PorousConductiveSlabData,voltage_drop_custom,ConfigValue,Bool,False,"If True, add voltage_drop_custom Var to be connected to degradation models"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,143,CONFIG,SolidOxideCellData,has_gas_holdup,ConfigValue,Bool,False,"If True, make holdup terms corresponding to gas phase"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,151,CONFIG,SolidOxideCellData,control_volume_zfaces,ConfigValue,ListOf(float),,"List containing coordinates of control volume faces in z direction. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,160,CONFIG,SolidOxideCellData,control_volume_xfaces_fuel_electrode,ConfigValue,ListOf(float),,"List containing coordinates of control volume faces in x direction for fuel electrode. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,169,CONFIG,SolidOxideCellData,control_volume_xfaces_oxygen_electrode,ConfigValue,ListOf(float),,"List containing coordinates of control volume faces in x direction for oxygen electrode. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,178,CONFIG,SolidOxideCellData,control_volume_xfaces_electrolyte,ConfigValue,ListOf(float),,"List containing coordinates of control volume faces in x direction for electrolyte. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,187,CONFIG,SolidOxideCellData,thin_fuel_electrode,ConfigValue,Bool,False,"If True, make 1D fuel electrode"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,195,CONFIG,SolidOxideCellData,thin_oxygen_electrode,ConfigValue,Bool,False,"If True, make 1D oxygen electrode"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,203,CONFIG,SolidOxideCellData,thin_electrolyte,ConfigValue,Bool,False,"If True, make 1D electrolyte"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,211,CONFIG,SolidOxideCellData,fuel_component_list,ConfigValue,common._SubsetOf(_gas_species_list),None,List of components in fuel stream
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,219,CONFIG,SolidOxideCellData,oxygen_component_list,ConfigValue,common._SubsetOf(_gas_species_list),None,List of components in the oxygen stream
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,227,CONFIG,SolidOxideCellData,fuel_triple_phase_boundary_stoich_dict,ConfigValue,common._SubsetOf(_all_species_list),None,Dictionary with species as keys and stoichiometric coefficients as values for the redox reaction that occurs at the fuel-side triple phase boundary
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,236,CONFIG,SolidOxideCellData,inert_fuel_species_triple_phase_boundary,ConfigValue,common._SubsetOf(_gas_species_list),None,List of fuel-side species that do not participate in reactions at the triple phase boundary.
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,246,CONFIG,SolidOxideCellData,oxygen_triple_phase_boundary_stoich_dict,ConfigValue,common._SubsetOf(_all_species_list),None,Dictionary with species as keys and stoichiometric coefficients as values for the redox reaction that occurs at the oxygen-side triple phase boundary
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,255,CONFIG,SolidOxideCellData,inert_oxygen_species_triple_phase_boundary,ConfigValue,common._SubsetOf(_gas_species_list),None,List of oxygen-side species that do not participate in reactions at the triple phase boundary.
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,264,CONFIG,SolidOxideCellData,flow_pattern,ConfigValue,In(HeatExchangerFlowPattern),HeatExchangerFlowPattern.countercurrent,Co-current or counter-current flow pattern
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,272,CONFIG,SolidOxideCellData,flux_through_interconnect,ConfigValue,Bool,False,If True write periodic constraint to model flux through interconnect.
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,281,CONFIG,SolidOxideCellData,thin_interconnect,ConfigValue,Bool,False,"If True, make 1D interconnect"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,289,CONFIG,SolidOxideCellData,control_volume_xfaces_interconnect,ConfigValue,ListOf(float),,"List containing coordinates of control volume faces in x direction for interconnect. Coordinates must start with zero, be strictly increasing, and end with one"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,298,CONFIG,SolidOxideCellData,include_contact_resistance,ConfigValue,Bool,False,If True write periodic constraint to model flux through interconnect.
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,309,CONFIG,SolidOxideCellData,include_temperature_x_thermo,ConfigValue,In([True]),True,Whether to consider temperature variations in x direction in thermodynamic equations
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,318,CONFIG,SolidOxideCellData,voltage_drop_custom,ConfigValue,Bool,False,"If True, add voltage_drop_custom Var to be connected to degradation models"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,326,CONFIG,SolidOxideCellData,has_heat_loss_term,ConfigValue,Bool,False,"If True, add a heat loss variable at the x1 edge of either the interconnect (if present) or oxygen channel"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_cell.py,334,CONFIG,SolidOxideCellData,log_exchange_current_modifier,ConfigValue,Bool,False,"If True, add log_exchange_current_modifier Var to both triple phase boundaries to be connected to degradation models"
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_module_simple.py,68,CONFIG,SolidOxideModuleSimpleData,solid_oxide_cell_config,ConfigBlock,,,Config block for the SolidOxideCell
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_module_simple.py,75,CONFIG,SolidOxideModuleSimpleData,fuel_property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for fuel-side stream
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_module_simple.py,88,CONFIG,SolidOxideModuleSimpleData,fuel_property_package_args,ConfigBlock,,,Arguments to use for constructing property package of the fuel-side stream
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_module_simple.py,101,CONFIG,SolidOxideModuleSimpleData,oxygen_property_package,ConfigValue,is_physical_parameter_block,None,Property package to use for oxygen-side stream
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_module_simple.py,114,CONFIG,SolidOxideModuleSimpleData,oxygen_property_package_args,ConfigBlock,,,Arguments to use for constructing property package of the oxygen-side stream
+idaes/models_extra/power_generation/unit_models/soc_submodels/solid_oxide_module_simple.py,127,CONFIG,SolidOxideModuleSimpleData,has_heat_loss_term,ConfigValue,Bool,False,"If True, add a term for heat lost to environment"
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,79,CONFIG,SocTriplePhaseBoundaryData,dynamic,ConfigValue,In([False]),False,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,88,CONFIG,SocTriplePhaseBoundaryData,has_holdup,ConfigValue,In([False]),False,
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,92,CONFIG,SocTriplePhaseBoundaryData,component_list,ConfigValue,common._SubsetOf(_gas_species_list),,List of components
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,98,CONFIG,SocTriplePhaseBoundaryData,reaction_stoichiometry,ConfigValue,,,Stochiometric coefficients for component reactions on the triple phase boundary. Must contain term for number of electrons consumed/liberated.
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,106,CONFIG,SocTriplePhaseBoundaryData,inert_species,ConfigValue,common._SubsetOf(_gas_species_list),None,List of species that do not participate in reactions at the triple phase boundary.
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,115,CONFIG,SocTriplePhaseBoundaryData,conc_mol_comp_ref,ConfigValue,,None,Variable for the component concentration in bulk channel
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,122,CONFIG,SocTriplePhaseBoundaryData,below_electrolyte,ConfigValue,Bool,,Whether the triple phase boundary is located below or above the electrolyte. This flag determines the sign of material_flux_x.
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,130,CONFIG,SocTriplePhaseBoundaryData,voltage_drop_custom,ConfigValue,Bool,False,"If True, add voltage_drop_custom Var to be connected to degradation models"
+idaes/models_extra/power_generation/unit_models/soc_submodels/triple_phase_boundary.py,138,CONFIG,SocTriplePhaseBoundaryData,log_exchange_current_modifier,ConfigValue,Bool,False,"If True, add log_exchange_current_modifier Var to be connected to degradation models"
+idaes/models_extra/power_generation/unit_models/soec_design.py,52,CONFIG,SoecDesignData,oxygen_side_property_package,ConfigValue,is_physical_parameter_block,,Property package for the oxygen side.
+idaes/models_extra/power_generation/unit_models/soec_design.py,64,CONFIG,SoecDesignData,hydrogen_side_property_package,ConfigValue,is_physical_parameter_block,,Property package for the hydrogen side.
+idaes/models_extra/power_generation/unit_models/soec_design.py,76,CONFIG,SoecDesignData,oxygen_side_property_package_args,ConfigBlock,,,Property package arguments for the oxygen side.
+idaes/models_extra/power_generation/unit_models/soec_design.py,84,CONFIG,SoecDesignData,hydrogen_side_property_package_args,ConfigBlock,,,Property package arguments for the hydrogen side.
+idaes/models_extra/power_generation/unit_models/soec_design.py,92,CONFIG,SoecDesignData,reaction_eos,ConfigValue,In(EosType),EosType.PR,Physical properties for electrolysis reactions
+idaes/models_extra/power_generation/unit_models/soec_design.py,104,CONFIG,SoecDesignData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/steamheater.py,61,CONFIG,SteamHeaterData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/steamheater.py,77,CONFIG,SteamHeaterData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/steamheater.py,93,CONFIG,SteamHeaterData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/steamheater.py,109,CONFIG,SteamHeaterData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/steamheater.py,122,CONFIG,SteamHeaterData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/steamheater.py,136,CONFIG,SteamHeaterData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/steamheater.py,149,CONFIG,SteamHeaterData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/steamheater.py,161,CONFIG,SteamHeaterData,single_side_only,ConfigValue,Bool,True,Flag indicating the heat is from one side of tubes only
+idaes/models_extra/power_generation/unit_models/waterpipe.py,60,CONFIG,WaterPipeData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/waterpipe.py,76,CONFIG,WaterPipeData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/waterpipe.py,92,CONFIG,WaterPipeData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/waterpipe.py,108,CONFIG,WaterPipeData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/waterpipe.py,121,CONFIG,WaterPipeData,has_pressure_change,ConfigValue,Bool,True,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/waterpipe.py,135,CONFIG,WaterPipeData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/waterpipe.py,148,CONFIG,WaterPipeData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/waterpipe.py,160,CONFIG,WaterPipeData,contraction_expansion_at_end,ConfigValue,"In(['None', 'contraction', 'expansion'])",'None',Any contraction or expansion at the end
+idaes/models_extra/power_generation/unit_models/waterpipe.py,170,CONFIG,WaterPipeData,water_phase,ConfigValue,"In(['Liq', 'Vap'])",'Liq',Water phase
+idaes/models_extra/power_generation/unit_models/watertank.py,71,CONFIG,WaterTankData,tank_type,ConfigValue,"In(['simple_tank', 'rectangular_tank', 'vertical_cylindrical_tank', 'horizontal_cylindrical_tank'])",'simple_tank',Flag indicating the tank type
+idaes/models_extra/power_generation/unit_models/watertank.py,96,CONFIG,WaterTankData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/watertank.py,112,CONFIG,WaterTankData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/watertank.py,128,CONFIG,WaterTankData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/watertank.py,144,CONFIG,WaterTankData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/watertank.py,157,CONFIG,WaterTankData,has_pressure_change,ConfigValue,Bool,True,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/watertank.py,171,CONFIG,WaterTankData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/watertank.py,184,CONFIG,WaterTankData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,73,CONFIG,WaterwallSectionData,dynamic,ConfigValue,DefaultBool,useDefault,Dynamic model flag
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,87,CONFIG,WaterwallSectionData,has_holdup,ConfigValue,Bool,False,Holdup construction flag
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,101,CONFIG,WaterwallSectionData,material_balance_type,ConfigValue,In(MaterialBalanceType),MaterialBalanceType.componentPhase,Material balance construction flag
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,117,CONFIG,WaterwallSectionData,energy_balance_type,ConfigValue,In(EnergyBalanceType),EnergyBalanceType.enthalpyTotal,Energy balance construction flag
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,133,CONFIG,WaterwallSectionData,momentum_balance_type,ConfigValue,In(MomentumBalanceType),MomentumBalanceType.pressureTotal,Momentum balance construction flag
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,149,CONFIG,WaterwallSectionData,has_heat_transfer,ConfigValue,Bool,False,Heat transfer term construction flag
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,162,CONFIG,WaterwallSectionData,has_pressure_change,ConfigValue,Bool,False,Pressure change term construction flag
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,176,CONFIG,WaterwallSectionData,property_package,ConfigValue,is_physical_parameter_block,useDefault,Property package to use for control volume
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,189,CONFIG,WaterwallSectionData,property_package_args,ConfigBlock,,,Arguments to use for constructing property packages
+idaes/models_extra/power_generation/unit_models/waterwall_section.py,201,CONFIG,WaterwallSectionData,rigorous_boiling,ConfigValue,Bool,False,Heat of reaction term construction flag
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,131,CONFIG,FixedBedTSA0DData,adsorbent,ConfigValue,In(Adsorbent),Adsorbent.zeolite_13x,Adsorbent flag
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,143,CONFIG,FixedBedTSA0DData,number_of_beds,ConfigValue,int,120,Number of beds in fixed bed TSA system
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,158,CONFIG,FixedBedTSA0DData,transformation_method,ConfigValue,is_transformation_method,'dae.collocation',Method to use for DAE transformation
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,173,CONFIG,FixedBedTSA0DData,transformation_scheme,ConfigValue,In(TransformationScheme),TransformationScheme.lagrangeRadau,Scheme to use for DAE transformation
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,195,CONFIG,FixedBedTSA0DData,finite_elements,ConfigValue,int,20,Number of finite elements for time domain
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,205,CONFIG,FixedBedTSA0DData,collocation_points,ConfigValue,int,6,Number of collocation points per finite element
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,215,CONFIG,FixedBedTSA0DData,compressor,ConfigValue,Bool,False,Compressor flag
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,228,CONFIG,FixedBedTSA0DData,compressor_properties,ConfigValue,is_physical_parameter_block,useDefault,Property package for compressor
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,239,CONFIG,FixedBedTSA0DData,steam_calculation,ConfigValue,In(SteamCalculationType),SteamCalculationType.none,Steam calculation flag
+idaes/models_extra/temperature_swing_adsorption/fixed_bed_tsa0d.py,254,CONFIG,FixedBedTSA0DData,steam_properties,ConfigValue,is_physical_parameter_block,useDefault,Property package for heater unit model

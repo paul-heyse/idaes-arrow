@@ -1,5 +1,11 @@
 [files]
-extend-exclude = ["*.eps", "*.css", "*.map", "*.svg"]
+extend-exclude = [
+  "*.eps", "*.css", "*.map", "*.svg",
+  # FORK: vendored third-party API references and agent skills (not our prose)
+  "docs-code-update/", ".codex/", ".agents/",
+  # FORK: Rust build artifacts, lockfile crate names/checksums, Insta snapshots
+  "Cargo.lock", "*.snap", "rust/target/",
+]
 
 [default.extend-words]
 # Ignore IDAES

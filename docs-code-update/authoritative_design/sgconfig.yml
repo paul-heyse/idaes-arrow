@@ -1,0 +1,8 @@
+# ast-grep project for the authoritative_design document set.
+#
+# These rules are a second, independent extractor for the structural facts the
+# document set counts. _scripts/inventory.py derives the same facts with the
+# Python `ast` module; _scripts/crosscheck.py asserts the two agree. Two
+# extractors disagreeing is a signal that a fact is being counted wrongly.
+ruleDirs:
+  - sgrules

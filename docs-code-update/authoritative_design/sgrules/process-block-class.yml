@@ -1,0 +1,19 @@
+id: idaes-process-block-class
+language: python
+severity: hint
+message: process block class declared via declare_process_block_class
+note: |
+  The decorator synthesizes a container class named by its first argument and
+  injects it into the decorated class's module. The decorated class itself is
+  the data class. Counting these is how the document set enumerates the 160
+  process block pairs.
+rule:
+  kind: decorated_definition
+  all:
+    - has:
+        field: definition
+        kind: class_definition
+    - has:
+        stopBy: neighbor
+        kind: decorator
+        pattern: "@declare_process_block_class($$$ARGS)"

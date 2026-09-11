@@ -132,3 +132,10 @@ docs/apidoc/
 # Mac OSX
 .DS_Store
 
+# Rust (fork)
+/rust/target/
+*.pyd
+*.dylib
+*.rlib
+*.pdb
+.bacon-locations

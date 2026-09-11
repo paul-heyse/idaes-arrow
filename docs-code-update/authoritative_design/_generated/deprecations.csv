@@ -1,0 +1,50 @@
+file,line,kind,version,remove_in,message
+idaes/apps/caprese/categorize.py,320,deprecated,2.0.0,,categorize_dae_variables has been replaced by categorize_dae_variables_and_constraints
+idaes/core/base/control_volume0d.py,341,deprecation_warning,2.0.0,2.14.0,msg
+idaes/core/base/control_volume1d.py,723,deprecation_warning,2.0.0,2.14.0,msg
+idaes/core/base/property_meta.py,272,deprecation_warning,2.3.0,2.14.0,msg
+idaes/core/base/property_meta.py,544,deprecation_warning,2.0.0,2.14.0,msg
+idaes/core/datasets.py,29,deprecation_warning,2.6.0dev0,2.6.0rc0,idaes.core.datasets is no longer available due to the DMF being unsupported. Visit https://github.com/IDAES/dmf for more information.
+idaes/core/dmf/__init__.py,24,deprecation_warning,2.6.0dev0,2.6.0rc0,idaes.core.dmf is no longer supported and has been moved into a dedicated repository for archival. Visit https://github.com/IDAES/dmf for more information.
+idaes/core/scaling/custom_scaler_base.py,734,deprecation_warning,2.9,2.10,This method has been renamed 'get_sum_terms_nominal_values'.
+idaes/core/scaling/util.py,813,relocated_module_attribute,2.13.0,2.14.0,get_nominal_value
+idaes/core/scaling/util.py,820,relocated_module_attribute,2.13.0,2.14.0,NominalValueExtractionVisitor
+idaes/core/solvers/petsc.py,495,deprecation_warning,2.2.0,2.14.0,Keyword argument snes_options has been DEPRECATED in favor of initial_solver_options.
+idaes/core/util/convergence/convergence_base.py,96,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,111,deprecated,2.3.0,,This class has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,174,deprecated,2.3.0,,This class has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,522,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,566,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,614,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,651,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,689,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,713,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,794,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,863,deprecated,2.3.0,,This function has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/convergence/convergence_base.py,892,deprecated,2.3.0,,This class has been deprecated in favor of the new Parameter Sweep tools and may be removed in a future release.
+idaes/core/util/diagnostics_tools/deprecated/degeneracy_hunter_legacy.py,79,deprecation_warning,2.2.0,2.12.0,msg
+idaes/core/util/model_diagnostics.py,27,relocated_module_attribute,2.12.0,,ConstraintTermAnalysisVisitor
+idaes/core/util/model_diagnostics.py,33,relocated_module_attribute,2.12.0,,compute_ill_conditioning_certificate
+idaes/core/util/model_diagnostics.py,39,relocated_module_attribute,2.12.0,,DegeneracyHunter
+idaes/core/util/model_diagnostics.py,44,relocated_module_attribute,2.12.0,,DegeneracyHunter2
+idaes/core/util/model_diagnostics.py,49,relocated_module_attribute,2.12.0,,DHCONFIG
+idaes/core/util/model_diagnostics.py,55,relocated_module_attribute,2.12.0,,DiagnosticsToolbox
+idaes/core/util/model_diagnostics.py,60,relocated_module_attribute,2.12.0,,CONFIG
+idaes/core/util/model_diagnostics.py,67,relocated_module_attribute,2.12.0,,IpoptConvergenceAnalysis
+idaes/core/util/model_diagnostics.py,72,relocated_module_attribute,2.12.0,,psweep_runner_validator
+idaes/core/util/model_diagnostics.py,77,relocated_module_attribute,2.12.0,,CACONFIG
+idaes/core/util/model_diagnostics.py,83,relocated_module_attribute,2.12.0,,ipopt_solve_halt_on_error
+idaes/core/util/model_diagnostics.py,89,relocated_module_attribute,2.12.0,,get_valid_range_of_component
+idaes/core/util/model_diagnostics.py,94,relocated_module_attribute,2.12.0,,list_components_with_values_outside_valid_range
+idaes/core/util/model_diagnostics.py,99,relocated_module_attribute,2.12.0,,set_bounds_from_valid_range
+idaes/core/util/model_diagnostics.py,105,relocated_module_attribute,2.12.0,,SVDToolbox
+idaes/core/util/model_diagnostics.py,110,relocated_module_attribute,2.12.0,,SVDCONFIG
+idaes/core/util/model_diagnostics.py,115,relocated_module_attribute,2.12.0,,svd_callback_validator
+idaes/core/util/model_diagnostics.py,120,relocated_module_attribute,2.12.0,,svd_dense
+idaes/core/util/model_diagnostics.py,125,relocated_module_attribute,2.12.0,,svd_sparse
+idaes/core/util/model_diagnostics.py,131,relocated_module_attribute,2.12.0,,check_parallel_jacobian
+idaes/core/util/model_statistics.py,885,deprecation_warning,2.2.0,2.11.0,msg
+idaes/core/util/model_statistics.py,891,deprecation_warning,2.2.0,2.11.0,msg
+idaes/models_extra/column_models/plate_heat_exchanger.py,65,deprecated,2.3.0,,The Plate Heat Exchanger (PHE) model is known to be affected by issues causing it to fail to solve on certain platforms starting with Pyomo v6.7.0. This might cause the model to be removed in an upcom
+idaes/models_extra/power_generation/unit_models/drum1D.py,393,deprecation_warning,2.13.0,2.14.0,"Providing the drum diameter as a config argument is deprecated. It has been converted to a Var, so it can be fixed to a value directly."
+idaes/models_extra/power_generation/unit_models/drum1D.py,405,deprecation_warning,2.13.0,2.14.0,"Providing the drum thickness as a config argument is deprecated. It has been converted to a Var, so it can be fixed to a value directly."

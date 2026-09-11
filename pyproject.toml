@@ -88,7 +88,9 @@ include-package-data = true
 py-version = "3.10"
 
 [tool.setuptools.packages.find]
-include = ["idaes*"]
+# FORK: was ["idaes*"], which also matches `idaes_accel` (the separate
+# maturin-built distribution). Anchored so the two can never collide.
+include = ["idaes", "idaes.*"]
 
 [tool.setuptools.package-data]
 "*" = [

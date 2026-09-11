@@ -1,0 +1,20 @@
+id: idaes-external-library-binding
+language: python
+severity: hint
+message: binding to an external compiled library or executable
+note: |
+  IDAES discovers three shared libraries at import time (general_helmholtz_external,
+  cubic_roots, functions) and degrades gracefully when they are absent. These
+  sites, together with the Pyomo ExternalFunction declarations that consume them
+  and the Executable lookups for external solvers, are the boundary between the
+  Python model and compiled code.
+rule:
+  any:
+    - pattern: find_library($$$ARGS)
+    - pattern: $X.find_library($$$ARGS)
+    - pattern: ExternalFunction($$$ARGS)
+    - pattern: $X.ExternalFunction($$$ARGS)
+    - pattern: LoadLibrary($$$ARGS)
+    - pattern: $$$X.LoadLibrary($$$ARGS)
+    - pattern: Executable($$$ARGS)
+    - pattern: $X.Executable($$$ARGS)

@@ -18,6 +18,7 @@ env:
 
 jobs:
   build:
+    if: github.repository == 'IDAES/idaes-pse'
     runs-on: ubuntu-latest
 
     steps:
@@ -77,6 +78,7 @@ jobs:
           retention-days: 1
 
   test-whl:
+    if: github.repository == 'IDAES/idaes-pse'
     needs: [build]
     name: Test idaes-pse from .whl file
     runs-on: ubuntu-latest
@@ -129,6 +131,7 @@ jobs:
           pytest --pyargs idaes -m "unit" -x -k "not (TestMSContactorInitializerNoHoldup or TestMSContactorInitializerWithHoldup)"
 
   upload-test-pypi:
+    if: github.repository == 'IDAES/idaes-pse'
     needs: [test-whl]
     runs-on: ubuntu-latest
     permissions:
@@ -147,6 +150,7 @@ jobs:
           repository-url: https://test.pypi.org/legacy/
 
   install-test-pypi:
+    if: github.repository == 'IDAES/idaes-pse'
     runs-on: ubuntu-latest
     needs: [upload-test-pypi]
 
@@ -179,6 +183,7 @@ jobs:
           pytest --pyargs idaes -m "unit" -x -k "not (TestMSContactorInitializerNoHoldup or TestMSContactorInitializerWithHoldup)"
 
   upload-pypi:
+    if: github.repository == 'IDAES/idaes-pse'
     needs: [install-test-pypi]
     runs-on: ubuntu-latest
     permissions:
@@ -195,6 +200,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b
 
   env-snapshot:
+    if: github.repository == 'IDAES/idaes-pse'
     name: Create and collect env snapshot
     needs: [upload-pypi]
     runs-on: ubuntu-latest
