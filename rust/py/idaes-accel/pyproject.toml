@@ -1,0 +1,35 @@
+[build-system]
+requires = ["maturin>=1.15,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "idaes-accel"
+description = "Rust (Arrow/DataFusion) acceleration for the IDAES PSE Framework"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "Paul Heyse" }]
+urls = { Homepage = "https://github.com/paul-heyse/idaes-arrow" }
+classifiers = [
+  "Programming Language :: Rust",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "License :: OSI Approved :: BSD License",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
+dynamic = ["version"]
+
+# NOTE: no runtime dependency on idaes-pse. The dependency runs the other way --
+# idaes-pse[accel] depends on this -- so that `pip install idaes-pse` keeps working
+# with zero Rust toolchain and this package stays independently versioned.
+#
+# pyarrow is NOT a dependency yet. It becomes one (>=15, the floor for exporting
+# PyRecordBatchReader) when the first Arrow-shaped kernel lands. Dense numeric
+# kernels cross the boundary as NumPy arrays, which needs nothing here.
+dependencies = []
+
+[tool.maturin]
+bindings = "pyo3"
+module-name = "idaes_accel._core"
+python-source = "python"
+manifest-path = "Cargo.toml"
+strip = true

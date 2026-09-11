@@ -1,0 +1,55 @@
+# Dependency policy for the idaes-arrow Rust workspace.
+# Run with `just policy` (cargo deny check + cargo audit).
+
+[graph]
+all-features = true
+
+[advisories]
+# A known-vulnerable dependency fails the build. `unmaintained` is a warning
+# because it is a judgement call, not a defect.
+yanked = "deny"
+unmaintained = "workspace"
+# Every entry here must carry a reason, an owner and a review date in a comment.
+# An ignore with no expiry is a permanent silent exception; do not create one.
+ignore = []
+
+[licenses]
+# The Arrow/DataFusion stack is Apache-2.0; PyO3 and most of the small crates are
+# "MIT OR Apache-2.0". Our own code is BSD-3-Clause to match upstream IDAES.
+# Copyleft is absent by omission -- anything not listed fails.
+allow = [
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "MIT",
+    "MIT-0",
+    "Unicode-3.0",
+    "Zlib",
+]
+# The allow-list is written for the full Arrow/DataFusion stack, which is not in
+# the graph yet. Do not warn about allowances nothing currently uses.
+unused-allowed-license = "allow"
+confidence-threshold = 0.93
+exceptions = []
+
+[bans]
+# `multiple-versions = "deny"` is the mechanical form of the one-type-universe
+# rule: two majors of arrow/parquet/object_store in the graph make `downcast_ref`
+# return None with no compile error. `just one-type-universe` checks the same
+# thing more cheaply and with a clearer message.
+multiple-versions = "deny"
+wildcards = "deny"
+allow-wildcard-paths = true          # path deps inside this workspace
+highlight = "all"
+deny = []
+# Add entries here ONLY with a comment naming who accepted the duplication and why.
+skip = []
+skip-tree = []
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []

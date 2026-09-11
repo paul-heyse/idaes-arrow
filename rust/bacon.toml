@@ -1,0 +1,20 @@
+default_job = "check-all"
+
+[jobs.check-all]
+command = ["cargo", "check", "--workspace", "--all-targets"]
+
+[jobs.clippy]
+command = ["cargo", "clippy", "--workspace", "--all-targets", "--", "-D", "warnings"]
+
+[jobs.nextest-workspace]
+command = ["cargo", "nextest", "run", "--workspace"]
+need_stdout = true
+analyzer = "nextest"
+
+[jobs.doc]
+command = ["cargo", "doc", "--workspace", "--no-deps"]
+
+[exports.locations]
+auto = true
+path = ".bacon-locations"
+line_format = "{kind} {path}:{line}:{column} {message}"

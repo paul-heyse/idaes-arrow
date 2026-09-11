@@ -1,0 +1,14 @@
+# `clippy::unwrap_used` / `expect_used` / `panic` are denied at workspace level
+# because a panic crossing the PyO3 boundary is an abort risk. Tests are exempt:
+# assert! expands to panic! and unwrap is idiomatic in test bodies.
+allow-unwrap-in-tests = true
+allow-expect-in-tests = true
+allow-panic-in-tests = true
+
+# Product names that appear in prose. `clippy::doc_markdown` (pedantic) flags any
+# mixed-case word as a missing code span; backticking a product name is wrong --
+# it is not an identifier. ".." extends clippy's default list rather than replacing it.
+doc-valid-idents = [
+    "NumPy", "SciPy", "PyO3", "PyArrow", "DataFusion", "PySMO", "IDAES", "PyPI",
+    "CPython", "RecordBatch", "SessionContext", "..",
+]

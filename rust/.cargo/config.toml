@@ -1,0 +1,18 @@
+# Deliberately minimal.
+#
+# No linker overrides. On Apple targets the correct configuration is the absence
+# of one: setting `linker`, `-fuse-ld=lld`, `-Wl,-ld_classic`, mold or zld blocks
+# the Apple toolchain from selecting the current linker and SDK.
+#
+# No `target-cpu=native`, ever. It lets LLVM contract `a*b + c` into a single FMA,
+# which changes floating-point results -- parity tests would pass on the developer's
+# machine and fail on CI. Any baseline must be set identically in both places.
+#
+# sccache is NOT wired in here on purpose: committing a mandatory `rustc-wrapper`
+# breaks every contributor who does not have sccache installed. The justfile sets
+# RUSTC_WRAPPER per-command instead. Note sccache cannot cache cdylib/bin/proc-macro
+# crates (they invoke the system linker), which is why the PyO3 crate is a thin
+# shell over rlib crates that do cache.
+
+[alias]
+xtask = "run --package xtask --"

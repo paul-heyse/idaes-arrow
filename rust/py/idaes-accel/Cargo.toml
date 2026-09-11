@@ -1,0 +1,25 @@
+[package]
+name = "idaes-accel"
+version = "0.1.0"
+description = "Rust acceleration for the IDAES Process Systems Engineering Framework"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+# This crate ships to PyPI as a wheel built by maturin, never to crates.io.
+publish = false
+
+# A thin #[pymodule] shell. All real logic lives in idaes-accel-core, because
+# sccache cannot cache cdylib crates (they invoke the system linker) but does
+# cache rlib crates.
+[lib]
+name = "_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+idaes-accel-core.workspace = true
+pyo3 = { workspace = true, features = ["extension-module", "abi3-py310"] }
+
+[lints]
+workspace = true

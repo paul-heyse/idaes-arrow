@@ -1,0 +1,12 @@
+# Pinned stable. Nightly is never the default for this workspace: Miri,
+# cargo-udeps and fuzz coverage invoke `cargo +nightly-<date> ...` explicitly so
+# compiler-private checks can never silently change the compiler that builds the
+# wheels shipped to users.
+#
+# Floor is dictated by DataFusion 55.0.0 (rust-version = 1.94.0), even though
+# DataFusion does not enter the dependency graph until the first query-shaped
+# target. See rust/Cargo.toml [workspace.package] rust-version.
+[toolchain]
+channel = "1.98.1"
+profile = "minimal"
+components = ["rustfmt", "clippy", "rust-analyzer", "rust-src", "llvm-tools"]

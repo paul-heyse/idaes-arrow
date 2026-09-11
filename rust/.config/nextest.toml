@@ -1,0 +1,17 @@
+[profile.default]
+fail-fast = true
+slow-timeout = { period = "60s", terminate-after = 2 }
+
+# `flaky-result = "fail"` is deliberate. Retries are diagnostic -- they answer
+# "is this failure nondeterministic?" -- not a way to launder a red test green.
+[profile.ci]
+fail-fast = false
+retries = { backoff = "exponential", count = 2, delay = "1s", max-delay = "10s", jitter = true }
+flaky-result = "fail"
+slow-timeout = { period = "60s", terminate-after = 3 }
+global-timeout = "2h"
+success-output = "never"
+failure-output = "immediate-final"
+
+[profile.ci.junit]
+path = "junit.xml"

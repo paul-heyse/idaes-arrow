@@ -1,0 +1,81 @@
+# Rust workspace for the idaes-arrow fork.
+#
+# Layout rationale:
+#   crates/*  pure-Rust rlib crates. sccache CAN cache these.
+#   py/*      the single PyO3 cdylib. sccache CANNOT cache cdylib/bin/proc-macro
+#             crates, so this crate stays a thin #[pymodule] shell and every line
+#             of real logic lives in an rlib above.
+#
+# Crates deliberately NOT created yet (they arrive with the first query-shaped
+# target, not before -- packages are not created merely to organize concepts):
+#   idaes-arrow   Arrow schema contracts / canonical type universe
+#   idaes-engine  DataFusion SessionContext factory, config, UDF registry
+#
+# Resolved pins for the Arrow/DataFusion stack, verified against crates.io and
+# against datafusion 55.0.0's own dependency requirements on 2026-09-10:
+#
+#   datafusion   = "=55.0.0"    rust-version 1.94.0
+#   arrow        = "=59.3.0"    DF55 requires ^59.2.0; 59.3.0 is a bugfix release
+#   parquet      = "=59.3.0"    same family, same requirement
+#   object_store = "=0.13.2"    DF55 requires ^0.13.2 => >=0.13.2, <0.14.0.
+#                               crates.io latest is 0.14.1 -- DO NOT take it. A
+#                               second object_store major in the graph is exactly
+#                               the split this pin exists to prevent.
+#   pyo3 = "0.29" (0.29.2)      pyo3-arrow = "0.19.0"    numpy = "0.29"
+#
+# The vendored reference docs are written against arrow/parquet 59.2.0. We take
+# 59.3.0 deliberately: it is a patch release within the same minor, so it carries
+# bug fixes without changing any interface the design work depends on.
+#
+# Resolve to exactly ONE version of each of arrow / parquet / object_store /
+# datafusion. A split type universe makes `downcast_ref` return None silently,
+# with no compile error. `cargo tree -d` is a required CI gate for this reason.
+[workspace]
+resolver = "3"
+members = ["crates/*", "py/idaes-accel"]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.94.0"
+license = "BSD-3-Clause"
+repository = "https://github.com/paul-heyse/idaes-arrow"
+authors = ["Paul Heyse"]
+
+[workspace.dependencies]
+# `version` alongside `path` is required for a publishable crate: cargo-deny
+# treats a bare path dependency as a wildcard, and crates.io rejects one.
+idaes-accel-core = { path = "crates/idaes-accel-core", version = "0.1.0" }
+# NOTE: do NOT set `default-features = false` on pyo3 -- its default feature set
+# includes `macros`, without which #[pymodule]/#[pyfunction] do not exist.
+# `pyo3-arrow`, when it arrives, DOES need default-features = false: its default
+# `buffer_protocol` feature is incompatible with abi3 below abi3-py311, and we
+# target abi3-py310 to match idaes-pse's supported Python range.
+pyo3 = "0.29"
+# thiserror/anyhow are added when a crate actually defines an error type.
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+unreachable_pub = "warn"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "warn"
+panic = "deny"
+
+# Portable release profile. `panic = "unwind"` is REQUIRED: PyO3 converts unwinds
+# into Python exceptions, and `abort` would take the interpreter down instead.
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 16
+panic = "unwind"
+debug = 1
+strip = false          # maturin's own `strip = true` handles the shipped wheel
+
+[profile.profiling]
+inherits = "release"
+debug = true
+strip = false
