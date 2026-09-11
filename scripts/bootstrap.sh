@@ -40,8 +40,24 @@ need() {
 
 stage_venv() {
   need uv
-  say "Creating .venv on $(cat .python-version)"
-  uv venv "$VENV" --python "$(cat .python-version)"
+  local want
+  want="$(cat .python-version)"
+
+  # Reuse an existing venv when the interpreter already matches, so
+  # `just bootstrap` is cheap to re-run. Recreate when it does not: a venv on
+  # the wrong Python is worse than none, because everything appears to work
+  # until an abi3 wheel or a version-gated dependency fails obscurely.
+  if [[ -x "$PY" ]] && [[ "$("$PY" -c 'import platform;print(platform.python_version())' 2>/dev/null)" == "$want" ]]; then
+    say "Reusing .venv (already on $want)"
+  else
+    if [[ -e "$VENV" ]]; then
+      say "Recreating .venv (wanted $want)"
+      uv venv "$VENV" --python "$want" --clear
+    else
+      say "Creating .venv on $want"
+      uv venv "$VENV" --python "$want"
+    fi
+  fi
 
   say "Installing idaes-pse (editable) and development dependencies"
   # --no-build-isolation is deliberately NOT used: setuptools_scm needs the
@@ -57,9 +73,22 @@ stage_quality() {
 }
 
 stage_solvers() {
-  say "Downloading IDAES solvers and compiled libraries (~100 MB)"
   # NOT optional. Without these, idaes/core/util/functions.py evaluates
-  # os.path.isfile(None) and pytest aborts during collection.
+  # os.path.isfile(None) and pytest aborts during collection -- every test, not
+  # just the ones needing a solver.
+  local bindir
+  bindir="$("$BIN/idaes" bin-directory 2>/dev/null || echo "${HOME}/.idaes/bin")"
+
+  # Skip the ~100 MB download when the libraries are already there, so
+  # `just bootstrap` stays cheap to re-run. Use --force to refresh.
+  if [[ "${FORCE_SOLVERS:-0}" != "1" ]] \
+     && [[ -f "${bindir}/functions.so" || -f "${bindir}/functions.dll" ]] \
+     && [[ -f "${bindir}/cubic_roots.so" || -f "${bindir}/cubic_roots.dll" ]]; then
+    say "IDAES solvers already present in ${bindir} (FORCE_SOLVERS=1 to refresh)"
+    return 0
+  fi
+
+  say "Downloading IDAES solvers and compiled libraries (~100 MB)"
   if [[ "$(uname -s)" == "Linux" ]] && command -v apt-get >/dev/null 2>&1; then
     echo "note: these binaries link against libgfortran5 libgomp1 liblapack3 libblas3"
   fi
