@@ -23,7 +23,7 @@ pytest-cov
 pre-commit
 
 ### other/misc
-addheader>=0.2.2
+addheader>=0.3.2
 
 # this will install IDAES in editable mode using the dependencies defined under the `extras_require` tags defined in `setup.py`
 --editable .[ui,grid,omlt,coolprop]
