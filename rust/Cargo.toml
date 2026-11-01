@@ -56,7 +56,7 @@ idaes-accel-core = { path = "crates/idaes-accel-core", version = "0.1.0" }
 # `pyo3-arrow`, when it arrives, DOES need default-features = false: its default
 # `buffer_protocol` feature is incompatible with abi3 below abi3-py311, and we
 # target abi3-py310 to match idaes-pse's supported Python range.
-pyo3 = "0.29"
+pyo3 = "0.30"
 # thiserror/anyhow are added when a crate actually defines an error type.
 
 [workspace.lints.rust]
